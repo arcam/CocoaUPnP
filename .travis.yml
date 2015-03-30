@@ -1,0 +1,7 @@
+language: objective-c
+before_install: 
+  - cd Example
+script:
+  - xctool -project Example.xcodeproj -scheme Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xctool test -project Example.xcodeproj -scheme ExampleTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO  
+

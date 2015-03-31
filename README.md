@@ -1,6 +1,6 @@
 # CocoaUPnP
 
-CocoaUPnP is a logical progression of [upnpx](https://github.com/fkuehne/upnpx); designed to be easy, modern and block-based. It is written in Objective-C and is available for both iOS and Mac OS X.
+CocoaUPnP is a logical progression of [upnpx](https://github.com/fkuehne/upnpx) - designed to be easy, modern and block-based. It is written in Objective-C and is available for both iOS and Mac OS X.
 
 ## Warning: here be dragons...
 

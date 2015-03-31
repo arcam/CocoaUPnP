@@ -37,7 +37,7 @@ Change your directory to your `CocoaUPnP` folder
 
 Create and checkout a feature branch
 
-  git checkout -b awesomeNewFeature
+    git checkout -b awesomeNewFeature
 
 Commit and push to your fork then [submit a Pull Request](https://github.com/arcam/CocoaUPnP/compare/).
 

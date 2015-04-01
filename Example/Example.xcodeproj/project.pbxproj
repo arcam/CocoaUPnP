@@ -13,7 +13,6 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
-		0E9A78481AC944C20013DB95 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78471AC944C20013DB95 /* ExampleTests.m */; };
 		0EAA80E41ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */; };
 		0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
@@ -43,7 +42,6 @@
 		0E9A783B1AC944C10013DB95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ExampleTests-Info.plist"; path = "../../Example/ExampleTests-Info.plist"; sourceTree = "<group>"; };
-		0E9A78471AC944C20013DB95 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		0EAA80DF1ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UPPSearchHeaderStrings.h"; sourceTree = "<group>"; };
 		0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStrings.m"; sourceTree = "<group>"; };
 		0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStringsSpec.m"; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				0EAA80E51ACC22C20027A86A /* CocoaUPnPTests */,
-				0E9A78471AC944C20013DB95 /* ExampleTests.m */,
 				0E9A78451AC944C20013DB95 /* Supporting Files */,
 			);
 			path = ExampleTests;
@@ -374,7 +371,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E9A78481AC944C20013DB95 /* ExampleTests.m in Sources */,
 				0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,8 @@
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
 		0E9A78481AC944C20013DB95 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78471AC944C20013DB95 /* ExampleTests.m */; };
+		0EAA80E41ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */; };
+		0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -40,8 +42,12 @@
 		0E9A78381AC944C10013DB95 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0E9A783B1AC944C10013DB95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9A78461AC944C20013DB95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ExampleTests-Info.plist"; path = "../../Example/ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0E9A78471AC944C20013DB95 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
+		0EAA80DF1ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UPPSearchHeaderStrings.h"; sourceTree = "<group>"; };
+		0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStrings.m"; sourceTree = "<group>"; };
+		0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStringsSpec.m"; sourceTree = "<group>"; };
+		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ExampleTests-Prefix.pch"; path = "../../Example/ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 		0E9A782A1AC944C10013DB95 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				0EAA80DD1ACC22BC0027A86A /* CocoaUPnP */,
 				0E9A782F1AC944C10013DB95 /* AppDelegate.h */,
 				0E9A78301AC944C10013DB95 /* AppDelegate.m */,
 				0E9A78321AC944C10013DB95 /* ViewController.h */,
@@ -117,6 +124,7 @@
 		0E9A78441AC944C20013DB95 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				0EAA80E51ACC22C20027A86A /* CocoaUPnPTests */,
 				0E9A78471AC944C20013DB95 /* ExampleTests.m */,
 				0E9A78451AC944C20013DB95 /* Supporting Files */,
 			);
@@ -126,9 +134,46 @@
 		0E9A78451AC944C20013DB95 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0E9A78461AC944C20013DB95 /* Info.plist */,
+				0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */,
+				0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = "../../CocoaUPnPTests/Supporting Files";
+			sourceTree = "<group>";
+		};
+		0EAA80DD1ACC22BC0027A86A /* CocoaUPnP */ = {
+			isa = PBXGroup;
+			children = (
+				0EAA80DE1ACC22BC0027A86A /* Categories */,
+			);
+			name = CocoaUPnP;
+			path = ../../CocoaUPnP;
+			sourceTree = "<group>";
+		};
+		0EAA80DE1ACC22BC0027A86A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0EAA80DF1ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.h */,
+				0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		0EAA80E51ACC22C20027A86A /* CocoaUPnPTests */ = {
+			isa = PBXGroup;
+			children = (
+				0EAA80E61ACC22C20027A86A /* Categories */,
+			);
+			name = CocoaUPnPTests;
+			path = ../../CocoaUPnPTests;
+			sourceTree = "<group>";
+		};
+		0EAA80E61ACC22C20027A86A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		23ADABD815A432E01D768C4D /* Pods */ = {
@@ -321,6 +366,7 @@
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
 				0E9A782E1AC944C10013DB95 /* main.m in Sources */,
+				0EAA80E41ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E9A78481AC944C20013DB95 /* ExampleTests.m in Sources */,
+				0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,11 +518,12 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PREFIX_HEADER = "ExampleTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = "ExampleTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
@@ -491,7 +539,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				GCC_PREFIX_HEADER = "ExampleTests-Prefix.pch";
+				INFOPLIST_FILE = "ExampleTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";

@@ -98,14 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				0EAA80DD1ACC22BC0027A86A /* CocoaUPnP */,
-				0E9A782F1AC944C10013DB95 /* AppDelegate.h */,
-				0E9A78301AC944C10013DB95 /* AppDelegate.m */,
-				0E9A78321AC944C10013DB95 /* ViewController.h */,
-				0E9A78331AC944C10013DB95 /* ViewController.m */,
-				0E9A78351AC944C10013DB95 /* Main.storyboard */,
-				0E9A78381AC944C10013DB95 /* Images.xcassets */,
-				0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */,
-				0E9A782B1AC944C10013DB95 /* Supporting Files */,
+				0EAA80EC1ACC30370027A86A /* App */,
+				0EAA80ED1ACC30450027A86A /* Controllers */,
+				0EAA80EE1ACC305E0027A86A /* Storyboards */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -171,6 +166,35 @@
 				0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		0EAA80EC1ACC30370027A86A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A782F1AC944C10013DB95 /* AppDelegate.h */,
+				0E9A78301AC944C10013DB95 /* AppDelegate.m */,
+				0E9A78381AC944C10013DB95 /* Images.xcassets */,
+				0E9A782B1AC944C10013DB95 /* Supporting Files */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		0EAA80ED1ACC30450027A86A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A78321AC944C10013DB95 /* ViewController.h */,
+				0E9A78331AC944C10013DB95 /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0EAA80EE1ACC305E0027A86A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A78351AC944C10013DB95 /* Main.storyboard */,
+				0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		23ADABD815A432E01D768C4D /* Pods */ = {

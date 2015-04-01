@@ -2,4 +2,5 @@ language: objective-c
 before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
+podfile: Example/Podfile
 script: xctool -project Example/Example.xcodeproj -scheme Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test

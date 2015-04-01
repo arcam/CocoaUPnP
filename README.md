@@ -16,6 +16,12 @@ Initially, this project will focus on the Audio/Video [Device Control Protocols]
 
 CocoaUPnP will be test-driven as much as possible to ensure the library works as intended. When submitting a Pull Request, you should run the suite of unit tests to ensure your patch does not break existing functionality. Please ensure you add a test for the new feature you have added. You can look at the existing tests to get an idea of how to do this.
 
+### Writing tests
+
+When creating a new class, create a test class at the same time. Tests are written with [Specta](https://github.com/specta/specta), with accompanying [Expecta](https://github.com/specta/expecta) matchers.
+
+Both the [Specta](https://github.com/specta/specta) and [Expecta](https://github.com/specta/expecta) imports are declared in the [ExampleTests-Prefix.pch](https://github.com/arcam/CocoaUPnP/blob/master/Example/ExampleTests-Prefix.pch) file, so no need to import them in each spec. 
+
 ## Contributing
 
 Pull requests are always welcome. If you feel like getting stuck into the project, there are a multitude of ways you can help out.
@@ -37,9 +43,17 @@ Change your directory to your `CocoaUPnP` folder
 
     cd CocoaUPnP
 
+Run the tests to make sure nothing is broken
+
+    make tests
+
 Create and checkout a feature branch
 
     git checkout -b awesomeNewFeature
+
+Make your changes, then re-run the tests
+
+    make tests
 
 Commit and push to your fork then [submit a Pull Request](https://github.com/arcam/CocoaUPnP/compare/).
 

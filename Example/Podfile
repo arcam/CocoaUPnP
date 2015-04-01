@@ -5,6 +5,7 @@ target 'Example' do
 end
 
 target 'ExampleTests' do
-
+  pod 'Specta', '~> 0.4.0'
+  pod 'Expecta', '~> 0.3.2'
 end
 

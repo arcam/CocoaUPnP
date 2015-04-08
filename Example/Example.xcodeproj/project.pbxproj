@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E83D9421AD5641700694AA7 /* UPPMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9411AD5641700694AA7 /* UPPMediaItem.m */; };
+		0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */; };
+		0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
 		0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78301AC944C10013DB95 /* AppDelegate.m */; };
 		0E9A78341AC944C10013DB95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78331AC944C10013DB95 /* ViewController.m */; };
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
-		0EAA80E41ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */; };
-		0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E6475AB1AD55BEE004B39E3 /* UPPMediaItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPPMediaItemProtocol.h; sourceTree = "<group>"; };
+		0E83D9401AD5641700694AA7 /* UPPMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPMediaItem.h; sourceTree = "<group>"; };
+		0E83D9411AD5641700694AA7 /* UPPMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItem.m; sourceTree = "<group>"; };
+		0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
+		0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemProtocolSpec.m; sourceTree = "<group>"; };
 		0E9A78281AC944C10013DB95 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A782C1AC944C10013DB95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E9A782D1AC944C10013DB95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -41,11 +47,8 @@
 		0E9A78381AC944C10013DB95 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0E9A783B1AC944C10013DB95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ExampleTests-Info.plist"; path = "../../Example/ExampleTests-Info.plist"; sourceTree = "<group>"; };
-		0EAA80DF1ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UPPSearchHeaderStrings.h"; sourceTree = "<group>"; };
-		0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStrings.m"; sourceTree = "<group>"; };
-		0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UPPSearchHeaderStringsSpec.m"; sourceTree = "<group>"; };
-		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ExampleTests-Prefix.pch"; path = "../../Example/ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
+		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,11 +77,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E6475AA1AD55BC1004B39E3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0E6475AB1AD55BEE004B39E3 /* UPPMediaItemProtocol.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0E83D93F1AD563E500694AA7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E83D9401AD5641700694AA7 /* UPPMediaItem.h */,
+				0E83D9411AD5641700694AA7 /* UPPMediaItem.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0E83D95B1AD5691B00694AA7 /* ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				0E83D95C1AD5694400694AA7 /* CocoaUPnPTests */,
+				0E9A78451AC944C20013DB95 /* Supporting Files */,
+			);
+			name = ExampleTests;
+			sourceTree = "<group>";
+		};
+		0E83D95C1AD5694400694AA7 /* CocoaUPnPTests */ = {
+			isa = PBXGroup;
+			children = (
+				0E83D95D1AD5694400694AA7 /* Models */,
+				0E83D95F1AD5694400694AA7 /* Protocols */,
+			);
+			name = CocoaUPnPTests;
+			path = ../CocoaUPnPTests;
+			sourceTree = "<group>";
+		};
+		0E83D95D1AD5694400694AA7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0E83D95F1AD5694400694AA7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		0E9A781F1AC944C10013DB95 = {
 			isa = PBXGroup;
 			children = (
 				0E9A782A1AC944C10013DB95 /* Example */,
-				0E9A78441AC944C20013DB95 /* ExampleTests */,
+				0E83D95B1AD5691B00694AA7 /* ExampleTests */,
 				0E9A78291AC944C10013DB95 /* Products */,
 				23ADABD815A432E01D768C4D /* Pods */,
 				2E5768B8E79DE85E3DE4BD5F /* Frameworks */,
@@ -114,15 +169,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0E9A78441AC944C20013DB95 /* ExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				0EAA80E51ACC22C20027A86A /* CocoaUPnPTests */,
-				0E9A78451AC944C20013DB95 /* Supporting Files */,
-			);
-			path = ExampleTests;
-			sourceTree = "<group>";
-		};
 		0E9A78451AC944C20013DB95 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,42 +176,17 @@
 				0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			path = "../../CocoaUPnPTests/Supporting Files";
+			path = "../CocoaUPnPTests/Supporting Files";
 			sourceTree = "<group>";
 		};
 		0EAA80DD1ACC22BC0027A86A /* CocoaUPnP */ = {
 			isa = PBXGroup;
 			children = (
-				0EAA80DE1ACC22BC0027A86A /* Categories */,
+				0E83D93F1AD563E500694AA7 /* Models */,
+				0E6475AA1AD55BC1004B39E3 /* Protocols */,
 			);
 			name = CocoaUPnP;
 			path = ../../CocoaUPnP;
-			sourceTree = "<group>";
-		};
-		0EAA80DE1ACC22BC0027A86A /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				0EAA80DF1ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.h */,
-				0EAA80E01ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		0EAA80E51ACC22C20027A86A /* CocoaUPnPTests */ = {
-			isa = PBXGroup;
-			children = (
-				0EAA80E61ACC22C20027A86A /* Categories */,
-			);
-			name = CocoaUPnPTests;
-			path = ../../CocoaUPnPTests;
-			sourceTree = "<group>";
-		};
-		0EAA80E61ACC22C20027A86A /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				0EAA80E91ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		0EAA80EC1ACC30370027A86A /* App */ = {
@@ -385,9 +406,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
+				0E83D9421AD5641700694AA7 /* UPPMediaItem.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
 				0E9A782E1AC944C10013DB95 /* main.m in Sources */,
-				0EAA80E41ACC22BC0027A86A /* NSString+UPPSearchHeaderStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +416,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EAA80EA1ACC22E40027A86A /* NSString+UPPSearchHeaderStringsSpec.m in Sources */,
+				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,
+				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,5 @@
 platform :ios, '7.0'
+inhibit_all_warnings!
 
 target 'Example' do
   pod 'CocoaAsyncSocket', '~> 7.4.1'

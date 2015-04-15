@@ -3,6 +3,7 @@ inhibit_all_warnings!
 
 target 'Example' do
   pod 'CocoaAsyncSocket', '~> 7.4.1'
+  pod 'Ono', '~> 1.2'
 end
 
 target 'ExampleTests' do

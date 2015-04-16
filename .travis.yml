@@ -2,8 +2,9 @@ language: objective-c
 before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
-  - gem install cocoapods --no-ri --no-rdoc
+  - gem install cocoapods slather -N
 podfile: Example/Podfile
 script: 
   - make build
   - make test
+after_success: slather

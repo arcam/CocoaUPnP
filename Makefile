@@ -9,7 +9,9 @@ build:
 	set -o pipefail && xctool -workspace $(WORKSPACE) -scheme $(SCHEME) -sdk iphonesimulator build
 
 test:
-	set -o pipefail && xctool -workspace $(WORKSPACE) -scheme $(SCHEME) -sdk iphonesimulator test
+	set -o pipefail && xctool -workspace $(WORKSPACE) -scheme $(SCHEME) -sdk iphonesimulator \
+		-destination "platform=iOS Simulator,name=iPhone 6" \
+	 	GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES test
 
 docs:
 	/usr/local/bin/appledoc \

@@ -18,14 +18,6 @@ describe(@"UPPMediaItemProtocol", ^{
         expect(item).to.respondTo(@selector(artist));
     });
     
-    it(@"should respond to -[numberOfAudioChannels]", ^{
-        expect(item).to.respondTo(@selector(numberOfAudioChannels));
-    });
-    
-    it(@"should respond to -[bitrate]", ^{
-        expect(item).to.respondTo(@selector(bitrate));
-    });
-    
     it(@"should respond to -[date]", ^{
         expect(item).to.respondTo(@selector(date));
     });
@@ -34,16 +26,8 @@ describe(@"UPPMediaItemProtocol", ^{
         expect(item).to.respondTo(@selector(duration));
     });
     
-    it(@"should respond to -[sampleFrequency]", ^{
-        expect(item).to.respondTo(@selector(sampleFrequency));
-    });
-    
     it(@"should respond to -[genre]", ^{
         expect(item).to.respondTo(@selector(genre));
-    });
-    
-    it(@"should respond to -[iconURL]", ^{
-        expect(item).to.respondTo(@selector(iconURL));
     });
     
     it(@"should respond to -[isContainer]", ^{
@@ -66,16 +50,8 @@ describe(@"UPPMediaItemProtocol", ^{
         expect(item).to.respondTo(@selector(parentID));
     });
     
-    it(@"should respond to -[protocolInfo]", ^{
-        expect(item).to.respondTo(@selector(protocolInfo));
-    });
-    
     it(@"should respond to -[resources]", ^{
         expect(item).to.respondTo(@selector(resources));
-    });
-    
-    it(@"should respond to -[itemSize]", ^{
-        expect(item).to.respondTo(@selector(itemSize));
     });
     
     it(@"should respond to -[itemTitle]", ^{

@@ -7,19 +7,12 @@
 
 SpecBegin(UPPDeviceParser)
 
-NSData *(^LoadDataFromXML)(NSString *) = ^NSData *(NSString *fileName)
-{
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *filePath = [bundle pathForResource:fileName ofType:@"xml"];
-    return [NSData dataWithContentsOfFile:filePath];
-};
-
 describe(@"UPPDeviceParser", ^{
     
     __block UPPDeviceParser *parser;
     
     it(@"should parse device xml", ^{
-        NSData *data = LoadDataFromXML(@"Device");
+        NSData *data = LoadDataFromXML(@"Device", [self class]);
         parser = [[UPPDeviceParser alloc] initWithXMLData:data];
         
         waitUntil(^(DoneCallback done) {
@@ -70,7 +63,7 @@ describe(@"UPPDeviceParser", ^{
     });
     
     it(@"should return an error when no device found", ^{
-        NSData *data = LoadDataFromXML(@"Empty");
+        NSData *data = LoadDataFromXML(@"Empty", [self class]);
         parser = [[UPPDeviceParser alloc] initWithXMLData:data];
         
         waitUntil(^(DoneCallback done) {

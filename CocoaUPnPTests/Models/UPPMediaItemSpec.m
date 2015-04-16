@@ -28,45 +28,16 @@ describe(@"UPPMediaItem", ^{
         expect(mediaItem.artist).to.equal(string);
     });
     
-    it(@"should allow setting number of audio channels", ^{
-        NSString *string = @"2";
-        mediaItem.numberOfAudioChannels = string;
-        expect(mediaItem.numberOfAudioChannels).to.equal(string);
-    });
-   
-    it(@"should allow setting bitrate", ^{
-        NSString *string = @"40000";
-        mediaItem.bitrate = string;
-        expect(mediaItem.bitrate).to.equal(string);
-    });
-    
     it(@"should allow setting date", ^{
         NSString *string = @"1994";
         mediaItem.date = string;
         expect(mediaItem.date).to.equal(string);
     });
     
-    it(@"should allow setting duration", ^{
-        NSString *string = @"00:01:37";
-        mediaItem.duration = string;
-        expect(mediaItem.duration).to.equal(string);
-    });
-    
-    it(@"should allow setting sample frequency", ^{
-        NSString *string = @"44100";
-        mediaItem.sampleFrequency = string;
-        expect(mediaItem.sampleFrequency).to.equal(string);
-    });
-    
     it(@"should allow setting genre", ^{
         NSString *string = @"Rock";
         mediaItem.genre = string;
         expect(mediaItem.genre).to.equal(string);
-    });
-    
-    it(@"should return an icon URL", ^{
-        mediaItem.iconURLString = url;
-        expect(mediaItem.iconURL.absoluteString).to.equal(url);
     });
     
     it(@"should state if it is a container", ^{
@@ -98,23 +69,11 @@ describe(@"UPPMediaItem", ^{
         expect(mediaItem.parentID).to.equal(string);
     });
     
-    it(@"should allow setting protocol info", ^{
-        NSString *string = @"protocol";
-        mediaItem.protocolInfo = string;
-        expect(mediaItem.protocolInfo).to.equal(string);
-    });
-    
     it(@"should allow setting a number of resources", ^{
         NSString *string = @"resource";
         NSArray *resources = @[ string, string ];
         mediaItem.resources = resources;
         expect(mediaItem.resources).to.equal(resources);
-    });
-    
-    it(@"should allow setting item size", ^{
-        NSString *string = @"24000000";
-        mediaItem.itemSize = string;
-        expect(mediaItem.itemSize).to.equal(string);
     });
     
     it(@"should allow setting item title", ^{
@@ -126,11 +85,6 @@ describe(@"UPPMediaItem", ^{
     it(@"should return an album art URL", ^{
         mediaItem.albumArtURLString = url;
         expect(mediaItem.albumArtURL.absoluteString).to.equal(url);
-    });
-    
-    it(@"should return a resource URL", ^{
-        mediaItem.resourceURLString = url;
-        expect(mediaItem.resourceURL.absoluteString).to.equal(url);
     });
     
 });

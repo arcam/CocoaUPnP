@@ -17,41 +17,14 @@
 - (NSString *)artist;
 
 /**
- *  The number of audio channels
- */
-- (NSString *)numberOfAudioChannels;
-
-/**
- *  The bitrate of the resource
- */
-- (NSString *)bitrate;
-
-/**
  *  The date of the media item. E.g. the album release year
  */
 - (NSString *)date;
 
 /**
- *  The duration of the item in HH:MM:SS
- */
-- (NSString *)duration;
-
-/**
- *  The sample frequency of the media item
- */
-- (NSString *)sampleFrequency;
-
-/**
  *  The genre of the media item
  */
 - (NSString *)genre;
-
-/**
- *  The media items icon URL
- *
- *  @return Returns an `NSURL` for the icon
- */
-- (NSURL *)iconURL;
 
 /**
  *  If the media item is a container, e.g. a music album
@@ -79,19 +52,9 @@
 - (NSString *)parentID;
 
 /**
- *  The protocol info string of the media item
- */
-- (NSString *)protocolInfo;
-
-/**
  *  An array of media resources
  */
 - (NSArray *)resources;
-
-/**
- *  The size in bytes of the media item
- */
-- (NSString *)itemSize;
 
 /**
  *  The media item title - this could be the song title, or album title etc
@@ -104,12 +67,5 @@
  *  @return Returns an `NSURL` for the album or song artwork
  */
 - (NSURL *)albumArtURL;
-
-/**
- *  The URL for the media item resource
- *
- *  @return Returns an `NSURL` for the item
- */
-- (NSURL *)resourceURL;
 
 @end

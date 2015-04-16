@@ -1,0 +1,15 @@
+<u:BrowseResponse xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+<Result>&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot; xmlns:sec=&quot;http://www.sec.co.kr/&quot; xmlns:dlna=&quot;urn:schemas-dlna-org:metadata-1-0/&quot;&gt;&lt;item id=&quot;29$34537$34555$@34555&quot; parentID=&quot;29$34537$34555&quot; restricted=&quot;1&quot;&gt;
+&lt;dc:title&gt;Now We Die&lt;/dc:title&gt;
+&lt;upnp:class&gt;object.item.audioItem.musicTrack&lt;/upnp:class&gt;
+&lt;dc:date&gt;2014-01-01&lt;/dc:date&gt;&lt;upnp:album&gt;Bloodstone &amp;amp; Diamonds&lt;/upnp:album&gt;&lt;upnp:albumArtist&gt;Machine Head&lt;/upnp:albumArtist&gt;&lt;upnp:artist&gt;Machine Head&lt;/upnp:artist&gt;&lt;dc:creator&gt;Machine Head&lt;/dc:creator&gt;&lt;upnp:genre&gt;Metal&lt;/upnp:genre&gt;&lt;upnp:author&gt;Phil Demmel/Flynn, Robert/Robert Flynn/Demmel, Phil&lt;/upnp:author&gt;&lt;upnp:originalTrackNumber&gt;1&lt;/upnp:originalTrackNumber&gt;&lt;upnp:albumArtURI dlna:profileID=&quot;JPEG_TN&quot;&gt;http://127.0.0.1/art.jpg&lt;/upnp:albumArtURI&gt;&lt;res  protocolInfo=&quot;http-get:*:audio/x-flac:*&quot; size=&quot;55867243&quot; bitrate=&quot;128875&quot; duration=&quot;0:07:10.000&quot; nrAudioChannels=&quot;2&quot; sampleFrequency=&quot;44100&quot;&gt;http://10.54.6.186:50002/m/NDLNA/34555.flac&lt;/res&gt;&lt;/item&gt;
+&lt;item id=&quot;29$34537$34555$@34556&quot; parentID=&quot;29$34537$34555&quot; restricted=&quot;1&quot;&gt;
+&lt;dc:title&gt;Killers &amp;amp; Kings&lt;/dc:title&gt;
+&lt;upnp:class&gt;object.item.audioItem.musicTrack&lt;/upnp:class&gt;
+&lt;dc:date&gt;2014-01-01&lt;/dc:date&gt;&lt;upnp:album&gt;Bloodstone &amp;amp; Diamonds&lt;/upnp:album&gt;&lt;upnp:albumArtist&gt;Machine Head&lt;/upnp:albumArtist&gt;&lt;upnp:artist&gt;Machine Head&lt;/upnp:artist&gt;&lt;dc:creator&gt;Machine Head&lt;/dc:creator&gt;&lt;upnp:genre&gt;Metal&lt;/upnp:genre&gt;&lt;upnp:author&gt;Demmel, Phil/Phil Demmel/Robert Flynn/Flynn, Robb; Demmel, Phil/Flynn, Robert&lt;/upnp:author&gt;&lt;upnp:originalTrackNumber&gt;2&lt;/upnp:originalTrackNumber&gt;&lt;upnp:albumArtURI dlna:profileID=&quot;JPEG_TN&quot;&gt;http://10.54.6.186:50002/transcoder/jpegtnscaler.cgi/ebdart/34556.jpg&lt;/upnp:albumArtURI&gt;&lt;res  protocolInfo=&quot;http-get:*:audio/x-flac:*&quot; size=&quot;36133617&quot; bitrate=&quot;131375&quot; duration=&quot;0:04:32.000&quot; nrAudioChannels=&quot;2&quot; sampleFrequency=&quot;44100&quot;&gt;http://10.54.6.186:50002/m/NDLNA/34556.flac&lt;/res&gt;&lt;/item&gt;
+&lt;/DIDL-Lite&gt;</Result>
+<NumberReturned>2</NumberReturned>
+<TotalMatches>12</TotalMatches>
+<UpdateID>0</UpdateID>
+</u:BrowseResponse>
+

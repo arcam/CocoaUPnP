@@ -22,10 +22,6 @@ describe(@"UPPMediaItemProtocol", ^{
         expect(item).to.respondTo(@selector(date));
     });
     
-    it(@"should respond to -[duration]", ^{
-        expect(item).to.respondTo(@selector(duration));
-    });
-    
     it(@"should respond to -[genre]", ^{
         expect(item).to.respondTo(@selector(genre));
     });
@@ -62,9 +58,6 @@ describe(@"UPPMediaItemProtocol", ^{
         expect(item).to.respondTo(@selector(albumArtURL));
     });
     
-    it(@"should respond to -[resourceURL]", ^{
-        expect(item).to.respondTo(@selector(resourceURL));
-    });
 });
 
 SpecEnd

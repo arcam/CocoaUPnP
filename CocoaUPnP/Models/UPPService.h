@@ -2,33 +2,33 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  This class defines a UPnP service
+ This class defines a UPnP service
  */
 @interface UPPService : NSObject
 
 /**
- *  UPnP compliant service type. E.g.
- *  `urn:schemas-upnp-org:service:RenderingControl:1`
+ UPnP compliant service type. E.g.
+ `urn:schemas-upnp-org:service:RenderingControl:1`
  */
 @property (copy, nonatomic) NSString *serviceType;
 
 /**
- *  Service identifier. E.g. `urn:upnp-org:serviceId:RenderingControl`
+ Service identifier. E.g. `urn:upnp-org:serviceId:RenderingControl`
  */
 @property (copy, nonatomic) NSString *serviceId;
 
 /**
- *  Service description URL path
+ Service description URL path
  */
 @property (copy, nonatomic) NSString *descriptionURL;
 
 /**
- *  Control URL path
+ Control URL path
  */
 @property (copy, nonatomic) NSString *controlURL;
 
 /**
- *  Event subscription URL path
+ Event subscription URL path
  */
 @property (copy, nonatomic) NSString *eventSubURL;
 

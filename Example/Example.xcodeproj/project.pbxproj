@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EC6D71ADFB796006F7F98 /* Error.xml */; };
+		0E6EC6DB1ADFB7E9006F7F98 /* UPPErrorParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EC6DA1ADFB7E9006F7F98 /* UPPErrorParser.m */; };
+		0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */; };
 		0E83D9421AD5641700694AA7 /* UPPMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9411AD5641700694AA7 /* UPPMediaItem.m */; };
 		0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */; };
 		0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */; };
@@ -46,6 +49,10 @@
 
 /* Begin PBXFileReference section */
 		0E6475AB1AD55BEE004B39E3 /* UPPMediaItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPPMediaItemProtocol.h; sourceTree = "<group>"; };
+		0E6EC6D71ADFB796006F7F98 /* Error.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Error.xml; sourceTree = "<group>"; };
+		0E6EC6D91ADFB7E9006F7F98 /* UPPErrorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPErrorParser.h; sourceTree = "<group>"; };
+		0E6EC6DA1ADFB7E9006F7F98 /* UPPErrorParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParser.m; sourceTree = "<group>"; };
+		0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParserSpec.m; sourceTree = "<group>"; };
 		0E83D9401AD5641700694AA7 /* UPPMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPMediaItem.h; sourceTree = "<group>"; };
 		0E83D9411AD5641700694AA7 /* UPPMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItem.m; sourceTree = "<group>"; };
 		0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
@@ -176,6 +183,7 @@
 				0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */,
 				0E8B1A031ADD473F0029FCC7 /* Device.xml */,
 				0E8B1A121ADE76FA0029FCC7 /* Empty.xml */,
+				0E6EC6D71ADFB796006F7F98 /* Error.xml */,
 				0E8B1A241ADE9BF70029FCC7 /* Items.xml */,
 			);
 			path = ExampleXML;
@@ -186,6 +194,8 @@
 			children = (
 				0E8B1A061ADD47840029FCC7 /* UPPDeviceParser.h */,
 				0E8B1A071ADD47840029FCC7 /* UPPDeviceParser.m */,
+				0E6EC6D91ADFB7E9006F7F98 /* UPPErrorParser.h */,
+				0E6EC6DA1ADFB7E9006F7F98 /* UPPErrorParser.m */,
 				0E8B1A1B1ADE97040029FCC7 /* UPPMediaItemParser.h */,
 				0E8B1A1C1ADE97040029FCC7 /* UPPMediaItemParser.m */,
 			);
@@ -196,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8B1A0A1ADD47B60029FCC7 /* UPPDeviceParserSpec.m */,
+				0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */,
 				0E8B1A1E1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m */,
 			);
 			path = Parsers;
@@ -287,8 +298,8 @@
 		0EAA80DD1ACC22BC0027A86A /* CocoaUPnP */ = {
 			isa = PBXGroup;
 			children = (
-				0E8B1A051ADD474D0029FCC7 /* Parsers */,
 				0E83D93F1AD563E500694AA7 /* Models */,
+				0E8B1A051ADD474D0029FCC7 /* Parsers */,
 				0E6475AA1AD55BC1004B39E3 /* Protocols */,
 			);
 			name = CocoaUPnP;
@@ -440,6 +451,7 @@
 			files = (
 				0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */,
 				0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */,
+				0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */,
 				0E8B1A131ADE76FA0029FCC7 /* Empty.xml in Resources */,
 				0E8B1A2C1ADF9DF80029FCC7 /* Containers.xml in Resources */,
 			);
@@ -522,6 +534,7 @@
 				0E8B1A161ADE781C0029FCC7 /* UPPError.m in Sources */,
 				0E83D9421AD5641700694AA7 /* UPPMediaItem.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
+				0E6EC6DB1ADFB7E9006F7F98 /* UPPErrorParser.m in Sources */,
 				0E8B1A1D1ADE97040029FCC7 /* UPPMediaItemParser.m in Sources */,
 				0E8B1A111ADE6DBF0029FCC7 /* UPPService.m in Sources */,
 				0E8B1A081ADD47840029FCC7 /* UPPDeviceParser.m in Sources */,
@@ -533,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */,
 				0E8B1A0B1ADD47B60029FCC7 /* UPPDeviceParserSpec.m in Sources */,
 				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,

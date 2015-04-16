@@ -24,7 +24,5 @@ NSError * UPPErrorWithCode(UPPErrorCode code) {
 
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : errorDescription };
     
-    return [[NSError alloc] initWithDomain:UPPErrorDomain
-                                      code:code
-                                  userInfo:userInfo];
+    return [NSError errorWithDomain:UPPErrorDomain code:code userInfo:userInfo];
 }

@@ -18,7 +18,12 @@ typedef NS_ENUM(NSInteger, UPPErrorCode){
     /**
      The XML provided does not have a `<device>` tag
      */
-    UPPErrorCodeNoDeviceElementFound
+    UPPErrorCodeNoDeviceElementFound,
+    
+    /**
+     A network call to a UPnP device returned an error
+     */
+    UPPErrorCodeUPnPErrorReturned
 };
 
 /**

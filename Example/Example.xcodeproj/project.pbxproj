@@ -33,6 +33,9 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
+		0EE5C0261ADFFCA800D3EAEA /* UPPLastChangeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0251ADFFCA800D3EAEA /* UPPLastChangeParser.m */; };
+		0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */; };
+		0EE5C02C1ADFFE5C00D3EAEA /* LastChangeTransport.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -92,6 +95,10 @@
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0EE5C0241ADFFCA800D3EAEA /* UPPLastChangeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPLastChangeParser.h; sourceTree = "<group>"; };
+		0EE5C0251ADFFCA800D3EAEA /* UPPLastChangeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPLastChangeParser.m; sourceTree = "<group>"; };
+		0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPLastChangeParserSpec.m; sourceTree = "<group>"; };
+		0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeTransport.xml; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +192,7 @@
 				0E8B1A121ADE76FA0029FCC7 /* Empty.xml */,
 				0E6EC6D71ADFB796006F7F98 /* Error.xml */,
 				0E8B1A241ADE9BF70029FCC7 /* Items.xml */,
+				0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */,
 			);
 			path = ExampleXML;
 			sourceTree = "<group>";
@@ -196,6 +204,8 @@
 				0E8B1A071ADD47840029FCC7 /* UPPDeviceParser.m */,
 				0E6EC6D91ADFB7E9006F7F98 /* UPPErrorParser.h */,
 				0E6EC6DA1ADFB7E9006F7F98 /* UPPErrorParser.m */,
+				0EE5C0241ADFFCA800D3EAEA /* UPPLastChangeParser.h */,
+				0EE5C0251ADFFCA800D3EAEA /* UPPLastChangeParser.m */,
 				0E8B1A1B1ADE97040029FCC7 /* UPPMediaItemParser.h */,
 				0E8B1A1C1ADE97040029FCC7 /* UPPMediaItemParser.m */,
 			);
@@ -207,6 +217,7 @@
 			children = (
 				0E8B1A0A1ADD47B60029FCC7 /* UPPDeviceParserSpec.m */,
 				0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */,
+				0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */,
 				0E8B1A1E1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m */,
 			);
 			path = Parsers;
@@ -452,6 +463,7 @@
 				0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */,
 				0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */,
 				0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */,
+				0EE5C02C1ADFFE5C00D3EAEA /* LastChangeTransport.xml in Resources */,
 				0E8B1A131ADE76FA0029FCC7 /* Empty.xml in Resources */,
 				0E8B1A2C1ADF9DF80029FCC7 /* Containers.xml in Resources */,
 			);
@@ -532,6 +544,7 @@
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
 				0E8B1A0E1ADE4F8A0029FCC7 /* UPPDeviceIcon.m in Sources */,
 				0E8B1A161ADE781C0029FCC7 /* UPPError.m in Sources */,
+				0EE5C0261ADFFCA800D3EAEA /* UPPLastChangeParser.m in Sources */,
 				0E83D9421AD5641700694AA7 /* UPPMediaItem.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
 				0E6EC6DB1ADFB7E9006F7F98 /* UPPErrorParser.m in Sources */,
@@ -547,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */,
+				0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */,
 				0E8B1A0B1ADD47B60029FCC7 /* UPPDeviceParserSpec.m in Sources */,
 				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,

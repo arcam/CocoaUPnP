@@ -37,6 +37,9 @@
 		0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */; };
 		0EE5C02C1ADFFE5C00D3EAEA /* LastChangeTransport.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */; };
 		0EE5C02E1AE0F04D00D3EAEA /* UPPErrorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */; };
+		0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */; };
+		0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0311AE0F1E000D3EAEA /* UPPDeviceIconSpec.m */; };
+		0EE5C0341AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -101,6 +104,9 @@
 		0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPLastChangeParserSpec.m; sourceTree = "<group>"; };
 		0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeTransport.xml; sourceTree = "<group>"; };
 		0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorSpec.m; sourceTree = "<group>"; };
+		0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPServiceSpec.m; sourceTree = "<group>"; };
+		0EE5C0311AE0F1E000D3EAEA /* UPPDeviceIconSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDeviceIconSpec.m; sourceTree = "<group>"; };
+		0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemResourceSpec.m; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,8 +179,11 @@
 		0E83D95D1AD5694400694AA7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0EE5C0311AE0F1E000D3EAEA /* UPPDeviceIconSpec.m */,
 				0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */,
+				0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */,
 				0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */,
+				0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,10 +575,13 @@
 				0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */,
 				0E8B1A0B1ADD47B60029FCC7 /* UPPDeviceParserSpec.m in Sources */,
 				0EE5C02E1AE0F04D00D3EAEA /* UPPErrorSpec.m in Sources */,
+				0EE5C0341AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m in Sources */,
 				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,
+				0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,
+				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

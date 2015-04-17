@@ -18,6 +18,7 @@ NSError * UPPErrorWithCode(UPPErrorCode code) {
             break;
             
         default:
+            code = UPPErrorCodeGeneric;
             errorDescription = @"Unknown error";
             break;
     }

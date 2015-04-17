@@ -11,6 +11,11 @@ extern NSString * const UPPErrorDomain;
  */
 typedef NS_ENUM(NSInteger, UPPErrorCode){
     /**
+     A generic error code
+     */
+    UPPErrorCodeGeneric,
+    
+    /**
      Error code when a parser's data object is `nil`
      */
     UPPErrorCodeEmptyData,

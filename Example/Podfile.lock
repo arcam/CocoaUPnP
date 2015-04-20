@@ -1,22 +1,52 @@
 PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.4.1)
+  - CocoaUPnP (0.0.1):
+    - AFNetworking (~> 2.5.2)
+    - CocoaAsyncSocket (~> 7.4.1)
+    - Ono (~> 1.2)
   - Expecta (0.3.2)
   - OCMock (3.1.2)
   - Ono (1.2.1)
   - Specta (0.4.0)
 
 DEPENDENCIES:
-  - CocoaAsyncSocket (~> 7.4.1)
+  - CocoaUPnP (from `../CocoaUPnP.podspec`)
   - Expecta (~> 0.3.2)
   - OCMock (~> 3.1.2)
-  - Ono (~> 1.2)
   - Specta (~> 0.4.0)
 
+EXTERNAL SOURCES:
+  CocoaUPnP:
+    :path: ../CocoaUPnP.podspec
+
 SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
+  CocoaUPnP: 33eb2a9c74cb0208e3d209ac4f71f9f65edb0d13
   Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   Ono: 1122212de602280cc7af19d7ab12ee98a3fc0339
   Specta: a353759f073ffcc0a365b782fe4aaeac064c03c6
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.36.4

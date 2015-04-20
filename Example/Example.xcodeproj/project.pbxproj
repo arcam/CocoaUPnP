@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */; };
+		0E4E362A1AE5022C0051842F /* UPPRequestSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */; };
+		0E4E362E1AE509160051842F /* PlayRequest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E4E362D1AE509160051842F /* PlayRequest.xml */; };
 		0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EC6D71ADFB796006F7F98 /* Error.xml */; };
 		0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */; };
 		0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPSessionManagerSpec.m; sourceTree = "<group>"; };
+		0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRequestSerializerSpec.m; sourceTree = "<group>"; };
+		0E4E362D1AE509160051842F /* PlayRequest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PlayRequest.xml; sourceTree = "<group>"; };
 		0E6EC6D71ADFB796006F7F98 /* Error.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Error.xml; sourceTree = "<group>"; };
 		0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParserSpec.m; sourceTree = "<group>"; };
 		0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
@@ -109,9 +113,18 @@
 		0E4E36231AE4FFBC0051842F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */,
 				0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		0E4E362C1AE509160051842F /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				0E4E362D1AE509160051842F /* PlayRequest.xml */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		0E83D95B1AD5691B00694AA7 /* ExampleTests */ = {
@@ -160,6 +173,7 @@
 		0E8B1A021ADD473F0029FCC7 /* ExampleXML */ = {
 			isa = PBXGroup;
 			children = (
+				0E4E362C1AE509160051842F /* Requests */,
 				0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */,
 				0E8B1A031ADD473F0029FCC7 /* Device.xml */,
 				0E8B1A121ADE76FA0029FCC7 /* Empty.xml */,
@@ -384,6 +398,7 @@
 			files = (
 				0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */,
 				0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */,
+				0E4E362E1AE509160051842F /* PlayRequest.xml in Resources */,
 				0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */,
 				0EE5C02C1ADFFE5C00D3EAEA /* LastChangeTransport.xml in Resources */,
 				0E8B1A131ADE76FA0029FCC7 /* Empty.xml in Resources */,
@@ -474,6 +489,7 @@
 				0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */,
 				0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */,
 				0E8B1A0B1ADD47B60029FCC7 /* UPPDeviceParserSpec.m in Sources */,
+				0E4E362A1AE5022C0051842F /* UPPRequestSerializerSpec.m in Sources */,
 				0EE5C02E1AE0F04D00D3EAEA /* UPPErrorSpec.m in Sources */,
 				0EE5C0341AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m in Sources */,
 				0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */,

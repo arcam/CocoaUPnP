@@ -1,3 +1,5 @@
+// CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
+// Copyright 2015 Arcam. See LICENSE file.
 
 /**
  This protocol defines a series of methods that descibes a generic UPnP media

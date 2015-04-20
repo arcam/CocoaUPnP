@@ -3,6 +3,11 @@
 
 #import "AFURLResponseSerialization.h"
 
+@class UPPResponseParser;
+
+/**
+ This class is responsible for deserialising SOAP request responses
+ */
 @interface UPPResponseSerializer : AFXMLParserResponseSerializer
 
 @end

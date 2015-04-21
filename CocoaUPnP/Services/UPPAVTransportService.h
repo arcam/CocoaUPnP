@@ -49,4 +49,15 @@
  */
 - (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error;
 
+/**
+ Get media information from the service
+ 
+ @discussion This method does not return values for PlayMedium, RecordMedium or
+     WriteStatus.
+ 
+ @param instanceId The instance identifier
+ @param completion A completion block with the returned data
+ */
+- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSNumber *numberOfTracks, NSString *duration, NSString *currentURI, NSString *currentURIMetaData, NSString *nextURI, NSString *nextURIMetaData))completion;
+
 @end

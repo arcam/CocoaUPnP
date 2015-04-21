@@ -33,6 +33,11 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
+- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSNumber *numberOfTracks, NSString *duration, NSString *currentURI, NSString *currentURIMetaData, NSString *nextURI, NSString *nextURIMetaData))completion
+{
+    
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

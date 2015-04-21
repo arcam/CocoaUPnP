@@ -118,6 +118,19 @@ describe(@"UPPAVTransportService", ^{
         });
         
     });
+    
+    describe(@"when requesting media information", ^{
+        
+        xit(@"should return information", ^{
+            
+        });
+        
+        xit(@"should return an error when call fails", ^{
+            
+        });
+        
+    });
+    
 });
 
 SpecEnd

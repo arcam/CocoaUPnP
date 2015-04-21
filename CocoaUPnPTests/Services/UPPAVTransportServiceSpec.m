@@ -289,6 +289,26 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when sending next", ^{
+        
+        it(@"should send next command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Next",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service nextWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+    });
 });
 
 SpecEnd

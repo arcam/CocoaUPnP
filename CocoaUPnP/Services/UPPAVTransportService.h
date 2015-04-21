@@ -125,4 +125,13 @@
  */
 - (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error;
 
+/**
+ Send next command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)nextWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

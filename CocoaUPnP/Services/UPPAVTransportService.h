@@ -62,4 +62,6 @@
 
 - (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *currentTransportState, NSString *currentTransportStatus, NSString *currentSpeed))completion;
 
+- (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *track, NSString *trackDuration, NSString *trackMetaData, NSString *trackURI, NSString *relTime, NSString *absTime, NSString *relCount, NSString *absCount))completion;
+
 @end

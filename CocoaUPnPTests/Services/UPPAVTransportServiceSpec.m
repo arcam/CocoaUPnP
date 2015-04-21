@@ -143,6 +143,18 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when getting position information", ^{
+        
+        xit(@"should return information", ^{
+            
+        });
+        
+        xit(@"should return an error when call fails", ^{
+            
+        });
+        
+    });
+    
 });
 
 SpecEnd

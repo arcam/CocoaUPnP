@@ -3,6 +3,7 @@
 
 #import "UPPResponseParser.h"
 #import "Ono.h"
+#import "UPPError.h"
 
 @interface UPPResponseParser ()
 @property (strong, nonatomic) NSData *data;
@@ -28,6 +29,12 @@
     }
     
     NSError *error = nil;
+    
+    if (!self.data) {
+        responseBlock(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
+        return;
+    }
+    
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
     
     if (!document) {

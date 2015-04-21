@@ -309,6 +309,28 @@ describe(@"UPPAVTransportService", ^{
         });
         
     });
+    
+    describe(@"when sending previous", ^{
+        
+        it(@"should send previous command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Previous",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service previousWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+    });
+    
 });
 
 SpecEnd

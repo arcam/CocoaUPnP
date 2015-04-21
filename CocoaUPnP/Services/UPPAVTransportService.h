@@ -134,4 +134,13 @@
  */
 - (void)nextWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Send previous command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)previousWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

@@ -103,6 +103,16 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
+- (void)previousWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"Previous"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

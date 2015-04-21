@@ -167,6 +167,18 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when getting transport settings", ^{
+        
+        xit(@"should return information", ^{
+            
+        });
+        
+        xit(@"should return an error when call fails", ^{
+            
+        });
+        
+    });
+    
 });
 
 SpecEnd

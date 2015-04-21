@@ -66,4 +66,6 @@
 
 - (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *playMedia, NSString *recMedia, NSString *recQualityModes))completion;
 
+- (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *playMode, NSString *recQualityModes))completion;
+
 @end

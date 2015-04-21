@@ -43,10 +43,16 @@
 
 - (void)playWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
-    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Play",
-                                  UPPNameSpaceKey: _nameSpace };
+    [self playWithInstanceID:instanceId speed:@"1" error:error];
+}
+
+- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed error:(NSError *__autoreleasing *)error
+{
+    NSDictionary *wrapped = [self wrapParameters:@{ @"Speed": speed }
+                                      withAction:@"Play"
+                                       namespace:_nameSpace];
     
-    [self _sendPostRequestWithParameters:parameters error:error];
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 #pragma mark - Private Methods

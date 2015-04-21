@@ -212,8 +212,10 @@ describe(@"UPPAVTransportService", ^{
         
         it(@"should send play command", ^{
             
+            NSDictionary *params = @{ @"Speed": @"1" };
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];
@@ -221,6 +223,24 @@ describe(@"UPPAVTransportService", ^{
             
             NSError *error = nil;
             [service playWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should send play command with speed", ^{
+            
+            NSDictionary *params = @{ @"Speed": @"2" };
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service playWithInstanceID:instanceId speed:@"2" error:&error];
             
             [sessionManager verify];
             expect(error).to.beNil();

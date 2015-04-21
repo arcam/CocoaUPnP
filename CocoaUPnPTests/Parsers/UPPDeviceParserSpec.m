@@ -4,7 +4,7 @@
 #import "UPPDeviceParser.h"
 #import "UPPBasicDevice.h"
 #import "UPPDeviceIcon.h"
-#import "UPPService.h"
+#import "UPPServiceDescription.h"
 #import "UPPError.h"
 
 SpecBegin(UPPDeviceParser)
@@ -49,7 +49,7 @@ describe(@"UPPDeviceParser", ^{
                 // Services
                 NSArray *services = device.services;
                 expect(services.count).to.equal(3);
-                UPPService *service = [services firstObject];
+                UPPServiceDescription *service = [services firstObject];
                 expect(service.serviceType).to.equal(@"urn:schemas-upnp-org:service:RenderingControl:1");
                 expect(service.serviceId).to.equal(@"urn:upnp-org:serviceId:RenderingControl");
                 expect(service.descriptionURL).to.equal(@"/RenderingControl/desc.xml");

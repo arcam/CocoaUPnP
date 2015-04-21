@@ -5,7 +5,7 @@
 #import "UPPBasicDevice.h"
 #import "Ono.h"
 #import "UPPDeviceIcon.h"
-#import "UPPService.h"
+#import "UPPServiceDescription.h"
 #import "UPPError.h"
 
 @interface UPPDeviceParser ()
@@ -102,7 +102,7 @@
 {
     NSMutableArray *services = [NSMutableArray array];
     [serviceList.children enumerateObjectsUsingBlock:^(ONOXMLElement *serviceElement, NSUInteger idx, BOOL *stop) {
-        UPPService *service = [[UPPService alloc] init];
+        UPPServiceDescription *service = [[UPPServiceDescription alloc] init];
         service.serviceType = [[serviceElement firstChildWithTag:@"serviceType"] stringValue];
         service.serviceId = [[serviceElement firstChildWithTag:@"serviceId"] stringValue];
         service.descriptionURL = [[serviceElement firstChildWithTag:@"SCPDURL"] stringValue];

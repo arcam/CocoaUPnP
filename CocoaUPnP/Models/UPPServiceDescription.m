@@ -1,9 +1,9 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPService.h"
+#import "UPPServiceDescription.h"
 
-@implementation UPPService
+@implementation UPPServiceDescription
 
 #pragma mark - NSObject
 

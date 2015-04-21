@@ -77,4 +77,13 @@
  */
 - (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Send play command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)playWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

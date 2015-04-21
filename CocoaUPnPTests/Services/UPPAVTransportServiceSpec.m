@@ -208,6 +208,35 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when starting playback", ^{
+        
+        it(@"should send play command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service playWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should return an error when call fails", ^{
+            service.sessionManager = [[MockFailSessionManager alloc] init];
+            
+            [service playWithInstanceID:instanceId error:&error];
+            
+            expect(error).toNot.beNil();
+            expect(error.code).to.equal(MockFailSessionErrorCode);
+        });
+        
+    });
+    
 });
 
 SpecEnd

@@ -1,7 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <Foundation/Foundation.h>
+#import "UPPBaseParser.h"
 
 /**
  Media item parser completion block
@@ -14,16 +14,7 @@
  */
 typedef void(^UPPMediaItemCompletionBlock)(NSArray *items, NSNumber *resultsReturned, NSNumber *totalResults, NSNumber *updateID, NSError *error);
 
-@interface UPPMediaItemParser : NSObject
-
-/**
- Initialise a new parser object
- 
- @param data A data representation of an XML device document
- 
- @return Returns a new parser instance
- */
-- (instancetype)initWithXMLData:(NSData *)data;
+@interface UPPMediaItemParser : UPPBaseParser
 
 /**
  Parse the previously supplied XML data

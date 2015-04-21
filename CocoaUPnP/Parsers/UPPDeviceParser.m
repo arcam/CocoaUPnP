@@ -8,22 +8,7 @@
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
 
-@interface UPPDeviceParser ()
-@property (strong, nonatomic) NSData *data;
-@end
-
 @implementation UPPDeviceParser
-
-- (instancetype)initWithXMLData:(NSData *)data
-{
-    self = [super init];
-    
-    if (self) {
-        self.data = data;
-    }
-    
-    return self;
-}
 
 - (void)parseWithCompletion:(CompletionBlock)completion
 {
@@ -31,7 +16,7 @@
         return;
     }
     
-    if (!self.data) {
+    if (![self data]) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }

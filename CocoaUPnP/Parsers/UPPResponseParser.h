@@ -1,7 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <Foundation/Foundation.h>
+#import "UPPBaseParser.h"
 
 /**
  Parser completion block
@@ -15,16 +15,7 @@ typedef void(^Response)(NSDictionary *response, NSError *error);
 /**
  This class is responsible for the initial parsing of SOAP responses
  */
-@interface UPPResponseParser : NSObject
-
-/**
- Initialise a new parser object
- 
- @param data A data representation of an XML device document
- 
- @return Returns a new parser instance
- */
-- (instancetype)initWithXMLData:(NSData *)data;
+@interface UPPResponseParser : UPPBaseParser
 
 /**
  Parse the previously supplied XML data

@@ -5,22 +5,7 @@
 #import "Ono.h"
 #import "UPPError.h"
 
-@interface UPPLastChangeParser ()
-@property (strong, nonatomic) NSData *data;
-@end
-
 @implementation UPPLastChangeParser
-
-- (instancetype)initWithData:(NSData *)data
-{
-    self = [super init];
-    
-    if (self) {
-        self.data = data;
-    }
-    
-    return self;
-}
 
 - (void)parseWithCompletion:(UPPLastChangeCompletionBlock)completion
 {
@@ -30,7 +15,7 @@
     
     UPPTransportState state = UPPTransportStateUnknown;
     
-    if (!self.data) {
+    if (![self data]) {
         completion(state, nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }

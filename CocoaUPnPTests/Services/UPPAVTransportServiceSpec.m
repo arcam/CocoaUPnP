@@ -155,6 +155,18 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when getting device capabilities", ^{
+        
+        xit(@"should return information", ^{
+            
+        });
+        
+        xit(@"should return an error when call fails", ^{
+            
+        });
+        
+    });
+    
 });
 
 SpecEnd

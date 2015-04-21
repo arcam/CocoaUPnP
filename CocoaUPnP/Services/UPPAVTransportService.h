@@ -64,4 +64,6 @@
 
 - (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *track, NSString *trackDuration, NSString *trackMetaData, NSString *trackURI, NSString *relTime, NSString *absTime, NSString *relCount, NSString *absCount))completion;
 
+- (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *playMedia, NSString *recMedia, NSString *recQualityModes))completion;
+
 @end

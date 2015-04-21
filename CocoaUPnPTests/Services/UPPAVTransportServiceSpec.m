@@ -105,18 +105,6 @@ describe(@"UPPAVTransportService", ^{
             expect(error).to.beNil();
         });
         
-        it(@"should return set an error when call fails", ^{
-            service.sessionManager = [[MockFailSessionManager alloc] init];
-            
-            [service setNextAVTransportURIWithInstanceID:instanceId
-                                                 nextURI:nextURI
-                                         nextURIMetaData:nextURIMetaData
-                                                   error:&error];
-            
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
-        });
-        
     });
     
     describe(@"when requesting media information", ^{
@@ -137,19 +125,11 @@ describe(@"UPPAVTransportService", ^{
             
         });
         
-        xit(@"should return an error when call fails", ^{
-            
-        });
-        
     });
     
     describe(@"when getting position information", ^{
         
         xit(@"should return information", ^{
-            
-        });
-        
-        xit(@"should return an error when call fails", ^{
             
         });
         
@@ -161,19 +141,11 @@ describe(@"UPPAVTransportService", ^{
             
         });
         
-        xit(@"should return an error when call fails", ^{
-            
-        });
-        
     });
     
     describe(@"when getting transport settings", ^{
         
         xit(@"should return information", ^{
-            
-        });
-        
-        xit(@"should return an error when call fails", ^{
             
         });
         
@@ -195,15 +167,6 @@ describe(@"UPPAVTransportService", ^{
             
             [sessionManager verify];
             expect(error).to.beNil();
-        });
-        
-        it(@"should return an error when call fails", ^{
-            service.sessionManager = [[MockFailSessionManager alloc] init];
-            
-            [service stopWithInstanceID:instanceId error:&error];
-            
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
         });
         
     });
@@ -246,15 +209,6 @@ describe(@"UPPAVTransportService", ^{
             expect(error).to.beNil();
         });
         
-        it(@"should return an error when call fails", ^{
-            service.sessionManager = [[MockFailSessionManager alloc] init];
-            
-            [service playWithInstanceID:instanceId error:&error];
-            
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
-        });
-        
     });
     
     describe(@"when pausing playback", ^{
@@ -275,15 +229,6 @@ describe(@"UPPAVTransportService", ^{
             expect(error).to.beNil();
         });
         
-        it(@"should return an error when call fails", ^{
-            service.sessionManager = [[MockFailSessionManager alloc] init];
-            
-            [service stopWithInstanceID:instanceId error:&error];
-            
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
-        });
-        
     });
     
     describe(@"when recording", ^{
@@ -302,15 +247,6 @@ describe(@"UPPAVTransportService", ^{
             
             [sessionManager verify];
             expect(error).to.beNil();
-        });
-        
-        it(@"should return an error when call fails", ^{
-            service.sessionManager = [[MockFailSessionManager alloc] init];
-            
-            [service recordWithInstanceID:instanceId error:&error];
-            
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
         });
         
     });

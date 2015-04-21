@@ -96,4 +96,22 @@
  */
 - (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed error:(NSError * __autoreleasing *)error;
 
+/**
+ Send pause command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)pauseWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
+/**
+ Send record command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)recordWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

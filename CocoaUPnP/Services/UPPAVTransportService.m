@@ -55,6 +55,22 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
+- (void)pauseWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Pause",
+                                  UPPNameSpaceKey: _nameSpace };
+    
+    [self _sendPostRequestWithParameters:parameters error:error];
+}
+
+- (void)recordWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Record",
+                                  UPPNameSpaceKey: _nameSpace };
+    
+    [self _sendPostRequestWithParameters:parameters error:error];
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

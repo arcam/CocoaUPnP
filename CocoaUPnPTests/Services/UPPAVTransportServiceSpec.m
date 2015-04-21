@@ -257,6 +257,64 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when pausing playback", ^{
+        
+        it(@"should send pause command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Pause",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service pauseWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should return an error when call fails", ^{
+            service.sessionManager = [[MockFailSessionManager alloc] init];
+            
+            [service stopWithInstanceID:instanceId error:&error];
+            
+            expect(error).toNot.beNil();
+            expect(error.code).to.equal(MockFailSessionErrorCode);
+        });
+        
+    });
+    
+    describe(@"when recording", ^{
+        
+        it(@"should send record command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Record",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service recordWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should return an error when call fails", ^{
+            service.sessionManager = [[MockFailSessionManager alloc] init];
+            
+            [service recordWithInstanceID:instanceId error:&error];
+            
+            expect(error).toNot.beNil();
+            expect(error.code).to.equal(MockFailSessionErrorCode);
+        });
+        
+    });
+    
 });
 
 SpecEnd

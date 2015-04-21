@@ -71,6 +71,18 @@
     [self _sendPostRequestWithParameters:parameters error:error];
 }
 
+- (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ @"InstanceID": instanceId,
+                                  @"Unit": unit,
+                                  @"Target": target };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"Seek"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

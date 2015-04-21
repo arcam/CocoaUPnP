@@ -251,6 +251,35 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when seeking playback", ^{
+        
+        it(@"should send seek command", ^{
+            
+            NSString *unit = @"REL_TIME";
+            NSString *target = @"01:02:04.0000";
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"Unit": unit,
+                                      @"Target": target };
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Seek",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service seekWithInstanceID:instanceId
+                                   unit:unit
+                                 target:target
+                                  error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+    });
+    
 });
 
 SpecEnd

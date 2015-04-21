@@ -114,4 +114,15 @@
  */
 - (void)recordWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Seek to time
+ 
+ @param instanceId The instance identifier
+ @param unit       The seek mode
+ @param target     The time to seek to
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error;
+
 @end

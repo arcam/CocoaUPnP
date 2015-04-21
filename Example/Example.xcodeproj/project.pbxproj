@@ -30,6 +30,8 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
+		0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */; };
+		0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */; };
 		0EE5C0281ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */; };
 		0EE5C02C1ADFFE5C00D3EAEA /* LastChangeTransport.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */; };
 		0EE5C02E1AE0F04D00D3EAEA /* UPPErrorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */; };
@@ -82,6 +84,9 @@
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = UPPAVTransportServiceSpec.m; sourceTree = "<group>"; tabWidth = 4; };
+		0EBB0DF01AE6690A005F107A /* MockFailSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockFailSessionManager.h; sourceTree = "<group>"; };
+		0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockFailSessionManager.m; sourceTree = "<group>"; };
 		0EE5C0271ADFFCCA00D3EAEA /* UPPLastChangeParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPLastChangeParserSpec.m; sourceTree = "<group>"; };
 		0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeTransport.xml; sourceTree = "<group>"; };
 		0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorSpec.m; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 				0E4E36231AE4FFBC0051842F /* Networking */,
 				0E8B1A091ADD478B0029FCC7 /* Parsers */,
 				0E83D95F1AD5694400694AA7 /* Protocols */,
+				0EBB0DED1AE6506E005F107A /* Services */,
 				0E8B1A201ADE973B0029FCC7 /* Test Helpers */,
 			);
 			name = CocoaUPnPTests;
@@ -207,6 +213,8 @@
 		0E8B1A201ADE973B0029FCC7 /* Test Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0EBB0DF01AE6690A005F107A /* MockFailSessionManager.h */,
+				0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */,
 				0E8B1A211ADE97730029FCC7 /* TestHelpers.h */,
 				0E8B1A221ADE97730029FCC7 /* TestHelpers.m */,
 			);
@@ -289,6 +297,14 @@
 				0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		0EBB0DED1AE6506E005F107A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		23ADABD815A432E01D768C4D /* Pods */ = {
@@ -506,7 +522,9 @@
 				0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */,
 				0E4E36321AE521AF0051842F /* UPPResponseSerializerSpec.m in Sources */,
 				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,
+				0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */,
 				0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */,
+				0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,

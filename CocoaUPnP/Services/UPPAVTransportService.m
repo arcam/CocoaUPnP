@@ -35,10 +35,12 @@
 
 - (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
-    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Stop",
-                                  UPPNameSpaceKey: _nameSpace };
+    NSDictionary *parameters = @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"Stop"
+                                       namespace:_nameSpace];
     
-    [self _sendPostRequestWithParameters:parameters error:error];
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 - (void)playWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
@@ -48,7 +50,10 @@
 
 - (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed error:(NSError *__autoreleasing *)error
 {
-    NSDictionary *wrapped = [self wrapParameters:@{ @"Speed": speed }
+    NSDictionary *parameters = @{ @"InstanceID": instanceId,
+                                  @"Speed": speed };
+    
+    NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:@"Play"
                                        namespace:_nameSpace];
     
@@ -57,18 +62,23 @@
 
 - (void)pauseWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
-    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Pause",
-                                  UPPNameSpaceKey: _nameSpace };
     
-    [self _sendPostRequestWithParameters:parameters error:error];
+    NSDictionary *parameters = @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"Pause"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 - (void)recordWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
-    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Record",
-                                  UPPNameSpaceKey: _nameSpace };
+    NSDictionary *parameters = @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"Record"
+                                       namespace:_nameSpace];
     
-    [self _sendPostRequestWithParameters:parameters error:error];
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 - (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error

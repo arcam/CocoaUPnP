@@ -6,6 +6,10 @@
 #import "MockFailSessionManager.h"
 #import "UPPConstants.h"
 
+NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
+    return @{ @"InstanceID": @"0" };
+};
+
 SpecBegin(UPPAVTransportService)
 
 describe(@"UPPAVTransportService", ^{
@@ -156,7 +160,8 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send stop command", ^{
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Stop",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];
@@ -175,7 +180,8 @@ describe(@"UPPAVTransportService", ^{
         
         it(@"should send play command", ^{
             
-            NSDictionary *params = @{ @"Speed": @"1" };
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"Speed": @"1" };
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
                                               UPPNameSpaceKey: service.nameSpace,
                                               UPPParametersKey: params };
@@ -193,7 +199,8 @@ describe(@"UPPAVTransportService", ^{
         
         it(@"should send play command with speed", ^{
             
-            NSDictionary *params = @{ @"Speed": @"2" };
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"Speed": @"2" };
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
                                               UPPNameSpaceKey: service.nameSpace,
                                               UPPParametersKey: params };
@@ -216,7 +223,8 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send pause command", ^{
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Pause",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];
@@ -236,7 +244,8 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send record command", ^{
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Record",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];

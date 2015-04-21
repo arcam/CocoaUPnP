@@ -33,6 +33,14 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
+- (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ UPPSOAPActionKey: @"Stop",
+                                  UPPNameSpaceKey: _nameSpace };
+    
+    [self _sendPostRequestWithParameters:parameters error:error];
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

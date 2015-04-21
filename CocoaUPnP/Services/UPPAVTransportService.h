@@ -68,4 +68,13 @@
 
 - (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *playMode, NSString *recQualityModes))completion;
 
+/**
+ Send stop command
+ 
+ @param instanceId The instance identifier
+ @param error      The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

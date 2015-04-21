@@ -179,6 +179,35 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when stopping playback", ^{
+        
+        it(@"should send stop command", ^{
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Stop",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service stopWithInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should return an error when call fails", ^{
+            service.sessionManager = [[MockFailSessionManager alloc] init];
+            
+            [service stopWithInstanceID:instanceId error:&error];
+            
+            expect(error).toNot.beNil();
+            expect(error.code).to.equal(MockFailSessionErrorCode);
+        });
+        
+    });
+    
 });
 
 SpecEnd

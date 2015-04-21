@@ -38,6 +38,11 @@
     
 }
 
+- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *currentTransportState, NSString *currentTransportStatus, NSString *currentSpeed))completion
+{
+    
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

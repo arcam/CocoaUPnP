@@ -60,4 +60,6 @@
  */
 - (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSNumber *numberOfTracks, NSString *duration, NSString *currentURI, NSString *currentURIMetaData, NSString *nextURI, NSString *nextURIMetaData))completion;
 
+- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSString *currentTransportState, NSString *currentTransportStatus, NSString *currentSpeed))completion;
+
 @end

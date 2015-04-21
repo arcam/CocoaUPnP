@@ -4,6 +4,7 @@
 #import "UPPAVTransportService.h"
 #import "UPPSessionManager.h"
 #import "MockFailSessionManager.h"
+#import "UPPConstants.h"
 
 SpecBegin(UPPAVTransportService)
 
@@ -17,6 +18,7 @@ describe(@"UPPAVTransportService", ^{
     
     beforeEach(^{
         service = [[UPPAVTransportService alloc] init];
+        service.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
         sessionManager = OCMClassMock([UPPSessionManager class]);
         service.sessionManager = sessionManager;
         controlURL = [NSURL URLWithString:@"http://127.0.0.1/ctrl"];
@@ -36,9 +38,13 @@ describe(@"UPPAVTransportService", ^{
         });
         
         it(@"should send parameters", ^{
-            NSDictionary *expectedParams = @{ @"InstanceID" : instanceId,
-                                              @"CurrentURI" : currentURI,
-                                              @"CurrentURIMetaData" : currentURIMetaData };
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"CurrentURI": currentURI,
+                                      @"CurrentURIMetaData": currentURIMetaData };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetAVTransportURI",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];
@@ -78,9 +84,13 @@ describe(@"UPPAVTransportService", ^{
         });
         
         it(@"should send parameters", ^{
-            NSDictionary *expectedParams = @{ @"InstanceID": instanceId,
-                                              @"NextURI": nextURI,
-                                              @"NextURIMetaData": nextURIMetaData };
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"NextURI": nextURI,
+                                      @"NextURIMetaData": nextURIMetaData };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetNextAVTransportURI",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
             
             [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
                 return [parameters isEqualToDictionary:expectedParams];

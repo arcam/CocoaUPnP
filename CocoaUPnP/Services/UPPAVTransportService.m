@@ -3,6 +3,7 @@
 
 #import "UPPAVTransportService.h"
 #import "UPPSessionManager.h"
+#import "UPPConstants.h"
 
 @implementation UPPAVTransportService
 
@@ -11,7 +12,12 @@
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"CurrentURI": currentURI,
                                   @"CurrentURIMetaData": currentURIMetaData };
-    [self _sendPostRequestWithParameters:parameters error:error];
+    
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"SetAVTransportURI"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 - (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error
@@ -19,10 +25,22 @@
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"NextURI": nextURI,
                                   @"NextURIMetaData": nextURIMetaData };
-    [self _sendPostRequestWithParameters:parameters error:error];
+    
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"SetNextAVTransportURI"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
 #pragma mark - Private Methods
+
+- (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace
+{
+    return @{ UPPSOAPActionKey: action,
+              UPPNameSpaceKey: namespace,
+              UPPParametersKey: parameters };
+}
 
 - (void)_sendPostRequestWithParameters:(NSDictionary *)parameters error:(NSError * __autoreleasing *)error
 {

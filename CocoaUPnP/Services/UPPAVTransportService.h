@@ -23,6 +23,11 @@
 @property (copy, nonatomic) NSURL *controlURL;
 
 /**
+ The name space of the control point
+ */
+@property (copy, nonatomic) NSString *nameSpace;
+
+/**
  Set the current transport URI
  
  @param instanceId         The instance identifier

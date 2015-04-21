@@ -33,4 +33,15 @@
  */
 - (void)setAVTransportURIWithInstanceID:(NSString *)instanceId currentURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData error:(NSError * __autoreleasing *)error;
 
+/**
+ Set the next transport URI
+ 
+ @param instanceId      The instance identifier
+ @param nextURI         The URI for the next media item
+ @param nextURIMetaData The meta data for the next media item
+ @param error           The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error;
+
 @end

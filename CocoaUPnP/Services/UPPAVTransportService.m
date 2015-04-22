@@ -41,9 +41,7 @@
 
 - (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *mediaInfo, NSError *error))completion
 {
-    if (!completion) {
-        return;
-    }
+    if (!completion) { return; }
     
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetMediaInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
@@ -52,11 +50,18 @@
 
 - (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportInfo, NSError *error))completion
 {
-    if (!completion) {
-        return;
-    }
+    if (!completion) { return; }
     
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportInfo" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
+- (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *positionInfo,  NSError *error))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithInstanceID:instanceId action:@"GetPositionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
 }

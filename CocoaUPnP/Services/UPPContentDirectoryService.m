@@ -23,4 +23,13 @@
     }];
 }
 
+- (void)systemUpdateIDWithCompletion:(void (^)(NSDictionary *, NSError *))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithParameters:nil action:@"GetSystemUpdateID" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
 @end

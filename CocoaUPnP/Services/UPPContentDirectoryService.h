@@ -23,4 +23,11 @@
  */
 - (void)sortCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
 
+/**
+ Get the devices system update ID
+ 
+ @param completion A completion block which returns the parsed response, or an
+ */
+- (void)systemUpdateIDWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+
 @end

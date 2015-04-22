@@ -59,7 +59,18 @@ describe(@"UPPContentDirectoryService", ^{
     });
     
     describe(@"when getting system update id", ^{
-        xit(@"should send required parameters", ^{
+        it(@"should send required parameters", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSystemUpdateID",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service systemUpdateIDWithCompletion:^(NSDictionary *response, NSError *error) {
+                expect(response[@"Hello"]).to.equal(@"World");
+                expect(error).to.beNil();
+            }];
+            
+            [sessionManager verify];
         });
     });
     

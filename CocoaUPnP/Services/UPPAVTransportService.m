@@ -39,6 +39,23 @@
 
 #pragma mark - Getting Information
 
+- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *mediaInfo, NSError *error))completion
+{
+    if (!completion) {
+        return;
+    }
+    
+    NSDictionary *parameters= @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"GetMediaInfo"
+                                       namespace:_nameSpace];
+    
+    [_sessionManager POST:[_controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(nil, error);
+    }];
+}
 
 #pragma mark - General Transport Controls
 

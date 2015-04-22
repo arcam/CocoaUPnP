@@ -5,6 +5,7 @@
 #import "UPPSessionManager.h"
 #import "MockFailSessionManager.h"
 #import "UPPConstants.h"
+#import "UPPError.h"
 
 NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
     return @{ @"InstanceID": @"0" };
@@ -113,11 +114,52 @@ describe(@"UPPAVTransportService", ^{
     
     describe(@"when requesting media information", ^{
         
-        xit(@"should return information", ^{
+        it(@"should return information", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
+            
+            // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
+            [[[sessionManager expect]
+              andDo:^(NSInvocation *invocation) {
+                  void (^successBlock)(NSURLSessionTask *task, id responseObject);
+                  [invocation getArgument:&successBlock atIndex:4];
+                  successBlock(nil, @{ @"Hello": @"World" });
+              }]
+             POST:[controlURL absoluteString]
+             parameters:expectedParams
+             success:[OCMArg any]
+             failure:[OCMArg any]];
+            
+            [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
+                expect(mediaInfo[@"Hello"]).to.equal(@"World");
+                expect(error).to.beNil();
+            }];
             
         });
         
-        xit(@"should return an error when call fails", ^{
+        it(@"should return an error when call fails", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
+            
+            // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
+            [[[sessionManager expect]
+              andDo:^(NSInvocation *invocation) {
+                void (^successBlock)(NSURLSessionTask *task, NSError *error);
+                [invocation getArgument:&successBlock atIndex:5];
+                successBlock(nil, UPPErrorWithCode(UPPErrorCodeGeneric));
+            }]
+             POST:[controlURL absoluteString]
+             parameters:expectedParams
+             success:[OCMArg any]
+             failure:[OCMArg any]];
+            
+            [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
+                expect(mediaInfo).to.beNil();
+                expect(error).toNot.beNil();
+                expect(error.code).to.equal(UPPErrorCodeGeneric);
+            }];
             
         });
         

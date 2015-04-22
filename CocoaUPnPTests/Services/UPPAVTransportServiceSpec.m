@@ -379,6 +379,14 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when getting transport actions", ^{
+        
+        xit(@"should return information", ^{
+            
+        });
+        
+    });
+    
 });
 
 SpecEnd

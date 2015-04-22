@@ -189,4 +189,13 @@
  */
 - (void)recordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Get tranport actions from the service
+ 
+ @param instanceId The instance identifier
+ @param completion A completion block which returns the parsed response, or an 
+     error if unsuccessful
+ */
+- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion;
+
 @end

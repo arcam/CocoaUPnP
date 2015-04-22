@@ -1,16 +1,16 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPService.h"
+#import "UPPServiceDescription.h"
 
-SpecBegin(UPPService)
+SpecBegin(UPPServiceDescription)
 
-describe(@"UPPService", ^{
+describe(@"UPPServiceDescription", ^{
     
-    __block UPPService *service;
+    __block UPPServiceDescription *service;
     
     beforeEach(^{
-        service = [[UPPService alloc] init];
+        service = [[UPPServiceDescription alloc] init];
         service.serviceType = @"serviceType";
         service.serviceId = @"id";
         service.descriptionURL = @"http://127.0.0.1";

@@ -25,7 +25,7 @@ describe(@"UPPLastChangeParser", ^{
         NSData *data = LoadDataFromXML(@"LastChangeTransport", [self class]);
         expect(data).toNot.beNil();
         
-        UPPLastChangeParser *parser = [[UPPLastChangeParser alloc] initWithData:data];
+        UPPLastChangeParser *parser = [[UPPLastChangeParser alloc] initWithXMLData:data];
         
         waitUntil(^(DoneCallback done) {
             [parser parseWithCompletion:^(UPPTransportState transportState, NSString *transportActions, NSError *error) {
@@ -59,7 +59,7 @@ describe(@"UPPLastChangeParser", ^{
     
     void (^TestStateEquality)(NSString *, UPPTransportState) = ^void(NSString *string, UPPTransportState state) {
         NSData *data = StubEventWithTransportState(string);
-        UPPLastChangeParser *parser = [[UPPLastChangeParser alloc] initWithData:data];
+        UPPLastChangeParser *parser = [[UPPLastChangeParser alloc] initWithXMLData:data];
         waitUntil(^(DoneCallback done) {
             [parser parseWithCompletion:^(UPPTransportState transportState, NSString *transportActions, NSError *error) {
                 expect(transportState).to.equal(state);

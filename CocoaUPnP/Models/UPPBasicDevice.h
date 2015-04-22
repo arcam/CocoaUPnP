@@ -75,7 +75,7 @@
 @property (copy, nonatomic) NSArray *iconList;
 
 /**
- An array of service objects supported by the device. @see UPPService
+ An array of service objects supported by the device. @see UPPServiceDescription
  */
 @property (copy, nonatomic) NSArray *services;
 

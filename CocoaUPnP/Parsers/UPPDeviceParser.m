@@ -5,25 +5,10 @@
 #import "UPPBasicDevice.h"
 #import "Ono.h"
 #import "UPPDeviceIcon.h"
-#import "UPPService.h"
+#import "UPPServiceDescription.h"
 #import "UPPError.h"
 
-@interface UPPDeviceParser ()
-@property (strong, nonatomic) NSData *data;
-@end
-
 @implementation UPPDeviceParser
-
-- (instancetype)initWithXMLData:(NSData *)data
-{
-    self = [super init];
-    
-    if (self) {
-        self.data = data;
-    }
-    
-    return self;
-}
 
 - (void)parseWithCompletion:(CompletionBlock)completion
 {
@@ -31,7 +16,7 @@
         return;
     }
     
-    if (!self.data) {
+    if (![self data]) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
@@ -102,7 +87,7 @@
 {
     NSMutableArray *services = [NSMutableArray array];
     [serviceList.children enumerateObjectsUsingBlock:^(ONOXMLElement *serviceElement, NSUInteger idx, BOOL *stop) {
-        UPPService *service = [[UPPService alloc] init];
+        UPPServiceDescription *service = [[UPPServiceDescription alloc] init];
         service.serviceType = [[serviceElement firstChildWithTag:@"serviceType"] stringValue];
         service.serviceId = [[serviceElement firstChildWithTag:@"serviceId"] stringValue];
         service.descriptionURL = [[serviceElement firstChildWithTag:@"SCPDURL"] stringValue];

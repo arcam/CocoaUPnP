@@ -1,7 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <Foundation/Foundation.h>
+#import "UPPBaseParser.h"
 
 /**
  The returned transport state
@@ -51,16 +51,7 @@ typedef void(^UPPLastChangeCompletionBlock)(UPPTransportState transportState, NS
  This classes sole responsibility is parsing a UPnP last change notification 
  event and returning the results to the caller.
  */
-@interface UPPLastChangeParser : NSObject
-
-/**
- Initialise a new parser object
- 
- @param data A data representation of an XML device document
- 
- @return Returns a new parser instance
- */
-- (instancetype)initWithData:(NSData *)data;
+@interface UPPLastChangeParser : UPPBaseParser
 
 /**
  Parse the previously supplied XML data

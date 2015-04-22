@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPRequestSerializer.h"
+#import "UPPConstants.h"
 
 SpecBegin(UPPRequestSerializer)
 
@@ -13,20 +14,21 @@ describe(@"UPPRequestSerializer", ^{
     __block NSString *nameSpace;
     
     beforeEach(^{
-        soapAction = @"Play";
-        nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
-        
         UPPRequestSerializer *serializer = [UPPRequestSerializer serializer];
-        serializer.soapAction = soapAction;
-        serializer.nameSpace = nameSpace;
         
         url = [NSURL URLWithString:@"http://www.google.com"];
         NSURLRequest *inRequest = [NSURLRequest requestWithURL:url];
         
+        soapAction = @"Play";
+        nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
         NSDictionary *params = @{ @"InstanceID" : @"0", @"Speed" : @"1" };
+        
+        NSDictionary *paramWrapper = @{ UPPSOAPActionKey: soapAction,
+                                        UPPNameSpaceKey: nameSpace,
+                                        UPPParametersKey: params };
         NSError *error = nil;
         request = [serializer requestBySerializingRequest:inRequest
-                                           withParameters:params
+                                           withParameters:paramWrapper
                                                     error:&error];
     });
     

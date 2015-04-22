@@ -5,22 +5,7 @@
 #import "Ono.h"
 #import "UPPError.h"
 
-@interface UPPResponseParser ()
-@property (strong, nonatomic) NSData *data;
-@end
-
 @implementation UPPResponseParser
-
-- (instancetype)initWithXMLData:(NSData *)data
-{
-    self = [super init];
-    
-    if (self) {
-        self.data = data;
-    }
-    
-    return self;
-}
 
 - (void)parseWithResponse:(Response)responseBlock
 {
@@ -30,7 +15,7 @@
     
     NSError *error = nil;
     
-    if (!self.data) {
+    if (![self data]) {
         responseBlock(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }

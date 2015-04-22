@@ -5,23 +5,9 @@
 #import "Ono.h"
 #import "UPPMediaItem.h"
 #import "UPPMediaItemResource.h"
-
-@interface UPPMediaItemParser ()
-@property (strong, nonatomic) NSData *data;
-@end
+#import "UPPError.h"
 
 @implementation UPPMediaItemParser
-
-- (instancetype)initWithXMLData:(NSData *)data
-{
-    self = [super init];
-    
-    if (self) {
-        self.data = data;
-    }
-    
-    return self;
-}
 
 - (void)parseWithCompletion:(UPPMediaItemCompletionBlock)completion
 {
@@ -30,7 +16,13 @@
     }
     
     NSError *error = nil;
-    ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
+    
+    if (![self data]) {
+        completion(nil, nil, nil, nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
+        return;
+    }
+    
+    ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:[self data] error:&error];
     
     if (!document) {
         completion(nil, nil, nil, nil, error);

@@ -1,7 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <Foundation/Foundation.h>
+#import "UPPBaseParser.h"
 
 @class UPPBasicDevice;
 
@@ -18,16 +18,7 @@ typedef void(^CompletionBlock)(UPPBasicDevice *device, NSError *error);
  This class defines an object whose sole responsibility is to parse a device
  description XML document into a `UPPDevice` object. @see UPPDevice
  */
-@interface UPPDeviceParser : NSObject
-
-/**
- Initialise a new parser object
- 
- @param data A data representation of an XML device document
- 
- @return Returns a new parser instance
- */
-- (instancetype)initWithXMLData:(NSData *)data;
+@interface UPPDeviceParser : UPPBaseParser
 
 /**
  Parse the previously supplied XML data

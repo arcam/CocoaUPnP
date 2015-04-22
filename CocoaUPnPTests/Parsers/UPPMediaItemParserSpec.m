@@ -5,7 +5,7 @@
 #import "UPPMediaItemParser.h"
 #import "UPPMediaItem.h"
 #import "UPPMediaItemResource.h"
-
+#import "UPPError.h"
 
 SpecBegin(UPPMediaItemParser)
 
@@ -99,6 +99,19 @@ describe(@"UPPMediaItemParser", ^{
         
     });
 
+    it(@"should exit early with no data", ^{
+        parser = [[UPPMediaItemParser alloc] initWithXMLData:nil];
+        waitUntil(^(DoneCallback done) {
+            [parser parseWithCompletion:^(NSArray *items, NSNumber *resultsReturned, NSNumber *totalResults, NSNumber *updateID, NSError *error) {
+                expect(items).to.beNil();
+                expect(resultsReturned).to.beNil();
+                expect(totalResults).to.beNil();
+                expect(error).toNot.beNil();
+                expect(error.code).to.equal(UPPErrorCodeEmptyData);
+            }];
+            done();
+        });
+    });
 });
 
 SpecEnd

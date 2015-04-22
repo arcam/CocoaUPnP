@@ -66,6 +66,15 @@
     }];
 }
 
+- (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *deviceCapabilities, NSError *error))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithInstanceID:instanceId action:@"GetDeviceCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
 #pragma mark - General Transport Controls
 
 - (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error

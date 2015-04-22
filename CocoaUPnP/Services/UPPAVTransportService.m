@@ -84,6 +84,15 @@
     }];
 }
 
+- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportActions" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
 #pragma mark - General Transport Controls
 
 - (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error

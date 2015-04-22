@@ -496,8 +496,26 @@ describe(@"UPPAVTransportService", ^{
     
     describe(@"when getting transport actions", ^{
         
-        xit(@"should return information", ^{
+        it(@"should return information", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetCurrentTransportActions",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: InstanceDict() };
             
+            [[[sessionManager expect]
+              andDo:^(NSInvocation *invocation) {
+                  void (^successBlock)(NSURLSessionTask *task, id responseObject);
+                  [invocation getArgument:&successBlock atIndex:4];
+                  successBlock(nil, @{ @"Hello": @"World" });
+              }]
+             POST:[controlURL absoluteString]
+             parameters:expectedParams
+             success:[OCMArg any]
+             failure:[OCMArg any]];
+            
+            [service transportActionsWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
+                expect(dict[@"Hello"]).to.equal(@"World");
+                expect(error).to.beNil();
+            }];
         });
         
     });

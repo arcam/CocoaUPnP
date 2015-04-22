@@ -331,6 +331,30 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when setting play mode", ^{
+        
+        it(@"should send play mode command", ^{
+            
+            NSString *newPlayMode = @"SHUFFLE";
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"NewPlayMode": newPlayMode };
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetPlayMode",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service playMode:(NSString *)newPlayMode withInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+    });
+    
 });
 
 SpecEnd

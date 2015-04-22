@@ -113,6 +113,17 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
+- (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ @"InstanceID": instanceId,
+                                @"NewPlayMode": newPlayMode };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"SetPlayMode"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
+}
+
 #pragma mark - Private Methods
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action namespace:(NSString *)namespace

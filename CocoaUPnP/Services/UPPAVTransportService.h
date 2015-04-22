@@ -169,4 +169,14 @@
  */
 - (void)previousWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Set play mode
+ 
+ @param newPlayMode The new play mode
+ @param instanceId  The instance identifier
+ @param error       The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

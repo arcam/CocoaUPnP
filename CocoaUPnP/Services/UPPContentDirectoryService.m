@@ -14,4 +14,13 @@
     }];
 }
 
+- (void)sortCapabilitiesWithCompletion:(void (^)(NSDictionary *, NSError *))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithParameters:nil action:@"GetSortCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
 @end

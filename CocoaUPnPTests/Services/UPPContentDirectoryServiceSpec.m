@@ -43,7 +43,18 @@ describe(@"UPPContentDirectoryService", ^{
     });
     
     describe(@"when getting sort capabilities", ^{
-        xit(@"should send required parameters", ^{
+        it(@"should send required parameters", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSortCapabilities",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service sortCapabilitiesWithCompletion:^(NSDictionary *response, NSError *error) {
+                expect(response[@"Hello"]).to.equal(@"World");
+                expect(error).to.beNil();
+            }];
+            
+            [sessionManager verify];
         });
     });
     

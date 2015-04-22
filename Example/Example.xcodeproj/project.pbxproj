@@ -40,6 +40,7 @@
 		0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */; };
 		0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0311AE0F1E000D3EAEA /* UPPDeviceIconSpec.m */; };
 		0EE5C0341AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */; };
+		0EECAE8C1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EECAE8B1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPServiceSpec.m; sourceTree = "<group>"; };
 		0EE5C0311AE0F1E000D3EAEA /* UPPDeviceIconSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDeviceIconSpec.m; sourceTree = "<group>"; };
 		0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemResourceSpec.m; sourceTree = "<group>"; };
+		0EECAE8B1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPContentDirectoryServiceSpec.m; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			children = (
 				0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */,
 				0ED2B9B81AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m */,
+				0EECAE8B1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
+				0EECAE8C1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,
 				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,
 				0ED2B9B91AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m in Sources */,

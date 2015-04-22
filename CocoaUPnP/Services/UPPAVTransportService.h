@@ -179,4 +179,14 @@
  */
 - (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+/**
+ Set record mode
+ 
+ @param newRecordMode The new record mode
+ @param instanceId  The instance identifier
+ @param error       The error returned by the renderer, or nil if call was
+     successful
+ */
+- (void)recordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+
 @end

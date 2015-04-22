@@ -355,6 +355,30 @@ describe(@"UPPAVTransportService", ^{
         
     });
     
+    describe(@"when setting record mode", ^{
+        
+        it(@"should send record mode command", ^{
+            
+            NSString *newRecordMode = @"0:BASIC";
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"NewRecordMode": newRecordMode };
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetRecordMode",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            [[sessionManager expect] POST:[controlURL absoluteString] parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
+                return [parameters isEqualToDictionary:expectedParams];
+            }] success:nil failure:[OCMArg any]];
+            
+            NSError *error = nil;
+            [service recordMode:(NSString *)newRecordMode withInstanceID:instanceId error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+    });
+    
 });
 
 SpecEnd

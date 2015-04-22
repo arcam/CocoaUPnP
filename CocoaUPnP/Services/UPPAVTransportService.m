@@ -116,9 +116,20 @@
 - (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
-                                @"NewPlayMode": newPlayMode };
+                                  @"NewPlayMode": newPlayMode };
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:@"SetPlayMode"
+                                       namespace:_nameSpace];
+    
+    [self _sendPostRequestWithParameters:wrapped error:error];
+}
+
+- (void)recordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+{
+    NSDictionary *parameters = @{ @"InstanceID": instanceId,
+                                  @"NewRecordMode": newRecordMode };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:@"SetRecordMode"
                                        namespace:_nameSpace];
     
     [self _sendPostRequestWithParameters:wrapped error:error];

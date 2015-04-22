@@ -119,23 +119,15 @@ describe(@"UPPAVTransportService", ^{
                                               UPPNameSpaceKey: service.nameSpace,
                                               UPPParametersKey: InstanceDict() };
             
-            // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
-            [[[sessionManager expect]
-              andDo:^(NSInvocation *invocation) {
-                void (^successBlock)(NSURLSessionTask *task, NSError *error);
-                [invocation getArgument:&successBlock atIndex:5];
-                successBlock(nil, UPPErrorWithCode(UPPErrorCodeGeneric));
-            }]
-             POST:url
-             parameters:expectedParams
-             success:[OCMArg any]
-             failure:[OCMArg any]];
+            VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
             
             [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
                 expect(mediaInfo).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeGeneric);
             }];
+            
+            OCMVerify(sessionManager);
         });
     });
     

@@ -28,3 +28,12 @@ void (^VerifyPostWithParams)(NSDictionary *, id, NSString *);;
  @param NSString     The URL the message is posted to
  */
 void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *);
+
+/**
+ Setup an expectation for a failed network call, and return stubbed error
+ 
+ @param NSDictionary The parameters passed into the method
+ @param id           The session manager to set the expectation on
+ @param NSString     The URL the message is posted to
+ */
+void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *);

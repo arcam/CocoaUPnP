@@ -75,7 +75,52 @@ describe(@"UPPContentDirectoryService", ^{
     });
     
     describe(@"when browsing directory", ^{
-        xit(@"should send required parameters", ^{
+        it(@"should send required parameters", ^{
+            NSString *objectID = @"0";
+            NSString *browseFlag = @"BrowseDirectChildren";
+            NSString *filter = @"*";
+            NSNumber *startingIndex = @0;
+            NSNumber *requestedCount = @20;
+            NSString *sortCriteria = @"+dc:title";
+            
+            NSDictionary *params = @{ @"ObjectID": objectID,
+                                      @"BrowseFlag": browseFlag,
+                                      @"Filter": filter,
+                                      @"StartingIndex": startingIndex,
+                                      @"RequestedCount": requestedCount,
+                                      @"SortCriteria": sortCriteria };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service browseWithObjectID:objectID browseFlag:BrowseDirectChildren filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) {
+                expect(response).toNot.beNil();
+                expect(error).to.beNil();
+            }];
+            
+            [sessionManager verify];
+        });
+        
+        it(@"should set sane defaults", ^{
+            NSDictionary *params = @{ @"ObjectID": @0,
+                                      @"BrowseFlag": @"BrowseMetadata",
+                                      @"Filter": @"*",
+                                      @"StartingIndex": @0,
+                                      @"RequestedCount": @20,
+                                      @"SortCriteria": @"+dc:title" };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service browseWithObjectID:nil browseFlag:BrowseMetadata filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:^(NSDictionary *response, NSError *error) {}];
+            
+            [sessionManager verify];
         });
     });
     

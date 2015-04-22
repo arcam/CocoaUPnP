@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPRequestSerializer.h"
+#import "UPPConstants.h"
 
 @implementation UPPRequestSerializer
 
@@ -9,6 +10,9 @@
 {
     NSMutableURLRequest *mutableRequest = [[NSMutableURLRequest alloc]
                                            initWithURL:request.URL];
+    
+    NSString *soapAction = parameters[UPPSOAPActionKey];
+    NSString *nameSpace = parameters[UPPNameSpaceKey];
     
     NSMutableString *body = [NSMutableString string];
     
@@ -18,14 +22,14 @@
     @" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"
     @"<s:Body>";
     [body appendString:bodyText];
-    [body appendFormat:@"<u:%@ xmlns:u=\"%@\">", _soapAction, _nameSpace];
-    [body appendString:[self upp_stringForParameters:parameters]];
-    [body appendFormat:@"</u:%@>", _soapAction];
+    [body appendFormat:@"<u:%@ xmlns:u=\"%@\">", soapAction, nameSpace];
+    [body appendString:[self upp_stringForParameters:parameters[UPPParametersKey]]];
+    [body appendFormat:@"</u:%@>", soapAction];
     [body appendString:@"</s:Body></s:Envelope>"];
     
     [mutableRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSString *action = [NSString stringWithFormat:@"\"%@#%@\"", _nameSpace, _soapAction];
+    NSString *action = [NSString stringWithFormat:@"\"%@#%@\"", nameSpace, soapAction];
     [mutableRequest setValue:action forHTTPHeaderField:@"SOAPACTION"];
     
     NSString *length = [NSString stringWithFormat:@"%@", @(body.length)];

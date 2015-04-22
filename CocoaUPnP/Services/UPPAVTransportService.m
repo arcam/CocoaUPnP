@@ -45,15 +45,19 @@
         return;
     }
     
-    NSDictionary *parameters= @{ @"InstanceID": instanceId };
-    NSDictionary *wrapped = [self wrapParameters:parameters
-                                      withAction:@"GetMediaInfo"
-                                       namespace:_nameSpace];
+    [self _sendPostRequestWithInstanceID:instanceId action:@"GetMediaInfo" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
+- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportInfo, NSError *error))completion
+{
+    if (!completion) {
+        return;
+    }
     
-    [_sessionManager POST:[_controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
-        completion(responseObject, nil);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        completion(nil, error);
+    [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportInfo" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
     }];
 }
 
@@ -177,6 +181,20 @@
 {
     [_sessionManager POST:[_controlURL absoluteString] parameters:parameters success:nil failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
         *error = returnedError;
+    }];
+}
+
+- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
+{
+    NSDictionary *parameters = @{ @"InstanceID": instanceId };
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:action
+                                       namespace:_nameSpace];
+    
+    [_sessionManager POST:[_controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(responseObject, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(nil, error);
     }];
 }
 

@@ -149,7 +149,7 @@
  @param error      The error returned by the renderer, or nil if call was
      successful
  */
-- (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error;
+- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error;
 
 /**
  Send next command
@@ -177,7 +177,7 @@
  @param error       The error returned by the renderer, or nil if call was
      successful
  */
-- (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
 /**
  Set record mode
@@ -187,7 +187,7 @@
  @param error       The error returned by the renderer, or nil if call was
      successful
  */
-- (void)recordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
 /**
  Get tranport actions from the service

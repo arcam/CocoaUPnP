@@ -278,7 +278,7 @@ describe(@"UPPAVTransportService", ^{
             }] success:nil failure:[OCMArg any]];
             
             NSError *error = nil;
-            [service seekWithInstanceID:instanceId
+            [service setSeekWithInstanceID:instanceId
                                    unit:unit
                                  target:target
                                   error:&error];
@@ -347,7 +347,7 @@ describe(@"UPPAVTransportService", ^{
             }] success:nil failure:[OCMArg any]];
             
             NSError *error = nil;
-            [service playMode:(NSString *)newPlayMode withInstanceID:instanceId error:&error];
+            [service setPlayMode:(NSString *)newPlayMode withInstanceID:instanceId error:&error];
             
             [sessionManager verify];
             expect(error).to.beNil();
@@ -371,7 +371,7 @@ describe(@"UPPAVTransportService", ^{
             }] success:nil failure:[OCMArg any]];
             
             NSError *error = nil;
-            [service recordMode:(NSString *)newRecordMode withInstanceID:instanceId error:&error];
+            [service setRecordMode:(NSString *)newRecordMode withInstanceID:instanceId error:&error];
             
             [sessionManager verify];
             expect(error).to.beNil();

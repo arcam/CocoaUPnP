@@ -81,7 +81,7 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
-- (void)seekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error
+- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"Unit": unit,
@@ -113,7 +113,7 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
-- (void)playMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"NewPlayMode": newPlayMode };
@@ -124,7 +124,7 @@
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
 
-- (void)recordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"NewRecordMode": newRecordMode };

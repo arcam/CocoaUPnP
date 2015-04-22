@@ -58,7 +58,7 @@ describe(@"UPPAVTransportService", ^{
                                   currentURIMetaData:currentURIMetaData
                                                error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
         
@@ -95,7 +95,7 @@ describe(@"UPPAVTransportService", ^{
                                          nextURIMetaData:nextURIMetaData
                                                    error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -127,7 +127,7 @@ describe(@"UPPAVTransportService", ^{
                 expect(error.code).to.equal(UPPErrorCodeGeneric);
             }];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
         });
     });
     
@@ -202,7 +202,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service stopWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -221,7 +221,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service playWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
         
@@ -238,7 +238,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service playWithInstanceID:instanceId speed:@"2" error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -254,7 +254,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service pauseWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -270,7 +270,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service recordWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -295,7 +295,7 @@ describe(@"UPPAVTransportService", ^{
                                  target:target
                                   error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -311,7 +311,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service nextWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -327,7 +327,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service previousWithInstanceID:instanceId error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -349,7 +349,7 @@ describe(@"UPPAVTransportService", ^{
                   withInstanceID:instanceId
                            error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });
@@ -371,7 +371,7 @@ describe(@"UPPAVTransportService", ^{
                     withInstanceID:instanceId
                              error:&error];
             
-            OCMVerify(sessionManager);
+            [sessionManager verify];
             expect(error).to.beNil();
         });
     });

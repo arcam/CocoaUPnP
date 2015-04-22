@@ -1,33 +1,13 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <Foundation/Foundation.h>
-
-@class UPPSessionManager;
+#import "UPPBasicService.h"
 
 /**
  This class contains all the network calls needed for the UPnP [AVTransport1
  service](http://upnp.org/specs/av/UPnP-av-AVTransport-v1-Service.pdf).
  */
-@interface UPPAVTransportService : NSObject
-
-#pragma mark - Properties
-
-/**
- The session manager instance to perform the network requests with
- */
-@property (strong, nonatomic) UPPSessionManager *sessionManager;
-
-/**
- The service's control point URL
- */
-@property (copy, nonatomic) NSURL *controlURL;
-
-/**
- The name space of the control point
- */
-@property (copy, nonatomic) NSString *nameSpace;
-
+@interface UPPAVTransportService : UPPBasicService
 
 #pragma mark - Transport URI Methods
 

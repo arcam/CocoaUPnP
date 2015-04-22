@@ -6,11 +6,12 @@
 @class UPPSessionManager;
 
 /**
- This class contains all the network calls needed for the UPnP AVTransport1
- service.
- @see http://upnp.org/specs/av/UPnP-av-AVTransport-v1-Service.pdf
+ This class contains all the network calls needed for the UPnP [AVTransport1
+ service](http://upnp.org/specs/av/UPnP-av-AVTransport-v1-Service.pdf).
  */
 @interface UPPAVTransportService : NSObject
+
+#pragma mark - Properties
 
 /**
  The session manager instance to perform the network requests with
@@ -26,6 +27,13 @@
  The name space of the control point
  */
 @property (copy, nonatomic) NSString *nameSpace;
+
+
+#pragma mark - Transport URI Methods
+
+///----------------------------
+/// @name Transport URI Methods
+///----------------------------
 
 /**
  Set the current transport URI
@@ -48,6 +56,13 @@
      successful
  */
 - (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error;
+
+
+#pragma mark - Getting Information
+
+///--------------------------
+/// @name Getting Information
+///--------------------------
 
 /**
  Get media information from the service
@@ -93,6 +108,22 @@
      error if unsuccessful
  */
 - (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportSettings, NSError *error))completion;
+
+/**
+ Get tranport actions from the service
+ 
+ @param instanceId The instance identifier
+ @param completion A completion block which returns the parsed response, or an 
+     error if unsuccessful
+ */
+- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion;
+
+
+#pragma mark - General Transport Controls
+
+///---------------------------------
+/// @name General Transport Controls
+///---------------------------------
 
 /**
  Send stop command
@@ -169,6 +200,13 @@
  */
 - (void)previousWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
+
+#pragma mark - Mode Setting
+
+///-------------------
+/// @name Mode Setting
+///-------------------
+
 /**
  Set play mode
  
@@ -188,14 +226,5 @@
      successful
  */
 - (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
-
-/**
- Get tranport actions from the service
- 
- @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an 
-     error if unsuccessful
- */
-- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion;
 
 @end

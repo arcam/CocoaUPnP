@@ -7,6 +7,9 @@
 
 @implementation UPPAVTransportService
 
+
+#pragma mark - Transport URI Methods
+
 - (void)setAVTransportURIWithInstanceID:(NSString *)instanceId currentURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
@@ -32,6 +35,12 @@
     
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
+
+
+#pragma mark - Getting Information
+
+
+#pragma mark - General Transport Controls
 
 - (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
@@ -112,6 +121,9 @@
     
     [self _sendPostRequestWithParameters:wrapped error:error];
 }
+
+
+#pragma mark - Mode Setting
 
 - (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {

@@ -5,4 +5,6 @@
 
 @interface UPPContentDirectoryService : UPPBasicService
 
+- (void)searchCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+
 @end

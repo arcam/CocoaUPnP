@@ -2,13 +2,43 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPContentDirectoryService.h"
+#import "UPPConstants.h"
+#import "UPPSessionManager.h"
+#import "NetworkTestHelpers.h"
 
 SpecBegin(UPPContentDirectoryService)
 
 describe(@"UPPContentDirectoryService", ^{
     
+    __block UPPContentDirectoryService *service;
+    __block id sessionManager;
+    __block NSString *url;
+    
+    beforeEach(^{
+        service = [[UPPContentDirectoryService alloc] init];
+        service.nameSpace = @"urn:schemas-upnp-org:service:ContentDirectory:1";
+        
+        sessionManager = OCMClassMock([UPPSessionManager class]);
+        service.sessionManager = sessionManager;
+        
+        url = @"http://127.0.0.1/ctrl";
+        NSURL *controlURL = [NSURL URLWithString:url];
+        service.controlURL = controlURL;
+    });
+    
     describe(@"when getting search capabilities", ^{
-        xit(@"should send required parameters", ^{
+        it(@"should send required parameters", ^{
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSearchCapabilities",
+                                              UPPNameSpaceKey: service.nameSpace };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service searchCapabilitiesWithCompletion:^(NSDictionary *response, NSError *error) {
+                expect(response[@"Hello"]).to.equal(@"World");
+                expect(error).to.beNil();
+            }];
+            
+            [sessionManager verify];
         });
     });
     

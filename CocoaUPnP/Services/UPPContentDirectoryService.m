@@ -5,4 +5,13 @@
 
 @implementation UPPContentDirectoryService
 
+- (void)searchCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion
+{
+    if (!completion) { return; }
+    
+    [self _sendPostRequestWithParameters:nil action:@"GetSearchCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
 @end

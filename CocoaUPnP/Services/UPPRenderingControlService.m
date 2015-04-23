@@ -24,4 +24,21 @@
     }];
 }
 
+- (void)setMuteWithInstanceID:(NSString *)instanceId mute:(BOOL)mute error:(NSError *__autoreleasing *)error
+{
+    [self setMuteWithInstanceID:instanceId channel:@"Master" mute:mute error:error];
+}
+
+- (void)setMuteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel mute:(BOOL)mute error:(NSError *__autoreleasing *)error
+{
+    NSNumber *muteNumber = mute ? @1 : @0;
+    NSDictionary *parameters = @{ @"Channel": channel,
+                                  @"DesiredMute": muteNumber };
+    
+    [self _sendPostRequestWithInstanceID:instanceId
+                                  action:@"SetMute"
+                              parameters:parameters
+                                   error:error];
+}
+
 @end

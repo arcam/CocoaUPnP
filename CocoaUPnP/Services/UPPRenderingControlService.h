@@ -16,7 +16,7 @@
 ///------------------
 
 /**
- Get mute status
+ Get mute status for Master channel
  
  @param instanceId The instance identifier
  @param completion A completion block which returns the parsed response, or an
@@ -31,5 +31,26 @@
  @param completion A completion block which returns the parsed response, or an
  */
 - (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(void(^)(NSDictionary *response, NSError *error))completion;
+
+/**
+ Set mute status for Master channel
+ 
+ @param instanceId The instance identifier
+ @param mute       Set to `YES` to mute, or `NO` to un-mute
+ @param error      The error returned by the renderer, or nil if call was 
+     successful
+ */
+- (void)setMuteWithInstanceID:(NSString *)instanceId mute:(BOOL)mute error:(NSError *__autoreleasing *)error;
+
+/**
+ Set mute status for a specific channel
+ 
+ @param instanceId The instance identifier
+ @param mute       Set to `YES` to mute, or `NO` to un-mute
+ @param channel    The channel to retrieve mute status for
+ @param error      The error returned by the renderer, or nil if call was 
+     successful
+ */
+- (void)setMuteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel mute:(BOOL)mute error:(NSError * __autoreleasing *)error;
 
 @end

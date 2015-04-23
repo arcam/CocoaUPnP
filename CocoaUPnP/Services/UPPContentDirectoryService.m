@@ -50,33 +50,74 @@
         [parameters setObject:@"BrowseMetadata" forKey:@"BrowseFlag"];
     }
     
-    if (filter) {
-        [parameters setObject:filter forKey:@"Filter"];
-    } else {
-        [parameters setObject:@"*" forKey:@"Filter"];
-    }
-    
-    if (startingIndex) {
-        [parameters setObject:startingIndex forKey:@"StartingIndex"];
-    } else {
-        [parameters setObject:@0 forKey:@"StartingIndex"];
-    }
-    
-    if (requestedCount) {
-        [parameters setObject:requestedCount forKey:@"RequestedCount"];
-    } else {
-        [parameters setObject:@20 forKey:@"RequestedCount"];
-    }
-    
-    if (sortCriteria) {
-        [parameters setObject:sortCriteria forKey:@"SortCriteria"];
-    } else {
-        [parameters setObject:@"+dc:title" forKey:@"SortCriteria"];
-    }
+    [self _addValuesToParams:&parameters
+                      filter:filter
+               startingIndex:startingIndex
+              requestedCount:requestedCount
+                sortCriteria:sortCriteria];
     
     [self _sendPostRequestWithParameters:parameters action:@"Browse" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
+}
+
+- (void)searchWithContainerID:(NSString *)containerId searchCriteria:(NSString *)searchCriteria filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(void (^)(NSDictionary *, NSError *))completion
+{
+    
+    if (!completion) { return; }
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    if (containerId) {
+        [parameters setObject:containerId forKey:@"ContainerID"];
+    } else {
+        [parameters setObject:@0 forKey:@"ContainerID"];
+    }
+    
+    if (searchCriteria) {
+        [parameters setObject:searchCriteria forKey:@"SearchCriteria"];
+    } else {
+        [parameters setObject:@"" forKey:@"SearchCriteria"];
+    }
+    
+    [self _addValuesToParams:&parameters
+                      filter:filter
+               startingIndex:startingIndex
+              requestedCount:requestedCount
+                sortCriteria:sortCriteria];
+    
+    [self _sendPostRequestWithParameters:parameters action:@"Search" completion:^(NSDictionary *responseObject, NSError *error) {
+        completion(responseObject, error);
+    }];
+}
+
+#pragma mark - Private Methods
+
+- (void)_addValuesToParams:(NSMutableDictionary **)parameters filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCriteria:(NSString *)sortCriteria
+{
+    if (filter) {
+        [*parameters setObject:filter forKey:@"Filter"];
+    } else {
+        [*parameters setObject:@"*" forKey:@"Filter"];
+    }
+    
+    if (startingIndex) {
+        [*parameters setObject:startingIndex forKey:@"StartingIndex"];
+    } else {
+        [*parameters setObject:@0 forKey:@"StartingIndex"];
+    }
+    
+    if (requestedCount) {
+        [*parameters setObject:requestedCount forKey:@"RequestedCount"];
+    } else {
+        [*parameters setObject:@20 forKey:@"RequestedCount"];
+    }
+    
+    if (sortCriteria) {
+        [*parameters setObject:sortCriteria forKey:@"SortCriteria"];
+    } else {
+        [*parameters setObject:@"" forKey:@"SortCriteria"];
+    }
 }
 
 @end

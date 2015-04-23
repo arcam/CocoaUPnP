@@ -18,7 +18,7 @@ describe(@"UPPContentDirectoryService", ^{
         service = [[UPPContentDirectoryService alloc] init];
         service.nameSpace = @"urn:schemas-upnp-org:service:ContentDirectory:1";
         
-        sessionManager = OCMClassMock([UPPSessionManager class]);
+        sessionManager = [OCMockObject mockForClass:[UPPSessionManager class]];
         service.sessionManager = sessionManager;
         
         url = @"http://127.0.0.1/ctrl";
@@ -110,7 +110,7 @@ describe(@"UPPContentDirectoryService", ^{
                                       @"Filter": @"*",
                                       @"StartingIndex": @0,
                                       @"RequestedCount": @20,
-                                      @"SortCriteria": @"+dc:title" };
+                                      @"SortCriteria": @"" };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
                                               UPPNameSpaceKey: service.nameSpace,
@@ -125,7 +125,52 @@ describe(@"UPPContentDirectoryService", ^{
     });
     
     describe(@"when searching directory", ^{
-        xit(@"should send required parameters", ^{
+        it(@"should send required parameters", ^{
+            NSString *containerID = @"1$5";
+            NSString *searchCriteria = @"(upnp:class derivedfrom \"object.item.audioItem.musicTrack\")";
+            NSString *filter = @"+dc:creator";
+            NSNumber *startingIndex = @42;
+            NSNumber *requestedCount = @8;
+            NSString *sortCriteria = @"+dc:title";
+            
+            NSDictionary *params = @{ @"ContainerID": containerID,
+                                      @"SearchCriteria": searchCriteria,
+                                      @"Filter": filter,
+                                      @"StartingIndex": startingIndex,
+                                      @"RequestedCount": requestedCount,
+                                      @"SortCriteria": sortCriteria };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service searchWithContainerID:containerID searchCriteria:searchCriteria filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) {
+                expect(response).toNot.beNil();
+                expect(error).to.beNil();
+            }];
+            
+            [sessionManager verify];
+        });
+        
+        it(@"should set sane defaults", ^{
+            NSDictionary *params = @{ @"ContainerID": @0,
+                                      @"SearchCriteria": @"",
+                                      @"Filter": @"*",
+                                      @"StartingIndex": @0,
+                                      @"RequestedCount": @20,
+                                      @"SortCriteria": @"" };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
+                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPParametersKey: params };
+            
+            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            
+            [service searchWithContainerID:nil searchCriteria:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:^(NSDictionary *response, NSError *error) { }];
+            
+            [sessionManager verify];
         });
     });
     

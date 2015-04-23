@@ -25,6 +25,7 @@
 		0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8B1A221ADE97730029FCC7 /* TestHelpers.m */; };
 		0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A241ADE9BF70029FCC7 /* Items.xml */; };
 		0E8B1A2C1ADF9DF80029FCC7 /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */; };
+		0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
 		0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78301AC944C10013DB95 /* AppDelegate.m */; };
 		0E9A78341AC944C10013DB95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78331AC944C10013DB95 /* ViewController.m */; };
@@ -76,6 +77,7 @@
 		0E8B1A221ADE97730029FCC7 /* TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpers.m; sourceTree = "<group>"; };
 		0E8B1A241ADE9BF70029FCC7 /* Items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Items.xml; sourceTree = "<group>"; };
 		0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Containers.xml; sourceTree = "<group>"; };
+		0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRenderingControlServiceSpec.m; sourceTree = "<group>"; };
 		0E9A78281AC944C10013DB95 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A782C1AC944C10013DB95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E9A782D1AC944C10013DB95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */,
 				0ED2B9B81AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m */,
 				0EECAE8B1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m */,
+				0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
 				0EECAE8C1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m in Sources */,
+				0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,
 				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,
 				0ED2B9B91AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m in Sources */,

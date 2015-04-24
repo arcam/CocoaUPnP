@@ -62,10 +62,10 @@ describe(@"UPPRenderingControlService", ^{
                 [sessionManager verify];
             });
             
-            it(@"should send required parameters with convenience call", ^{
+            it(@"should send required parameters with nil channel", ^{
                 VerifyGetPostWithParams(expectedParams, sessionManager, url);
                 
-                [service muteWithInstanceID:instanceId completion:^(NSDictionary *response, NSError *error) {
+                [service muteWithInstanceID:instanceId channel:nil completion:^(NSDictionary *response, NSError *error) {
                     expect(response).toNot.beNil();
                     expect(error).to.beNil();
                 }];
@@ -97,10 +97,11 @@ describe(@"UPPRenderingControlService", ^{
                 expect(error).to.beNil();
             });
             
-            it(@"should send required parameters with convenience call", ^{
+            it(@"should send required parameters with nil channel", ^{
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
                 [service setMuteWithInstanceID:instanceId
+                                       channel:nil
                                           mute:YES
                                          error:&error];
                 
@@ -119,6 +120,7 @@ describe(@"UPPRenderingControlService", ^{
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
                 [service setMuteWithInstanceID:instanceId
+                                       channel:nil
                                           mute:NO
                                          error:&error];
                 

@@ -27,13 +27,13 @@
 /**
  Set mute status for a specific channel
  
- @param instanceId The instance identifier
  @param mute       Set to `YES` to mute, or `NO` to un-mute
+ @param instanceId The instance identifier
  @param channel    The channel to retrieve mute status for. Defaults to `Master`.
  @param error      The error returned by the renderer, or nil if call was 
      successful
  */
-- (void)setMuteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel mute:(BOOL)mute error:(NSError * __autoreleasing *)error;
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel error:(NSError * __autoreleasing *)error;
 
 
 #pragma mark - Volume

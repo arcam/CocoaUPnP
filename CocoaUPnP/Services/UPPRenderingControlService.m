@@ -17,7 +17,7 @@
     }];
 }
 
-- (void)setMuteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel mute:(BOOL)mute error:(NSError *__autoreleasing *)error
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel error:(NSError * __autoreleasing *)error
 {
     NSNumber *muteNumber = mute ? @1 : @0;
     NSDictionary *parameters = @{ @"Channel": channel ?: @"Master",

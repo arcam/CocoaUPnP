@@ -87,10 +87,10 @@ describe(@"UPPRenderingControlService", ^{
             it(@"should send required parameters", ^{
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
-                [service setMuteWithInstanceID:instanceId
-                                       channel:channel
-                                          mute:YES
-                                         error:&error];
+                [service setMute:YES
+                  withInstanceID:instanceId
+                         channel:channel
+                           error:&error];
                 
                 [sessionManager verify];
                 expect(error).to.beNil();
@@ -99,10 +99,10 @@ describe(@"UPPRenderingControlService", ^{
             it(@"should send required parameters with nil channel", ^{
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
-                [service setMuteWithInstanceID:instanceId
-                                       channel:nil
-                                          mute:YES
-                                         error:&error];
+                [service setMute:YES
+                  withInstanceID:instanceId
+                         channel:channel
+                           error:&error];
                 
                 [sessionManager verify];
                 expect(error).to.beNil();
@@ -118,10 +118,10 @@ describe(@"UPPRenderingControlService", ^{
                                     UPPParametersKey: params };
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
-                [service setMuteWithInstanceID:instanceId
-                                       channel:nil
-                                          mute:NO
-                                         error:&error];
+                [service setMute:NO
+                  withInstanceID:instanceId
+                         channel:nil
+                           error:&error];
                 
                 [sessionManager verify];
                 expect(error).to.beNil();

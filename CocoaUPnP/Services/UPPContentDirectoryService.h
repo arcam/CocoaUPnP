@@ -49,6 +49,13 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  */
 - (void)systemUpdateIDWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
 
+
+#pragma mark - Fetching Items
+
+///-----------------------------------------------------------------------------
+/// @name Fetching Items
+///-----------------------------------------------------------------------------
+
 /**
  Browse the content directory service
  

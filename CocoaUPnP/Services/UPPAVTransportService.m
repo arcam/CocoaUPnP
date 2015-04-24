@@ -10,7 +10,7 @@
 
 #pragma mark - Transport URI Methods
 
-- (void)setAVTransportURIWithInstanceID:(NSString *)instanceId currentURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData error:(NSError * __autoreleasing *)error
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"CurrentURI": currentURI,
                                   @"CurrentURIMetaData": currentURIMetaData };
@@ -21,7 +21,7 @@
                                    error:error];
 }
 
-- (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"NextURI": nextURI,
                                   @"NextURIMetaData": nextURIMetaData };

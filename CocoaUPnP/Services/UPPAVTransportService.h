@@ -18,24 +18,24 @@
 /**
  Set the current transport URI
  
- @param instanceId         The instance identifier
  @param currentURI         The URI of the media item
  @param currentURIMetaData The meta data for the media item
+ @param instanceId         The instance identifier
  @param error              The error returned by the renderer, or nil if call
      was successful
  */
-- (void)setAVTransportURIWithInstanceID:(NSString *)instanceId currentURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData error:(NSError * __autoreleasing *)error;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
 /**
  Set the next transport URI
  
- @param instanceId      The instance identifier
  @param nextURI         The URI for the next media item
  @param nextURIMetaData The meta data for the next media item
+ @param instanceId      The instance identifier
  @param error           The error returned by the renderer, or nil if call was
      successful
  */
-- (void)setNextAVTransportURIWithInstanceID:(NSString *)instanceId nextURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData error:(NSError * __autoreleasing *)error;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
 
 
 #pragma mark - Getting Information

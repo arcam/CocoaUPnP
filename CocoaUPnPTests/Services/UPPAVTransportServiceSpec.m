@@ -53,10 +53,10 @@ describe(@"UPPAVTransportService", ^{
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
             
-            [service setAVTransportURIWithInstanceID:instanceId
-                                          currentURI:currentURI
-                                  currentURIMetaData:currentURIMetaData
-                                               error:&error];
+            [service setAVTransportURI:currentURI
+                    currentURIMetaData:currentURIMetaData
+                            instanceID:instanceId
+                                 error:&error];
             
             [sessionManager verify];
             expect(error).to.beNil();
@@ -65,10 +65,10 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return set an error when call fails", ^{
             service.sessionManager = [[MockFailSessionManager alloc] init];
             
-            [service setAVTransportURIWithInstanceID:instanceId
-                                          currentURI:currentURI
-                                  currentURIMetaData:currentURIMetaData
-                                               error:&error];
+            [service setAVTransportURI:currentURI
+                    currentURIMetaData:currentURIMetaData
+                            instanceID:instanceId
+                                 error:&error];
             
             expect(error).toNot.beNil();
             expect(error.code).to.equal(MockFailSessionErrorCode);
@@ -90,10 +90,10 @@ describe(@"UPPAVTransportService", ^{
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
             
-            [service setNextAVTransportURIWithInstanceID:instanceId
-                                                 nextURI:nextURI
-                                         nextURIMetaData:nextURIMetaData
-                                                   error:&error];
+            [service setNextAVTransportURI:nextURI
+                           nextURIMetaData:nextURIMetaData
+                                instanceID:instanceId
+                                     error:&error];
             
             [sessionManager verify];
             expect(error).to.beNil();

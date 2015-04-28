@@ -26,12 +26,15 @@
 		0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A241ADE9BF70029FCC7 /* Items.xml */; };
 		0E8B1A2C1ADF9DF80029FCC7 /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */; };
 		0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */; };
+		0E918B621AEFA861000C679A /* SSDPDelegateTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E918B611AEFA861000C679A /* SSDPDelegateTestHelper.m */; };
+		0E918B641AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E918B631AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
 		0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78301AC944C10013DB95 /* AppDelegate.m */; };
 		0E9A78341AC944C10013DB95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78331AC944C10013DB95 /* ViewController.m */; };
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
+		0EB7EEFE1AEF904B0005A874 /* SSDPServiceBrowserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */; };
 		0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */; };
 		0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */; };
 		0ED2B9B91AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B9B81AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m */; };
@@ -78,6 +81,9 @@
 		0E8B1A241ADE9BF70029FCC7 /* Items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Items.xml; sourceTree = "<group>"; };
 		0E8B1A2A1ADF9C930029FCC7 /* Containers.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Containers.xml; sourceTree = "<group>"; };
 		0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRenderingControlServiceSpec.m; sourceTree = "<group>"; };
+		0E918B601AEFA861000C679A /* SSDPDelegateTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDPDelegateTestHelper.h; sourceTree = "<group>"; };
+		0E918B611AEFA861000C679A /* SSDPDelegateTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPDelegateTestHelper.m; sourceTree = "<group>"; };
+		0E918B631AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserDelegateSpec.m; sourceTree = "<group>"; };
 		0E9A78281AC944C10013DB95 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A782C1AC944C10013DB95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E9A782D1AC944C10013DB95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserSpec.m; sourceTree = "<group>"; };
 		0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = UPPAVTransportServiceSpec.m; sourceTree = "<group>"; tabWidth = 4; };
 		0EBB0DF01AE6690A005F107A /* MockFailSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockFailSessionManager.h; sourceTree = "<group>"; };
 		0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockFailSessionManager.m; sourceTree = "<group>"; };
@@ -133,6 +140,7 @@
 		0E4E36231AE4FFBC0051842F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				0EB7EEAC1AEF79400005A874 /* SSDP */,
 				0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */,
 				0E4E36311AE521AF0051842F /* UPPResponseSerializerSpec.m */,
 				0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */,
@@ -308,6 +316,17 @@
 				0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		0EB7EEAC1AEF79400005A874 /* SSDP */ = {
+			isa = PBXGroup;
+			children = (
+				0E918B601AEFA861000C679A /* SSDPDelegateTestHelper.h */,
+				0E918B611AEFA861000C679A /* SSDPDelegateTestHelper.m */,
+				0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */,
+				0E918B631AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m */,
+			);
+			path = SSDP;
 			sourceTree = "<group>";
 		};
 		0EBB0DED1AE6506E005F107A /* Services */ = {
@@ -540,11 +559,14 @@
 				0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */,
 				0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */,
 				0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */,
+				0EB7EEFE1AEF904B0005A874 /* SSDPServiceBrowserSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
+				0E918B641AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
 				0EECAE8C1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m in Sources */,
 				0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,
+				0E918B621AEFA861000C679A /* SSDPDelegateTestHelper.m in Sources */,
 				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,
 				0ED2B9B91AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m in Sources */,
 			);

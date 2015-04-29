@@ -28,6 +28,7 @@
 		0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D475C1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m */; };
 		0E918B621AEFA861000C679A /* SSDPDelegateTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E918B611AEFA861000C679A /* SSDPDelegateTestHelper.m */; };
 		0E918B641AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E918B631AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m */; };
+		0E918B6C1AEFD5D8000C679A /* UPPDiscoverySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E918B6B1AEFD5D8000C679A /* UPPDiscoverySpec.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
 		0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78301AC944C10013DB95 /* AppDelegate.m */; };
 		0E9A78341AC944C10013DB95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78331AC944C10013DB95 /* ViewController.m */; };
@@ -84,6 +85,7 @@
 		0E918B601AEFA861000C679A /* SSDPDelegateTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDPDelegateTestHelper.h; sourceTree = "<group>"; };
 		0E918B611AEFA861000C679A /* SSDPDelegateTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPDelegateTestHelper.m; sourceTree = "<group>"; };
 		0E918B631AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserDelegateSpec.m; sourceTree = "<group>"; };
+		0E918B6B1AEFD5D8000C679A /* UPPDiscoverySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDiscoverySpec.m; sourceTree = "<group>"; };
 		0E9A78281AC944C10013DB95 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A782C1AC944C10013DB95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E9A782D1AC944C10013DB95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */,
 				0E4E36311AE521AF0051842F /* UPPResponseSerializerSpec.m */,
 				0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */,
+				0E918B6B1AEFD5D8000C679A /* UPPDiscoverySpec.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,
 				0EECAE8C1AE7EBF300E17471 /* UPPContentDirectoryServiceSpec.m in Sources */,
 				0E8D475D1AE93BFF00EC5669 /* UPPRenderingControlServiceSpec.m in Sources */,
+				0E918B6C1AEFD5D8000C679A /* UPPDiscoverySpec.m in Sources */,
 				0E8B1A231ADE97730029FCC7 /* TestHelpers.m in Sources */,
 				0E918B621AEFA861000C679A /* SSDPDelegateTestHelper.m in Sources */,
 				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,

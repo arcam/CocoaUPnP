@@ -2,6 +2,10 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPDiscovery.h"
+#import "SSDPService.h"
+#import "UPPSessionManager.h"
+#import "UPPDeviceParser.h"
+#import "UPPBasicDevice.h"
 
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
@@ -39,17 +43,36 @@
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didFindService:(SSDPService *)service
 {
-    [self.devices addObject:service];
+    [self parseService:service];
 }
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didRemoveService:(SSDPService *)service
 {
-    [self.devices removeObject:service];
+    NSString *usn = service.uniqueServiceName;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@", usn];
+    NSArray *devices = [self.devices filteredArrayUsingPredicate:predicate];
+    [self.devices removeObjectsInArray:devices];
 }
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didNotStartBrowsingForServices:(NSError *)error
 {
     NSLog(@"Could not start browsing for services: %@", error);
+}
+
+#pragma mark - Private Methods
+
+- (void)parseService:(SSDPService *)service
+{
+    [UPPDeviceParser parseURL:service.location withCompletion:^(UPPBasicDevice *device, NSError *error) {
+        if (device) {
+            [self addDevice:device];
+        }
+    }];
+}
+
+- (void)addDevice:(UPPBasicDevice *)device
+{
+    [self.devices addObject:device];
 }
 
 @end

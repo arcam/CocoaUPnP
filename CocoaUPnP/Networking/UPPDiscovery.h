@@ -3,8 +3,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SSDPServiceBrowser.h"
+#import "UPPDeviceParser.h"
 
 @interface UPPDiscovery : NSObject <SSDPServiceBrowserDelegate>
+
+@property (strong, nonatomic) UPPDeviceParser *parser;
 
 + (UPPDiscovery *)sharedInstance;
 - (NSArray *)availableDevices;

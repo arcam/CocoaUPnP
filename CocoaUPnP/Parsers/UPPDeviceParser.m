@@ -7,8 +7,29 @@
 #import "UPPDeviceIcon.h"
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
+#import "AFHTTPSessionManager.h"
+#import "UPPRequestSerializer.h"
 
 @implementation UPPDeviceParser
+
++ (void)parseURL:(NSURL *)url withCompletion:(CompletionBlock)completion
+{
+    if (!completion) {
+        return;
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [UPPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
+        UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];
+        [parser parseWithCompletion:^(UPPBasicDevice *device, NSError *error) {
+            completion(device, error);
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(nil, error);
+    }];
+}
 
 - (void)parseWithCompletion:(CompletionBlock)completion
 {
@@ -31,7 +52,7 @@
     
     __block UPPBasicDevice *device;
     
-    [document enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+    [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         device = [[UPPBasicDevice alloc] init];
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];

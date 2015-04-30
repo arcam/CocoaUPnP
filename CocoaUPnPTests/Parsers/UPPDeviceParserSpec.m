@@ -6,6 +6,7 @@
 #import "UPPDeviceIcon.h"
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
+#import "OHHTTPStubs.h"
 
 SpecBegin(UPPDeviceParser)
 
@@ -99,6 +100,30 @@ describe(@"UPPDeviceParser", ^{
         
     });
     
+    describe(@"when parsing from url", ^{
+        
+        it(@"should download and parse from a url", ^{
+            NSString *urlString = @"http://127.0.0.1/desc.xml";
+            NSURL *url = [NSURL URLWithString:urlString];
+            
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return [request.URL.absoluteString isEqualToString:url.absoluteString];
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+                NSData *data = LoadDataFromXML(@"Device", [self class]);
+                return [OHHTTPStubsResponse responseWithData:data
+                                                  statusCode:200
+                                                     headers:nil];
+            }];
+            
+            waitUntil(^(DoneCallback done) {
+                [UPPDeviceParser parseURL:url withCompletion:^(UPPBasicDevice *device, NSError *error) {
+                    expect(device).toNot.beNil();
+                    expect(device.friendlyName).to.equal(@"Paul");
+                    done();
+                }];
+            });
+        });
+    });
 });
 
 SpecEnd

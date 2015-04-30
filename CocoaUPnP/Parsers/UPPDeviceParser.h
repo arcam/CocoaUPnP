@@ -20,6 +20,8 @@ typedef void(^CompletionBlock)(UPPBasicDevice *device, NSError *error);
  */
 @interface UPPDeviceParser : UPPBaseParser
 
++ (void)parseURL:(NSURL *)url withCompletion:(CompletionBlock)completion;
+
 /**
  Parse the previously supplied XML data
  

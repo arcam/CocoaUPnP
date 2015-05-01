@@ -6,5 +6,5 @@ before_install:
 podfile: Example/Podfile
 script: 
   - make build
-  - make test
+  - make tests
 after_success: slather

@@ -53,7 +53,13 @@
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didRemoveService:(SSDPService *)service
 {
     NSArray *devices = [self devicesMatchingService:service];
-    [self.devices removeObjectsInArray:devices];
+    
+    for (UPPBasicDevice *device in devices) {
+        [self.devices removeObject:device];
+        if ([self.delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
+            [self.delegate discovery:self didRemoveDevice:device];
+        }
+    }
 }
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didNotStartBrowsingForServices:(NSError *)error
@@ -75,6 +81,10 @@
 - (void)addDevice:(UPPBasicDevice *)device
 {
     [self.devices addObject:device];
+    
+    if ([self.delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
+        [self.delegate discovery:self didFindDevice:device];
+    }
 }
 
 - (NSArray *)devicesMatchingService:(SSDPService *)service

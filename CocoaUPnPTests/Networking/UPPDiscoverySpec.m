@@ -19,7 +19,6 @@ describe(@"UPPDiscovery", ^{
     
     beforeEach(^{
         discovery = [[UPPDiscovery alloc] init];
-        
     });
     
     it(@"should have a shared instance", ^{
@@ -35,20 +34,21 @@ describe(@"UPPDiscovery", ^{
         __block id mockParser;
         __block id mockDevice;
         __block id mockService;
+        __block id mockDelegate;
         __block NSURL *url;
         __block NSString *usn;
         
         beforeEach(^{
+            usn = @"usn";
+            url = [NSURL URLWithString:@"http://127.0.0.1/desc.xml"];
+            
             mockParser = OCMClassMock([UPPDeviceParser class]);
             discovery.parser = mockParser;
-            
             mockDevice = OCMClassMock([UPPBasicDevice class]);
-            
-            url = [NSURL URLWithString:@"http://127.0.0.1/desc.xml"];
             mockService = OCMClassMock([SSDPService class]);
             OCMStub([mockService location]).andReturn(url);
-            
-            usn = @"usn";
+            mockDelegate = OCMProtocolMock(@protocol(UPPDiscoveryDelegate));
+            discovery.delegate = mockDelegate;
             
             expect(discovery.availableDevices.count).to.equal(0);
         });
@@ -57,32 +57,27 @@ describe(@"UPPDiscovery", ^{
             [mockParser stopMocking];
             [mockDevice stopMocking];
             [mockService stopMocking];
+            [mockDelegate stopMocking];
         });
         
         describe(@"when a device is added", ^{
-            it(@"should add parsed devices to availableDevices", ^{
-                OCMExpect([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
-                    void(^completionBlock)(UPPBasicDevice *device, NSError *error);
-                    [invocation getArgument:&completionBlock atIndex:3];
-                    completionBlock(mockDevice, nil);
-                });
-                
-                [discovery ssdpBrowser:nil didFindService:mockService];
-                
-                NSArray *availableDevices = discovery.availableDevices;
-                expect(availableDevices.count).to.equal(1);
-                expect(availableDevices[0]).to.beIdenticalTo(mockDevice);
-                
-                OCMVerifyAll(mockParser);
-            });
-            
-            it(@"should not add the same device twice", ^{
+            beforeEach(^{
                 OCMStub([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
                     void(^completionBlock)(UPPBasicDevice *device, NSError *error);
                     [invocation getArgument:&completionBlock atIndex:3];
                     completionBlock(mockDevice, nil);
                 });
+            });
+            
+            it(@"should add parsed device to availableDevices", ^{
+                [discovery ssdpBrowser:nil didFindService:mockService];
                 
+                NSArray *availableDevices = discovery.availableDevices;
+                expect(availableDevices.count).to.equal(1);
+                expect(availableDevices[0]).to.beIdenticalTo(mockDevice);
+            });
+            
+            it(@"should not add the same device twice", ^{
                 [discovery ssdpBrowser:nil didFindService:mockService];
                 expect(discovery.availableDevices.count).to.equal(1);
                 
@@ -90,8 +85,18 @@ describe(@"UPPDiscovery", ^{
                 expect(discovery.availableDevices.count).to.equal(1);
             });
             
-            it(@"should not try and add a device if there was a parser error", ^{
-                OCMExpect([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+            it(@"should inform delegate", ^{
+                OCMExpect([mockDelegate discovery:discovery didFindDevice:mockDevice]);
+                
+                [discovery ssdpBrowser:nil didFindService:mockService];
+                
+                OCMVerifyAll(mockDelegate);
+            });
+        });
+        
+        describe(@"when a parse error occurs", ^{
+            it(@"should not try and add a device", ^{
+                OCMStub([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
                     void(^completionBlock)(UPPBasicDevice *device, NSError *error);
                     [invocation getArgument:&completionBlock atIndex:3];
                     completionBlock(nil, nil);
@@ -105,9 +110,13 @@ describe(@"UPPDiscovery", ^{
         });
 
         describe(@"when a device is removed", ^{
+            
+            __block UPPBasicDevice *device;
+            
             beforeEach(^{
-                // OCMock objects do not respond to predicate matches
-                UPPBasicDevice *device = [UPPBasicDevice new];
+                // OCMock objects do not respond to predicate matches, so use a
+                // real device instead
+                device = [UPPBasicDevice new];
                 device.udn = usn;
                 [discovery.devices addObject:device];
             });
@@ -126,6 +135,15 @@ describe(@"UPPDiscovery", ^{
                 [discovery ssdpBrowser:nil didRemoveService:mockService];
                 
                 expect(discovery.availableDevices.count).to.equal(1);
+            });
+            
+            it(@"should inform delegate", ^{
+                OCMStub([mockService uniqueServiceName]).andReturn(usn);
+                OCMExpect([mockDelegate discovery:discovery didRemoveDevice:device]);
+                
+                [discovery ssdpBrowser:nil didRemoveService:mockService];
+                
+                OCMVerifyAll(mockDelegate);
             });
         });
     });

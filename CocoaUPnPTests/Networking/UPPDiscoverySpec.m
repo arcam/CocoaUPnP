@@ -60,7 +60,7 @@ describe(@"UPPDiscovery", ^{
         });
         
         describe(@"when a device is added", ^{
-            it(@"should parse and add parsed devices to availableDevices", ^{
+            it(@"should add parsed devices to availableDevices", ^{
                 OCMExpect([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
                     void(^completionBlock)(UPPBasicDevice *device, NSError *error);
                     [invocation getArgument:&completionBlock atIndex:3];
@@ -74,6 +74,20 @@ describe(@"UPPDiscovery", ^{
                 expect(availableDevices[0]).to.beIdenticalTo(mockDevice);
                 
                 OCMVerifyAll(mockParser);
+            });
+            
+            it(@"should not add the same device twice", ^{
+                OCMStub([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+                    void(^completionBlock)(UPPBasicDevice *device, NSError *error);
+                    [invocation getArgument:&completionBlock atIndex:3];
+                    completionBlock(mockDevice, nil);
+                });
+                
+                [discovery ssdpBrowser:nil didFindService:mockService];
+                expect(discovery.availableDevices.count).to.equal(1);
+                
+                [discovery ssdpBrowser:nil didFindService:mockService];
+                expect(discovery.availableDevices.count).to.equal(1);
             });
             
             it(@"should not try and add a device if there was a parser error", ^{
@@ -98,7 +112,7 @@ describe(@"UPPDiscovery", ^{
                 [discovery.devices addObject:device];
             });
             
-            it(@"should remove devices as they disappear", ^{
+            it(@"should remove devices", ^{
                 OCMStub([mockService uniqueServiceName]).andReturn(usn);
                 
                 [discovery ssdpBrowser:nil didRemoveService:mockService];

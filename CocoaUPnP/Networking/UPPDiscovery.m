@@ -43,14 +43,16 @@
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didFindService:(SSDPService *)service
 {
+    NSArray *devices = [self devicesMatchingService:service];
+    
+    if (devices.count > 0) { return; }
+    
     [self parseService:service];
 }
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didRemoveService:(SSDPService *)service
 {
-    NSString *usn = service.uniqueServiceName;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@", usn];
-    NSArray *devices = [self.devices filteredArrayUsingPredicate:predicate];
+    NSArray *devices = [self devicesMatchingService:service];
     [self.devices removeObjectsInArray:devices];
 }
 
@@ -73,6 +75,13 @@
 - (void)addDevice:(UPPBasicDevice *)device
 {
     [self.devices addObject:device];
+}
+
+- (NSArray *)devicesMatchingService:(SSDPService *)service
+{
+    NSString *udn = service.uniqueServiceName;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@", udn];
+    return [self.devices filteredArrayUsingPredicate:predicate];
 }
 
 @end

@@ -25,18 +25,18 @@ PODS:
     - AFNetworking (~> 2.5.2)
     - CocoaAsyncSocket (~> 7.4.1)
     - Ono (~> 1.2)
-  - Expecta (0.3.2)
+  - Expecta (1.0.0)
   - OCMock (3.1.2)
-  - OHHTTPStubs (4.0.0)
+  - OHHTTPStubs (4.0.1)
   - Ono (1.2.1)
-  - Specta (0.4.0)
+  - Specta (1.0.0)
 
 DEPENDENCIES:
   - CocoaUPnP (from `../CocoaUPnP.podspec`)
-  - Expecta (~> 0.3.2)
+  - Expecta (~> 1.0)
   - OCMock (~> 3.1.2)
   - OHHTTPStubs (~> 4.0.0)
-  - Specta (~> 0.4.0)
+  - Specta (~> 1.0)
 
 EXTERNAL SOURCES:
   CocoaUPnP:
@@ -46,10 +46,10 @@ SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
   CocoaUPnP: 33eb2a9c74cb0208e3d209ac4f71f9f65edb0d13
-  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
-  OHHTTPStubs: 3d65d31dd8389a8adabcc086ff2cc99c02e49bcc
+  OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
   Ono: 1122212de602280cc7af19d7ab12ee98a3fc0339
-  Specta: a353759f073ffcc0a365b782fe4aaeac064c03c6
+  Specta: 96fe05fe5c7348b5223f85e862904f6e832abb14
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.0

@@ -1,42 +1,43 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPMediaServerDevice.h"
-#import "UPPContentDirectoryService.h"
+#import "UPPMediaRendererDevice.h"
+#import "UPPRenderingControlService.h"
 #import "UPPConnectionManagerService.h"
 #import "UPPAVTransportService.h"
 
-@interface UPPMediaServerDevice ()
-@property (strong, nonatomic) UPPContentDirectoryService *contentDirectoryService;
+@interface UPPMediaRendererDevice ()
+@property (strong, nonatomic) UPPRenderingControlService *renderingControlService;
 @property (strong, nonatomic) UPPConnectionManagerService *connectionManagerService;
 @property (strong, nonatomic) UPPAVTransportService *avTransportService;
 @end
 
-@implementation UPPMediaServerDevice
+@implementation UPPMediaRendererDevice
 
-+ (instancetype)mediaServerWithURN:(NSString *)urn baseURL:(NSURL *)baseURL
++ (instancetype)mediaRendererWithURN:(NSString *)urn baseURL:(NSURL *)baseURL
 {
-    UPPMediaServerDevice *device = [[UPPMediaServerDevice alloc] init];
+    UPPMediaRendererDevice *device = [[UPPMediaRendererDevice alloc] init];
     device.deviceType = urn;
     device.baseURL = baseURL;
     
     return device;
 }
 
-- (UPPContentDirectoryService *)contentDirectoryService
+- (UPPRenderingControlService *)renderingControlService
 {
-    if (!_contentDirectoryService) {
-        NSString *namespace = @":service:ContentDirectory:";
+    if (!_renderingControlService) {
+        
+        NSString *namespace = @":service:RenderingControl:";
         UPPBasicService *service = [self serviceForNameSpace:namespace];
         
         if (!service) {
             return nil;
         }
         
-        _contentDirectoryService = [[UPPContentDirectoryService alloc] init];
-        _contentDirectoryService.controlURL = [self controlURLForService:service];
+        _renderingControlService = [[UPPRenderingControlService alloc] init];
+        _renderingControlService.controlURL = [self controlURLForService:service];
     }
-    return _contentDirectoryService;
+    return _renderingControlService;
 }
 
 - (UPPConnectionManagerService *)connectionManagerService

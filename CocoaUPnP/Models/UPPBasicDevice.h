@@ -3,6 +3,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class UPPBasicService;
+
 /**
  This class defines a basic UPnP device.
  */
@@ -85,5 +87,8 @@
  @return Returns a unique service name `udn::deviceType`
  */
 - (NSString *)usn;
+
+- (NSURL *)controlURLForService:(UPPBasicService *)service;
+- (UPPBasicService *)serviceForNameSpace:(NSString *)nameSpace;
 
 @end

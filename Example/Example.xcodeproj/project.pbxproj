@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E04CAEC1AE7B6F1008A02D9 /* NetworkTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E04CAEB1AE7B6F1008A02D9 /* NetworkTestHelpers.m */; };
+		0E31CBED1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E31CBEC1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m */; };
 		0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */; };
 		0E4E362A1AE5022C0051842F /* UPPRequestSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */; };
 		0E4E362E1AE509160051842F /* PlayRequest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E4E362D1AE509160051842F /* PlayRequest.xml */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		0E04CAEA1AE7B6F1008A02D9 /* NetworkTestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTestHelpers.h; sourceTree = "<group>"; };
 		0E04CAEB1AE7B6F1008A02D9 /* NetworkTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTestHelpers.m; sourceTree = "<group>"; };
+		0E31CBEC1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaServerDeviceSpec.m; sourceTree = "<group>"; };
 		0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPSessionManagerSpec.m; sourceTree = "<group>"; };
 		0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRequestSerializerSpec.m; sourceTree = "<group>"; };
 		0E4E362D1AE509160051842F /* PlayRequest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PlayRequest.xml; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				0EE5C02D1AE0F04D00D3EAEA /* UPPErrorSpec.m */,
 				0EE5C0331AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m */,
 				0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */,
+				0E31CBEC1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m */,
 				0EE5C02F1AE0F1D200D3EAEA /* UPPServiceSpec.m */,
 			);
 			path = Models;
@@ -556,6 +559,7 @@
 				0EE5C02E1AE0F04D00D3EAEA /* UPPErrorSpec.m in Sources */,
 				0EE5C0341AE0F1F000D3EAEA /* UPPMediaItemResourceSpec.m in Sources */,
 				0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */,
+				0E31CBED1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m in Sources */,
 				0E04CAEC1AE7B6F1008A02D9 /* NetworkTestHelpers.m in Sources */,
 				0E4E36321AE521AF0051842F /* UPPResponseSerializerSpec.m in Sources */,
 				0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */,

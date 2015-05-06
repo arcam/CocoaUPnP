@@ -66,4 +66,12 @@
     }];
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p, nameSpace: %@, controlURL: %@>",
+            NSStringFromClass([self class]), self, self.nameSpace, self.controlURL];
+}
+
 @end

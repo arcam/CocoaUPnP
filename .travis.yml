@@ -2,7 +2,8 @@ language: objective-c
 before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
-  - gem install cocoapods slather -N
+  - gem install cocoapods -v 0.36.4 -N
+  - gem install slather -N
 podfile: Example/Podfile
 script: 
   - make build

@@ -20,7 +20,7 @@ describe(@"UPPAVTransportService", ^{
     
     beforeEach(^{
         service = [[UPPAVTransportService alloc] init];
-        service.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
+        service.serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
         
         sessionManager = OCMClassMock([UPPSessionManager class]);
         service.sessionManager = sessionManager;
@@ -48,7 +48,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"CurrentURIMetaData": currentURIMetaData };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetAVTransportURI",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -85,7 +85,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"NextURIMetaData": nextURIMetaData };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetNextAVTransportURI",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -103,7 +103,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when requesting media information", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -116,7 +116,7 @@ describe(@"UPPAVTransportService", ^{
         
         it(@"should return an error when call fails", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
@@ -134,7 +134,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when getting transport information", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetTransportInfo",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -149,7 +149,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when getting position information", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetPositionInfo",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -164,7 +164,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when getting device capabilities", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetDeviceCapabilities",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -179,7 +179,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when getting transport settings", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetTransportSettings",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -194,7 +194,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when stopping playback", ^{
         it(@"should send stop command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Stop",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -213,7 +213,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"Speed": @"1" };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -230,7 +230,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"Speed": @"2" };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -246,7 +246,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when pausing playback", ^{
         it(@"should send pause command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Pause",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -262,7 +262,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when recording", ^{
         it(@"should send record command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Record",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -284,7 +284,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"Unit": unit,
                                       @"Target": target };
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Seek",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -303,7 +303,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when sending next", ^{
         it(@"should send next command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Next",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -319,7 +319,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when sending previous", ^{
         it(@"should send previous command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Previous",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -339,7 +339,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"NewPlayMode": newPlayMode };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetPlayMode",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -361,7 +361,7 @@ describe(@"UPPAVTransportService", ^{
                                       @"NewRecordMode": newRecordMode };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetRecordMode",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyPostWithParams(expectedParams, sessionManager, url);
@@ -379,7 +379,7 @@ describe(@"UPPAVTransportService", ^{
     describe(@"when getting transport actions", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetCurrentTransportActions",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceDict() };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);

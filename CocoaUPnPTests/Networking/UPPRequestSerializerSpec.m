@@ -11,7 +11,7 @@ describe(@"UPPRequestSerializer", ^{
     __block NSURL *url;
     __block NSURLRequest *request;
     __block NSString *soapAction;
-    __block NSString *nameSpace;
+    __block NSString *serviceType;
     
     beforeEach(^{
         UPPRequestSerializer *serializer = [UPPRequestSerializer serializer];
@@ -20,11 +20,11 @@ describe(@"UPPRequestSerializer", ^{
         NSURLRequest *inRequest = [NSURLRequest requestWithURL:url];
         
         soapAction = @"Play";
-        nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
+        serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
         NSDictionary *params = @{ @"InstanceID" : @"0", @"Speed" : @"1" };
         
         NSDictionary *paramWrapper = @{ UPPSOAPActionKey: soapAction,
-                                        UPPNameSpaceKey: nameSpace,
+                                        UPPNameSpaceKey: serviceType,
                                         UPPParametersKey: params };
         NSError *error = nil;
         request = [serializer requestBySerializingRequest:inRequest
@@ -47,7 +47,7 @@ describe(@"UPPRequestSerializer", ^{
     it(@"should set required HTTP headers", ^{
         NSDictionary *headers = request.allHTTPHeaderFields;
         
-        NSString *soapHeader = [NSString stringWithFormat:@"\"%@#%@\"", nameSpace, soapAction];
+        NSString *soapHeader = [NSString stringWithFormat:@"\"%@#%@\"", serviceType, soapAction];
         expect(headers[@"SOAPACTION"]).to.equal(soapHeader);
         
         NSString *length = [NSString stringWithFormat:@"%@", @(request.HTTPBody.length)];

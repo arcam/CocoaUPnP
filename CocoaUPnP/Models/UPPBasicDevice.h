@@ -3,7 +3,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class UPPBasicService;
+@class UPPServiceDescription;
 
 /**
  This class defines a basic UPnP device.
@@ -88,7 +88,13 @@
  */
 - (NSString *)usn;
 
-- (NSURL *)controlURLForService:(UPPBasicService *)service;
-- (UPPBasicService *)serviceForNameSpace:(NSString *)nameSpace;
+/**
+ Find the first service which matches `serviceType`
+ 
+ @param serviceType The service type to search for
+ 
+ @return The matching service description, or nil if no matches found
+ */
+- (UPPServiceDescription *)serviceForType:(NSString *)serviceType;
 
 @end

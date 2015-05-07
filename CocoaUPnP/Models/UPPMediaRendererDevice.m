@@ -5,6 +5,7 @@
 #import "UPPRenderingControlService.h"
 #import "UPPConnectionManagerService.h"
 #import "UPPAVTransportService.h"
+#import "UPPServiceDescription.h"
 
 @interface UPPMediaRendererDevice ()
 @property (strong, nonatomic) UPPRenderingControlService *renderingControlService;
@@ -28,15 +29,17 @@
     if (!_renderingControlService) {
         
         NSString *namespace = @":service:RenderingControl:";
-        UPPBasicService *service = [self serviceForNameSpace:namespace];
+        UPPServiceDescription *service = [self serviceForType:namespace];
         
         if (!service) {
             return nil;
         }
         
-        _renderingControlService = [[UPPRenderingControlService alloc] init];
-        _renderingControlService.controlURL = [self controlURLForService:service];
+        _renderingControlService = [UPPRenderingControlService
+                                    serviceWithBaseURL:self.baseURL
+                                    description:service];
     }
+    
     return _renderingControlService;
 }
 
@@ -44,14 +47,15 @@
 {
     if (!_connectionManagerService) {
         NSString *namespace = @":service:ConnectionManager:";
-        UPPBasicService *service = [self serviceForNameSpace:namespace];
+        UPPServiceDescription *service = [self serviceForType:namespace];
         
         if (!service) {
             return nil;
         }
         
-        _connectionManagerService = [[UPPConnectionManagerService alloc] init];
-        _connectionManagerService.controlURL = [self controlURLForService:service];
+        _connectionManagerService = [UPPConnectionManagerService
+                                     serviceWithBaseURL:self.baseURL
+                                     description:service];
     }
     return _connectionManagerService;
 }
@@ -60,14 +64,15 @@
 {
     if (!_avTransportService) {
         NSString *namespace = @":service:AVTransport:";
-        UPPBasicService *service = [self serviceForNameSpace:namespace];
+        UPPServiceDescription *service = [self serviceForType:namespace];
         
         if (!service) {
             return nil;
         }
         
-        _avTransportService = [[UPPAVTransportService alloc] init];
-        _avTransportService.controlURL = [self controlURLForService:service];
+        _avTransportService = [UPPAVTransportService
+                               serviceWithBaseURL:self.baseURL
+                               description:service];
     }
     return _avTransportService;
 }

@@ -9,6 +9,7 @@
 #import "UPPError.h"
 #import "AFHTTPSessionManager.h"
 #import "UPPRequestSerializer.h"
+#import "UPPMediaRendererDevice.h"
 
 @implementation UPPDeviceParser
 
@@ -50,10 +51,18 @@
         return;
     }
     
-    __block UPPBasicDevice *device;
+//    __block UPPBasicDevice *device;
+    __block UPPMediaRendererDevice *device;
     
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-        device = [[UPPBasicDevice alloc] init];
+//        device = [[UPPBasicDevice alloc] init];
+        NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
+        
+        // TODO: This is hacky..
+        NSString *presentationURL = [[element firstChildWithTag:@"presentationURL"] stringValue];
+        NSURL *baseURL = [NSURL URLWithString:presentationURL];
+        device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
+                                                      baseURL:baseURL];
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
@@ -71,7 +80,6 @@
 
 - (void)parseElement:(ONOXMLElement *)element intoDevice:(UPPBasicDevice *)device
 {
-    device.deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
     device.friendlyName = [[element firstChildWithTag:@"friendlyName"] stringValue];
     device.manufacturer = [[element firstChildWithTag:@"manufacturer"] stringValue];
     device.modelDescription = [[element firstChildWithTag:@"modelDescription"] stringValue];

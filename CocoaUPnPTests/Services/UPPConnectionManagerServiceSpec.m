@@ -20,7 +20,7 @@ describe(@"UPPConnectionManagerService", ^{
     
     beforeEach(^{
         service = [[UPPConnectionManagerService alloc] init];
-        service.nameSpace = @"urn:schemas-upnp-org:service:ConnectionManager:1";
+        service.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:1";
         
         sessionManager = OCMClassMock([UPPSessionManager class]);
         service.sessionManager = sessionManager;
@@ -39,7 +39,7 @@ describe(@"UPPConnectionManagerService", ^{
         
         beforeEach(^{
             expectedParams = @{ UPPSOAPActionKey: @"GetProtocolInfo",
-                                UPPNameSpaceKey: service.nameSpace };
+                                UPPNameSpaceKey: service.serviceType };
         });
         
         it(@"should send required parameters", ^{
@@ -83,7 +83,7 @@ describe(@"UPPConnectionManagerService", ^{
                                       @"PeerConnectionID": peerConnectionId };
             
             expectedParams = @{ UPPSOAPActionKey: @"PrepareForConnection",
-                                UPPNameSpaceKey: service.nameSpace,
+                                UPPNameSpaceKey: service.serviceType,
                                 UPPParametersKey: params };
         });
         
@@ -122,7 +122,7 @@ describe(@"UPPConnectionManagerService", ^{
             NSDictionary *params = @{ @"ConnectionID": peerConnectionId };
             
             expectedParams = @{ UPPSOAPActionKey: @"ConnectionComplete",
-                                UPPNameSpaceKey: service.nameSpace,
+                                UPPNameSpaceKey: service.serviceType,
                                 UPPParametersKey: params };
         });
         
@@ -151,7 +151,7 @@ describe(@"UPPConnectionManagerService", ^{
         
         beforeEach(^{
             expectedParams = @{ UPPSOAPActionKey: @"GetCurrentConnectionIDs",
-                                UPPNameSpaceKey: service.nameSpace };
+                                UPPNameSpaceKey: service.serviceType };
         });
         
         it(@"should send required parameters", ^{
@@ -175,7 +175,7 @@ describe(@"UPPConnectionManagerService", ^{
             connectionId = @"connectionId";
             NSDictionary *params = @{ @"ConnectionID": connectionId };
             expectedParams = @{ UPPSOAPActionKey: @"GetCurrentConnectionInfo",
-                                UPPNameSpaceKey: service.nameSpace,
+                                UPPNameSpaceKey: service.serviceType,
                                 UPPParametersKey: params };
         });
         

@@ -3,9 +3,9 @@
 
 #import "UPPMediaServerDevice.h"
 #import "UPPContentDirectoryService.h"
-#import "UPPBasicService.h"
 #import "UPPConnectionManagerService.h"
 #import "UPPAVTransportService.h"
+#import "UPPServiceDescription.h"
 
 SpecBegin(UPPMediaServerDevice)
 
@@ -21,17 +21,17 @@ describe(@"UPPMediaServerDevice", ^{
         
         device = [UPPMediaServerDevice mediaServerWithURN:urn baseURL:baseURL];
         
-        UPPBasicService *contentDirectoryService = [[UPPBasicService alloc] init];
-        contentDirectoryService.controlURL = [NSURL URLWithString:@"ctrl/dir"];
-        contentDirectoryService.nameSpace = @"urn:schemas-upnp-org:service:ContentDirectory:1";
+        UPPServiceDescription *contentDirectoryService = [[UPPServiceDescription alloc] init];
+        contentDirectoryService.controlURL = @"ctrl/dir";
+        contentDirectoryService.serviceType = @"urn:schemas-upnp-org:service:ContentDirectory:1";
         
-        UPPBasicService *connectionManagerService = [[UPPBasicService alloc] init];
-        connectionManagerService.controlURL = [NSURL URLWithString:@"ctrl/connmgr"];
-        connectionManagerService.nameSpace = @"urn:schemas-upnp-org:service:ConnectionManager:1";
+        UPPServiceDescription *connectionManagerService = [[UPPServiceDescription alloc] init];
+        connectionManagerService.controlURL = @"ctrl/connmgr";
+        connectionManagerService.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:1";
         
-        UPPBasicService *avTransportService = [[UPPBasicService alloc] init];
-        avTransportService.controlURL = [NSURL URLWithString:@"ctrl/trnspt"];
-        avTransportService.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
+        UPPServiceDescription *avTransportService = [[UPPServiceDescription alloc] init];
+        avTransportService.controlURL = @"ctrl/trnspt";
+        avTransportService.serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
         
         NSArray *services = @[ contentDirectoryService,
                                connectionManagerService,
@@ -59,8 +59,8 @@ describe(@"UPPMediaServerDevice", ^{
         });
         
         it(@"should return any content directory service", ^{
-            UPPBasicService *contentDirectoryService = [[UPPBasicService alloc] init];
-            contentDirectoryService.nameSpace = @"urn:schemas-upnp-org:service:ContentDirectory:2";
+            UPPServiceDescription *contentDirectoryService = [[UPPServiceDescription alloc] init];
+            contentDirectoryService.serviceType = @"urn:schemas-upnp-org:service:ContentDirectory:2";
             device.services = @[ contentDirectoryService ];
             
             UPPContentDirectoryService *service = [device contentDirectoryService];
@@ -80,8 +80,8 @@ describe(@"UPPMediaServerDevice", ^{
         });
         
         it(@"should return any connection manager service", ^{
-            UPPBasicService *connectionManagerService = [[UPPBasicService alloc] init];
-            connectionManagerService.nameSpace = @"urn:schemas-upnp-org:service:ConnectionManager:2";
+            UPPServiceDescription *connectionManagerService = [[UPPServiceDescription alloc] init];
+            connectionManagerService.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:2";
             device.services = @[ connectionManagerService ];
             
             UPPConnectionManagerService *service = [device connectionManagerService];
@@ -101,8 +101,8 @@ describe(@"UPPMediaServerDevice", ^{
         });
         
         it(@"should match any AV transport service", ^{
-            UPPBasicService *avTransportService = [[UPPBasicService alloc] init];
-            avTransportService.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:2";
+            UPPServiceDescription *avTransportService = [[UPPServiceDescription alloc] init];
+            avTransportService.serviceType = @"urn:schemas-upnp-org:service:AVTransport:2";
             device.services = @[ avTransportService ];
             
             UPPAVTransportService *service = [device avTransportService];

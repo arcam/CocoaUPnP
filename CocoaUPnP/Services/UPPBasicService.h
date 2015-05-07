@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
+#import "UPPServiceDescription.h"
 
 @class UPPSessionManager;
 
@@ -27,9 +28,14 @@
 @property (copy, nonatomic) NSURL *controlURL;
 
 /**
- The name space of the control point
+ The service's event subscription URL
  */
-@property (copy, nonatomic) NSString *nameSpace;
+@property (copy, nonatomic) NSURL *eventSubscriptionURL;
+
+/**
+ The service type of the control point
+ */
+@property (copy, nonatomic) NSString *serviceType;
 
 
 #pragma mark - Methods
@@ -37,6 +43,17 @@
 ///-----------------------------------------------------------------------------
 /// @name Methods
 ///-----------------------------------------------------------------------------
+
+/**
+ A convenience initialiser for creating a new service from a base URL and
+ `UPPServiceDescription`
+ 
+ @param baseURL     The base URL for the service
+ @param description The basic service description
+ 
+ @return A new basic service instance
+ */
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description;
 
 /**
  Send a POST request, with an error pointer

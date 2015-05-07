@@ -2,10 +2,10 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPMediaRendererDevice.h"
-#import "UPPBasicService.h"
 #import "UPPRenderingControlService.h"
 #import "UPPConnectionManagerService.h"
 #import "UPPAVTransportService.h"
+#import "UPPServiceDescription.h"
 
 SpecBegin(UPPMediaRendererDevice)
 
@@ -21,17 +21,17 @@ describe(@"UPPMediaRendererDevice", ^{
         
         device = [UPPMediaRendererDevice mediaRendererWithURN:urn baseURL:baseURL];
         
-        UPPBasicService *renderingControlService = [[UPPBasicService alloc] init];
-        renderingControlService.controlURL = [NSURL URLWithString:@"ctrl/render"];
-        renderingControlService.nameSpace = @"urn:schemas-upnp-org:service:RenderingControl:1";
+        UPPServiceDescription *renderingControlService = [[UPPServiceDescription alloc] init];
+        renderingControlService.controlURL = @"ctrl/render";
+        renderingControlService.serviceType = @"urn:schemas-upnp-org:service:RenderingControl:1";
         
-        UPPBasicService *connectionManagerService = [[UPPBasicService alloc] init];
-        connectionManagerService.controlURL = [NSURL URLWithString:@"ctrl/connmgr"];
-        connectionManagerService.nameSpace = @"urn:schemas-upnp-org:service:ConnectionManager:1";
+        UPPServiceDescription *connectionManagerService = [[UPPServiceDescription alloc] init];
+        connectionManagerService.controlURL = @"ctrl/connmgr";
+        connectionManagerService.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:1";
         
-        UPPBasicService *avTransportService = [[UPPBasicService alloc] init];
-        avTransportService.controlURL = [NSURL URLWithString:@"ctrl/trnspt"];
-        avTransportService.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:1";
+        UPPServiceDescription *avTransportService = [[UPPServiceDescription alloc] init];
+        avTransportService.controlURL = @"ctrl/trnspt";
+        avTransportService.serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
         
         NSArray *services = @[ renderingControlService,
                                connectionManagerService,
@@ -55,12 +55,12 @@ describe(@"UPPMediaRendererDevice", ^{
             UPPRenderingControlService *service = [device renderingControlService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should return any rendering control service", ^{
-            UPPBasicService *renderingControlService = [[UPPBasicService alloc] init];
-            renderingControlService.nameSpace = @"urn:schemas-upnp-org:service:RenderingControl:2";
+            UPPServiceDescription *renderingControlService = [[UPPServiceDescription alloc] init];
+            renderingControlService.serviceType = @"urn:schemas-upnp-org:service:RenderingControl:2";
             device.services = @[ renderingControlService ];
             
             UPPRenderingControlService *service = [device renderingControlService];
@@ -76,12 +76,12 @@ describe(@"UPPMediaRendererDevice", ^{
             UPPConnectionManagerService *service = [device connectionManagerService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should return any connection manager service", ^{
-            UPPBasicService *connectionManagerService = [[UPPBasicService alloc] init];
-            connectionManagerService.nameSpace = @"urn:schemas-upnp-org:service:ConnectionManager:2";
+            UPPServiceDescription *connectionManagerService = [[UPPServiceDescription alloc] init];
+            connectionManagerService.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:2";
             device.services = @[ connectionManagerService ];
             
             UPPConnectionManagerService *service = [device connectionManagerService];
@@ -97,12 +97,12 @@ describe(@"UPPMediaRendererDevice", ^{
             UPPAVTransportService *service = [device avTransportService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should match any AV transport service", ^{
-            UPPBasicService *avTransportService = [[UPPBasicService alloc] init];
-            avTransportService.nameSpace = @"urn:schemas-upnp-org:service:AVTransport:2";
+            UPPServiceDescription *avTransportService = [[UPPServiceDescription alloc] init];
+            avTransportService.serviceType = @"urn:schemas-upnp-org:service:AVTransport:2";
             device.services = @[ avTransportService ];
             
             UPPAVTransportService *service = [device avTransportService];

@@ -5,7 +5,20 @@
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
 
+@interface UPPBasicService ()
+@property (strong, nonatomic) NSURL *baseURL;
+@end
+
 @implementation UPPBasicService
+
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description
+{
+    id service = [[[self class] alloc] init];
+    [service setBaseURL:baseURL];
+    [service populateFromServiceDescription:description];
+    
+    return service;
+}
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action
 {
@@ -15,8 +28,8 @@
         [wrapper setObject:action forKey:UPPSOAPActionKey];
     }
     
-    if (self.nameSpace) {
-        [wrapper setObject:self.nameSpace forKey:UPPNameSpaceKey];
+    if (self.serviceType) {
+        [wrapper setObject:self.serviceType forKey:UPPNameSpaceKey];
     }
     
     if (parameters) {
@@ -66,12 +79,30 @@
     }];
 }
 
+#pragma mark - Private Methods
+
+- (void)populateFromServiceDescription:(UPPServiceDescription *)description
+{
+    self.serviceType = description.serviceType;
+    self.controlURL = [self urlForComponent:description.controlURL];
+    self.eventSubscriptionURL = [self urlForComponent:description.eventSubURL];
+}
+
+- (NSURL *)urlForComponent:(NSString *)component
+{
+    if (!component) {
+        return nil;
+    }
+    
+    return [NSURL URLWithString:component relativeToURL:self.baseURL];
+}
+
 #pragma mark - NSObject
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p, nameSpace: %@, controlURL: %@>",
-            NSStringFromClass([self class]), self, self.nameSpace, self.controlURL];
+    return [NSString stringWithFormat:@"<%@: %p, serviceType: %@, controlURL: %@>",
+            NSStringFromClass([self class]), self, self.serviceType, self.controlURL];
 }
 
 @end

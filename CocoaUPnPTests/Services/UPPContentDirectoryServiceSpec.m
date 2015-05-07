@@ -16,7 +16,7 @@ describe(@"UPPContentDirectoryService", ^{
     
     beforeEach(^{
         service = [[UPPContentDirectoryService alloc] init];
-        service.nameSpace = @"urn:schemas-upnp-org:service:ContentDirectory:1";
+        service.serviceType = @"urn:schemas-upnp-org:service:ContentDirectory:1";
         
         sessionManager = [OCMockObject mockForClass:[UPPSessionManager class]];
         service.sessionManager = sessionManager;
@@ -29,7 +29,7 @@ describe(@"UPPContentDirectoryService", ^{
     describe(@"when getting search capabilities", ^{
         it(@"should send required parameters", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSearchCapabilities",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.serviceType };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
             
@@ -45,7 +45,7 @@ describe(@"UPPContentDirectoryService", ^{
     describe(@"when getting sort capabilities", ^{
         it(@"should send required parameters", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSortCapabilities",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.serviceType };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
             
@@ -61,7 +61,7 @@ describe(@"UPPContentDirectoryService", ^{
     describe(@"when getting system update id", ^{
         it(@"should send required parameters", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSystemUpdateID",
-                                              UPPNameSpaceKey: service.nameSpace };
+                                              UPPNameSpaceKey: service.serviceType };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
             
@@ -91,7 +91,7 @@ describe(@"UPPContentDirectoryService", ^{
                                       @"SortCriteria": sortCriteria };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -113,7 +113,7 @@ describe(@"UPPContentDirectoryService", ^{
                                       @"SortCriteria": @"" };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -141,7 +141,7 @@ describe(@"UPPContentDirectoryService", ^{
                                       @"SortCriteria": sortCriteria };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
@@ -163,7 +163,7 @@ describe(@"UPPContentDirectoryService", ^{
                                       @"SortCriteria": @"" };
             
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
-                                              UPPNameSpaceKey: service.nameSpace,
+                                              UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);

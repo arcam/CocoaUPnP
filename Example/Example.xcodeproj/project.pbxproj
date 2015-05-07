@@ -36,6 +36,7 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
+		0EB2B0671AFB646C00F06466 /* MediaServer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0661AFB646C00F06466 /* MediaServer.xml */; };
 		0EB7EEFE1AEF904B0005A874 /* SSDPServiceBrowserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */; };
 		0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */; };
 		0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */; };
@@ -102,6 +103,7 @@
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0EB2B0661AFB646C00F06466 /* MediaServer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MediaServer.xml; sourceTree = "<group>"; };
 		0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserSpec.m; sourceTree = "<group>"; };
 		0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = UPPAVTransportServiceSpec.m; sourceTree = "<group>"; tabWidth = 4; };
 		0EBB0DF01AE6690A005F107A /* MockFailSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockFailSessionManager.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				0E6EB23D1AE5354D0092DEEC /* GetConnectionID.xml */,
 				0E8B1A241ADE9BF70029FCC7 /* Items.xml */,
 				0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */,
+				0EB2B0661AFB646C00F06466 /* MediaServer.xml */,
 				0E4E362C1AE509160051842F /* Requests */,
 			);
 			path = ExampleXML;
@@ -376,6 +379,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E9A784B1AC944C20013DB95 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				0EB2B0651AFB5F8800F06466 /* Remove Stale Coverage Files */,
 				E0DE8BDC51FA0B516B77DE20 /* Check Pods Manifest.lock */,
 				0E9A78241AC944C10013DB95 /* Sources */,
 				0E9A78251AC944C10013DB95 /* Frameworks */,
@@ -395,6 +399,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E9A784E1AC944C20013DB95 /* Build configuration list for PBXNativeTarget "ExampleTests" */;
 			buildPhases = (
+				0EB2B0641AFB5F4900F06466 /* Remove Stale Coverage Files */,
 				63E5DCBEF8D958F8567F45BE /* Check Pods Manifest.lock */,
 				0E9A783D1AC944C20013DB95 /* Sources */,
 				0E9A783E1AC944C20013DB95 /* Frameworks */,
@@ -463,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB2B0671AFB646C00F06466 /* MediaServer.xml in Resources */,
 				0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */,
 				0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */,
 				0E4E362E1AE509160051842F /* PlayRequest.xml in Resources */,
@@ -477,6 +483,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0EB2B0641AFB5F4900F06466 /* Remove Stale Coverage Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Stale Coverage Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Cleaning Profiler Information\"\ncd \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\"\n# Delete *.gcda files in the current target\nrm -f *.gcda";
+		};
+		0EB2B0651AFB5F8800F06466 /* Remove Stale Coverage Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Stale Coverage Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Cleaning Profiler Information\"\ncd \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\"\n# Delete *.gcda files in the current target\nrm -f *.gcda";
+		};
 		1550F4C9F3F619418E57165A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -636,6 +670,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -677,6 +713,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

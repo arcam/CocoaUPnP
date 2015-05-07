@@ -18,7 +18,7 @@ describe(@"UPPRenderingControlService", ^{
     
     beforeEach(^{
         service = [[UPPRenderingControlService alloc] init];
-        service.nameSpace = @"urn:schemas-upnp-org:service:RenderingControl:1";
+        service.serviceType = @"urn:schemas-upnp-org:service:RenderingControl:1";
         
         sessionManager = [OCMockObject mockForClass:[UPPSessionManager class]];
         service.sessionManager = sessionManager;
@@ -46,7 +46,7 @@ describe(@"UPPRenderingControlService", ^{
                 params = @{ @"InstanceID": instanceId,
                             @"Channel": channel };
                 expectedParams = @{ UPPSOAPActionKey: @"GetMute",
-                                    UPPNameSpaceKey: service.nameSpace,
+                                    UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
             
@@ -80,7 +80,7 @@ describe(@"UPPRenderingControlService", ^{
                             @"DesiredMute": @1 };
                 
                 expectedParams = @{ UPPSOAPActionKey: @"SetMute",
-                                    UPPNameSpaceKey: service.nameSpace,
+                                    UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
             
@@ -114,7 +114,7 @@ describe(@"UPPRenderingControlService", ^{
                             @"DesiredMute": @0 };
                 
                 expectedParams = @{ UPPSOAPActionKey: @"SetMute",
-                                    UPPNameSpaceKey: service.nameSpace,
+                                    UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
                 VerifyPostWithParams(expectedParams, sessionManager, url);
                 
@@ -144,7 +144,7 @@ describe(@"UPPRenderingControlService", ^{
                 params = @{ @"InstanceID": instanceId,
                             @"Channel": channel };
                 expectedParams = @{ UPPSOAPActionKey: @"GetVolume",
-                                    UPPNameSpaceKey: service.nameSpace,
+                                    UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
             
@@ -178,7 +178,7 @@ describe(@"UPPRenderingControlService", ^{
                             @"DesiredVolume": @1 };
                 
                 expectedParams = @{ UPPSOAPActionKey: @"SetVolume",
-                                    UPPNameSpaceKey: service.nameSpace,
+                                    UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
             

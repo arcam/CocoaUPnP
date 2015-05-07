@@ -10,6 +10,7 @@
 #import "AFHTTPSessionManager.h"
 #import "UPPRequestSerializer.h"
 #import "UPPMediaRendererDevice.h"
+#import "UPPMediaServerDevice.h"
 
 @implementation UPPDeviceParser
 
@@ -24,7 +25,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
         UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];
-        [parser parseWithCompletion:^(UPPBasicDevice *device, NSError *error) {
+        [parser parseWithBaseURL:url completion:^(UPPBasicDevice *device, NSError *error) {
             completion(device, error);
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -32,7 +33,9 @@
     }];
 }
 
-- (void)parseWithCompletion:(CompletionBlock)completion
+#pragma mark - Private Methods
+
+- (void)parseWithBaseURL:(NSURL *)baseURL completion:(CompletionBlock)completion
 {
     if (!completion) {
         return;
@@ -51,18 +54,18 @@
         return;
     }
     
-//    __block UPPBasicDevice *device;
-    __block UPPMediaRendererDevice *device;
+    __block UPPBasicDevice *device;
     
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-//        device = [[UPPBasicDevice alloc] init];
         NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
         
-        // TODO: This is hacky..
-        NSString *presentationURL = [[element firstChildWithTag:@"presentationURL"] stringValue];
-        NSURL *baseURL = [NSURL URLWithString:presentationURL];
-        device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
+        if ([deviceType rangeOfString:@":MediaRenderer:"].location != NSNotFound) {
+            device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
+                                                          baseURL:baseURL];
+        } else if ([deviceType rangeOfString:@":MediaServer:"].location != NSNotFound) {
+            device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
+        }
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
@@ -75,8 +78,6 @@
     
     completion(device, nil);
 }
-
-#pragma mark - Private Methods
 
 - (void)parseElement:(ONOXMLElement *)element intoDevice:(UPPBasicDevice *)device
 {

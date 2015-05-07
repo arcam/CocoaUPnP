@@ -94,7 +94,7 @@
         return nil;
     }
     
-    return [self.baseURL URLByAppendingPathComponent:component];
+    return [NSURL URLWithString:component relativeToURL:self.baseURL];
 }
 
 #pragma mark - NSObject

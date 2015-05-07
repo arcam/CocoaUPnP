@@ -55,7 +55,7 @@ describe(@"UPPMediaServerDevice", ^{
             UPPContentDirectoryService *service = [device contentDirectoryService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should return any content directory service", ^{
@@ -76,7 +76,7 @@ describe(@"UPPMediaServerDevice", ^{
             UPPConnectionManagerService *service = [device connectionManagerService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should return any connection manager service", ^{
@@ -97,7 +97,7 @@ describe(@"UPPMediaServerDevice", ^{
             UPPAVTransportService *service = [device avTransportService];
             
             expect(service).toNot.beNil();
-            expect(service.controlURL).to.equal(controlURL);
+            expect(service.controlURL.absoluteURL).to.equal(controlURL);
         });
         
         it(@"should match any AV transport service", ^{

@@ -387,6 +387,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E9A784B1AC944C20013DB95 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				0EB2B0651AFB5F8800F06466 /* Remove Stale Coverage Files */,
 				E0DE8BDC51FA0B516B77DE20 /* Check Pods Manifest.lock */,
 				0E9A78241AC944C10013DB95 /* Sources */,
 				0E9A78251AC944C10013DB95 /* Frameworks */,
@@ -406,6 +407,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E9A784E1AC944C20013DB95 /* Build configuration list for PBXNativeTarget "ExampleTests" */;
 			buildPhases = (
+				0EB2B0641AFB5F4900F06466 /* Remove Stale Coverage Files */,
 				63E5DCBEF8D958F8567F45BE /* Check Pods Manifest.lock */,
 				0E9A783D1AC944C20013DB95 /* Sources */,
 				0E9A783E1AC944C20013DB95 /* Frameworks */,
@@ -488,6 +490,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0EB2B0641AFB5F4900F06466 /* Remove Stale Coverage Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Stale Coverage Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Cleaning Profiler Information\"\ncd \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\"\n# Delete *.gcda files in the current target\nrm -f *.gcda";
+		};
+		0EB2B0651AFB5F8800F06466 /* Remove Stale Coverage Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Stale Coverage Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Cleaning Profiler Information\"\ncd \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\"\n# Delete *.gcda files in the current target\nrm -f *.gcda";
+		};
 		1550F4C9F3F619418E57165A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -648,6 +678,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -689,6 +721,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

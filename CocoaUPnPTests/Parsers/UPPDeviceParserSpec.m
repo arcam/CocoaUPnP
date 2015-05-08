@@ -18,8 +18,6 @@ SpecBegin(UPPDeviceParser)
 
 describe(@"UPPDeviceParser", ^{
     
-    __block UPPDeviceParser *parser;
-    
     afterEach(^{
         [OHHTTPStubs removeAllStubs];
     });
@@ -173,13 +171,12 @@ describe(@"UPPDeviceParser", ^{
                 expect(device).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeNoDeviceElementFound);
+                done();
             }];
-            done();
         });
     });
     
-    it(@"should exit early with no data", ^{
-        parser = [[UPPDeviceParser alloc] initWithXMLData:nil];
+    fit(@"should exit early with no data", ^{
         NSString *urlString = @"http://127.0.0.3/desc.xml";
         NSURL *url = [NSURL URLWithString:urlString];
         
@@ -197,8 +194,8 @@ describe(@"UPPDeviceParser", ^{
                 expect(device).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeEmptyData);
+                done();
             }];
-            done();
         });
     });
 });

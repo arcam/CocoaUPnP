@@ -108,8 +108,8 @@ describe(@"UPPMediaItemParser", ^{
                 expect(totalResults).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeEmptyData);
+                done();
             }];
-            done();
         });
     });
 });

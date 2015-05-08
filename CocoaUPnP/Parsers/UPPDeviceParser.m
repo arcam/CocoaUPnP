@@ -40,7 +40,7 @@
         return;
     }
     
-    if (![self data]) {
+    if (self.data.length == 0) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }

@@ -176,7 +176,7 @@ describe(@"UPPDeviceParser", ^{
         });
     });
     
-    fit(@"should exit early with no data", ^{
+    it(@"should exit early with no data", ^{
         NSString *urlString = @"http://127.0.0.3/desc.xml";
         NSURL *url = [NSURL URLWithString:urlString];
         

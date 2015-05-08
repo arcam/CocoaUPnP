@@ -2,7 +2,6 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 @implementation AppDelegate
 

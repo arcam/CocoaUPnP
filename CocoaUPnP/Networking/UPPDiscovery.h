@@ -50,9 +50,21 @@
 @property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate;
 
 /**
+ An instance of `SSDPServiceBrowser`. Lazily instantiated for better testing.
+ */
+@property (strong, nonatomic) SSDPServiceBrowser *browser;
+
+/**
  Creates and returns a common shared instance.
  */
 + (UPPDiscovery *)sharedInstance;
+
+/**
+ Start searching for services matching the service type
+ 
+ @param services The service type to search for. For example, `ssdp:all`
+ */
+- (void)startBrowsingForServices:(NSString *)services;
 
 /**
  Return an array of all currently known devices.

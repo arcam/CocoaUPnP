@@ -9,6 +9,7 @@
 
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
+@property (strong, nonatomic) NSMutableArray *unparsedUUIDs;
 @end
 
 SpecBegin(UPPDiscovery)
@@ -36,10 +37,12 @@ describe(@"UPPDiscovery", ^{
         __block id mockService;
         __block id mockDelegate;
         __block NSURL *url;
-        __block NSString *usn;
+        __block NSString *uniqueDeviceName;
+        __block NSString *uniqueServiceName;
         
         beforeEach(^{
-            usn = @"usn";
+            uniqueDeviceName = @"foo";
+            uniqueServiceName = [NSString stringWithFormat:@"%@::bar", uniqueDeviceName];
             url = [NSURL URLWithString:@"http://127.0.0.1/desc.xml"];
             
             mockParser = OCMClassMock([UPPDeviceParser class]);
@@ -67,6 +70,7 @@ describe(@"UPPDiscovery", ^{
                     [invocation getArgument:&completionBlock atIndex:3];
                     completionBlock(mockDevice, nil);
                 });
+                OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
             });
             
             it(@"should add parsed device to availableDevices", ^{
@@ -84,6 +88,16 @@ describe(@"UPPDiscovery", ^{
                 [discovery ssdpBrowser:nil didFindService:mockService];
                 expect(discovery.availableDevices.count).to.equal(1);
             });
+            
+            it(@"should not add the same device even if unparsed", ^{
+                [discovery.unparsedUUIDs addObject:uniqueDeviceName];
+                
+                [discovery ssdpBrowser:nil didFindService:mockService];
+                expect(discovery.availableDevices.count).to.equal(0);
+                
+                OCMVerifyAll(mockParser);
+            });
+            
             
             it(@"should inform delegate", ^{
                 OCMExpect([mockDelegate discovery:discovery didFindDevice:mockDevice]);
@@ -117,12 +131,12 @@ describe(@"UPPDiscovery", ^{
                 // OCMock objects do not respond to predicate matches, so use a
                 // real device instead
                 device = [UPPBasicDevice new];
-                device.udn = usn;
+                device.udn = uniqueDeviceName;
                 [discovery.devices addObject:device];
             });
             
             it(@"should remove devices", ^{
-                OCMStub([mockService uniqueServiceName]).andReturn(usn);
+                OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
                 
                 [discovery ssdpBrowser:nil didRemoveService:mockService];
                 
@@ -130,7 +144,7 @@ describe(@"UPPDiscovery", ^{
             });
             
             it(@"should not remove devices if no match found", ^{
-                OCMStub([mockService uniqueServiceName]).andReturn(@"foo");
+                OCMStub([mockService uniqueServiceName]).andReturn(@"baz::quz");
                 
                 [discovery ssdpBrowser:nil didRemoveService:mockService];
                 
@@ -138,7 +152,7 @@ describe(@"UPPDiscovery", ^{
             });
             
             it(@"should inform delegate", ^{
-                OCMStub([mockService uniqueServiceName]).andReturn(usn);
+                OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
                 OCMExpect([mockDelegate discovery:discovery didRemoveDevice:device]);
                 
                 [discovery ssdpBrowser:nil didRemoveService:mockService];
@@ -146,6 +160,15 @@ describe(@"UPPDiscovery", ^{
                 OCMVerifyAll(mockDelegate);
             });
         });
+    });
+    
+    it(@"should have a browser", ^{
+        discovery.browser = nil;
+        
+        SSDPServiceBrowser *browser = discovery.browser;
+        
+        expect(browser).toNot.beNil();
+        expect(browser.delegate).to.equal(discovery);
     });
 });
 

@@ -21,7 +21,6 @@
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [UPPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
         UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];

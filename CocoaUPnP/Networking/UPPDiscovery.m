@@ -9,6 +9,7 @@
 
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
+@property (strong, nonatomic) NSMutableArray *unparsedUUIDs;
 @end
 
 @implementation UPPDiscovery
@@ -29,6 +30,11 @@
     return [self.devices copy];
 }
 
+- (void)startBrowsingForServices:(NSString *)services
+{
+    [self.browser startBrowsingForServiceTypes:services];
+}
+
 #pragma mark - Lazy Instantiation
 
 - (NSMutableArray *)devices
@@ -39,20 +45,38 @@
     return _devices;
 }
 
+- (NSMutableArray *)unparsedUUIDs
+{
+    if (!_unparsedUUIDs) {
+        _unparsedUUIDs = [NSMutableArray array];
+    }
+    return _unparsedUUIDs;
+}
+
+- (SSDPServiceBrowser *)browser
+{
+    if (!_browser) {
+        _browser = [[SSDPServiceBrowser alloc] init];
+        _browser.delegate = self;
+    }
+    return _browser;
+}
+
 #pragma mark - SSDPServiceBrowserDelegate
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didFindService:(SSDPService *)service
 {
-    NSArray *devices = [self devicesMatchingService:service];
-    
-    if (devices.count > 0) { return; }
+    if ([self deviceKnown:[self udnForService:service]]) {
+        return;
+    }
     
     [self parseService:service];
 }
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didRemoveService:(SSDPService *)service
 {
-    NSArray *devices = [self devicesMatchingService:service];
+    NSString *uniqueDeviceName = [self udnForService:service];
+    NSArray *devices = [self devicesMatchingName:uniqueDeviceName];
     
     for (UPPBasicDevice *device in devices) {
         [self.devices removeObject:device];
@@ -71,6 +95,13 @@
 
 - (void)parseService:(SSDPService *)service
 {
+    NSString *udn = [self udnForService:service];
+    
+    if (!udn) {
+        return;
+    }
+    
+    [self.unparsedUUIDs addObject:udn];
     [UPPDeviceParser parseURL:service.location withCompletion:^(UPPBasicDevice *device, NSError *error) {
         if (device) {
             [self addDevice:device];
@@ -87,11 +118,42 @@
     }
 }
 
-- (NSArray *)devicesMatchingService:(SSDPService *)service
+- (NSArray *)devicesMatchingName:(NSString *)uniqueDeviceName
 {
-    NSString *udn = service.uniqueServiceName;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@", udn];
+    if (!uniqueDeviceName) {
+        return nil;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@",
+                              uniqueDeviceName];
     return [self.devices filteredArrayUsingPredicate:predicate];
+}
+
+- (BOOL)deviceKnown:(NSString *)deviceIdentifier
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self == %@",
+                              deviceIdentifier];
+    NSArray *results = [self.unparsedUUIDs filteredArrayUsingPredicate:predicate];
+    
+    if (results.count > 0) {
+        return YES;
+    }
+    
+    predicate = [NSPredicate predicateWithFormat:@"udn == %@", deviceIdentifier];
+    results = [self.devices filteredArrayUsingPredicate:predicate];
+    
+    if (results.count > 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (NSString *)udnForService:(SSDPService *)service
+{
+    NSString *usn = service.uniqueServiceName;
+    NSArray *array = [usn componentsSeparatedByString:@"::"];
+    return [array firstObject];
 }
 
 @end

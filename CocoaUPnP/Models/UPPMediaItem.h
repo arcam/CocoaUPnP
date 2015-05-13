@@ -87,4 +87,9 @@
  */
 - (NSURL *)albumArtURL;
 
+/**
+ Return the first resource `duration` value that is not nil
+ */
+- (NSString *)duration;
+
 @end

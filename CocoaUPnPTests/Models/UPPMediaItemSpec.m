@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPMediaItem.h"
+#import "UPPMediaItemResource.h"
 
 SpecBegin(UPPMediaItem)
 
@@ -90,6 +91,29 @@ describe(@"UPPMediaItem", ^{
         expect(mediaItem.albumArtURL.absoluteString).to.equal(url);
     });
     
+    describe(@"duration helper method", ^{
+        it(@"should return nil with no resources", ^{
+            expect(mediaItem.resources).to.beNil();
+            
+            expect([mediaItem duration]).to.beNil();
+        });
+        
+        it(@"should return duration with a resource", ^{
+            NSString *duration = @"0:12:34.567";
+            UPPMediaItemResource *resource = [[UPPMediaItemResource alloc] init];
+            resource.duration = duration;
+            mediaItem.resources = @[ resource ];
+            
+            expect([mediaItem duration]).to.equal(duration);
+        });
+        
+        it(@"should return nil with a resource that has no duration", ^{
+            UPPMediaItemResource *resource = [[UPPMediaItemResource alloc] init];
+            mediaItem.resources = @[ resource ];
+            
+            expect([mediaItem duration]).to.beNil();
+        });
+    });
 });
 
 SpecEnd

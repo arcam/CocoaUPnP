@@ -12,12 +12,15 @@ describe(@"UPPRequestSerializer", ^{
     __block NSURLRequest *request;
     __block NSString *soapAction;
     __block NSString *serviceType;
+    __block NSMutableURLRequest *mutableRequest;
     
     beforeEach(^{
         UPPRequestSerializer *serializer = [UPPRequestSerializer serializer];
         
         url = [NSURL URLWithString:@"http://www.google.com"];
-        NSURLRequest *inRequest = [NSURLRequest requestWithURL:url];
+        mutableRequest = [NSMutableURLRequest requestWithURL:url];
+        mutableRequest.HTTPMethod = @"POST";
+        NSURLRequest *inRequest = [mutableRequest copy];
         
         soapAction = @"Play";
         serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
@@ -60,6 +63,16 @@ describe(@"UPPRequestSerializer", ^{
         expect(request.URL).to.equal(url);
     });
     
+    it(@"should set http method to POST", ^{
+        expect(request.HTTPMethod).to.equal(@"POST");
+    });
+    
+    it(@"should set http method to GET", ^{
+        mutableRequest.HTTPMethod = @"GET";
+        
+        request = [[UPPRequestSerializer serializer] requestBySerializingRequest:[mutableRequest copy] withParameters:nil error:nil];
+        expect(request.HTTPMethod).to.equal(@"GET");
+    });
 });
 
 SpecEnd

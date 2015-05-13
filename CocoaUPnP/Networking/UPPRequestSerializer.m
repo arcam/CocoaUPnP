@@ -10,6 +10,7 @@
 {
     NSMutableURLRequest *mutableRequest = [[NSMutableURLRequest alloc]
                                            initWithURL:request.URL];
+    mutableRequest.HTTPMethod = request.HTTPMethod;
     
     NSString *soapAction = parameters[UPPSOAPActionKey];
     NSString *nameSpace = parameters[UPPNameSpaceKey];

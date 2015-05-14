@@ -97,6 +97,17 @@
     return [NSURL URLWithString:component relativeToURL:self.baseURL];
 }
 
+
+- (UPPSessionManager *)sessionManager
+{
+    if (!_sessionManager) {
+        _sessionManager = [[UPPSessionManager alloc] initWithBaseURL:nil];
+    }
+    
+    return _sessionManager;
+}
+
+
 #pragma mark - NSObject
 
 - (NSString *)description

@@ -96,10 +96,7 @@ describe(@"UPPContentDirectoryService", ^{
             
             VerifyGetPostWithParams(expectedParams, sessionManager, url);
             
-            [service browseWithObjectID:objectID browseFlag:BrowseDirectChildren filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) {
-                expect(response).toNot.beNil();
-                expect(error).to.beNil();
-            }];
+            [service browseWithObjectID:objectID browseFlag:BrowseDirectChildren filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) { }];
             
             [sessionManager verify];
         });

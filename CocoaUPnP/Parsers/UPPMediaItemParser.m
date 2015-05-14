@@ -7,47 +7,49 @@
 #import "UPPMediaItemResource.h"
 #import "UPPError.h"
 
+NSString * const UPnPXMLResultsKey = @"Result";
+
 @implementation UPPMediaItemParser
 
-- (void)parseWithCompletion:(UPPMediaItemCompletionBlock)completion
++ (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion
 {
-    if (!completion) {
+    if (!results || !completion) {
+        return;
+    }
+    
+    NSString *resultsString = results[UPnPXMLResultsKey];
+    
+    if (!resultsString) {
+        completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
     
     NSError *error = nil;
-    
-    if (![self data]) {
-        completion(nil, nil, nil, nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
-        return;
-    }
-    
-    ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:[self data] error:&error];
+    ONOXMLDocument *document = [ONOXMLDocument
+                                XMLDocumentWithString:resultsString
+                                encoding:NSUTF8StringEncoding error:&error];
     
     if (!document) {
-        completion(nil, nil, nil, nil, error);
+        completion(nil, error);
         return;
     }
     
-    NSNumber *resultsReturned = [[document firstChildWithXPath:@"//NumberReturned"] numberValue];
-    NSNumber *totalResults = [[document firstChildWithXPath:@"//TotalMatches"] numberValue];
-    NSNumber *updateID = [[document firstChildWithXPath:@"//UpdateID"] numberValue];
-    
-    NSString *results = [[document firstChildWithXPath:@"/u:BrowseResponse/Result"] stringValue];
-    
-    // The UPnP spec allows embedding XML in XML (!), as a result the inner XML
-    // is declared using percent escaped characters. This is rediculous as it
-    // means we have to separately parse it.
-    //
-    // Seriously. Why did you do this, XML forum?
-    //
-    NSData *newData = [results dataUsingEncoding:NSUTF8StringEncoding];
-    ONOXMLDocument *didl = [ONOXMLDocument XMLDocumentWithData:newData error:&error];
-    
-    [didl definePrefix:@"didl" forDefaultNamespace:@"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"];
+    NSArray *items = [self parseItemsInDocument:document];
+    if (items) {
+        NSMutableDictionary *parsedResults = [results mutableCopy];
+        [parsedResults setObject:items forKey:UPnPXMLResultsKey];
+        completion([parsedResults copy], nil);
+    } else {
+        completion(nil, UPPErrorWithCode(UPPErrorCodeNoItemElementsFound));
+    }
+}
+
++ (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
+{
+    [document definePrefix:@"didl" forDefaultNamespace:@"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"];
     
     __block NSMutableArray *items;
-    [didl enumerateElementsWithXPath:@"/didl:DIDL-Lite/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+    [document enumerateElementsWithXPath:@"/didl:DIDL-Lite/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         
         UPPMediaItem *item = [[UPPMediaItem alloc] init];
         
@@ -66,38 +68,40 @@
         item.itemTitle = [[element firstChildWithTag:@"title"] stringValue];
         item.parentID = [element valueForAttribute:@"parentID"];
         item.objectID = [element valueForAttribute:@"id"];
-        
-        __block NSMutableArray *resources;
-        NSArray *res = [element childrenWithTag:@"res"];
-        [res enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL *stop) {
-            
-            UPPMediaItemResource *r = [[UPPMediaItemResource alloc] init];
-            r.numberOfAudioChannels = [resource valueForAttribute:@"nrAudioChannels"];
-            r.bitrate = [resource valueForAttribute:@"bitrate"];
-            r.duration = [resource valueForAttribute:@"duration"];
-            r.sampleFrequency = [resource valueForAttribute:@"sampleFrequency"];
-            r.protocolInfo = [resource valueForAttribute:@"protocolInfo"];
-            r.itemSize = [resource valueForAttribute:@"size"];
-            r.resourceURLString = [resource stringValue];
-            
-            if (!resources) {
-                resources = [NSMutableArray array];
-            }
-            
-            [resources addObject:r];
-        }];
-        
-        item.resources = resources;
+        item.resources = [self parseResources:[element childrenWithTag:@"res"]];
         
         if (!items) {
             items = [NSMutableArray array];
         }
         
         [items addObject:item];
-        
     }];
     
-    completion(items, resultsReturned, totalResults, updateID, error);
+    return [items copy];
+}
+
++ (NSArray *)parseResources:(NSArray *)res
+{
+    __block NSMutableArray *mutableResources;
+    
+    [res enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL *stop) {
+        UPPMediaItemResource *r = [[UPPMediaItemResource alloc] init];
+        r.numberOfAudioChannels = [resource valueForAttribute:@"nrAudioChannels"];
+        r.bitrate = [resource valueForAttribute:@"bitrate"];
+        r.duration = [resource valueForAttribute:@"duration"];
+        r.sampleFrequency = [resource valueForAttribute:@"sampleFrequency"];
+        r.protocolInfo = [resource valueForAttribute:@"protocolInfo"];
+        r.itemSize = [resource valueForAttribute:@"size"];
+        r.resourceURLString = [resource stringValue];
+        
+        if (!mutableResources) {
+            mutableResources = [NSMutableArray array];
+        }
+        
+        [mutableResources addObject:r];
+    }];
+    
+    return [mutableResources copy];
 }
 
 @end

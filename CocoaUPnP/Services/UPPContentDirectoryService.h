@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
-- (void)searchCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)searchCapabilitiesWithCompletion:(UPPResponseBlock)completion;
 
 /**
  Get the devices sort capabilities
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
-- (void)sortCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)sortCapabilitiesWithCompletion:(UPPResponseBlock)completion;
 
 /**
  Get the devices system update ID
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
-- (void)systemUpdateIDWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)systemUpdateIDWithCompletion:(UPPResponseBlock)completion;
 
 
 #pragma mark - Fetching Items
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion     A completion block which returns the parsed response, or
      an error if unsuccessful
  */
-- (void)browseWithObjectID:(NSString *)objectId browseFlag:(UPPBrowseFlag)browseFlag filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)browseWithObjectID:(NSString *)objectId browseFlag:(UPPBrowseFlag)browseFlag filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(UPPResponseBlock)completion;
 
 /**
  Search the content directory service
@@ -91,6 +91,6 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion     A completion block which returns the parsed response, or
      an error if unsuccessful
  */
-- (void)searchWithContainerID:(NSString *)containerId searchCriteria:(NSString *)searchCriteria filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)searchWithContainerID:(NSString *)containerId searchCriteria:(NSString *)searchCriteria filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(UPPResponseBlock)completion;
 
 @end

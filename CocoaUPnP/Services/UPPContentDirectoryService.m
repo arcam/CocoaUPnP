@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPContentDirectoryService.h"
+#import "UPPMediaItemParser.h"
 
 @implementation UPPContentDirectoryService
 
@@ -57,7 +58,15 @@
                 sortCriteria:sortCriteria];
     
     [self _sendPostRequestWithParameters:parameters action:@"Browse" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
+        
+        if (responseObject) {
+            [UPPMediaItemParser parseResults:responseObject withCompletion:^(NSDictionary *results, NSError *error) {
+                completion(results, error);
+            }];
+            
+        } else {
+            completion(nil, error);
+        }
     }];
 }
 

@@ -10,6 +10,7 @@
  */
 @interface UPPBasicService : NSObject
 
+typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 
 #pragma mark - Properties
 

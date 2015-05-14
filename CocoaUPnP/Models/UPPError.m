@@ -19,6 +19,10 @@ NSError * UPPErrorWithCode(UPPErrorCode code) {
             errorDescription = @"No device element found in XML data";
             break;
             
+        case UPPErrorCodeNoItemElementsFound:
+            errorDescription = @"No item or container elements found in XML data";
+            break;
+            
         default:
             code = UPPErrorCodeGeneric;
             errorDescription = @"Unknown error";

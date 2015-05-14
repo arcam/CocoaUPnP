@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E04CAEC1AE7B6F1008A02D9 /* NetworkTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E04CAEB1AE7B6F1008A02D9 /* NetworkTestHelpers.m */; };
+		0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DFDB41B021A700051717E /* FolderViewController.m */; };
 		0E31CBED1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E31CBEC1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m */; };
 		0E4E36251AE4FFEB0051842F /* UPPSessionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */; };
 		0E4E362A1AE5022C0051842F /* UPPRequestSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */; };
@@ -17,6 +18,7 @@
 		0E6EB23E1AE5354D0092DEEC /* GetConnectionID.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EB23D1AE5354D0092DEEC /* GetConnectionID.xml */; };
 		0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EC6D71ADFB796006F7F98 /* Error.xml */; };
 		0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */; };
+		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
 		0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */; };
 		0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */; };
 		0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A031ADD473F0029FCC7 /* Device.xml */; };
@@ -37,7 +39,6 @@
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
 		0EB2B0671AFB646C00F06466 /* MediaServer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0661AFB646C00F06466 /* MediaServer.xml */; };
-		0EB7EEFE1AEF904B0005A874 /* SSDPServiceBrowserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7EEFD1AEF904B0005A874 /* SSDPServiceBrowserSpec.m */; };
 		0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DEE1AE65097005F107A /* UPPAVTransportServiceSpec.m */; };
 		0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB0DF11AE6690A005F107A /* MockFailSessionManager.m */; };
 		0ECC49151AFA209300165C0C /* UPPMediaRendererDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC49141AFA209300165C0C /* UPPMediaRendererDeviceSpec.m */; };
@@ -67,6 +68,8 @@
 /* Begin PBXFileReference section */
 		0E04CAEA1AE7B6F1008A02D9 /* NetworkTestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTestHelpers.h; sourceTree = "<group>"; };
 		0E04CAEB1AE7B6F1008A02D9 /* NetworkTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTestHelpers.m; sourceTree = "<group>"; };
+		0E2DFDB31B021A6F0051717E /* FolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
+		0E2DFDB41B021A700051717E /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
 		0E31CBEC1AF9FD4100889F9D /* UPPMediaServerDeviceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaServerDeviceSpec.m; sourceTree = "<group>"; };
 		0E4E36241AE4FFEB0051842F /* UPPSessionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPSessionManagerSpec.m; sourceTree = "<group>"; };
 		0E4E36291AE5022C0051842F /* UPPRequestSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRequestSerializerSpec.m; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 		0E6EB23D1AE5354D0092DEEC /* GetConnectionID.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetConnectionID.xml; sourceTree = "<group>"; };
 		0E6EC6D71ADFB796006F7F98 /* Error.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Error.xml; sourceTree = "<group>"; };
 		0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParserSpec.m; sourceTree = "<group>"; };
+		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
+		0E83B3241B04D13F008FBF27 /* PlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackManager.m; sourceTree = "<group>"; };
 		0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
 		0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemProtocolSpec.m; sourceTree = "<group>"; };
 		0E8B1A031ADD473F0029FCC7 /* Device.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Device.xml; sourceTree = "<group>"; };
@@ -166,6 +171,15 @@
 				0E4E362D1AE509160051842F /* PlayRequest.xml */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		0E83B3221B04D12D008FBF27 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E83B3231B04D13F008FBF27 /* PlaybackManager.h */,
+				0E83B3241B04D13F008FBF27 /* PlaybackManager.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		0E83D95B1AD5691B00694AA7 /* ExampleTests */ = {
@@ -282,6 +296,7 @@
 			children = (
 				0EAA80EC1ACC30370027A86A /* App */,
 				0EAA80ED1ACC30450027A86A /* Controllers */,
+				0E83B3221B04D12D008FBF27 /* Models */,
 				0EAA80EE1ACC305E0027A86A /* Storyboards */,
 			);
 			path = Example;
@@ -322,6 +337,8 @@
 			children = (
 				0E9A78321AC944C10013DB95 /* ViewController.h */,
 				0E9A78331AC944C10013DB95 /* ViewController.m */,
+				0E2DFDB31B021A6F0051717E /* FolderViewController.h */,
+				0E2DFDB41B021A700051717E /* FolderViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -583,6 +600,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */,
+				0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */,
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
 				0E9A782E1AC944C10013DB95 /* main.m in Sources */,
@@ -610,7 +629,6 @@
 				0EBB0DF21AE6690A005F107A /* MockFailSessionManager.m in Sources */,
 				0EE5C0321AE0F1E000D3EAEA /* UPPDeviceIconSpec.m in Sources */,
 				0EBB0DEF1AE65097005F107A /* UPPAVTransportServiceSpec.m in Sources */,
-				0EB7EEFE1AEF904B0005A874 /* SSDPServiceBrowserSpec.m in Sources */,
 				0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */,
 				0E918B641AEFA8DF000C679A /* SSDPServiceBrowserDelegateSpec.m in Sources */,
 				0E8B1A1F1ADE971E0029FCC7 /* UPPMediaItemParserSpec.m in Sources */,

@@ -4,9 +4,14 @@
 #import "ViewController.h"
 #import "UPPBasicDevice.h"
 #import "UPPDiscovery.h"
+#import "FolderViewController.h"
+#import "UPPMediaServerDevice.h"
+#import "UPPMediaRendererDevice.h"
+#import "PlaybackManager.h"
 
 @interface ViewController () <UPPDiscoveryDelegate>
 @property (strong, nonatomic) NSMutableArray *devices;
+@property (strong, nonatomic) PlaybackManager *playbackManager;
 @end
 
 @implementation ViewController
@@ -15,6 +20,7 @@
 {
     [super viewDidLoad];
     
+    self.playbackManager = [[PlaybackManager alloc] init];
     [[UPPDiscovery sharedInstance] setDelegate:self];
     [[UPPDiscovery sharedInstance] startBrowsingForServices:@"ssdp:all"];
 }
@@ -49,6 +55,30 @@
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id device = self.devices[indexPath.row];
+    
+    if ([device isKindOfClass:[UPPMediaRendererDevice class]]) {
+        self.playbackManager.renderer = device;
+    }
+    
+    else if ([device isKindOfClass:[UPPMediaServerDevice class]]) {
+        [self pushViewControllerForDevice:device];
+    }
+}
+
+- (void)pushViewControllerForDevice:(UPPMediaServerDevice *)device
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FolderViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"FolderViewController"];
+    viewController.title = [device friendlyName];
+    viewController.device = device;
+    viewController.playbackManager = self.playbackManager;
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 #pragma mark - UPPDiscoveryDelegate
 

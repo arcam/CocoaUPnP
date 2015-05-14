@@ -13,7 +13,7 @@
 - (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"CurrentURI": currentURI,
-                                  @"CurrentURIMetaData": currentURIMetaData };
+                                  @"CurrentURIMetaData": currentURIMetaData ?: @"" };
     
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetAVTransportURI"
@@ -24,7 +24,7 @@
 - (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"NextURI": nextURI,
-                                  @"NextURIMetaData": nextURIMetaData };
+                                  @"NextURIMetaData": nextURIMetaData ?: @"" };
     
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetNextAVTransportURI"

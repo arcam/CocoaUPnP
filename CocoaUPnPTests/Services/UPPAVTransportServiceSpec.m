@@ -62,6 +62,26 @@ describe(@"UPPAVTransportService", ^{
             expect(error).to.beNil();
         });
         
+        it(@"should not raise an exception with no metadata", ^{
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"CurrentURI": currentURI,
+                                      @"CurrentURIMetaData": @"" };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetAVTransportURI",
+                                              UPPNameSpaceKey: service.serviceType,
+                                              UPPParametersKey: params };
+            
+            VerifyPostWithParams(expectedParams, sessionManager, url);
+            
+            [service setAVTransportURI:currentURI
+                    currentURIMetaData:nil
+                            instanceID:instanceId
+                                 error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
         it(@"should return set an error when call fails", ^{
             service.sessionManager = [[MockFailSessionManager alloc] init];
             
@@ -76,8 +96,13 @@ describe(@"UPPAVTransportService", ^{
     });
     
     describe(@"when setting next transport URI", ^{
+        __block NSString *nextURI;
+        
+        beforeEach(^{
+            nextURI = @"nextURI";
+        });
+        
         it(@"should send parameters", ^{
-            NSString *nextURI = @"nextURI";
             NSString *nextURIMetaData = @"nextURIMetaData";
             
             NSDictionary *params = @{ @"InstanceID": instanceId,
@@ -92,6 +117,26 @@ describe(@"UPPAVTransportService", ^{
             
             [service setNextAVTransportURI:nextURI
                            nextURIMetaData:nextURIMetaData
+                                instanceID:instanceId
+                                     error:&error];
+            
+            [sessionManager verify];
+            expect(error).to.beNil();
+        });
+        
+        it(@"should not raise an exception with nil metadata", ^{
+            NSDictionary *params = @{ @"InstanceID": instanceId,
+                                      @"NextURI": nextURI,
+                                      @"NextURIMetaData": @"" };
+            
+            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetNextAVTransportURI",
+                                              UPPNameSpaceKey: service.serviceType,
+                                              UPPParametersKey: params };
+            
+            VerifyPostWithParams(expectedParams, sessionManager, url);
+            
+            [service setNextAVTransportURI:nextURI
+                           nextURIMetaData:nil
                                 instanceID:instanceId
                                      error:&error];
             

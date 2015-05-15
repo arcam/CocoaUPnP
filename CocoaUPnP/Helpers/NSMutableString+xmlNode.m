@@ -10,7 +10,7 @@ static NSString * XMLSafeString (NSString *s) {
     s = [s stringByReplacingOccurrencesOfString:@">" withString:@"&amp;gt;"];
     s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"&amp;apos;"];
     s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"&amp;quot;"];
-    
+
     return s;
 }
 

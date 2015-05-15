@@ -15,7 +15,7 @@ void (^VerifyPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictiona
 };
 
 void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
-    
+
     // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
     [[[manager expect] andDo:^(NSInvocation *invocation) {
           void (^successBlock)(NSURLSessionTask *task, id responseObject);
@@ -29,7 +29,7 @@ void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDicti
 };
 
 void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
-    
+
     // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
     [[[manager expect]
       andDo:^(NSInvocation *invocation) {

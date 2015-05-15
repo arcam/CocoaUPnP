@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.playbackManager = [[PlaybackManager alloc] init];
     [[UPPDiscovery sharedInstance] setDelegate:self];
     [[UPPDiscovery sharedInstance] startBrowsingForServices:@"ssdp:all"];
@@ -32,7 +32,7 @@
     if (!_devices) {
         _devices = [NSMutableArray array];
     }
-    
+
     return _devices;
 }
 
@@ -46,11 +46,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
+
     UPPBasicDevice *device = self.devices[indexPath.row];
     cell.textLabel.text = device.friendlyName;
     cell.detailTextLabel.text = device.deviceType;
-    
+
     return cell;
 }
 
@@ -59,11 +59,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id device = self.devices[indexPath.row];
-    
+
     if ([device isKindOfClass:[UPPMediaRendererDevice class]]) {
         self.playbackManager.renderer = device;
     }
-    
+
     else if ([device isKindOfClass:[UPPMediaServerDevice class]]) {
         [self pushViewControllerForDevice:device];
     }
@@ -76,7 +76,7 @@
     viewController.title = [device friendlyName];
     viewController.device = device;
     viewController.playbackManager = self.playbackManager;
-    
+
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -87,7 +87,7 @@
     if ([self.devices containsObject:device]) {
         return;
     }
-    
+
     [self.devices addObject:device];
     NSInteger row = [self.devices indexOfObject:device];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
@@ -100,7 +100,7 @@
     if (![self.devices containsObject:device]) {
         return;
     }
-    
+
     NSInteger row = [self.devices indexOfObject:device];
     [self.devices removeObject:device];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];

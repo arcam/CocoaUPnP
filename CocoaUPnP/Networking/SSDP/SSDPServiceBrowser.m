@@ -50,15 +50,15 @@ typedef enum : NSUInteger {
 #pragma mark - Public Methods
 
 - (void)startBrowsingForServiceTypes:(NSString *)serviceType {
-    
+
     if (!self.multicastSocket.isConnected) {
         [self setupSocket];
     }
-    
+
     NSString *searchHeader;
     searchHeader = [self _prepareSearchRequestWithServiceType:serviceType];
     NSData *d = [searchHeader dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     [self.multicastSocket sendData:d
                             toHost:SSDPMulticastGroupAddress
                               port:SSDPMulticastUDPPort
@@ -69,19 +69,19 @@ typedef enum : NSUInteger {
 - (void)setupSocket
 {
     [self.multicastSocket setIPv6Enabled:NO];
-    
+
     NSError *err = nil;
-    
+
     if (![self.multicastSocket bindToPort:SSDPMulticastUDPPort error:&err]) {
         [self _notifyDelegateWithError:err];
         return;
     }
-    
+
     if (![self.multicastSocket joinMulticastGroup:SSDPMulticastGroupAddress error:&err]) {
         [self _notifyDelegateWithError:err];
         return;
     }
-    
+
     if (![self.multicastSocket beginReceiving:&err]) {
         [self _notifyDelegateWithError:err];
         return;
@@ -116,21 +116,21 @@ typedef enum : NSUInteger {
       fromAddress:(NSData *)address withFilterContext:(id)filterContext
 {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
+
     if (!msg) {
         return;
     }
-    
+
     NSDictionary *headers = [self _parseHeadersFromMessage:msg];
     SSDPService *service = [[SSDPService alloc] initWithHeaders:headers];
-    
+
     if ([headers[SSDPResponseStatusKey] isEqualToString:@"200"]) {
         [self _notifyDelegateWithFoundService:service];
     }
-    
+
     else if ([headers[SSDPRequestMethodKey] isEqualToString:@"NOTIFY"]) {
         NSString *nts = headers[@"nts"];
-        
+
         if ( [nts isEqualToString:@"ssdp:alive"] ) {
             [self _notifyDelegateWithFoundService:service];
         }
@@ -150,10 +150,10 @@ typedef enum : NSUInteger {
                                   regularExpressionWithPattern:pattern
                                   options:options
                                   error:nil];
-    
+
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     __block SSDPMessageType type = SSDPUnknownMessage;
-    
+
     [message enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         if (type == SSDPUnknownMessage) {
             // First line describes type of message
@@ -183,7 +183,7 @@ typedef enum : NSUInteger {
             }];
         }
     }];
-    
+
     return headers;
 }
 
@@ -217,7 +217,7 @@ typedef enum : NSUInteger {
 
 - (NSString *)_prepareSearchRequestWithServiceType:(NSString *)serviceType {
     NSString *userAgent = [self _userAgentString];
-    
+
     return [NSString stringWithFormat:
             @"M-SEARCH * HTTP/1.1\r\n"
             "HOST: %@:%d\r\n"
@@ -235,20 +235,20 @@ typedef enum : NSUInteger {
     NSString *userAgent = nil;
     NSDictionary *bundleInfos = [[NSBundle mainBundle] infoDictionary];
     NSString *bundleExecutable = bundleInfos[(__bridge NSString *)kCFBundleExecutableKey] ?: bundleInfos[(__bridge NSString *)kCFBundleIdentifierKey];
-    
+
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
     userAgent = [NSString stringWithFormat:@"%@/%@ (%@; iOS %@) %@",
                  bundleExecutable,
                  (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: bundleInfos[(__bridge NSString *)kCFBundleVersionKey],
                  [[UIDevice currentDevice] model],
                  [[UIDevice currentDevice] systemVersion], SSDPVersionString];
-    
+
 #elif defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
     userAgent = [NSString stringWithFormat:@"%@/%@ (Mac OS X %@) %@", bundleExecutable,
                  bundleInfos[@"CFBundleShortVersionString"] ?: bundleInfos[(__bridge NSString *)kCFBundleVersionKey],
                  [[NSProcessInfo processInfo] operatingSystemVersionString], SSDPVersionString];
 #endif
-    
+
     return userAgent;
 }
 

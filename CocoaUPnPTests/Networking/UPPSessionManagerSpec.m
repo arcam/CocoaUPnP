@@ -8,7 +8,7 @@
 SpecBegin(UPPSessionManager)
 
 describe(@"UPPSessionManager", ^{
-    
+
     __block UPPSessionManager *manager;
 
     beforeEach(^{

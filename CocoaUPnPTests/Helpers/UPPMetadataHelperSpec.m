@@ -18,7 +18,7 @@ static UPPMediaItem * CreateMediaItem() {
     item.genre = @"Rock & Roll";
     item.trackNumber = @"1";
     item.albumArtURLString = @"http://127.0.0.1/artwork_tn.jpg";
-    
+
     UPPMediaItemResource *res1 = [[UPPMediaItemResource alloc] init];
     res1.protocolInfo = @"http-get:*:audio/mpeg:*";
     res1.itemSize = @"11032595";
@@ -27,7 +27,7 @@ static UPPMediaItem * CreateMediaItem() {
     res1.numberOfAudioChannels = @"2";
     res1.sampleFrequency = @"44100";
     res1.resourceURLString = @"http://127.0.0.1/res.mp3";
-    
+
     UPPMediaItemResource *res2 = [[UPPMediaItemResource alloc] init];
     res2.protocolInfo = @"http-get:*:audio/x-flac:*";
     res2.itemSize = @"25325776";
@@ -36,9 +36,9 @@ static UPPMediaItem * CreateMediaItem() {
     res2.numberOfAudioChannels = @"2";
     res2.sampleFrequency = @"44100";
     res2.resourceURLString = @"http://127.0.0.1/res.flac";
-    
+
     item.resources = @[ res1, res2 ];
-    
+
     return item;
 };
 
@@ -50,9 +50,9 @@ describe(@"UPPMetadataHelper", ^{
         NSData *xml = LoadDataFromXML(@"FullMetadata", [self class]);
         NSString *expected = [[NSString alloc] initWithData:xml
                                                    encoding:NSUTF8StringEncoding];
-        
+
         NSString *metadata = UPPMetadataForItem(item);
-        
+
         expect(metadata).toNot.beNil();
         expect(metadata).to.equal(expected);
     });

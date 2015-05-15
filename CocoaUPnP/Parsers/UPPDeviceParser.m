@@ -19,7 +19,7 @@
     if (!completion) {
         return;
     }
-    
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
@@ -39,25 +39,25 @@
     if (!completion) {
         return;
     }
-    
+
     if (self.data.length == 0) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
-    
+
     NSError *error = nil;
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
-    
+
     if (!document) {
         completion(nil, error);
         return;
     }
-    
+
     __block UPPBasicDevice *device;
-    
+
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
-        
+
         if ([deviceType rangeOfString:@":MediaRenderer:"].location != NSNotFound) {
             device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
                                                           baseURL:baseURL];
@@ -69,12 +69,12 @@
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
     }];
-    
+
     if (!device) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeNoDeviceElementFound));
         return;
     }
-    
+
     completion(device, nil);
 }
 
@@ -87,7 +87,7 @@
     device.modelNumber = [[element firstChildWithTag:@"modelNumber"] stringValue];
     device.serialNumber = [[element firstChildWithTag:@"serialNumber"] stringValue];
     device.udn = [[element firstChildWithTag:@"UDN"] stringValue];
-    
+
     NSString *url = [[element firstChildWithTag:@"manufacturerURL"] stringValue];
     device.manufacturerURL = [NSURL URLWithString:url];
     url = [[element firstChildWithTag:@"modelURL"] stringValue];
@@ -106,7 +106,7 @@
         icon.url = [[iconElement firstChildWithTag:@"url"] stringValue];
         [icons addObject:icon];
     }];
-    
+
     if (icons.count > 0) {
         device.iconList = [icons copy];
     }
@@ -124,7 +124,7 @@
         service.eventSubURL = [[serviceElement firstChildWithTag:@"eventSubURL"] stringValue];
         [services addObject:service];
     }];
-    
+
     if (services.count > 0) {
         device.services = [services copy];
     }

@@ -7,16 +7,16 @@
 
 /**
  Initialise a new parser object
- 
+
  @param data A data representation of an XML device document
- 
+
  @return Returns a new parser instance
  */
 - (instancetype)initWithXMLData:(NSData *)data;
 
 /**
  Get the data that was passed in during initialisation
- 
+
  @return Returns the parser objects current data
  */
 - (NSData *)data;

@@ -20,26 +20,26 @@
     UPPMediaRendererDevice *device = [[UPPMediaRendererDevice alloc] init];
     device.deviceType = urn;
     device.baseURL = baseURL;
-    
+
     return device;
 }
 
 - (UPPRenderingControlService *)renderingControlService
 {
     if (!_renderingControlService) {
-        
+
         NSString *namespace = @":service:RenderingControl:";
         UPPServiceDescription *service = [self serviceForType:namespace];
-        
+
         if (!service) {
             return nil;
         }
-        
+
         _renderingControlService = [UPPRenderingControlService
                                     serviceWithBaseURL:self.baseURL
                                     description:service];
     }
-    
+
     return _renderingControlService;
 }
 
@@ -48,11 +48,11 @@
     if (!_connectionManagerService) {
         NSString *namespace = @":service:ConnectionManager:";
         UPPServiceDescription *service = [self serviceForType:namespace];
-        
+
         if (!service) {
             return nil;
         }
-        
+
         _connectionManagerService = [UPPConnectionManagerService
                                      serviceWithBaseURL:self.baseURL
                                      description:service];
@@ -65,11 +65,11 @@
     if (!_avTransportService) {
         NSString *namespace = @":service:AVTransport:";
         UPPServiceDescription *service = [self serviceForType:namespace];
-        
+
         if (!service) {
             return nil;
         }
-        
+
         _avTransportService = [UPPAVTransportService
                                serviceWithBaseURL:self.baseURL
                                description:service];

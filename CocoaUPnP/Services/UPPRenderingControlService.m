@@ -8,10 +8,10 @@
 - (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(void(^)(NSDictionary *response, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"Channel": channel ?: @"Master" };
-    
+
     [self _sendPostRequestWithParameters:parameters action:@"GetMute" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -22,7 +22,7 @@
     NSNumber *muteNumber = mute ? @1 : @0;
     NSDictionary *parameters = @{ @"Channel": channel ?: @"Master",
                                   @"DesiredMute": muteNumber };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetMute"
                               parameters:parameters
@@ -32,10 +32,10 @@
 - (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(void(^)(NSDictionary *response, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     NSDictionary *parameters = @{ @"InstanceID": instanceId,
                                   @"Channel": channel ?: @"Master" };
-    
+
     [self _sendPostRequestWithParameters:parameters action:@"GetVolume" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -45,7 +45,7 @@
 {
     NSDictionary *parameters = @{ @"Channel": channel ?: @"Master" ,
                                   @"DesiredVolume": volume };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetVolume"
                               parameters:parameters

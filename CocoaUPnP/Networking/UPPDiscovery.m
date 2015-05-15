@@ -21,7 +21,7 @@
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[UPPDiscovery alloc] init];
     });
-    
+
     return _sharedInstance;
 }
 
@@ -69,7 +69,7 @@
     if ([self deviceKnown:[self udnForService:service]]) {
         return;
     }
-    
+
     [self parseService:service];
 }
 
@@ -77,7 +77,7 @@
 {
     NSString *uniqueDeviceName = [self udnForService:service];
     NSArray *devices = [self devicesMatchingName:uniqueDeviceName];
-    
+
     for (UPPBasicDevice *device in devices) {
         [self.devices removeObject:device];
         if ([self.delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
@@ -96,11 +96,11 @@
 - (void)parseService:(SSDPService *)service
 {
     NSString *udn = [self udnForService:service];
-    
+
     if (!udn) {
         return;
     }
-    
+
     [self.unparsedUUIDs addObject:udn];
     [UPPDeviceParser parseURL:service.location withCompletion:^(UPPBasicDevice *device, NSError *error) {
         if (device) {
@@ -112,7 +112,7 @@
 - (void)addDevice:(UPPBasicDevice *)device
 {
     [self.devices addObject:device];
-    
+
     if ([self.delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
         [self.delegate discovery:self didFindDevice:device];
     }
@@ -123,7 +123,7 @@
     if (!uniqueDeviceName) {
         return nil;
     }
-    
+
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"udn == %@",
                               uniqueDeviceName];
     return [self.devices filteredArrayUsingPredicate:predicate];
@@ -134,18 +134,18 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self == %@",
                               deviceIdentifier];
     NSArray *results = [self.unparsedUUIDs filteredArrayUsingPredicate:predicate];
-    
+
     if (results.count > 0) {
         return YES;
     }
-    
+
     predicate = [NSPredicate predicateWithFormat:@"udn == %@", deviceIdentifier];
     results = [self.devices filteredArrayUsingPredicate:predicate];
-    
+
     if (results.count > 0) {
         return YES;
     }
-    
+
     return NO;
 }
 

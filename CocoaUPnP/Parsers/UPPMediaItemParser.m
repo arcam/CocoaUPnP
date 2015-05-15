@@ -16,24 +16,24 @@ NSString * const UPnPXMLResultsKey = @"Result";
     if (!results || !completion) {
         return;
     }
-    
+
     NSString *resultsString = results[UPnPXMLResultsKey];
-    
+
     if (!resultsString) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
-    
+
     NSError *error = nil;
     ONOXMLDocument *document = [ONOXMLDocument
                                 XMLDocumentWithString:resultsString
                                 encoding:NSUTF8StringEncoding error:&error];
-    
+
     if (!document) {
         completion(nil, error);
         return;
     }
-    
+
     NSArray *items = [self parseItemsInDocument:document];
     if (items) {
         NSMutableDictionary *parsedResults = [results mutableCopy];
@@ -47,17 +47,17 @@ NSString * const UPnPXMLResultsKey = @"Result";
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
     [document definePrefix:@"didl" forDefaultNamespace:@"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"];
-    
+
     __block NSMutableArray *items;
     [document enumerateElementsWithXPath:@"/didl:DIDL-Lite/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-        
+
         UPPMediaItem *item = [[UPPMediaItem alloc] init];
-        
+
         if ([[element tag] isEqualToString:@"container"]) {
             item.isContainer = YES;
             item.childCount = [element valueForAttribute:@"childCount"];
         }
-        
+
         item.albumTitle = [[element firstChildWithTag:@"album"] stringValue];
         item.artist = [[element firstChildWithTag:@"artist"] stringValue];
         item.date = [[element firstChildWithTag:@"date"] stringValue];
@@ -69,21 +69,21 @@ NSString * const UPnPXMLResultsKey = @"Result";
         item.parentID = [element valueForAttribute:@"parentID"];
         item.objectID = [element valueForAttribute:@"id"];
         item.resources = [self parseResources:[element childrenWithTag:@"res"]];
-        
+
         if (!items) {
             items = [NSMutableArray array];
         }
-        
+
         [items addObject:item];
     }];
-    
+
     return [items copy];
 }
 
 + (NSArray *)parseResources:(NSArray *)res
 {
     __block NSMutableArray *mutableResources;
-    
+
     [res enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL *stop) {
         UPPMediaItemResource *r = [[UPPMediaItemResource alloc] init];
         r.numberOfAudioChannels = [resource valueForAttribute:@"nrAudioChannels"];
@@ -93,14 +93,14 @@ NSString * const UPnPXMLResultsKey = @"Result";
         r.protocolInfo = [resource valueForAttribute:@"protocolInfo"];
         r.itemSize = [resource valueForAttribute:@"size"];
         r.resourceURLString = [resource stringValue];
-        
+
         if (!mutableResources) {
             mutableResources = [NSMutableArray array];
         }
-        
+
         [mutableResources addObject:r];
     }];
-    
+
     return [mutableResources copy];
 }
 

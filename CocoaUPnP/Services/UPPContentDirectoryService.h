@@ -11,7 +11,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
      BrowseMetadata states that the properties of the object should be returned.
      */
     BrowseMetadata,
-    
+
     /**
      BrowseDirectChildren states that the direct children of the object will be
      returned in the result.
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
 
 /**
  Get the devices search capabilities
- 
+
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
 
 /**
  Get the devices sort capabilities
- 
+
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
 
 /**
  Get the devices system update ID
- 
+
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
@@ -58,11 +58,11 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
 
 /**
  Browse the content directory service
- 
+
  @param objectId       The root object ID. A value of `0` corresponds to the
      root object of the content directory.
  @param browseFlag     The browse flag parameter.
- @param filter         The browse filter. Defaults to `*` which will return all 
+ @param filter         The browse filter. Defaults to `*` which will return all
      properties.
  @param startingIndex  Starting index. Defaults to `0`.
  @param requestedCount Amount of objects to return. A value of `0` tells the
@@ -77,10 +77,10 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
 
 /**
  Search the content directory service
- 
+
  @param containerId    The container object ID.
  @param searchCriteria The search criteria.
- @param filter         The browse filter. Defaults to `*` which will return all 
+ @param filter         The browse filter. Defaults to `*` which will return all
      properties.
  @param startingIndex  Starting index. Defaults to `0`.
  @param requestedCount Amount of objects to return. A value of `0` tells the

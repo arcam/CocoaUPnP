@@ -11,9 +11,9 @@
 
 /**
  Parse UPnP error response into an `NSError`
- 
+
  @param data An `NSData` representation of an error document
- 
+
  @return Returns an `NSError` with the `<errorCode>` and `<errorDescription>` in
  the localised description.
  */

@@ -65,7 +65,7 @@
 
 /**
  The album artwork URL
- 
+
  @return Returns an `NSURL` for the album or song artwork
  */
 - (NSURL *)albumArtURL;

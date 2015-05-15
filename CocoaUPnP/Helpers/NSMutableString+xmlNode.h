@@ -12,7 +12,7 @@
  Appends a percent encoded XML node to self. For example:
  `[mString upp_appendValue:@"bar" forKey:@"foo"];` appends
  `&lt;foo&gt;bar&lt;/foo&gt;`
- 
+
  @param value The value to append.
  @param key   The key to append.
  */
@@ -20,7 +20,7 @@
 
 /**
  Appends a percent encoded XML attribute to self. For example;
- 
+
  @param value     The XML value.
  @param attribute The XML attribute title.
  */

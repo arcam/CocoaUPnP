@@ -15,10 +15,10 @@
 
 /**
  Convenience initialiser
- 
+
  @param urn     The device's uniform resource name
  @param baseURL The base URL to use with service calls
- 
+
  @return A new `UPPMediaServerDevice`
  */
 + (instancetype)mediaRendererWithURN:(NSString *)urn baseURL:(NSURL *)baseURL;

@@ -16,12 +16,12 @@
     UPPAVTransportService *avTransport = [self.renderer avTransportService];
     NSString *instanceId = @"0";
     NSError *error = nil;
-    
+
     [avTransport setAVTransportURI:resource.resourceURLString
                 currentURIMetaData:UPPMetadataForItem(item)
                         instanceID:instanceId
                              error:&error];
-    
+
     [avTransport playWithInstanceID:instanceId
                               error:&error];
 }

@@ -16,13 +16,13 @@
     if (self.resources.count == 0) {
         return nil;
     }
-    
+
     for (UPPMediaItemResource *res in self.resources) {
         if (res.duration) {
             return res.duration;
         }
     }
-    
+
     return nil;
 }
 

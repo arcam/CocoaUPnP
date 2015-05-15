@@ -15,11 +15,11 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"serviceType contains %@", serviceType];
     NSArray *filtered = [self.services filteredArrayUsingPredicate:predicate];
-    
+
     if (filtered.count == 0) {
         return nil;
     }
-    
+
     return [filtered firstObject];
 }
 

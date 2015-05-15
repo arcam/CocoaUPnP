@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.tableView.hidden = YES;
     self.items = [NSMutableArray array];
     [self fetchChildren];
@@ -35,7 +35,7 @@
             NSLog(@"Error fetching results: %@", error);
         }
     };
-    
+
     [[self.device contentDirectoryService]
      browseWithObjectID:self.objectId
      browseFlag:BrowseDirectChildren
@@ -50,7 +50,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.items addObjectsFromArray:results];
-        
+
         if (self.tableView.hidden) {
             self.tableView.hidden = NO;
             [self.activityIndicator stopAnimating];
@@ -72,11 +72,11 @@
     UPPMediaItem *item = self.items[indexPath.row];
     cell.textLabel.text = [self titleForMediaItem:item];
     cell.detailTextLabel.text = [item duration];
-    
+
     if ([item isContainer]) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    
+
     return cell;
 }
 
@@ -87,7 +87,7 @@
                            [item.trackNumber intValue], item.itemTitle];
         return title;
     }
-    
+
     return item.itemTitle;
 }
 
@@ -96,12 +96,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UPPMediaItem *item = self.items[indexPath.row];
-    
+
     if ([item.objectClass isEqualToString:@"object.item.audioItem.musicTrack"]) {
         [self.playbackManager playItem:item];
         return;
     }
-    
+
     [self pushFolderViewControllerWithItem:item];
 }
 
@@ -111,10 +111,10 @@
     FolderViewController *newViewController = [storyboard instantiateViewControllerWithIdentifier:@"FolderViewController"];
     newViewController.device = self.device;
     newViewController.playbackManager = self.playbackManager;
-    
+
     newViewController.objectId = item.objectID;
     newViewController.title = item.itemTitle;
-    
+
     [self.navigationController pushViewController:newViewController animated:YES];
 }
 

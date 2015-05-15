@@ -14,7 +14,7 @@
 {
     NSDictionary *parameters = @{ @"CurrentURI": currentURI,
                                   @"CurrentURIMetaData": currentURIMetaData ?: @"" };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetAVTransportURI"
                               parameters:parameters
@@ -25,7 +25,7 @@
 {
     NSDictionary *parameters = @{ @"NextURI": nextURI,
                                   @"NextURIMetaData": nextURIMetaData ?: @"" };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetNextAVTransportURI"
                               parameters:parameters
@@ -38,7 +38,7 @@
 - (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *mediaInfo, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetMediaInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -47,7 +47,7 @@
 - (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportInfo, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -56,7 +56,7 @@
 - (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *positionInfo,  NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetPositionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -65,7 +65,7 @@
 - (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *deviceCapabilities, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetDeviceCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -74,7 +74,7 @@
 - (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportSettings, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportSettings" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -83,7 +83,7 @@
 - (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportActions" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -107,7 +107,7 @@
 - (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed error:(NSError *__autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"Speed": speed };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"Play"
                               parameters:parameters
@@ -134,7 +134,7 @@
 {
     NSDictionary *parameters = @{ @"Unit": unit,
                                   @"Target": target };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"Seek"
                               parameters:parameters
@@ -163,7 +163,7 @@
 - (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"NewPlayMode": newPlayMode };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetPlayMode"
                               parameters:parameters
@@ -173,7 +173,7 @@
 - (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error
 {
     NSDictionary *parameters = @{ @"NewRecordMode": newRecordMode };
-    
+
     [self _sendPostRequestWithInstanceID:instanceId
                                   action:@"SetRecordMode"
                               parameters:parameters

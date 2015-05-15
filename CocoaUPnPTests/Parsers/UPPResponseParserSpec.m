@@ -7,9 +7,9 @@
 SpecBegin(UPPResponseParser)
 
 describe(@"UPPResponseParser", ^{
-    
+
     __block UPPResponseParser *parser;
-    
+
     it(@"should parse a basic response", ^{
         NSData *data =  LoadDataFromXML(@"GetConnectionID", [self class]);
         parser = [[UPPResponseParser alloc] initWithXMLData:data];
@@ -23,7 +23,7 @@ describe(@"UPPResponseParser", ^{
             }];
         });
     });
-    
+
     it(@"should return early with no data", ^{
         parser = [[UPPResponseParser alloc] initWithXMLData:nil];
         waitUntil(^(DoneCallback done) {

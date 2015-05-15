@@ -12,11 +12,11 @@
 - (instancetype)initWithXMLData:(NSData *)data
 {
     self = [super init];
-    
+
     if (self) {
         self.xmlData = data;
     }
-    
+
     return self;
 }
 

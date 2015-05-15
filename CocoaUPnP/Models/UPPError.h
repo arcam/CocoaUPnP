@@ -16,22 +16,22 @@ typedef NS_ENUM(NSInteger, UPPErrorCode) {
      A generic error code
      */
     UPPErrorCodeGeneric,
-    
+
     /**
      A network call to a UPnP device returned an error
      */
     UPPErrorCodeUPnPErrorReturned,
-    
+
     /**
      Error code when a parser's data object is `nil`
      */
     UPPErrorCodeEmptyData,
-    
+
     /**
      The XML provided does not have a `<device>` tag
      */
     UPPErrorCodeNoDeviceElementFound,
-    
+
     /**
      The XML provided contains no `<item>` or `<container>` tags
      */
@@ -40,9 +40,9 @@ typedef NS_ENUM(NSInteger, UPPErrorCode) {
 
 /**
  Create an `NSError` object from a `UPPErrorCode`
- 
+
  @param code The `UPPErrorCode` for the error
- 
+
  @return Returns an `NSError` object
  */
 NSError * UPPErrorWithCode(UPPErrorCode code);

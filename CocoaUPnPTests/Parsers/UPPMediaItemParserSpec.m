@@ -14,10 +14,10 @@ describe(@"UPPMediaItemParser", ^{
     it(@"should parse an xml document of items", ^{
         NSData *data = LoadDataFromXML(@"Items", [self class]);
         expect(data).toNot.beNil();
-        
+
         NSString *result = [[NSString alloc] initWithData:data
                                                  encoding:NSUTF8StringEncoding];
-        
+
         NSDictionary *results = @{ @"NumberReturned": @2,
                                    @"TotalMatches": @12,
                                    @"UpdateID": @0,
@@ -25,12 +25,12 @@ describe(@"UPPMediaItemParser", ^{
 
         waitUntil(^(DoneCallback done) {
             [UPPMediaItemParser parseResults:results withCompletion:^(NSDictionary *results, NSError *error) {
-                
+
                 expect(error).to.beNil();
                 NSArray *items = results[UPnPXMLResultsKey];
                 expect(items).toNot.beNil();
                 expect(items.count).to.equal(2);
-                
+
                 UPPMediaItem *item = [items firstObject];
                 expect(item).toNot.beNil();
                 expect(item.albumTitle).to.equal(@"Bloodstone & Diamonds");
@@ -44,7 +44,7 @@ describe(@"UPPMediaItemParser", ^{
                 expect(item.parentID).to.equal(@"29$34537$34555");
                 expect(item.itemTitle).to.equal(@"Now We Die");
                 expect(item.albumArtURLString).to.equal(@"http://127.0.0.1/art.jpg");
-                
+
                 expect(item.resources.count).to.equal(1);
                 UPPMediaItemResource *resource = [item.resources firstObject];
                 expect(resource).toNot.beNil();
@@ -55,37 +55,37 @@ describe(@"UPPMediaItemParser", ^{
                 expect(resource.protocolInfo).to.equal(@"http-get:*:audio/x-flac:*");
                 expect(resource.itemSize).to.equal(@"55867243");
                 expect(resource.resourceURLString).to.equal(@"http://10.54.6.186:50002/m/NDLNA/34555.flac");
-                
+
                 expect(results[@"NumberReturned"]).to.equal(2);
                 expect(results[@"TotalMatches"]).to.equal(12);
                 expect(results[@"UpdateID"]).to.equal(0);
-                
+
                 done();
-                
+
             }];
         });
     });
-    
+
     it(@"should parse an xml document of containers", ^{
         NSData *data = LoadDataFromXML(@"Containers", [self class]);
         expect(data).toNot.beNil();
-        
+
         NSString *result = [[NSString alloc] initWithData:data
                                                  encoding:NSUTF8StringEncoding];
-        
+
         NSDictionary *results = @{ @"NumberReturned": @2,
                                    @"TotalMatches": @307,
                                    @"UpdateID": @810,
                                    @"Result": result };
-        
+
         waitUntil(^(DoneCallback done) {
             [UPPMediaItemParser parseResults:results withCompletion:^(NSDictionary *results, NSError *error) {
-                
+
                 expect(error).to.beNil();
-                
+
                 NSArray *items = results[UPnPXMLResultsKey];
                 expect(items.count).to.equal(2);
-                
+
                 UPPMediaItem *item = [items firstObject];
                 expect(item.isContainer).to.equal(YES);
                 expect(item.objectID).to.equal(@"1$7$110");
@@ -96,16 +96,16 @@ describe(@"UPPMediaItemParser", ^{
                 expect(item.genre).to.equal(@"Death Metal");
                 expect(item.artist).to.equal(@"Insomnium");
                 expect(item.albumArtURLString).to.equal(@"http://127.0.0.1/799-4032.jpg");
-                
+
                 expect(results[@"NumberReturned"]).to.equal(2);
                 expect(results[@"TotalMatches"]).to.equal(307);
                 expect(results[@"UpdateID"]).to.equal(810);
-                
+
                 done();
             }];
         });
     });
-    
+
     describe(@"when an error occurs", ^{
         it(@"should set empty data error", ^{
             waitUntil(^(DoneCallback done) {
@@ -113,22 +113,22 @@ describe(@"UPPMediaItemParser", ^{
                     expect(results).to.beNil();
                     expect(error).toNot.beNil();
                     expect(error.code).to.equal(UPPErrorCodeEmptyData);
-                    
+
                     done();
                 }];
             });
         });
-        
+
         it(@"should set no item error", ^{
             waitUntil(^(DoneCallback done) {
                 NSString *brokenResults = @"<DIDL-Lite></DIDL-Lite>";
                 NSDictionary *results = @{ @"Result": brokenResults };
-                
+
                 [UPPMediaItemParser parseResults:results withCompletion:^(NSDictionary *results, NSError *error) {
                     expect(results).to.beNil();
                     expect(error).toNot.beNil();
                     expect(error.code).to.equal(UPPErrorCodeNoItemElementsFound);
-                    
+
                     done();
                 }];
             });

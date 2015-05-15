@@ -16,44 +16,44 @@
     id service = [[[self class] alloc] init];
     [service setBaseURL:baseURL];
     [service populateFromServiceDescription:description];
-    
+
     return service;
 }
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action
 {
     NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    
+
     if (action) {
         [wrapper setObject:action forKey:UPPSOAPActionKey];
     }
-    
+
     if (self.serviceType) {
         [wrapper setObject:self.serviceType forKey:UPPNameSpaceKey];
     }
-    
+
     if (parameters) {
         [wrapper setObject:parameters forKey:UPPParametersKey];
     }
-    
+
     return [wrapper copy];
 }
 
 - (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters error:(NSError * __autoreleasing *)error
 {
     NSMutableDictionary *mergedParameters = [NSMutableDictionary dictionary];
-    
+
     if (instanceId) {
         [mergedParameters setObject:instanceId forKey:@"InstanceID"];
     }
-    
+
     if (parameters) {
         [mergedParameters addEntriesFromDictionary:parameters];
     }
-    
+
     NSDictionary *wrapped = [self wrapParameters:mergedParameters
                                       withAction:action];
-    
+
     [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:nil failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
         *error = returnedError;
     }];
@@ -71,7 +71,7 @@
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
-    
+
     [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -93,7 +93,7 @@
     if (!component) {
         return nil;
     }
-    
+
     return [NSURL URLWithString:component relativeToURL:self.baseURL];
 }
 
@@ -103,7 +103,7 @@
     if (!_sessionManager) {
         _sessionManager = [[UPPSessionManager alloc] initWithBaseURL:nil];
     }
-    
+
     return _sessionManager;
 }
 

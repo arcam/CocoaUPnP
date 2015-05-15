@@ -6,23 +6,23 @@
 NSString * const UPPErrorDomain = @"com.arcam.cocoaupnp.error";
 
 NSError * UPPErrorWithCode(UPPErrorCode code) {
-    
+
     NSString *errorDescription;
-    
+
     switch (code) {
-            
+
         case UPPErrorCodeEmptyData:
             errorDescription = @"No data to parse";
             break;
-            
+
         case UPPErrorCodeNoDeviceElementFound:
             errorDescription = @"No device element found in XML data";
             break;
-            
+
         case UPPErrorCodeNoItemElementsFound:
             errorDescription = @"No item or container elements found in XML data";
             break;
-            
+
         default:
             code = UPPErrorCodeGeneric;
             errorDescription = @"Unknown error";
@@ -30,6 +30,6 @@ NSError * UPPErrorWithCode(UPPErrorCode code) {
     }
 
     NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : errorDescription };
-    
+
     return [NSError errorWithDomain:UPPErrorDomain code:code userInfo:userInfo];
 }

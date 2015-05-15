@@ -48,17 +48,17 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 /**
  A convenience initialiser for creating a new service from a base URL and
  `UPPServiceDescription`
- 
+
  @param baseURL     The base URL for the service
  @param description The basic service description
- 
+
  @return A new basic service instance
  */
 + (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description;
 
 /**
  Send a POST request, with an error pointer
- 
+
  @param instanceId The instance identifier
  @param action     The UPnP action
  @param parameters UPnP parameters
@@ -69,7 +69,7 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 
 /**
  Send a POST request, with a completion block
- 
+
  @param instanceId The instance identifier
  @param action     The UPnP action
  @param completion A completion block either returning a dictionary response, or
@@ -79,7 +79,7 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 
 /**
  Send a POST request, with a completion block
- 
+
  @param parameters The parameters for the call
  @param action     The UPnP action
  @param completion A completion block either returning a dictionary response, or

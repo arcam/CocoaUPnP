@@ -90,9 +90,9 @@
 
 /**
  Find the first service which matches `serviceType`
- 
+
  @param serviceType The service type to search for
- 
+
  @return The matching service description, or nil if no matches found
  */
 - (UPPServiceDescription *)serviceForType:(NSString *)serviceType;

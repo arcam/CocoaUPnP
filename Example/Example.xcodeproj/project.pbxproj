@@ -19,6 +19,8 @@
 		0E6EC6D81ADFB796006F7F98 /* Error.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EC6D71ADFB796006F7F98 /* Error.xml */; };
 		0E6EC6DD1ADFB869006F7F98 /* UPPErrorParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */; };
 		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
+		0E83B35D1B04F31C008FBF27 /* UPPMetadataHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B35C1B04F31C008FBF27 /* UPPMetadataHelperSpec.m */; };
+		0E83B35F1B04F6E9008FBF27 /* FullMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B35E1B04F6E9008FBF27 /* FullMetadata.xml */; };
 		0E83D9611AD5694400694AA7 /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */; };
 		0E83D9621AD5694400694AA7 /* UPPMediaItemProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */; };
 		0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E8B1A031ADD473F0029FCC7 /* Device.xml */; };
@@ -81,6 +83,8 @@
 		0E6EC6DC1ADFB869006F7F98 /* UPPErrorParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParserSpec.m; sourceTree = "<group>"; };
 		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
 		0E83B3241B04D13F008FBF27 /* PlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackManager.m; sourceTree = "<group>"; };
+		0E83B35C1B04F31C008FBF27 /* UPPMetadataHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMetadataHelperSpec.m; sourceTree = "<group>"; };
+		0E83B35E1B04F6E9008FBF27 /* FullMetadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = FullMetadata.xml; sourceTree = "<group>"; };
 		0E83D95E1AD5694400694AA7 /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
 		0E83D9601AD5694400694AA7 /* UPPMediaItemProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemProtocolSpec.m; sourceTree = "<group>"; };
 		0E8B1A031ADD473F0029FCC7 /* Device.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Device.xml; sourceTree = "<group>"; };
@@ -182,6 +186,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		0E83B35B1B04F2F6008FBF27 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0E83B35C1B04F31C008FBF27 /* UPPMetadataHelperSpec.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		0E83D95B1AD5691B00694AA7 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8B1A021ADD473F0029FCC7 /* ExampleXML */,
+				0E83B35B1B04F2F6008FBF27 /* Helpers */,
 				0E83D95D1AD5694400694AA7 /* Models */,
 				0E4E36231AE4FFBC0051842F /* Networking */,
 				0E8B1A091ADD478B0029FCC7 /* Parsers */,
@@ -237,6 +250,7 @@
 				0E8B1A031ADD473F0029FCC7 /* Device.xml */,
 				0E8B1A121ADE76FA0029FCC7 /* Empty.xml */,
 				0E6EC6D71ADFB796006F7F98 /* Error.xml */,
+				0E83B35E1B04F6E9008FBF27 /* FullMetadata.xml */,
 				0E6EB23D1AE5354D0092DEEC /* GetConnectionID.xml */,
 				0E8B1A241ADE9BF70029FCC7 /* Items.xml */,
 				0EE5C02B1ADFFE5C00D3EAEA /* LastChangeTransport.xml */,
@@ -491,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EB2B0671AFB646C00F06466 /* MediaServer.xml in Resources */,
+				0E83B35F1B04F6E9008FBF27 /* FullMetadata.xml in Resources */,
 				0E8B1A251ADE9BF70029FCC7 /* Items.xml in Resources */,
 				0E8B1A041ADD473F0029FCC7 /* Device.xml in Resources */,
 				0E4E362E1AE509160051842F /* PlayRequest.xml in Resources */,
@@ -639,6 +654,7 @@
 				0E918B621AEFA861000C679A /* SSDPDelegateTestHelper.m in Sources */,
 				0EE5C0301AE0F1D200D3EAEA /* UPPServiceSpec.m in Sources */,
 				0ED2B9B91AE7BE70004EC509 /* UPPConnectionManagerServiceSpec.m in Sources */,
+				0E83B35D1B04F31C008FBF27 /* UPPMetadataHelperSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

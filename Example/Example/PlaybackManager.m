@@ -6,6 +6,7 @@
 #import "UPPAVTransportService.h"
 #import "UPPMediaItem.h"
 #import "UPPMediaItemResource.h"
+#import "UPPMetadataHelper.h"
 
 @implementation PlaybackManager
 
@@ -17,16 +18,12 @@
     NSError *error = nil;
     
     [avTransport setAVTransportURI:resource.resourceURLString
-                currentURIMetaData:@""
+                currentURIMetaData:UPPMetadataForItem(item)
                         instanceID:instanceId
                              error:&error];
     
-    NSLog(@"error: %@", error);
-    
     [avTransport playWithInstanceID:instanceId
                               error:&error];
-    
-    NSLog(@"error: %@", error);
 }
 
 @end

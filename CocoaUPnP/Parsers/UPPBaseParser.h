@@ -3,6 +3,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ This class describes shared functionality between parser classes.
+ */
 @interface UPPBaseParser : NSObject
 
 /**

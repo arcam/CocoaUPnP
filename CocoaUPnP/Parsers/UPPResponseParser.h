@@ -20,7 +20,7 @@ typedef void(^Response)(NSDictionary *response, NSError *error);
 /**
  Parse the previously supplied XML data
 
- @param completion A completion block returning either a `UPPDevice` object
+ @param responseBlock A completion block returning either a `UPPDevice` object
  or an `NSError` object
  */
 - (void)parseWithResponse:(Response)responseBlock;

@@ -3,6 +3,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ This class describes a UPnP media item resource object.
+ */
 @interface UPPMediaItemResource : NSObject
 
 /**

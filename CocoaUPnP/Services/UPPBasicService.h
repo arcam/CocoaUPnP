@@ -10,6 +10,13 @@
  */
 @interface UPPBasicService : NSObject
 
+/**
+ A generic response block
+
+ @param response The SOAP response as an `NSDictionary`
+ @param error    An optional `NSError` which is returned in the event of parse
+                 failure
+ */
 typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 
 #pragma mark - Properties

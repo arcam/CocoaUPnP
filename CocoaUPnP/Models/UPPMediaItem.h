@@ -9,7 +9,7 @@
  a music track, an album, a podcast etc. The UPnP class of the object can be
  queried by calling the `objectClass` property.
  */
-@interface UPPMediaItem : NSObject <UPPMediaItemProtocol>
+@interface UPPMediaItem : NSObject <NSCoding, UPPMediaItemProtocol>
 
 #pragma mark - Properties
 

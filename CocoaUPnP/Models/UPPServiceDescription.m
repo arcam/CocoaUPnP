@@ -17,4 +17,27 @@
             self.eventSubURL];
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init])) {
+        self.serviceType = [decoder decodeObjectForKey:@"serviceType"];
+        self.serviceId = [decoder decodeObjectForKey:@"serviceId"];
+        self.descriptionURL = [decoder decodeObjectForKey:@"descriptionURL"];
+        self.controlURL = [decoder decodeObjectForKey:@"controlURL"];
+        self.eventSubURL = [decoder decodeObjectForKey:@"eventSubURL"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.serviceType forKey:@"serviceType"];
+    [encoder encodeObject:self.serviceId forKey:@"serviceId"];
+    [encoder encodeObject:self.descriptionURL forKey:@"descriptionURL"];
+    [encoder encodeObject:self.controlURL forKey:@"controlURL"];
+    [encoder encodeObject:self.eventSubURL forKey:@"eventSubURL"];
+}
+
 @end

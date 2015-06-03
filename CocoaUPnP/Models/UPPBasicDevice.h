@@ -8,7 +8,7 @@
 /**
  This class defines a basic UPnP device.
  */
-@interface UPPBasicDevice : NSObject
+@interface UPPBasicDevice : NSObject <NSCoding>
 
 /**
  UPnP device type, e.g. `urn:schemas-upnp-org:device:MediaRenderer:1`

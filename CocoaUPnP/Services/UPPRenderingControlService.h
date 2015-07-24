@@ -30,10 +30,10 @@
  @param mute       Set to `YES` to mute, or `NO` to un-mute
  @param instanceId The instance identifier
  @param channel    The channel to retrieve mute status for. Defaults to `Master`.
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    A block which returns the success state of the call, along
+     with an error object if the call was unsuccessful.
  */
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel error:(NSError * __autoreleasing *)error;
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock;
 
 
 #pragma mark - Volume
@@ -59,9 +59,9 @@
  @param instanceId The instance identifier
  @param channel    The channel to retrieve volume status for. Defaults to
      `Master`.
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+      along with an error object if the call was unsuccessful.
  */
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel error:(NSError *__autoreleasing *)error;
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock;
 
 @end

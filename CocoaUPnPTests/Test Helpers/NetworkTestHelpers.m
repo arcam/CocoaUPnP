@@ -11,7 +11,7 @@ NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
 void (^VerifyPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
     [[manager expect] POST:url parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
         return [parameters isEqualToDictionary:params];
-    }] success:nil failure:[OCMArg any]];
+    }] success:[OCMArg any] failure:[OCMArg any]];
 };
 
 void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {

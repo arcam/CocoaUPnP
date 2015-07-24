@@ -15,15 +15,24 @@
     UPPMediaItemResource *resource = [item.resources firstObject];
     UPPAVTransportService *avTransport = [self.renderer avTransportService];
     NSString *instanceId = @"0";
-    NSError *error = nil;
 
-    [avTransport setAVTransportURI:resource.resourceURLString
-                currentURIMetaData:UPPMetadataForItem(item)
-                        instanceID:instanceId
-                             error:&error];
+    [avTransport setAVTransportURI:resource.resourceURLString currentURIMetaData:UPPMetadataForItem(item) instanceID:instanceId success:^(BOOL success, NSError *error) {
+        if (success) {
+            [self sendPlayCommandWithInstanceID:instanceId];
+        } else {
+            NSLog(@"%s: Error setting transport URI: %@", __PRETTY_FUNCTION__, error);
+        }
+    }];
+}
 
-    [avTransport playWithInstanceID:instanceId
-                              error:&error];
+- (void)sendPlayCommandWithInstanceID:(NSString *)instanceId
+{
+    UPPAVTransportService *avTransport = [self.renderer avTransportService];
+    [avTransport playWithInstanceID:instanceId success:^(BOOL success, NSError *error) {
+        if (!success) {
+            NSLog(@"%s: Error sending play command: %@", __PRETTY_FUNCTION__, error);
+        }
+    }];
 }
 
 @end

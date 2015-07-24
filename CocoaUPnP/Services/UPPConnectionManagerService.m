@@ -29,11 +29,11 @@
     }];
 }
 
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId error:(NSError *__autoreleasing *)error
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
 {
     NSDictionary *parameters = @{ @"ConnectionID": connectionId };
 
-    [self _sendPostRequestWithInstanceID:nil action:@"ConnectionComplete" parameters:parameters error:error];
+    [self _sendPostRequestWithInstanceID:nil action:@"ConnectionComplete" parameters:parameters success:successBlock];
 }
 
 - (void)currentConnectionIDsWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion

@@ -14,7 +14,6 @@ describe(@"UPPRenderingControlService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
-    __block NSError *error;
 
     beforeEach(^{
         service = [[UPPRenderingControlService alloc] init];
@@ -28,7 +27,6 @@ describe(@"UPPRenderingControlService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
-        error = nil;
     });
 
     describe(@"mute status", ^{
@@ -90,10 +88,9 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:YES
                   withInstanceID:instanceId
                          channel:channel
-                           error:&error];
+                         success:nil];
 
                 [sessionManager verify];
-                expect(error).to.beNil();
             });
 
             it(@"should send required parameters with nil channel", ^{
@@ -102,10 +99,9 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:YES
                   withInstanceID:instanceId
                          channel:channel
-                           error:&error];
+                         success:nil];
 
                 [sessionManager verify];
-                expect(error).to.beNil();
             });
 
             it(@"should send required parameters with mute off", ^{
@@ -121,10 +117,9 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:NO
                   withInstanceID:instanceId
                          channel:nil
-                           error:&error];
+                         success:nil];
 
                 [sessionManager verify];
-                expect(error).to.beNil();
             });
         });
     });
@@ -188,10 +183,9 @@ describe(@"UPPRenderingControlService", ^{
                 [service setVolume:@1
                     withInstanceID:instanceId
                            channel:channel
-                             error:&error];
+                           success:nil];
 
                 [sessionManager verify];
-                expect(error).to.beNil();
             });
 
             it(@"should send required parameters with nil channel", ^{
@@ -200,10 +194,9 @@ describe(@"UPPRenderingControlService", ^{
                 [service setVolume:@1
                     withInstanceID:instanceId
                            channel:nil
-                             error:&error];
+                           success:nil];
 
                 [sessionManager verify];
-                expect(error).to.beNil();
             });
         });
     });

@@ -39,7 +39,7 @@
     return [wrapper copy];
 }
 
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters error:(NSError * __autoreleasing *)error
+- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
 {
     NSMutableDictionary *mergedParameters = [NSMutableDictionary dictionary];
 
@@ -54,8 +54,14 @@
     NSDictionary *wrapped = [self wrapParameters:mergedParameters
                                       withAction:action];
 
-    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:nil failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
-        *error = returnedError;
+    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (successBlock) {
+            successBlock(YES, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
+        if (successBlock) {
+            successBlock(NO, returnedError);
+        }
     }];
 }
 

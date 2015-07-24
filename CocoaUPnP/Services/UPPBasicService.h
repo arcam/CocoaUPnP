@@ -69,10 +69,10 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
  @param instanceId The instance identifier
  @param action     The UPnP action
  @param parameters UPnP parameters
- @param error      An error pointer which will be populated in the event of the
-     call failing
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters error:(NSError * __autoreleasing *)error;
+- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send a POST request, with a completion block

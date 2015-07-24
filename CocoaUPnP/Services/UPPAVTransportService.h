@@ -21,10 +21,11 @@
  @param currentURI         The URI of the media item
  @param currentURIMetaData The meta data for the media item
  @param instanceId         The instance identifier
- @param error              The error returned by the renderer, or nil if call
-     was successful
+ @param success            An optional block which returns the success state of
+ the call, along with an error object if the call was unsuccessful.
+
  */
-- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Set the next transport URI
@@ -32,10 +33,10 @@
  @param nextURI         The URI for the next media item
  @param nextURIMetaData The meta data for the next media item
  @param instanceId      The instance identifier
- @param error           The error returned by the renderer, or nil if call was
-     successful
+ @param success         An optional block which returns the success state of the
+ call, along with an error object if the call was unsuccessful.
  */
-- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 
 #pragma mark - Getting Information
@@ -109,47 +110,48 @@
  Send stop command
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
+
  */
-- (void)stopWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)stopWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send play command, with speed set to `1`
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
- */
-- (void)playWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
+*/
+- (void)playWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send play command with a speed setting
 
  @param instanceId The instance identifier
  @param speed      Playback speed
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed error:(NSError * __autoreleasing *)error;
+- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send pause command
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)pauseWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)pauseWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send record command
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)recordWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)recordWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Seek to time
@@ -157,28 +159,28 @@
  @param instanceId The instance identifier
  @param unit       The seek mode
  @param target     The time to seek to
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target error:(NSError * __autoreleasing *)error;
+- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send next command
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)nextWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)nextWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Send previous command
 
  @param instanceId The instance identifier
- @param error      The error returned by the renderer, or nil if call was
-     successful
+ @param success    An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)previousWithInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)previousWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 
 #pragma mark - Mode Setting
@@ -192,19 +194,19 @@
 
  @param newPlayMode The new play mode
  @param instanceId  The instance identifier
- @param error       The error returned by the renderer, or nil if call was
-     successful
+ @param success     An optional block which returns the success state of the call,
+ along with an error object if the call was unsuccessful.
  */
-- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Set record mode
 
  @param newRecordMode The new record mode
- @param instanceId  The instance identifier
- @param error       The error returned by the renderer, or nil if call was
-     successful
+ @param instanceId    The instance identifier
+ @param success       An optional block which returns the success state of the
+     call, along with an error object if the call was unsuccessful.
  */
-- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId error:(NSError * __autoreleasing *)error;
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 @end

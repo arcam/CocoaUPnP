@@ -16,7 +16,6 @@ describe(@"UPPAVTransportService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
-    __block NSError *error;
 
     beforeEach(^{
         service = [[UPPAVTransportService alloc] init];
@@ -30,7 +29,6 @@ describe(@"UPPAVTransportService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
-        error = nil;
     });
 
     describe(@"when setting current transport URI", ^{
@@ -56,10 +54,9 @@ describe(@"UPPAVTransportService", ^{
             [service setAVTransportURI:currentURI
                     currentURIMetaData:currentURIMetaData
                             instanceID:instanceId
-                                 error:&error];
+                               success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
 
         it(@"should not raise an exception with no metadata", ^{
@@ -76,22 +73,18 @@ describe(@"UPPAVTransportService", ^{
             [service setAVTransportURI:currentURI
                     currentURIMetaData:nil
                             instanceID:instanceId
-                                 error:&error];
+                               success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
 
         it(@"should return set an error when call fails", ^{
             service.sessionManager = [[MockFailSessionManager alloc] init];
 
-            [service setAVTransportURI:currentURI
-                    currentURIMetaData:currentURIMetaData
-                            instanceID:instanceId
-                                 error:&error];
-
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
+            [service setAVTransportURI:currentURI currentURIMetaData:currentURIMetaData instanceID:instanceId success:^(BOOL success, NSError *error) {
+                expect(error).toNot.beNil();
+                expect(error.code).to.equal(MockFailSessionErrorCode);
+            }];
         });
     });
 
@@ -118,10 +111,9 @@ describe(@"UPPAVTransportService", ^{
             [service setNextAVTransportURI:nextURI
                            nextURIMetaData:nextURIMetaData
                                 instanceID:instanceId
-                                     error:&error];
+                                   success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
 
         it(@"should not raise an exception with nil metadata", ^{
@@ -138,10 +130,9 @@ describe(@"UPPAVTransportService", ^{
             [service setNextAVTransportURI:nextURI
                            nextURIMetaData:nil
                                 instanceID:instanceId
-                                     error:&error];
+                                   success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -155,7 +146,6 @@ describe(@"UPPAVTransportService", ^{
 
             [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
                 expect(mediaInfo[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
             }];
         });
 
@@ -244,11 +234,9 @@ describe(@"UPPAVTransportService", ^{
 
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
-            NSError *error = nil;
-            [service stopWithInstanceID:instanceId error:&error];
+            [service stopWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -264,7 +252,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service playWithInstanceID:instanceId error:&error];
+            [service playWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -281,7 +269,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service playWithInstanceID:instanceId speed:@"2" error:&error];
+            [service playWithInstanceID:instanceId speed:@"2" success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -297,7 +285,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service pauseWithInstanceID:instanceId error:&error];
+            [service pauseWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -313,7 +301,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service recordWithInstanceID:instanceId error:&error];
+            [service recordWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -336,9 +324,9 @@ describe(@"UPPAVTransportService", ^{
 
             NSError *error = nil;
             [service setSeekWithInstanceID:instanceId
-                                   unit:unit
-                                 target:target
-                                  error:&error];
+                                      unit:unit
+                                    target:target
+                                   success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -354,7 +342,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service nextWithInstanceID:instanceId error:&error];
+            [service nextWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -370,7 +358,7 @@ describe(@"UPPAVTransportService", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
             NSError *error = nil;
-            [service previousWithInstanceID:instanceId error:&error];
+            [service previousWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -392,7 +380,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service setPlayMode:(NSString *)newPlayMode
                   withInstanceID:instanceId
-                           error:&error];
+                         success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();
@@ -414,7 +402,7 @@ describe(@"UPPAVTransportService", ^{
             NSError *error = nil;
             [service setRecordMode:(NSString *)newRecordMode
                     withInstanceID:instanceId
-                             error:&error];
+                           success:nil];
 
             [sessionManager verify];
             expect(error).to.beNil();

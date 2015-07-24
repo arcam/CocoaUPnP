@@ -35,9 +35,11 @@
  document
 
  @param connectionId The connection identifier
- @param error        An error which is populated if the call fails
+ @param success      An optional block which returns the success state of the
+ call, along with an error object if the call was unsuccessful.
+
  */
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId error:(NSError * __autoreleasing *)error;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Get current connection IDs. See 2.4.4 of the service template

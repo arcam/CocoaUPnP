@@ -16,7 +16,6 @@ describe(@"UPPConnectionManagerService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
-    __block NSError *error;
 
     beforeEach(^{
         service = [[UPPConnectionManagerService alloc] init];
@@ -30,7 +29,6 @@ describe(@"UPPConnectionManagerService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
-        error = nil;
     });
 
     describe(@"when getting protocol info", ^{
@@ -129,19 +127,18 @@ describe(@"UPPConnectionManagerService", ^{
         it(@"should send required parameters", ^{
             VerifyPostWithParams(expectedParams, sessionManager, url);
 
-            [service connectionCompleteWithConnectionID:peerConnectionId error:&error];
+            [service connectionCompleteWithConnectionID:peerConnectionId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
 
         it(@"should return an error if call fails", ^{
             service.sessionManager = [[MockFailSessionManager alloc] init];
 
-            [service connectionCompleteWithConnectionID:peerConnectionId error:&error];
-
-            expect(error).toNot.beNil();
-            expect(error.code).to.equal(MockFailSessionErrorCode);
+            [service connectionCompleteWithConnectionID:peerConnectionId success:^(BOOL success, NSError *error) {
+                expect(error).toNot.beNil();
+                expect(error.code).to.equal(MockFailSessionErrorCode);
+            }];
         });
     });
 

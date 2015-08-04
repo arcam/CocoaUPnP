@@ -26,7 +26,11 @@
 
 #import "GCDAsyncUdpSocket.h"
 #import "SSDPService.h"
-//#import "SSDPServiceTypes.h"
+
+#import <ifaddrs.h>
+#import <sys/socket.h>
+#import <net/if.h>
+#import <arpa/inet.h>
 
 NSString * const SSDPMulticastGroupAddress = @"239.255.255.250";
 const UInt16 SSDPMulticastUDPPort = 1900;
@@ -51,7 +55,7 @@ typedef enum : NSUInteger {
 
 - (void)startBrowsingForServiceTypes:(NSString *)serviceType {
 
-    if (!self.multicastSocket.isConnected) {
+    if (self.multicastSocket.isClosed) {
         [self setupSocket];
     }
 
@@ -72,7 +76,14 @@ typedef enum : NSUInteger {
 
     NSError *err = nil;
 
-    if (![self.multicastSocket bindToPort:SSDPMulticastUDPPort error:&err]) {
+    NSDictionary *interfaces = [SSDPServiceBrowser availableNetworkInterfaces];
+    NSData *sourceAddress = _networkInterface? [interfaces objectForKey:_networkInterface] : nil;
+
+    if (!sourceAddress) {
+        sourceAddress = [[interfaces allValues] firstObject];
+    }
+
+    if (![self.multicastSocket bindToAddress:sourceAddress error:&err]) {
         [self _notifyDelegateWithError:err];
         return;
     }
@@ -252,5 +263,25 @@ typedef enum : NSUInteger {
     return userAgent;
 }
 
++ (NSDictionary *)availableNetworkInterfaces {
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionary];
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *ifa = NULL;
+
+    // retrieve the current interfaces - returns 0 on success
+    if( getifaddrs(&interfaces) == 0 ) {
+        for( ifa = interfaces; ifa != NULL; ifa = ifa->ifa_next ) {
+            if( (ifa->ifa_addr->sa_family == AF_INET) && !(ifa->ifa_flags & IFF_LOOPBACK) && !strncmp(ifa->ifa_name, "en", 2)) {
+                NSData *data = [NSData dataWithBytes:ifa->ifa_addr length:sizeof(struct sockaddr_in)];
+                NSString *if_name = [NSString stringWithUTF8String:ifa->ifa_name];
+                [addresses setObject:data forKey:if_name];
+            }
+        }
+
+        freeifaddrs(interfaces);
+    }
+
+    return addresses;
+}
 
 @end

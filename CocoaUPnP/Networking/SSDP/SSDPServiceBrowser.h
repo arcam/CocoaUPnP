@@ -100,6 +100,7 @@ extern const UInt16 SSDPMulticastUDPPort;
  A `GCDAsyncUdpSocket` instance which is connected to the multicast address
  */
 @property (strong, nonatomic) GCDAsyncUdpSocket *multicastSocket;
+@property(readonly, nonatomic) NSString *networkInterface;
 
 /**
  A delegate to inform of browse events.

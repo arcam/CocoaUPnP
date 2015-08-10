@@ -56,6 +56,9 @@ describe(@"UPPMediaItemParser", ^{
                 expect(resource.itemSize).to.equal(@"55867243");
                 expect(resource.resourceURLString).to.equal(@"http://10.54.6.186:50002/m/NDLNA/34555.flac");
 
+                expect([item duration]).to.equal(@"0:07:10.000");
+                expect([item durationInSeconds]).to.equal(430);
+
                 expect(results[@"NumberReturned"]).to.equal(2);
                 expect(results[@"TotalMatches"]).to.equal(12);
                 expect(results[@"UpdateID"]).to.equal(0);

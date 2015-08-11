@@ -56,6 +56,7 @@
 		0EE226961B73A0EC0022119E /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266B1B73A0EC0022119E /* MockFailSessionManager.m */; };
 		0EE226971B73A0EC0022119E /* NetworkTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266D1B73A0EC0022119E /* NetworkTestHelpers.m */; };
 		0EE226981B73A0EC0022119E /* TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266F1B73A0EC0022119E /* TestHelpers.m */; };
+		0EFA0F451B78D5B900D58445 /* UPPEventSubscriptionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,7 @@
 		0EE2266D1B73A0EC0022119E /* NetworkTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTestHelpers.m; sourceTree = "<group>"; };
 		0EE2266E1B73A0EC0022119E /* TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelpers.h; sourceTree = "<group>"; };
 		0EE2266F1B73A0EC0022119E /* TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpers.m; sourceTree = "<group>"; };
+		0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionSpec.m; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9FD28AC0E5EC03F7D1C6B1CA /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */,
+				0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				0EE226831B73A0EC0022119E /* UPPMediaServerDeviceSpec.m in Sources */,
 				0ECF4AB31AFBA9A500871EBE /* UPPTestAppDelegate.m in Sources */,
 				0EE226871B73A0EC0022119E /* SSDPServiceBrowserSpec.m in Sources */,
+				0EFA0F451B78D5B900D58445 /* UPPEventSubscriptionSpec.m in Sources */,
 				0EE226941B73A0EC0022119E /* UPPContentDirectoryServiceSpec.m in Sources */,
 				0EE226931B73A0EC0022119E /* UPPConnectionManagerServiceSpec.m in Sources */,
 				0EE2268A1B73A0EC0022119E /* UPPResponseSerializerSpec.m in Sources */,

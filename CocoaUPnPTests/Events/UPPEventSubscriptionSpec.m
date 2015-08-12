@@ -79,7 +79,7 @@ describe(@"UPPEventSubscription", ^{
 
         it(@"should tell manager to unsubscribe when no observers are left", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager unsubscribe:sut]);
+            OCMExpect([mockManager unsubscribe:sut completion:nil]);
             sut.manager = mockManager;
 
             [sut removeEventObserver:mockObserver];
@@ -103,7 +103,7 @@ describe(@"UPPEventSubscription", ^{
 
         it(@"should tell manager when firing", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager renewSubscription:sut]);
+            OCMExpect([mockManager renewSubscription:sut completion:[OCMArg any]]);
             sut.manager = mockManager;
 
             [timer fire];
@@ -127,7 +127,7 @@ describe(@"UPPEventSubscription", ^{
 
         it(@"should tell manager when firing", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager subscriptionExpired:sut]);
+            OCMExpect([mockManager subscriptionExpired:sut completion:nil]);
             sut.manager = mockManager;
 
             [timer fire];

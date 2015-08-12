@@ -11,8 +11,8 @@
 - (NSURL *)callbackURL;
 - (void)subscribeObject:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 
-- (void)renewSubscription:(UPPEventSubscription *)subscription;
-- (void)subscriptionExpired:(UPPEventSubscription *)subscription;
-- (void)unsubscribe:(UPPEventSubscription *)subscription;
+- (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
+- (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
+- (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 
 @end

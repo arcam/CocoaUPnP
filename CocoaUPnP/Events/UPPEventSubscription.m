@@ -66,12 +66,12 @@
 
 - (void)renewSubscription
 {
-    [self.manager renewSubscription:self];
+    [self.manager renewSubscription:self completion:nil];
 }
 
 - (void)subscriptionExpired
 {
-    [self.manager subscriptionExpired:self];
+    [self.manager subscriptionExpired:self completion:nil];
 }
 
 #pragma mark - Lazy Instantiation
@@ -111,7 +111,7 @@
     [self.observers removeObject:observer];
 
     if (self.observers.count == 0) {
-        [self.manager unsubscribe:self];
+        [self.manager unsubscribe:self completion:nil];
     }
 }
 

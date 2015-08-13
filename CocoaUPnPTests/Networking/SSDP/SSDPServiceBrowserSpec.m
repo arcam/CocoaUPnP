@@ -38,11 +38,10 @@ describe(@"SSDPServiceBrowser", ^{
 
     describe(@"when starting browsing", ^{
         it(@"should setup multicast socket if not setup", ^{
-            OCMExpect([mockMulticastSocket isConnected]).andReturn(NO);
+            OCMExpect([mockMulticastSocket isClosed]).andReturn(YES);
             OCMExpect([mockMulticastSocket setIPv6Enabled:NO]);
 
-            OCMExpect([mockMulticastSocket
-                       bindToPort:1900 error:[OCMArg anyObjectRef]]).andReturn(YES);
+            OCMExpect([mockMulticastSocket bindToAddress:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(YES);
 
             OCMExpect([mockMulticastSocket
                        joinMulticastGroup:SSDPMulticastGroupAddress
@@ -59,7 +58,7 @@ describe(@"SSDPServiceBrowser", ^{
             // Strict mock will fail on any unexpected calls
             id strictMock = OCMStrictClassMock([GCDAsyncUdpSocket class]);
             browser.multicastSocket = strictMock;
-            OCMExpect([strictMock isConnected]).andReturn(YES);
+            OCMExpect([strictMock isClosed]).andReturn(NO);
 
             // We don't really care about what the methods parameters are,
             // just need to state we expect it to be called.
@@ -76,7 +75,7 @@ describe(@"SSDPServiceBrowser", ^{
         });
 
         it(@"should send data if connected", ^{
-            OCMExpect([mockMulticastSocket isConnected]).andReturn(YES);
+            OCMExpect([mockMulticastSocket isClosed]).andReturn(NO);
 
             NSString *searchHeader = [NSString stringWithFormat:
                                       @"M-SEARCH * HTTP/1.1\r\n"
@@ -100,7 +99,7 @@ describe(@"SSDPServiceBrowser", ^{
         });
 
         it(@"should send data for specific service type", ^{
-            OCMExpect([mockMulticastSocket isConnected]).andReturn(YES);
+            OCMExpect([mockMulticastSocket isClosed]).andReturn(NO);
 
             NSString *searchHeader = [NSString stringWithFormat:
                                       @"M-SEARCH * HTTP/1.1\r\n"

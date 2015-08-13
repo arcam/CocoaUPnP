@@ -12,11 +12,16 @@ static NSString * const UPPTestFakeURL = @"http://127.0.0.1:54321/Event";
 static NSString * const UPPTestSID = @"uuid:12345678";
 static NSString * const UPPTestTimeout = @"Second-1800";
 
+NSDate *(^ExpectedExpiryDate)(void) = ^NSDate *(void) {
+    return [NSDate dateWithTimeIntervalSinceNow:300];
+};
+
 SpecBegin(UPPEventSubscriptionManager)
 
 describe(@"UPPEventSubscriptionManager", ^{
 
     __block id mockService;
+    __block id mockObserver;
     __block UPPEventSubscriptionManager *sut;
     __block OHHTTPStubsResponseBlock responseBlock;
     __block OHHTTPStubsTestBlock testBlock;
@@ -25,6 +30,7 @@ describe(@"UPPEventSubscriptionManager", ^{
     beforeEach(^{
         sut = [UPPEventSubscriptionManager new];
         mockService = OCMClassMock([UPPBasicService class]);
+        mockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
         NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
         OCMStub([mockService eventSubscriptionURL]).andReturn(url);
 
@@ -76,14 +82,35 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         it(@"should send a request to the services event subscription URL", ^{
             waitUntil(^(DoneCallback done) {
-                [sut subscribeObject:nil toService:mockService completion:^(BOOL success) {
+                [sut subscribeObserver:nil toService:mockService completion:^(BOOL success) {
                     expect(success).to.beTruthy();
                     done();
                 }];
             });
         });
 
-        xit(@"should create a subscription object", ^{
+        it(@"should create a subscription object", ^{
+            expect([sut subscriptions].count).to.equal(0);
+
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    expect(success).to.beTruthy();
+
+                    expect([sut subscriptions].count).to.equal(1);
+                    UPPEventSubscription *subscription = [[sut subscriptions] firstObject];
+                    expect(subscription.subscriptionID).to.equal(UPPTestSID);
+
+                    NSDate *expectedExpiry = ExpectedExpiryDate();
+                    NSDate *expiry = subscription.expiryDate;
+                    NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiry];
+                    expect(interval).to.beLessThan(0.01);
+
+                    expect(subscription.eventSubscriptionURL).to.equal([NSURL URLWithString:UPPTestFakeURL]);
+                    expect([subscription eventObservers]).to.contain(mockObserver);
+
+                    done();
+                }];
+            });
         });
 
         xit(@"should reuse a subscription object", ^{
@@ -110,12 +137,14 @@ describe(@"UPPEventSubscriptionManager", ^{
 
             [OHHTTPStubs stubRequestsPassingTest:testBlock withStubResponse:responseBlock];
         });
+
         it(@"should send a request to the services event subscription URL", ^{
             waitUntil(^(DoneCallback done) {
                 [sut renewSubscription:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
                     expect(subscriptionID).to.equal(UPPTestSID);
-                    NSDate *expectedExpiry = [NSDate dateWithTimeIntervalSinceNow:300];
-                    expect([expectedExpiry timeIntervalSinceDate:expiryDate] < 0.01).to.beTruthy();
+                    NSDate *expectedExpiry = ExpectedExpiryDate();
+                    NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiryDate];
+                    expect(interval).to.beLessThan(0.01);
                     done();
                 }];
             });

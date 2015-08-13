@@ -8,8 +8,9 @@
 
 @interface UPPEventSubscriptionManager : NSObject
 
+- (NSArray *)subscriptions;
 - (NSURL *)callbackURL;
-- (void)subscribeObject:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
+- (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 
 - (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
 - (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;

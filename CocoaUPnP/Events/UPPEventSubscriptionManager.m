@@ -3,6 +3,11 @@
 
 #import "UPPEventSubscriptionManager.h"
 #import "UPPBasicService.h"
+#import "UPPEventSubscription.h"
+
+@interface UPPEventSubscriptionManager ()
+@property (strong, nonatomic) NSMutableArray *activeSubscriptions;
+@end
 
 @implementation UPPEventSubscriptionManager
 
@@ -11,18 +16,20 @@
     return [NSURL URLWithString:@"http://123.123.123.123/Event"];
 }
 
-- (void)subscribeObject:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
+- (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = service.eventSubscriptionURL;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:subscriptionURL];
-    [request setHTTPMethod:@"SUBSCRIBE"];
 
-    [request setValue:[subscriptionURL absoluteString] forHTTPHeaderField:@"HOST"];
-    [request setValue:@"iOS/8.4 UPnP/1.1 Example/1.0" forHTTPHeaderField:@"USER-AGENT"];
-    [request setValue:[[self callbackURL] absoluteString] forHTTPHeaderField:@"CALLBACK"];
-    [request setValue:@"upnp:event" forHTTPHeaderField:@"NT"];
-    [request setValue:@"Second-1800" forHTTPHeaderField:@"TIMEOUT"];
+    NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
+                               @"USER-AGENT": @"iOS/8.4 UPnP/1.1 Example/1.0",
+                               @"CALLBACK": [[self callbackURL] absoluteString],
+                               @"NT": @"upnp:event",
+                               @"TIMEOUT": @"Second-1800" };
+
+    NSMutableURLRequest *request = [self requestWithURL:subscriptionURL
+                                                 method:@"SUBSCRIBE"
+                                                headers:headers];
 
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
@@ -30,11 +37,17 @@
 
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
-        if (code == 200) {
-            completion(YES);
-        } else {
+        if (code != 200) {
             completion(NO);
         }
+
+        NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
+        UPPEventSubscription *subscription;
+        subscription = [self subscriptionWithURL:subscriptionURL
+                                         headers:headers
+                                        observer:observer];
+        [self.activeSubscriptions addObject:subscription];
+        completion(YES);
     }];
 
     [task resume];
@@ -45,12 +58,14 @@
 
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:subscriptionURL];
-    [request setHTTPMethod:@"SUBSCRIBE"];
 
-    [request setValue:[subscriptionURL absoluteString] forHTTPHeaderField:@"HOST"];
-    [request setValue:[subscription subscriptionID] forHTTPHeaderField:@"SID"];
-    [request setValue:@"Second-1800" forHTTPHeaderField:@"TIMEOUT"];
+    NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
+                               @"SID": [subscription subscriptionID],
+                               @"TIMEOUT": @"Second-1800" };
+
+    NSMutableURLRequest *request = [self requestWithURL:subscriptionURL
+                                                 method:@"SUBSCRIBE"
+                                                headers:headers];
 
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
@@ -61,7 +76,10 @@
         }
 
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        completion(headers[@"SID"], [self dateFromHeader:headers[@"TIMEOUT"]], nil);
+        NSString *subscriptionID = headers[@"SID"];
+        NSDate *expiryDate = [self dateFromHeader:headers[@"TIMEOUT"]];
+
+        completion(subscriptionID, expiryDate, nil);
     }];
 
     [task resume];
@@ -76,11 +94,13 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:subscriptionURL];
-    [request setHTTPMethod:@"UNSUBSCRIBE"];
 
-    [request setValue:[subscriptionURL absoluteString] forHTTPHeaderField:@"HOST"];
-    [request setValue:[subscription subscriptionID] forHTTPHeaderField:@"SID"];
+    NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
+                               @"SID": [subscription subscriptionID] };
+
+    NSMutableURLRequest *request = [self requestWithURL:subscriptionURL
+                                                 method:@"UNSUBSCRIBE"
+                                                headers:headers];
 
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
@@ -98,6 +118,22 @@
     [task resume];
 }
 
+- (NSArray *)subscriptions
+{
+    return [self.activeSubscriptions copy];
+}
+
+#pragma mark - Lazy Instantiation
+
+- (NSMutableArray *)activeSubscriptions
+{
+    if (!_activeSubscriptions) {
+        _activeSubscriptions = [NSMutableArray array];
+    }
+
+    return _activeSubscriptions;
+}
+
 #pragma mark - Private Methods
 
 - (NSDate *)dateFromHeader:(NSString *)header
@@ -110,6 +146,29 @@
                                                           withString:@""];
 
     return [NSDate dateWithTimeIntervalSinceNow:[timeout doubleValue]];
+}
+
+- (UPPEventSubscription *)subscriptionWithURL:(NSURL *)subscriptionURL headers:(NSDictionary *)headers observer:(id<UPPEventSubscriptionDelegate>)observer
+{
+    UPPEventSubscription *subscription;
+    subscription = [UPPEventSubscription subscriptionWithID:headers[@"SID"]
+                                                 expiryDate:[self dateFromHeader:headers[@"TIMEOUT"]]
+                                       eventSubscriptionURL:subscriptionURL];
+    [subscription addEventObserver:observer];
+
+    return subscription;
+}
+
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)url method:(NSString *)method headers:(NSDictionary *)headers
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:method];
+
+    [headers enumerateKeysAndObjectsUsingBlock:^(NSString *header, NSString *value, BOOL *stop) {
+        [request setValue:value forHTTPHeaderField:header];
+    }];
+
+    return request;
 }
 
 @end

@@ -136,11 +136,6 @@
     [task resume];
 }
 
-- (NSArray *)subscriptions
-{
-    return [self.activeSubscriptions copy];
-}
-
 #pragma mark - Lazy Instantiation
 
 - (NSMutableArray *)activeSubscriptions

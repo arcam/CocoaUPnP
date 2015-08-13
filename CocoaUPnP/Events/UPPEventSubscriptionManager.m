@@ -126,6 +126,7 @@
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
         if (code == 200) {
+            [self.activeSubscriptions removeObject:subscription];
             completion(YES);
         } else {
             completion(NO);

@@ -205,7 +205,6 @@ describe(@"UPPEventSubscriptionManager", ^{
                                     expiryDate:[NSDate distantPast]
                                     eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
             [sut.activeSubscriptions addObject:existingSubscription];
-
             expect(sut.activeSubscriptions.count).to.equal(1);
 
             waitUntil(^(DoneCallback done) {
@@ -248,7 +247,20 @@ describe(@"UPPEventSubscriptionManager", ^{
             });
         });
 
-        xit(@"should destroy a subscription object", ^{
+        it(@"should destroy a subscription object", ^{
+            UPPEventSubscription *existingSubscription;
+            existingSubscription = [UPPEventSubscription
+                                    subscriptionWithID:UPPTestSID
+                                    expiryDate:[NSDate distantPast]
+                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
+            [sut.activeSubscriptions addObject:existingSubscription];
+            expect(sut.activeSubscriptions.count).to.equal(1);
+            waitUntil(^(DoneCallback done) {
+                [sut unsubscribe:existingSubscription completion:^(BOOL success) {
+                    expect(sut.activeSubscriptions).toNot.contain(existingSubscription);
+                    done();
+                }];
+            });
         });
     });
 

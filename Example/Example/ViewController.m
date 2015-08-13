@@ -12,6 +12,7 @@
 @interface ViewController () <UPPDiscoveryDelegate>
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) PlaybackManager *playbackManager;
+@property (strong, nonatomic) NSTimer *searchTimer;
 @end
 
 @implementation ViewController
@@ -21,7 +22,33 @@
     [super viewDidLoad];
 
     self.playbackManager = [[PlaybackManager alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[UPPDiscovery sharedInstance] setDelegate:self];
+    [self setupSearchTimer];
+}
+
+- (void)setupSearchTimer
+{
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                        target:self
+                                                      selector:@selector(timerFired:)
+                                                      userInfo:nil
+                                                       repeats:YES];
+    [self.searchTimer fire];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.searchTimer invalidate];
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
     [[UPPDiscovery sharedInstance] startBrowsingForServices:@"ssdp:all"];
 }
 

@@ -70,6 +70,14 @@ NSString * const UPnPXMLResultsKey = @"Result";
         item.objectID = [element valueForAttribute:@"id"];
         item.resources = [self parseResources:[element childrenWithTag:@"res"]];
 
+        NSArray *durations = [item.resources valueForKey:@"duration"];
+        [durations enumerateObjectsUsingBlock:^(NSString *duration, NSUInteger idx, BOOL *stop) {
+            if (duration) {
+                item.durationInSeconds = [self durationFromString:duration];
+                *stop = YES;
+            }
+        }];
+
         if (!items) {
             items = [NSMutableArray array];
         }
@@ -102,6 +110,30 @@ NSString * const UPnPXMLResultsKey = @"Result";
     }];
 
     return [mutableResources copy];
+}
+
+#pragma mark - Private
+
++ (NSInteger)durationFromString:(NSString *)string
+{
+    NSInteger seconds = 0;
+
+    NSArray *components = [string componentsSeparatedByString:@":"];
+
+    if ([components count] == 3) {
+        // hh
+        NSInteger hours = [(NSString *)components[0] integerValue];
+        seconds += hours * 60 * 60;
+
+        // mm
+        NSInteger minutes = [(NSString *)components[1] integerValue];
+        seconds += minutes * 60;
+
+        // ss - actually a double
+        seconds += [(NSString *)components[2] integerValue];
+    }
+
+    return seconds;
 }
 
 @end

@@ -78,6 +78,13 @@
  */
 @property (copy, nonatomic) NSString *albumArtURLString;
 
+/**
+ An integer describing the tracks total duration in seconds.
+ @warning This value is scraped from the duration of the Media Item's resources.
+ This should be accurate enough for the simple display of data.
+ */
+@property (assign, nonatomic) NSInteger durationInSeconds;
+
 #pragma mark - Instance Methods
 
 /**

@@ -8,7 +8,6 @@
 
 @interface UPPEventSubscriptionManager : NSObject
 
-- (NSArray *)subscriptions;
 - (NSURL *)callbackURL;
 - (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 

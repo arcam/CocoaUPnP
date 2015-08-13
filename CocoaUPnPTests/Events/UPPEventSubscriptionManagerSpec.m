@@ -8,6 +8,17 @@
 #import <OCMock/OCMock.h>
 #import "UPPEventSubscription.h"
 
+/*
+ NOTE: This spec shouldn't know about the existance of activeSubscriptions, but
+     knowing about it will make testing much, much easier further down the line.
+     I don't personally see this implementation changing, so this is one of
+     those times where convenience greatly outweighs doing things 100% by the
+     book.
+ */
+@interface UPPEventSubscriptionManager ()
+@property (strong, nonatomic) NSMutableArray *activeSubscriptions;
+@end
+
 static NSString * const UPPTestFakeURL = @"http://127.0.0.1:54321/Event";
 static NSString * const UPPTestSID = @"uuid:12345678";
 static NSString * const UPPTestTimeout = @"Second-1800";
@@ -90,14 +101,15 @@ describe(@"UPPEventSubscriptionManager", ^{
         });
 
         it(@"should create a subscription object", ^{
-            expect([sut subscriptions].count).to.equal(0);
+            NSMutableArray *subscriptions = [sut activeSubscriptions];
+            expect(subscriptions.count).to.equal(0);
 
             waitUntil(^(DoneCallback done) {
                 [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
                     expect(success).to.beTruthy();
 
-                    expect([sut subscriptions].count).to.equal(1);
-                    UPPEventSubscription *subscription = [[sut subscriptions] firstObject];
+                    expect(subscriptions.count).to.equal(1);
+                    UPPEventSubscription *subscription = [subscriptions firstObject];
                     expect(subscription.subscriptionID).to.equal(UPPTestSID);
 
                     NSDate *expectedExpiry = ExpectedExpiryDate();
@@ -113,7 +125,43 @@ describe(@"UPPEventSubscriptionManager", ^{
             });
         });
 
-        xit(@"should reuse a subscription object", ^{
+        describe(@"when subscription already exists", ^{
+
+            __block UPPEventSubscription *subscription;
+
+            beforeEach(^{
+                NSDate *date = [NSDate date];
+                subscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
+                                                             expiryDate:date
+                                                   eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
+                [subscription addEventObserver:mockObserver];
+                [sut.activeSubscriptions addObject:subscription];
+
+                expect(sut.activeSubscriptions.count).to.equal(1);
+            });
+
+            it(@"should exit early if subscription exists", ^{
+                waitUntil(^(DoneCallback done) {
+                    [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+
+                        expect(sut.activeSubscriptions.count).to.equal(1);
+                        expect([sut.activeSubscriptions lastObject]).to.beIdenticalTo(subscription);
+                        done();
+                    }];
+                });
+            });
+
+            it(@"should add new observer if not included in subscription", ^{
+                id anotherMockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
+                waitUntil(^(DoneCallback done) {
+                    [sut subscribeObserver:anotherMockObserver toService:mockService completion:^(BOOL success) {
+
+                        expect(sut.activeSubscriptions.count).to.equal(1);
+                        expect(subscription.eventObservers.count).to.equal(2);
+                        done();
+                    }];
+                });
+            });
         });
     });
 

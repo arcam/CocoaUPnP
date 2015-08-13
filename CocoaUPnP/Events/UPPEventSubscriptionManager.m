@@ -18,6 +18,15 @@
 
 - (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 {
+    UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
+    if (subscripton) {
+        [subscripton addEventObserver:observer];
+        if (completion) {
+            completion(YES); // This probably should return an error when NO
+        }
+        return;
+    }
+
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = service.eventSubscriptionURL;
 
@@ -51,6 +60,14 @@
     }];
 
     [task resume];
+}
+
+- (UPPEventSubscription *)subscriptionWithURL:(NSURL *)url
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"eventSubscriptionURL = %@", url];
+    NSArray *matches = [self.activeSubscriptions filteredArrayUsingPredicate:predicate];
+
+    return [matches firstObject];
 }
 
 - (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;

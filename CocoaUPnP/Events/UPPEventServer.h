@@ -4,11 +4,12 @@
 #import <Foundation/Foundation.h>
 #import "GCDWebServer.h"
 
-extern const NSInteger UPPEventServerPort;
+extern const NSUInteger UPPEventServerPort;
 
 @interface UPPEventServer : NSObject
 @property (strong, nonatomic) GCDWebServer *webServer;
 
 - (void)startServer;
+- (NSURL *)eventServerCallbackURL;
 
 @end

@@ -3,6 +3,8 @@
 
 #import "UPPEventServer.h"
 #import <OCMock/OCMock.h>
+#import "GCDWebServerDataRequest.h"
+#import "GCDWebServerFunctions.h"
 
 SpecBegin(UPPEventServer)
 
@@ -26,28 +28,36 @@ describe(@"UPPEventServer", ^{
 
         beforeEach(^{
             mockServer = OCMClassMock([GCDWebServer class]);
+            NSURL *url = [NSURL URLWithString:@"http://127.0.0.1/"];
+            OCMStub([mockServer serverURL]).andReturn(url);
             sut.webServer = mockServer;
         });
 
         it(@"should add a handler for NOTIFY", ^{
-            OCMExpect([mockServer addHandlerForMethod:@"NOTIFY" path:[OCMArg any] requestClass:[OCMArg any] processBlock:[OCMArg any]]);
+            OCMExpect([mockServer addHandlerForMethod:@"NOTIFY" path:@"/Event" requestClass:[GCDWebServerDataRequest class] processBlock:[OCMArg any]]);
 
             [sut startServer];
 
             OCMVerifyAll(mockServer);
         });
 
-        xit(@"should use the exposed path");
-        pending(@"should use the exposed port");
-        xit(@"should return success when starting successfully");
-        xit(@"should return error when starting without delegate");
-        xit(@"should forward error if unable to start");
+        it(@"should start up the server on the correct port", ^{
+            OCMExpect([mockServer startWithPort:UPPEventServerPort bonjourName:nil]);
+
+            [sut startServer];
+
+            OCMVerifyAll(mockServer);
+        });
+
+        it(@"should expose the URL of the server", ^{
+            NSURL *expected = [NSURL URLWithString:@"http://127.0.0.1/Event"];
+            expect([sut eventServerCallbackURL]).to.equal(expected);
+        });
     });
 
     describe(@"when recieving an event", ^{
         xit(@"should parse data and return to delegate upon recieving NOTIFY");
     });
-
 });
 
 SpecEnd

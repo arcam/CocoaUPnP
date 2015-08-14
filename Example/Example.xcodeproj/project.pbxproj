@@ -15,6 +15,7 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
+		0EC8FE6B1B7DE7E400B58D3B /* UPPEventServerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC8FE6A1B7DE7E400B58D3B /* UPPEventServerSpec.m */; };
 		0ECF4AB31AFBA9A500871EBE /* UPPTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */; };
 		0EE226711B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */; };
 		0EE226721B73A0EC0022119E /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE2263C1B73A0EC0022119E /* Containers.xml */; };
@@ -89,6 +90,7 @@
 		0E9A78411AC944C20013DB95 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A78461AC944C20013DB95 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		0EAA80EB1ACC240E0027A86A /* ExampleTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleTests-Prefix.pch"; sourceTree = "<group>"; };
+		0EC8FE6A1B7DE7E400B58D3B /* UPPEventServerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventServerSpec.m; sourceTree = "<group>"; };
 		0ECF4AB11AFBA9A500871EBE /* UPPTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPTestAppDelegate.h; sourceTree = "<group>"; };
 		0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPTestAppDelegate.m; sourceTree = "<group>"; };
 		0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionManagerSpec.m; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		0EE226391B73A0EC0022119E /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				0EC8FE6A1B7DE7E400B58D3B /* UPPEventServerSpec.m */,
 				0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */,
 				0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */,
 			);
@@ -673,6 +676,7 @@
 				0EE226961B73A0EC0022119E /* MockFailSessionManager.m in Sources */,
 				0EE226891B73A0EC0022119E /* UPPRequestSerializerSpec.m in Sources */,
 				0EE2268C1B73A0EC0022119E /* UPPDeviceParserSpec.m in Sources */,
+				0EC8FE6B1B7DE7E400B58D3B /* UPPEventServerSpec.m in Sources */,
 				0EE2267F1B73A0EC0022119E /* UPPErrorSpec.m in Sources */,
 				0EE226851B73A0EC0022119E /* SSDPDelegateTestHelper.m in Sources */,
 				0EE2268B1B73A0EC0022119E /* UPPSessionManagerSpec.m in Sources */,

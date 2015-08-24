@@ -25,7 +25,6 @@
 		0EE226761B73A0EC0022119E /* FullMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226401B73A0EC0022119E /* FullMetadata.xml */; };
 		0EE226771B73A0EC0022119E /* GetConnectionID.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226411B73A0EC0022119E /* GetConnectionID.xml */; };
 		0EE226781B73A0EC0022119E /* Items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226421B73A0EC0022119E /* Items.xml */; };
-		0EE226791B73A0EC0022119E /* LastChangeTransport.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226431B73A0EC0022119E /* LastChangeTransport.xml */; };
 		0EE2267A1B73A0EC0022119E /* MediaServer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226441B73A0EC0022119E /* MediaServer.xml */; };
 		0EE2267B1B73A0EC0022119E /* PlayRequest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE226461B73A0EC0022119E /* PlayRequest.xml */; };
 		0EE2267C1B73A0EC0022119E /* UPPMetadataHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE226481B73A0EC0022119E /* UPPMetadataHelperSpec.m */; };
@@ -57,6 +56,7 @@
 		0EE226961B73A0EC0022119E /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266B1B73A0EC0022119E /* MockFailSessionManager.m */; };
 		0EE226971B73A0EC0022119E /* NetworkTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266D1B73A0EC0022119E /* NetworkTestHelpers.m */; };
 		0EE226981B73A0EC0022119E /* TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2266F1B73A0EC0022119E /* TestHelpers.m */; };
+		0EF0E3131B8B1777007CE522 /* LastChangeFull.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0E3121B8B1777007CE522 /* LastChangeFull.xml */; };
 		0EFA0F451B78D5B900D58445 /* UPPEventSubscriptionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */; };
 		892F8D876B5E605A3DFF1139 /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CD08F88080E6BB850E9BD8 /* libPods-ExampleTests.a */; };
 		8BAEEC9B1515D6BEA0AC1800 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49883CC589E73B457A9A2DA /* libPods-Example.a */; };
@@ -101,7 +101,6 @@
 		0EE226401B73A0EC0022119E /* FullMetadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = FullMetadata.xml; sourceTree = "<group>"; };
 		0EE226411B73A0EC0022119E /* GetConnectionID.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetConnectionID.xml; sourceTree = "<group>"; };
 		0EE226421B73A0EC0022119E /* Items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Items.xml; sourceTree = "<group>"; };
-		0EE226431B73A0EC0022119E /* LastChangeTransport.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeTransport.xml; sourceTree = "<group>"; };
 		0EE226441B73A0EC0022119E /* MediaServer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MediaServer.xml; sourceTree = "<group>"; };
 		0EE226461B73A0EC0022119E /* PlayRequest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PlayRequest.xml; sourceTree = "<group>"; };
 		0EE226481B73A0EC0022119E /* UPPMetadataHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMetadataHelperSpec.m; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		0EE2266D1B73A0EC0022119E /* NetworkTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTestHelpers.m; sourceTree = "<group>"; };
 		0EE2266E1B73A0EC0022119E /* TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelpers.h; sourceTree = "<group>"; };
 		0EE2266F1B73A0EC0022119E /* TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpers.m; sourceTree = "<group>"; };
+		0EF0E3121B8B1777007CE522 /* LastChangeFull.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeFull.xml; sourceTree = "<group>"; };
 		0EFA0F441B78D5B900D58445 /* UPPEventSubscriptionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionSpec.m; sourceTree = "<group>"; };
 		7E6BAD3AFF9FC0E3FB0A5BEB /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		87E3200B720787836E42604A /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 				0EE226401B73A0EC0022119E /* FullMetadata.xml */,
 				0EE226411B73A0EC0022119E /* GetConnectionID.xml */,
 				0EE226421B73A0EC0022119E /* Items.xml */,
-				0EE226431B73A0EC0022119E /* LastChangeTransport.xml */,
+				0EF0E3121B8B1777007CE522 /* LastChangeFull.xml */,
 				0EE226441B73A0EC0022119E /* MediaServer.xml */,
 				0EE226451B73A0EC0022119E /* Requests */,
 			);
@@ -534,13 +534,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EE2267A1B73A0EC0022119E /* MediaServer.xml in Resources */,
+				0EF0E3131B8B1777007CE522 /* LastChangeFull.xml in Resources */,
 				0EE226741B73A0EC0022119E /* Empty.xml in Resources */,
 				0EE226771B73A0EC0022119E /* GetConnectionID.xml in Resources */,
 				0EE226761B73A0EC0022119E /* FullMetadata.xml in Resources */,
 				0EE226721B73A0EC0022119E /* Containers.xml in Resources */,
 				0EE2267B1B73A0EC0022119E /* PlayRequest.xml in Resources */,
 				0EE226751B73A0EC0022119E /* Error.xml in Resources */,
-				0EE226791B73A0EC0022119E /* LastChangeTransport.xml in Resources */,
 				0EE226731B73A0EC0022119E /* Device.xml in Resources */,
 				0EE226781B73A0EC0022119E /* Items.xml in Resources */,
 			);

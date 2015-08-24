@@ -4,58 +4,62 @@
 #import "UPPLastChangeParser.h"
 #import "Ono.h"
 #import "UPPError.h"
+#import "UPPMediaItemParser.h"
 
 @implementation UPPLastChangeParser
 
-- (void)parseWithCompletion:(UPPLastChangeCompletionBlock)completion
++ (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
 {
     if (!completion) {
         return;
     }
 
-    UPPTransportState state = UPPTransportStateUnknown;
-
-    if (![self data]) {
-        completion(state, nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
+    if (!data) {
+        completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
 
     NSError *error = nil;
-    ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
+    ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:data error:&error];
 
     if (!document) {
-        completion(UPPTransportStateUnknown, nil, error);
+        completion(nil, error);
     }
 
-    ONOXMLElement *element = [document firstChildWithXPath:@"//*[name()='InstanceID']"];
+    ONOXMLElement *element = [document firstChildWithXPath:@"/e:propertyset/e:property/LastChange"];
+    __block NSMutableDictionary *responseDictionary;
 
-    NSString *transportState = [[element firstChildWithTag:@"TransportState"]
-                                valueForAttribute:@"val"];
-    state = [self transportStateForString:transportState];
+    ONOXMLDocument *lastChange = [ONOXMLDocument XMLDocumentWithString:[element stringValue] encoding:NSUTF8StringEncoding error:nil];
 
-    NSString *transportActions = [[element firstChildWithTag:@"CurrentTransportActions"]
-                                  valueForAttribute:@"val"];
+    NSString *namespace = @"urn:schemas-upnp-org:metadata-1-0/AVT/";
+    [lastChange definePrefix:@"a" forDefaultNamespace:namespace];
 
-    completion(state, transportActions, nil);
-}
+    [lastChange enumerateElementsWithXPath:@"//a:Event/a:InstanceID/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+        if (!responseDictionary) {
+            responseDictionary = [NSMutableDictionary dictionary];
+        }
+        NSString *tag = element.tag;
+        NSString *value = [element valueForAttribute:@"val"];
 
-#pragma mark - Private Methods
+        if ([tag rangeOfString:@"MetaData"].location != NSNotFound) {
+            ONOXMLDocument *metadata = [ONOXMLDocument XMLDocumentWithString:value encoding:NSUTF8StringEncoding error:nil];
+            NSArray *items = [UPPMediaItemParser parseItemsInDocument:metadata];
 
-- (UPPTransportState)transportStateForString:(NSString *)string
-{
-    if ([string isEqualToString:@"STOPPED"]) {
-        return UPPTransportStateStopped;
-    } else if ([string isEqualToString:@"TRANSITIONING"]) {
-        return UPPTransportStateTransitioning;
-    } else if ([string isEqualToString:@"PLAYING"]) {
-        return UPPTransportStatePlaying;
-    } else if ([string isEqualToString:@"PAUSED_PLAYBACK"]) {
-        return UPPTransportStatePaused;
-    } else if ([string isEqualToString:@"NO_MEDIA_PRESENT"]) {
-        return UPPTransportStateNoMediaPresent;
-    } else {
-        return UPPTransportStateUnknown;
-    }
+            if (items.count > 0) {
+                responseDictionary[tag] = [items firstObject];
+            }
+        } else {
+            if (value.length == 0) {
+                value = [element stringValue];
+            }
+            
+            if (tag && value) {
+                responseDictionary[tag] = value;
+            }
+        }
+    }];
+
+    completion([responseDictionary copy], nil);
 }
 
 @end

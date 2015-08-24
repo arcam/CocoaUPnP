@@ -3,6 +3,8 @@
 
 #import "UPPBaseParser.h"
 
+@class ONOXMLDocument;
+
 extern NSString * const UPnPXMLResultsKey;
 
 /**
@@ -19,5 +21,14 @@ extern NSString * const UPnPXMLResultsKey;
  error if the parsing failed.
  */
 + (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion;
+
+/**
+ Parse items from an XML description.
+
+ @param document The XML document to be parsed.
+
+ @return An array of media items.
+ */
++ (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document;
 
 @end

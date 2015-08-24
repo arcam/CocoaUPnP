@@ -5,6 +5,8 @@
 #import <OCMock/OCMock.h>
 #import "GCDWebServerDataRequest.h"
 #import "GCDWebServerFunctions.h"
+#import "GCDWebServer.h"
+#import "TestHelpers.h"
 
 SpecBegin(UPPEventServer)
 
@@ -62,7 +64,69 @@ describe(@"UPPEventServer", ^{
     });
 
     describe(@"when recieving an event", ^{
-        xit(@"should parse data and return to delegate upon recieving NOTIFY");
+
+        __block id response;
+        __block id mockServer;
+        __block GCDWebServerProcessBlock processBlock;
+
+        beforeEach(^{
+            mockServer = OCMClassMock([GCDWebServer class]);
+            sut.webServer = mockServer;
+            void (^theBlock)(NSInvocation *) = ^(NSInvocation *invocation) {
+                [invocation retainArguments];
+                NSUInteger args = [[invocation methodSignature] numberOfArguments];
+                [invocation getArgument:&processBlock
+                                atIndex:args - 1];
+            };
+
+            OCMStub([mockServer addHandlerForMethod:[OCMArg any]
+                                               path:[OCMArg any]
+                                       requestClass:[OCMArg any]
+                                       processBlock:[OCMArg any]]).andDo(theBlock);
+
+            [sut startServer];
+        });
+
+        it(@"should respond with an empty web server response", ^{
+            response = processBlock(nil);
+
+            expect(response).toNot.beNil();
+            expect(response).to.beKindOf([GCDWebServerResponse class]);
+        });
+
+        it(@"should parse data and return to delegate upon recieving NOTIFY", ^{
+            NSString *sid = @"uuid:13d860b0-5ed1-1cef-b959-88ea708ed26b";
+
+            NSDictionary *headers;
+            headers = @{ @"HOST": @"10.54.6.197:49170",
+                         @"CONTENT-TYPE": @"text/xml; charset=\"utf-8\"",
+                         @"CONTENT-LENGTH": @"3820",
+                         @"NT": @"upnp:event",
+                         @"NTS": @"upnp:propchange",
+                         @"SID": sid,
+                         @"SEQ": @"15" };
+
+            NSData *body = LoadDataFromXML(@"LastChangeFull", [self class]);
+            expect(body).toNot.beNil();
+
+            id mockRequest = OCMClassMock([GCDWebServerDataRequest class]);
+            OCMStub([mockRequest headers]).andReturn(headers);
+            OCMStub([mockRequest data]).andReturn(body);
+
+            id mockDelegate = OCMProtocolMock(@protocol(UPPEventServerDelegate));
+            OCMExpect([mockDelegate eventReceived:[OCMArg checkWithBlock:^BOOL(NSDictionary *event) {
+                expect(event).toNot.beNil();
+                expect(event[UPPEventServerSIDKey]).to.equal(sid);
+                expect(event[UPPEventServerBodyKey]).toNot.beNil();
+                return YES;
+            }]]);
+            sut.eventDelegate = mockDelegate;
+            expect(sut.eventDelegate).toNot.beNil();
+
+            processBlock(mockRequest);
+
+            OCMVerifyAll(mockDelegate);
+        });
     });
 });
 

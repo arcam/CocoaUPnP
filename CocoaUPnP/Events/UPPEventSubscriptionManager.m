@@ -4,6 +4,7 @@
 #import "UPPEventSubscriptionManager.h"
 #import "UPPBasicService.h"
 #import "UPPEventSubscription.h"
+#import "NSArray+firstObjectMatchingPredicate.h"
 
 @interface UPPEventSubscriptionManager ()
 @property (strong, nonatomic) NSMutableArray *activeSubscriptions;
@@ -145,6 +146,22 @@
     }
 
     return _activeSubscriptions;
+}
+
+#pragma mark - UPPEventServerDelegate
+
+- (void)eventReceived:(NSDictionary *)event
+{
+    NSString *sid = event[UPPEventServerSIDKey];
+    NSPredicate *predicate = [NSPredicate
+                              predicateWithFormat:@"subscriptionID == %@", sid];
+    UPPEventSubscription *subscription = [self.activeSubscriptions upp_firstObjectMatchingPredicate:predicate];
+
+    if (!subscription) {
+        return;
+    }
+
+    [subscription informObserversOfEvent:event];
 }
 
 #pragma mark - Private Methods

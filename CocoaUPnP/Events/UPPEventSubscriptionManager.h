@@ -3,10 +3,11 @@
 
 #import <Foundation/Foundation.h>
 #import "UPPEventSubscription.h"
+#import "UPPEventServer.h"
 
 @class UPPBasicService;
 
-@interface UPPEventSubscriptionManager : NSObject
+@interface UPPEventSubscriptionManager : NSObject <UPPEventServerDelegate>
 
 - (NSURL *)callbackURL;
 - (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)object toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;

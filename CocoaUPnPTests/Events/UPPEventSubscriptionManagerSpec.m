@@ -7,6 +7,7 @@
 
 #import <OCMock/OCMock.h>
 #import "UPPEventSubscription.h"
+#import "UPPEventServer.h"
 
 /*
  NOTE: This spec shouldn't know about the existance of activeSubscriptions, but
@@ -66,6 +67,10 @@ describe(@"UPPEventSubscriptionManager", ^{
 
     afterEach(^{
         [OHHTTPStubs removeAllStubs];
+    });
+
+    it(@"should conform to UPPEventServerDelegate", ^{
+        expect(sut).to.conformTo(@protocol(UPPEventServerDelegate));
     });
 
     describe(@"when subscribing to service events", ^{
@@ -266,10 +271,21 @@ describe(@"UPPEventSubscriptionManager", ^{
 
     describe(@"when recieving an event", ^{
 
-        xit(@"should parse the XML", ^{
+        __block id mockSubscription;
+
+        beforeEach(^{
+            mockSubscription = OCMClassMock([UPPEventSubscription class]);
+            OCMStub([mockSubscription valueForKey:@"subscriptionID"]).andReturn(UPPTestSID);
+            [sut.activeSubscriptions addObject:mockSubscription];
         });
 
-        xit(@"should pass the event object to the subscription object", ^{
+        it(@"should pass the event object to the subscription object", ^{
+            NSDictionary *event = @{ UPPEventServerSIDKey: UPPTestSID };
+            OCMExpect([mockSubscription informObserversOfEvent:event]);
+
+            [sut eventReceived:event];
+
+            OCMVerifyAll(mockSubscription);
         });
     });
 });

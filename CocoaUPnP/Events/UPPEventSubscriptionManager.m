@@ -12,13 +12,13 @@
 
 @implementation UPPEventSubscriptionManager
 
-- (NSURL *)callbackURL
-{
-    return [NSURL URLWithString:@"http://123.123.123.123/Event"];
-}
-
 - (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 {
+    if (![self.eventServer isRunning]) {
+        self.eventServer.eventDelegate = self;
+        [self.eventServer startServer];
+    }
+
     UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
     if (subscripton) {
         [subscripton addEventObserver:observer];
@@ -30,10 +30,11 @@
 
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = service.eventSubscriptionURL;
+    NSURL *callbackURL = [self.eventServer eventServerCallbackURL];
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
                                @"USER-AGENT": @"iOS/8.4 UPnP/1.1 Example/1.0",
-                               @"CALLBACK": [[self callbackURL] absoluteString],
+                               @"CALLBACK": [callbackURL absoluteString],
                                @"NT": @"upnp:event",
                                @"TIMEOUT": @"Second-1800" };
 
@@ -128,6 +129,11 @@
 
         if (code == 200) {
             [self.activeSubscriptions removeObject:subscription];
+
+            if (self.activeSubscriptions.count == 0) {
+                [self.eventServer stopServer];
+                self.eventServer = nil;
+            }
             completion(YES);
         } else {
             completion(NO);
@@ -146,6 +152,15 @@
     }
 
     return _activeSubscriptions;
+}
+
+- (UPPEventServer *)eventServer
+{
+    if (!_eventServer) {
+        _eventServer = [[UPPEventServer alloc] init];
+    }
+
+    return _eventServer;
 }
 
 #pragma mark - UPPEventServerDelegate

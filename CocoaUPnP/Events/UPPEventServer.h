@@ -54,8 +54,18 @@ extern NSString * const UPPEventServerBodyKey;
 - (void)startServer;
 
 /**
+ Stop the event server.
+ */
+- (void)stopServer;
+
+/**
  @return The event servers callback URL.
  */
 - (NSURL *)eventServerCallbackURL;
+
+/**
+ @return Return the running status of the web server.
+ */
+- (BOOL)isRunning;
 
 @end

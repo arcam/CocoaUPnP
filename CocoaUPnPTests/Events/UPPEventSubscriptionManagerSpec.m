@@ -21,6 +21,7 @@
 @end
 
 static NSString * const UPPTestFakeURL = @"http://127.0.0.1:54321/Event";
+static NSString * const UPPTestFakeCallbackURL = @"http://10.0.0.1:54321/Event";
 static NSString * const UPPTestSID = @"uuid:12345678";
 static NSString * const UPPTestTimeout = @"Second-1800";
 
@@ -38,6 +39,7 @@ describe(@"UPPEventSubscriptionManager", ^{
     __block OHHTTPStubsResponseBlock responseBlock;
     __block OHHTTPStubsTestBlock testBlock;
     __block UPPEventSubscription *subscription;
+    __block id mockEventServer;
 
     beforeEach(^{
         sut = [UPPEventSubscriptionManager new];
@@ -63,6 +65,11 @@ describe(@"UPPEventSubscriptionManager", ^{
                                               statusCode:200
                                                  headers:headers];
         };
+
+        mockEventServer = OCMClassMock([UPPEventServer class]);
+        NSURL *callbackURL = [NSURL URLWithString:UPPTestFakeCallbackURL];
+        OCMStub([mockEventServer eventServerCallbackURL]).andReturn(callbackURL);
+        sut.eventServer = mockEventServer;
     });
 
     afterEach(^{
@@ -84,7 +91,7 @@ describe(@"UPPEventSubscriptionManager", ^{
 
                 NSDictionary *headers = request.allHTTPHeaderFields;
                 if (![headers[@"HOST"] isEqualToString:UPPTestFakeURL] ||
-                    ![headers[@"CALLBACK"] isEqualToString:[[sut callbackURL] absoluteString]] ||
+                    ![headers[@"CALLBACK"] isEqualToString:UPPTestFakeCallbackURL] ||
                     ![headers[@"NT"] isEqualToString:@"upnp:event"] ||
                     ![headers[@"TIMEOUT"] isEqualToString:UPPTestTimeout]) {
                     return NO;
@@ -128,6 +135,28 @@ describe(@"UPPEventSubscriptionManager", ^{
                     done();
                 }];
             });
+        });
+
+        it(@"should start up an event server if stopped", ^{
+            OCMExpect([mockEventServer startServer]);
+            OCMExpect([mockEventServer setEventDelegate:sut]);
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    done();
+                }];
+            });
+            OCMVerifyAll(mockEventServer);
+        });
+
+        it(@"should not start up an event server if already running", ^{
+            OCMExpect([mockEventServer isRunning]).andReturn(YES);
+            [[mockEventServer reject] startServer];
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    done();
+                }];
+            });
+            OCMVerifyAll(mockEventServer);
         });
 
         describe(@"when subscription already exists", ^{
@@ -266,6 +295,27 @@ describe(@"UPPEventSubscriptionManager", ^{
                     done();
                 }];
             });
+        });
+
+        it(@"should shut down event server if no more subscriptions exist", ^{
+            UPPEventSubscription *existingSubscription;
+            existingSubscription = [UPPEventSubscription
+                                    subscriptionWithID:UPPTestSID
+                                    expiryDate:[NSDate distantPast]
+                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
+            [sut.activeSubscriptions addObject:existingSubscription];
+            expect(sut.activeSubscriptions.count).to.equal(1);
+
+            OCMExpect([mockEventServer stopServer]);
+
+            waitUntil(^(DoneCallback done) {
+                [sut unsubscribe:existingSubscription completion:^(BOOL success) {
+                    expect(sut.activeSubscriptions.count).to.equal(0);
+                    done();
+                }];
+            });
+
+            OCMVerifyAll(mockEventServer);
         });
     });
 

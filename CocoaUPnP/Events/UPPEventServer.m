@@ -25,6 +25,13 @@ NSString * const UPPEventServerBodyKey = @"Event";
     [self.webServer startWithPort:UPPEventServerPort bonjourName:nil];
 }
 
+- (void)stopServer
+{
+    if ([self.webServer isRunning]) {
+        [self.webServer stop];
+    }
+}
+
 - (NSURL *)eventServerCallbackURL
 {
     if (!self.webServer.isRunning) {
@@ -32,6 +39,11 @@ NSString * const UPPEventServerBodyKey = @"Event";
     }
     NSURL *baseURL = self.webServer.serverURL;
     return [baseURL URLByAppendingPathComponent:@"Event"];
+}
+
+- (BOOL)isRunning
+{
+    return self.webServer.isRunning;
 }
 
 #pragma mark - Lazy Instantiation

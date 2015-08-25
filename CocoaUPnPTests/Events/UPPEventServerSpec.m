@@ -63,6 +63,35 @@ describe(@"UPPEventServer", ^{
         });
     });
 
+    describe(@"when shutting down server", ^{
+        __block id mockServer;
+
+        beforeEach(^{
+            mockServer = OCMClassMock([GCDWebServer class]);
+            NSURL *url = [NSURL URLWithString:@"http://127.0.0.1/"];
+            OCMStub([mockServer serverURL]).andReturn(url);
+            sut.webServer = mockServer;
+        });
+
+        it(@"should shut down web server if running", ^{
+            OCMStub([mockServer isRunning]).andReturn(YES);
+            OCMExpect([mockServer stop]);
+
+            [sut stopServer];
+
+            OCMVerifyAll(mockServer);
+        });
+
+        it(@"should not shut down web server if not running", ^{
+            OCMStub([mockServer isRunning]).andReturn(NO);
+            [[mockServer reject] stop];
+
+            [sut stopServer];
+
+            OCMVerifyAll(mockServer);
+        });
+    });
+
     describe(@"when recieving an event", ^{
 
         __block id response;

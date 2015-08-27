@@ -2,12 +2,9 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "FolderViewController.h"
-#import "UPPMediaServerDevice.h"
-#import "UPPContentDirectoryService.h"
-#import "UPPMediaItemParser.h"
-#import "UPPMediaItem.h"
-#import "UPPMediaRendererDevice.h"
 #import "PlaybackManager.h"
+
+#import <CocoaUPnP/CocoaUPnP.h>
 
 @interface FolderViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

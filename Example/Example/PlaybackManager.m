@@ -2,11 +2,8 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "PlaybackManager.h"
-#import "UPPMediaRendererDevice.h"
-#import "UPPAVTransportService.h"
-#import "UPPMediaItem.h"
-#import "UPPMediaItemResource.h"
-#import "UPPMetadataHelper.h"
+
+#import <CocoaUPnP/CocoaUPnP.h>
 
 @implementation PlaybackManager
 

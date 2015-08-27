@@ -2,12 +2,10 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "ViewController.h"
-#import "UPPBasicDevice.h"
-#import "UPPDiscovery.h"
 #import "FolderViewController.h"
-#import "UPPMediaServerDevice.h"
-#import "UPPMediaRendererDevice.h"
 #import "PlaybackManager.h"
+
+#import <CocoaUPnP/CocoaUPnP.h>
 
 @interface ViewController () <UPPDiscoveryDelegate>
 @property (strong, nonatomic) NSMutableArray *devices;

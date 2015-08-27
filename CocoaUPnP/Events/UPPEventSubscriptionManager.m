@@ -8,9 +8,24 @@
 
 @interface UPPEventSubscriptionManager ()
 @property (strong, nonatomic) NSMutableArray *activeSubscriptions;
+@property (strong, nonatomic) NSURLSession *session;
 @end
 
 @implementation UPPEventSubscriptionManager
+
++ (instancetype)subscriptionManagerWithSession:(NSURLSession *)session
+{
+    return [[[self class] alloc] initWithSession:session];
+}
+
+- (instancetype)initWithSession:(NSURLSession *)session
+{
+    if ((self = [super init])) {
+        self.session = session;
+    }
+
+    return self;
+}
 
 - (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
 {
@@ -28,7 +43,6 @@
         return;
     }
 
-    NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = service.eventSubscriptionURL;
     NSURL *callbackURL = [self.eventServer eventServerCallbackURL];
 
@@ -42,14 +56,18 @@
                                                  method:@"SUBSCRIBE"
                                                 headers:headers];
 
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        if (!completion) { return; }
+    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
         if (code != 200) {
-            completion(NO);
+            if (self.activeSubscriptions.count == 0) {
+                [self.eventServer stopServer];
+            }
+            if (completion) {
+                completion(NO);
+            }
+            return;
         }
 
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
@@ -58,7 +76,9 @@
                                          headers:headers
                                         observer:observer];
         [self.activeSubscriptions addObject:subscription];
-        completion(YES);
+        if (completion) {
+            completion(YES);
+        }
     }];
 
     [task resume];
@@ -75,7 +95,6 @@
 - (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
 {
 
-    NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
@@ -86,7 +105,7 @@
                                                  method:@"SUBSCRIBE"
                                                 headers:headers];
 
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
         if (!completion) { return; }
 
@@ -111,7 +130,6 @@
 
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
-    NSURLSession *session = [NSURLSession sharedSession];
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
@@ -121,9 +139,7 @@
                                                  method:@"UNSUBSCRIBE"
                                                 headers:headers];
 
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        if (!completion) { return; }
+    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
@@ -134,13 +150,31 @@
                 [self.eventServer stopServer];
                 self.eventServer = nil;
             }
-            completion(YES);
+            if (completion) {
+                completion(YES);
+            }
         } else {
-            completion(NO);
+            if (completion) {
+                completion(NO);
+            }
         }
     }];
 
     [task resume];
+}
+
+- (void)removeObserver:(id<UPPEventSubscriptionDelegate>)observer fromService:(UPPBasicService *)service completion:(void (^)(BOOL))completion
+{
+    UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
+    [subscripton removeEventObserver:observer];
+
+    if ([subscripton eventObservers].count == 0) {
+        [self unsubscribe:subscripton completion:nil];
+    }
+
+    if (completion) {
+        completion(NO);
+    }
 }
 
 #pragma mark - Lazy Instantiation

@@ -2,7 +2,6 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPEventSubscriptionManager.h"
-#import "OHHTTPStubs.h"
 #import "UPPBasicService.h"
 
 #import <OCMock/OCMock.h>
@@ -25,55 +24,41 @@ static NSString * const UPPTestFakeCallbackURL = @"http://10.0.0.1:54321/Event";
 static NSString * const UPPTestSID = @"uuid:12345678";
 static NSString * const UPPTestTimeout = @"Second-1800";
 
-NSDate *(^ExpectedExpiryDate)(void) = ^NSDate *(void) {
-    return [NSDate dateWithTimeIntervalSinceNow:300];
-};
+NSDate *(^ExpectedExpiryDate)(void);
+NSURLResponse *(^SuccessfulResponse)(void);
+NSURLResponse *(^UnsuccessfulResponse)(void);
+void StubDataTaskAndReturnResponse(id session, NSURLResponse *response);
 
 SpecBegin(UPPEventSubscriptionManager)
 
 describe(@"UPPEventSubscriptionManager", ^{
 
+    __block UPPEventSubscriptionManager *sut;
+    __block id mockSession;
     __block id mockService;
     __block id mockObserver;
-    __block UPPEventSubscriptionManager *sut;
-    __block OHHTTPStubsResponseBlock responseBlock;
-    __block OHHTTPStubsTestBlock testBlock;
-    __block UPPEventSubscription *subscription;
     __block id mockEventServer;
+    __block UPPEventSubscription *exampleSubscription;
 
     beforeEach(^{
-        sut = [UPPEventSubscriptionManager new];
+        mockSession = OCMClassMock([NSURLSession class]);
+        sut = [UPPEventSubscriptionManager subscriptionManagerWithSession:mockSession];
+        expect(sut).toNot.beNil();
+
         mockService = OCMClassMock([UPPBasicService class]);
-        mockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
         NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
         OCMStub([mockService eventSubscriptionURL]).andReturn(url);
-
-        subscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
-                                                     expiryDate:nil
-                                           eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
-
-        responseBlock = ^OHHTTPStubsResponse *(NSURLRequest *request) {
-            NSDictionary *headers = @{
-                                      @"DATE": @"Fri, 01 Jan 2015 13:00:01 GMT",
-                                      @"SERVER": @"IPI/1.0 UPnP/1.0 DLNADOC/1.50",
-                                      @"SID": UPPTestSID,
-                                      @"TIMEOUT": @"Second-300",
-                                      @"CONTENT-LENGTH": @"0",
-                                      @"CONNECTION": @"Keep-Alive"
-                                      };
-            return [OHHTTPStubsResponse responseWithData:[NSData data]
-                                              statusCode:200
-                                                 headers:headers];
-        };
 
         mockEventServer = OCMClassMock([UPPEventServer class]);
         NSURL *callbackURL = [NSURL URLWithString:UPPTestFakeCallbackURL];
         OCMStub([mockEventServer eventServerCallbackURL]).andReturn(callbackURL);
         sut.eventServer = mockEventServer;
-    });
 
-    afterEach(^{
-        [OHHTTPStubs removeAllStubs];
+        mockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
+
+        exampleSubscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
+                                                            expiryDate:nil
+                                                  eventSubscriptionURL:url];
     });
 
     it(@"should conform to UPPEventServerDelegate", ^{
@@ -81,158 +66,171 @@ describe(@"UPPEventSubscriptionManager", ^{
     });
 
     describe(@"when subscribing to service events", ^{
+        it(@"should send a SUBSCRIBE request to the service's event subscription URL", ^{
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                return [[request URL] isEqual:[NSURL URLWithString:UPPTestFakeURL]] &&
+                       [[request HTTPMethod] isEqualToString:@"SUBSCRIBE"];
+            }] completionHandler:[OCMArg any]]);
 
-        beforeEach(^{
-            testBlock = ^BOOL(NSURLRequest *request) {
+            [sut subscribeObserver:nil toService:mockService completion:nil];
 
-                if (![request.HTTPMethod isEqualToString:@"SUBSCRIBE"]) {
-                    return NO;
-                }
+            OCMVerifyAll(mockSession);
+        });
 
+        it(@"should send the required headers in the subscription request", ^{
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
                 NSDictionary *headers = request.allHTTPHeaderFields;
-                if (![headers[@"HOST"] isEqualToString:UPPTestFakeURL] ||
-                    ![headers[@"CALLBACK"] isEqualToString:UPPTestFakeCallbackURL] ||
-                    ![headers[@"NT"] isEqualToString:@"upnp:event"] ||
-                    ![headers[@"TIMEOUT"] isEqualToString:UPPTestTimeout]) {
-                    return NO;
-                }
+                return [headers[@"HOST"] isEqualToString:UPPTestFakeURL] &&
+                       [headers[@"CALLBACK"] isEqualToString:UPPTestFakeCallbackURL] &&
+                       [headers[@"NT"] isEqualToString:@"upnp:event"] &&
+                       [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"];
+            }] completionHandler:[OCMArg any]]);
 
-                return [request.URL isEqual:[NSURL URLWithString:UPPTestFakeURL]];
-            };
+            [sut subscribeObserver:nil toService:mockService completion:nil];
 
-            [OHHTTPStubs stubRequestsPassingTest:testBlock withStubResponse:responseBlock];
+            OCMVerifyAll(mockSession);
         });
 
-        it(@"should send a request to the services event subscription URL", ^{
-            waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:nil toService:mockService completion:^(BOOL success) {
-                    expect(success).to.beTruthy();
-                    done();
-                }];
-            });
-        });
-
-        it(@"should create a subscription object", ^{
+        it(@"should create a subscription object when successful", ^{
+            // Assert no subscriptions first
             NSMutableArray *subscriptions = [sut activeSubscriptions];
             expect(subscriptions.count).to.equal(0);
 
-            waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
-                    expect(success).to.beTruthy();
+            // Stub out data task and return canned response
+            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
 
-                    expect(subscriptions.count).to.equal(1);
-                    UPPEventSubscription *subscription = [subscriptions firstObject];
-                    expect(subscription.subscriptionID).to.equal(UPPTestSID);
+            // Check assertions
+            expect(subscriptions.count).to.equal(1);
+            UPPEventSubscription *subscription = [subscriptions firstObject];
+            expect(subscription.subscriptionID).to.equal(UPPTestSID);
 
-                    NSDate *expectedExpiry = ExpectedExpiryDate();
-                    NSDate *expiry = subscription.expiryDate;
-                    NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiry];
-                    expect(interval).to.beLessThan(0.01);
+            NSDate *expectedExpiry = ExpectedExpiryDate();
+            NSDate *expiry = subscription.expiryDate;
+            expect(expiry).toNot.beNil();
+            NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiry];
+            expect(interval).to.beLessThan(0.01);
 
-                    expect(subscription.eventSubscriptionURL).to.equal([NSURL URLWithString:UPPTestFakeURL]);
-                    expect([subscription eventObservers]).to.contain(mockObserver);
+            expect(subscription.eventSubscriptionURL).to.equal([NSURL URLWithString:UPPTestFakeURL]);
+            expect([subscription eventObservers]).to.contain(mockObserver);
+        });
 
-                    done();
-                }];
-            });
+        it(@"should not create a subscription object when unsuccessful", ^{
+            expect([sut activeSubscriptions].count).to.equal(0);
+
+            StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
+            expect([sut activeSubscriptions].count).to.equal(0);
         });
 
         it(@"should start up an event server if stopped", ^{
+            OCMExpect([mockEventServer isRunning]).andReturn(NO);
             OCMExpect([mockEventServer startServer]);
             OCMExpect([mockEventServer setEventDelegate:sut]);
-            waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
-                    done();
-                }];
-            });
+
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
             OCMVerifyAll(mockEventServer);
         });
 
         it(@"should not start up an event server if already running", ^{
             OCMExpect([mockEventServer isRunning]).andReturn(YES);
             [[mockEventServer reject] startServer];
-            waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
-                    done();
-                }];
-            });
+            [[mockEventServer reject] setEventDelegate:[OCMArg any]];
+
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
+            OCMVerifyAll(mockEventServer);
+        });
+
+        it(@"should shut down the event server if no subscribers and subscription was unsuccessful", ^{
+            expect([sut activeSubscriptions].count).to.equal(0);
+            OCMExpect([mockEventServer stopServer]);
+
+            StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
+            OCMVerifyAll(mockEventServer);
+        });
+
+        it(@"should not shut down the event server if there are subscribers and subscription was unsuccessful", ^{
+            NSURL *url = [NSURL URLWithString:@"http://123.123.123.123"];
+            UPPEventSubscription *anotherSubscription = [UPPEventSubscription subscriptionWithID:@"aDifferentSID" expiryDate:[NSDate distantFuture] eventSubscriptionURL:url];
+            [sut.activeSubscriptions addObject:anotherSubscription];
+            expect([sut activeSubscriptions].count).to.equal(1);
+            [[mockEventServer reject] stopServer];
+
+            StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
+            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
             OCMVerifyAll(mockEventServer);
         });
 
         describe(@"when subscription already exists", ^{
-
-            __block UPPEventSubscription *subscription;
-
             beforeEach(^{
-                NSDate *date = [NSDate date];
-                subscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
-                                                             expiryDate:date
-                                                   eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
-                [subscription addEventObserver:mockObserver];
-                [sut.activeSubscriptions addObject:subscription];
-
+                [exampleSubscription addEventObserver:mockObserver];
+                [sut.activeSubscriptions addObject:exampleSubscription];
                 expect(sut.activeSubscriptions.count).to.equal(1);
             });
 
-            it(@"should exit early if subscription exists", ^{
-                waitUntil(^(DoneCallback done) {
-                    [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+            it(@"should not make a network call", ^{
+                [[mockSession reject] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
 
-                        expect(sut.activeSubscriptions.count).to.equal(1);
-                        expect([sut.activeSubscriptions lastObject]).to.beIdenticalTo(subscription);
-                        done();
-                    }];
-                });
+                [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+
+                expect(sut.activeSubscriptions.count).to.equal(1);
+                expect([sut.activeSubscriptions lastObject]).to.beIdenticalTo(exampleSubscription);
+                OCMVerifyAll(mockSession);
             });
 
-            it(@"should add new observer if not included in subscription", ^{
+            it(@"should add a new observer", ^{
                 id anotherMockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
-                waitUntil(^(DoneCallback done) {
-                    [sut subscribeObserver:anotherMockObserver toService:mockService completion:^(BOOL success) {
 
-                        expect(sut.activeSubscriptions.count).to.equal(1);
-                        expect(subscription.eventObservers.count).to.equal(2);
-                        done();
-                    }];
-                });
+                [sut subscribeObserver:anotherMockObserver toService:mockService completion:nil];
+
+                expect(sut.activeSubscriptions.count).to.equal(1);
+                expect(exampleSubscription.eventObservers.count).to.equal(2);
+                expect([exampleSubscription.eventObservers lastObject]).to.equal(anotherMockObserver);
+            });
+
+            it(@"should not add the same observer", ^{
+                [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+                UPPEventSubscription *addedSubscription = [sut.activeSubscriptions lastObject];
+                expect(addedSubscription.eventObservers.count).to.equal(1);
+
+                [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+                expect(addedSubscription.eventObservers.count).to.equal(1);
             });
         });
     });
 
     describe(@"when resubscribing to service events", ^{
-        beforeEach(^{
-            testBlock = ^BOOL(NSURLRequest *request) {
+        it(@"should send a SUBSCRIBE request to the services event subscription URL", ^{
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                return [[request URL] isEqual:[NSURL URLWithString:UPPTestFakeURL]] &&
+                [[request HTTPMethod] isEqualToString:@"SUBSCRIBE"];
+            }] completionHandler:[OCMArg any]]);
 
-                if (![request.HTTPMethod isEqualToString:@"SUBSCRIBE"]) {
-                    return NO;
-                }
+            [sut renewSubscription:exampleSubscription completion:nil];
 
+            OCMVerifyAll(mockSession);
+        });
+
+        it(@"should send all required headers in the subscription request", ^{
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
                 NSDictionary *headers = request.allHTTPHeaderFields;
-                if (![headers[@"HOST"] isEqualToString:UPPTestFakeURL] ||
-                    ![headers[@"SID"] isEqualToString:UPPTestSID] ||
-                    ![headers[@"TIMEOUT"] isEqualToString:UPPTestTimeout]) {
-                    return NO;
-                }
+                return [headers[@"HOST"] isEqualToString:UPPTestFakeURL] &&
+                       [headers[@"SID"] isEqualToString:UPPTestSID] &&
+                       [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"];
+            }] completionHandler:[OCMArg any]]);
 
-                return [request.URL isEqual:[NSURL URLWithString:UPPTestFakeURL]];
-            };
+            [sut renewSubscription:exampleSubscription completion:nil];
 
-            [OHHTTPStubs stubRequestsPassingTest:testBlock withStubResponse:responseBlock];
+            OCMVerifyAll(mockSession);
         });
 
-        it(@"should send a request to the services event subscription URL", ^{
-            waitUntil(^(DoneCallback done) {
-                [sut renewSubscription:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
-                    expect(subscriptionID).to.equal(UPPTestSID);
-                    NSDate *expectedExpiry = ExpectedExpiryDate();
-                    NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiryDate];
-                    expect(interval).to.beLessThan(0.01);
-                    done();
-                }];
-            });
-        });
-
-        it(@"should update a subscription object", ^{
+        it(@"should pass back new header information", ^{
             UPPEventSubscription *existingSubscription;
             existingSubscription = [UPPEventSubscription
                                     subscriptionWithID:UPPTestSID
@@ -241,79 +239,98 @@ describe(@"UPPEventSubscriptionManager", ^{
             [sut.activeSubscriptions addObject:existingSubscription];
             expect(sut.activeSubscriptions.count).to.equal(1);
 
-            waitUntil(^(DoneCallback done) {
-                [sut renewSubscription:existingSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
-                    expect(subscriptionID).to.equal(existingSubscription.subscriptionID);
-                    expect(expiryDate).toNot.equal([NSDate distantPast]);
-                    expect(error).to.beNil();
-                    done();
-                }];
-            });
+            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+
+            [sut renewSubscription:existingSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+                expect(subscriptionID).to.equal(existingSubscription.subscriptionID);
+                expect(expiryDate).toNot.equal([NSDate distantPast]);
+                expect(error).to.beNil();
+            }];
         });
     });
 
-    describe(@"when unsubscribing to service events", ^{
+    describe(@"when unsubscribing from service events", ^{
         beforeEach(^{
-            testBlock = ^BOOL(NSURLRequest *request) {
+            NSDate *expiry = [NSDate dateWithTimeIntervalSinceNow:30];
+            NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
 
-                if (![request.HTTPMethod isEqualToString:@"UNSUBSCRIBE"]) {
-                    return NO;
-                }
+            exampleSubscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
+                                                         expiryDate:expiry
+                                               eventSubscriptionURL:url];
+            [exampleSubscription addEventObserver:mockObserver];
+            [sut.activeSubscriptions addObject:exampleSubscription];
 
+            expect([exampleSubscription eventObservers]).to.contain(mockObserver);
+            expect(sut.activeSubscriptions).to.contain(exampleSubscription);
+        });
+
+        it(@"should remove the observer from the subscription", ^{
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
+
+            expect([exampleSubscription eventObservers]).toNot.contain(mockObserver);
+        });
+
+        it(@"should send UNSUBSCRIBE call if there are no more observers", ^{
+            expect([exampleSubscription eventObservers].count).to.equal(1);
+
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                return [[request HTTPMethod] isEqualToString:@"UNSUBSCRIBE"] &&
+                       [[request URL] isEqual:[NSURL URLWithString:UPPTestFakeURL]];
+            }] completionHandler:[OCMArg any]]);
+
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
+
+            expect([exampleSubscription eventObservers]).toNot.contain(mockObserver);
+            OCMVerifyAll(mockSession);
+        });
+
+        it(@"should send required headers if there are no more observers", ^{
+            expect([exampleSubscription eventObservers].count).to.equal(1);
+
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
                 NSDictionary *headers = request.allHTTPHeaderFields;
-                if (![headers[@"HOST"] isEqualToString:UPPTestFakeURL] ||
-                    ![headers[@"SID"] isEqualToString:UPPTestSID]) {
-                    return NO;
-                }
+                return [headers[@"HOST"] isEqualToString:UPPTestFakeURL] &&
+                       [headers[@"SID"] isEqualToString:UPPTestSID];
+            }] completionHandler:[OCMArg any]]);
 
-                return [request.URL isEqual:[NSURL URLWithString:UPPTestFakeURL]];
-            };
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
 
-            [OHHTTPStubs stubRequestsPassingTest:testBlock withStubResponse:responseBlock];
+            expect([exampleSubscription eventObservers]).toNot.contain(mockObserver);
+            OCMVerifyAll(mockSession);
         });
 
-        it(@"should send a request to the services event subscription URL", ^{
-            waitUntil(^(DoneCallback done) {
-                [sut unsubscribe:subscription completion:^(BOOL success) {
-                    expect(success).to.beTruthy();
-                    done();
-                }];
-            });
-        });
+        it(@"should not send an unsubscribe call if there are still observers", ^{
+            id anotherMockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
+            [exampleSubscription addEventObserver:anotherMockObserver];
+            expect([exampleSubscription eventObservers].count).to.equal(2);
+            [[mockSession reject] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
 
-        it(@"should destroy a subscription object", ^{
-            UPPEventSubscription *existingSubscription;
-            existingSubscription = [UPPEventSubscription
-                                    subscriptionWithID:UPPTestSID
-                                    expiryDate:[NSDate distantPast]
-                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
-            [sut.activeSubscriptions addObject:existingSubscription];
-            expect(sut.activeSubscriptions.count).to.equal(1);
-            waitUntil(^(DoneCallback done) {
-                [sut unsubscribe:existingSubscription completion:^(BOOL success) {
-                    expect(sut.activeSubscriptions).toNot.contain(existingSubscription);
-                    done();
-                }];
-            });
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
+
+            expect([exampleSubscription eventObservers]).toNot.contain(mockObserver);
+            expect([exampleSubscription eventObservers]).to.contain(anotherMockObserver);
+            OCMVerifyAll(mockSession);
         });
 
         it(@"should shut down event server if no more subscriptions exist", ^{
-            UPPEventSubscription *existingSubscription;
-            existingSubscription = [UPPEventSubscription
-                                    subscriptionWithID:UPPTestSID
-                                    expiryDate:[NSDate distantPast]
-                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
-            [sut.activeSubscriptions addObject:existingSubscription];
             expect(sut.activeSubscriptions.count).to.equal(1);
-
             OCMExpect([mockEventServer stopServer]);
 
-            waitUntil(^(DoneCallback done) {
-                [sut unsubscribe:existingSubscription completion:^(BOOL success) {
-                    expect(sut.activeSubscriptions.count).to.equal(0);
-                    done();
-                }];
-            });
+            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
+
+            OCMVerifyAll(mockEventServer);
+        });
+
+        it(@"should not shut down event server if more subscriptions exist", ^{
+            NSURL *url = [NSURL URLWithString:@"http://123.123.123.123"];
+            UPPEventSubscription *anotherSubscripton = [UPPEventSubscription subscriptionWithID:nil expiryDate:nil eventSubscriptionURL:url];
+            [sut.activeSubscriptions addObject:anotherSubscripton];
+            expect(sut.activeSubscriptions.count).to.equal(2);
+            [[mockEventServer reject] stopServer];
+
+            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+            [sut removeObserver:mockObserver fromService:mockService completion:nil];
 
             OCMVerifyAll(mockEventServer);
         });
@@ -341,3 +358,34 @@ describe(@"UPPEventSubscriptionManager", ^{
 });
 
 SpecEnd
+
+#pragma mark - Helper Blocks
+
+NSDate *(^ExpectedExpiryDate)(void) = ^NSDate *(void) {
+    return [NSDate dateWithTimeIntervalSinceNow:300];
+};
+
+NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
+    return [[NSHTTPURLResponse alloc] initWithURL:nil
+                                       statusCode:200
+                                      HTTPVersion:nil
+                                     headerFields:@{ @"SID": UPPTestSID,
+                                                     @"TIMEOUT": @"Second-1800" }];
+};
+
+NSURLResponse *(^UnsuccessfulResponse)(void) = ^NSURLResponse *(void) {
+    return [[NSHTTPURLResponse alloc] initWithURL:nil
+                                       statusCode:500
+                                      HTTPVersion:nil
+                                     headerFields:nil];
+};
+
+void StubDataTaskAndReturnResponse(id session, NSURLResponse *response)
+{
+    [[[session stub] andDo:^(NSInvocation *invocation) {
+        void (^successBlock)(NSData *, NSURLResponse *, NSError *) = nil;
+        [invocation getArgument:&successBlock atIndex:3];
+        successBlock(nil, response, nil);
+
+    }] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
+}

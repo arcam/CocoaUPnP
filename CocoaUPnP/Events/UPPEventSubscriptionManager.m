@@ -13,9 +13,17 @@
 
 @implementation UPPEventSubscriptionManager
 
-+ (instancetype)subscriptionManagerWithSession:(NSURLSession *)session
++ (instancetype)sharedManager
 {
-    return [[[self class] alloc] initWithSession:session];
+    static dispatch_once_t onceToken = 0;
+
+    __strong static id _sharedManager = nil;
+    dispatch_once(&onceToken, ^{
+        NSURLSession *session = [NSURLSession sharedSession];
+        _sharedManager = [[self alloc] initWithSession:session];
+    });
+
+    return _sharedManager;
 }
 
 - (instancetype)initWithSession:(NSURLSession *)session

@@ -18,13 +18,19 @@
 @property (strong, nonatomic) UPPEventServer *eventServer;
 
 /**
+ @return A shared event subscription manager instance, with the `NSURLSession`
+ set to `[NSURLSession sharedSession]`.
+ */
++ (instancetype)sharedManager;
+
+/**
  Instantiate a new instance of event subscription manager with an NSURLSession.
 
  @param session The session to use during network calls.
 
  @return A newly allocated and initialised subscription manager instance.
  */
-+ (instancetype)subscriptionManagerWithSession:(NSURLSession *)session;
+- (instancetype)initWithSession:(NSURLSession *)session;
 
 /**
  Subscribe an observer to UPnP service events.

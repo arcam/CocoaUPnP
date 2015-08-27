@@ -42,7 +42,7 @@ describe(@"UPPEventSubscriptionManager", ^{
 
     beforeEach(^{
         mockSession = OCMClassMock([NSURLSession class]);
-        sut = [UPPEventSubscriptionManager subscriptionManagerWithSession:mockSession];
+        sut = [[UPPEventSubscriptionManager alloc] initWithSession:mockSession];
         expect(sut).toNot.beNil();
 
         mockService = OCMClassMock([UPPBasicService class]);
@@ -63,6 +63,21 @@ describe(@"UPPEventSubscriptionManager", ^{
 
     it(@"should conform to UPPEventServerDelegate", ^{
         expect(sut).to.conformTo(@protocol(UPPEventServerDelegate));
+    });
+
+    describe(@"shared instance", ^{
+        it(@"should return an instance", ^{
+            expect([UPPEventSubscriptionManager sharedManager]).toNot.beNil();
+        });
+        
+        it(@"should return the same instance twice", ^{
+            UPPEventSubscriptionManager *manager = [UPPEventSubscriptionManager sharedManager];
+            expect([UPPEventSubscriptionManager sharedManager]).to.beIdenticalTo(manager);
+        });
+        
+        it(@"should be separate from unique instance", ^{
+            expect(sut).toNot.equal([UPPEventSubscriptionManager sharedManager]);
+        });
     });
 
     describe(@"when subscribing to service events", ^{

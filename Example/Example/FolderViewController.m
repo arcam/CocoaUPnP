@@ -30,6 +30,7 @@
             [self loadResults:response[@"Result"]];
         } else {
             NSLog(@"Error fetching results: %@", error);
+            [self.activityIndicator stopAnimating];
         }
     };
 

@@ -247,6 +247,7 @@
     subscription = [UPPEventSubscription subscriptionWithID:headers[@"SID"]
                                                  expiryDate:[self dateFromHeader:headers[@"TIMEOUT"]]
                                        eventSubscriptionURL:subscriptionURL];
+    [subscription setManager:self];
     [subscription addEventObserver:observer];
 
     return subscription;

@@ -123,6 +123,7 @@ describe(@"UPPEventSubscriptionManager", ^{
             expect(subscriptions.count).to.equal(1);
             UPPEventSubscription *subscription = [subscriptions firstObject];
             expect(subscription.subscriptionID).to.equal(UPPTestSID);
+            expect(subscription.manager).to.equal(sut);
 
             NSDate *expectedExpiry = ExpectedExpiryDate();
             NSDate *expiry = subscription.expiryDate;

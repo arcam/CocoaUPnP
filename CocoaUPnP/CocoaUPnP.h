@@ -46,3 +46,4 @@
 #import "UPPBasicService.h"
 #import "UPPConnectionManagerService.h"
 #import "UPPContentDirectoryService.h"
+#import "UPPRenderingControlService.h"

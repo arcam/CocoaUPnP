@@ -71,28 +71,29 @@
                                                 headers:headers];
 
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
-        NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-
-        if (code != 200) {
-            if (self.activeSubscriptions.count == 0) {
-                [self.eventServer stopServer];
+            if (code != 200) {
+                if (self.activeSubscriptions.count == 0) {
+                    [self.eventServer stopServer];
+                }
+                if (completion) {
+                    completion(NO);
+                }
+                return;
             }
+
+            NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
+            UPPEventSubscription *subscription;
+            subscription = [self subscriptionWithURL:subscriptionURL
+                                             headers:headers
+                                            observer:observer];
+            [self.activeSubscriptions addObject:subscription];
             if (completion) {
-                completion(NO);
+                completion(YES);
             }
-            return;
-        }
-
-        NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        UPPEventSubscription *subscription;
-        subscription = [self subscriptionWithURL:subscriptionURL
-                                         headers:headers
-                                        observer:observer];
-        [self.activeSubscriptions addObject:subscription];
-        if (completion) {
-            completion(YES);
-        }
+        });
     }];
 
     [task resume];
@@ -108,7 +109,6 @@
 
 - (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
 {
-
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],

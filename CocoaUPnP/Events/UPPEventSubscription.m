@@ -47,11 +47,17 @@
 
 - (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
 {
+    [self.expirationTimer invalidate];
+    [self.renewTimer invalidate];
+
     self.expirationTimer = [self timerWithFireDate:expiryDate
                                           selector:@selector(subscriptionExpired)];
 
     self.renewTimer = [self timerWithFireDate:[expiryDate dateByAddingTimeInterval:-30]
                                      selector:@selector(renewSubscription)];
+
+    [[NSRunLoop currentRunLoop] addTimer:self.expirationTimer forMode:NSDefaultRunLoopMode];
+    [[NSRunLoop currentRunLoop] addTimer:self.renewTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (NSTimer *)timerWithFireDate:(NSDate *)date selector:(SEL)selector
@@ -66,7 +72,11 @@
 
 - (void)renewSubscription
 {
-    [self.manager renewSubscription:self completion:nil];
+    [self.manager renewSubscription:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+        self.subscriptionID = subscriptionID;
+        self.expiryDate = expiryDate;
+        [self updateTimersWithExpiryDate:expiryDate];
+    }];
 }
 
 - (void)subscriptionExpired

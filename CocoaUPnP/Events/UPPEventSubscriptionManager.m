@@ -52,11 +52,17 @@
     }
 
     NSURL *subscriptionURL = service.eventSubscriptionURL;
-    NSURL *callbackURL = [self.eventServer eventServerCallbackURL];
+    NSString *host = [NSString stringWithFormat:@"%@:%@",
+                      [subscriptionURL host],
+                      [subscriptionURL port]];
 
-    NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
+    NSURL *callbackURL = [self.eventServer eventServerCallbackURL];
+    NSString *callback = [NSString stringWithFormat:@"<%@>",
+                          [callbackURL absoluteString]];
+
+    NSDictionary *headers = @{ @"HOST": host,
                                @"USER-AGENT": @"iOS/8.4 UPnP/1.1 Example/1.0",
-                               @"CALLBACK": [callbackURL absoluteString],
+                               @"CALLBACK": callback,
                                @"NT": @"upnp:event",
                                @"TIMEOUT": @"Second-1800" };
 

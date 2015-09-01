@@ -93,13 +93,17 @@ describe(@"UPPEventSubscriptionManager", ^{
         });
 
         it(@"should send the required headers in the subscription request", ^{
-            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+            OCMExpect(([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
                 NSDictionary *headers = request.allHTTPHeaderFields;
-                return [headers[@"HOST"] isEqualToString:UPPTestFakeURL] &&
-                       [headers[@"CALLBACK"] isEqualToString:UPPTestFakeCallbackURL] &&
+                NSString *host = @"127.0.0.1:54321";
+                expect(headers[@"HOST"]).to.equal(host);
+                NSString *callback = [NSString stringWithFormat:@"<%@>", UPPTestFakeCallbackURL];
+                expect(headers[@"CALLBACK"]).to.equal(callback);
+                return [headers[@"HOST"] isEqualToString:host] &&
+                       [headers[@"CALLBACK"] isEqualToString:callback] &&
                        [headers[@"NT"] isEqualToString:@"upnp:event"] &&
                        [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"];
-            }] completionHandler:[OCMArg any]]);
+            }] completionHandler:[OCMArg any]]));
 
             [sut subscribeObserver:nil toService:mockService completion:nil];
 

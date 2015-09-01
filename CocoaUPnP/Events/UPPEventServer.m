@@ -69,7 +69,9 @@ NSString * const UPPEventServerBodyKey = @"Event";
     }
 
     [UPPLastChangeParser parseData:request.data completion:^(NSDictionary *event, NSError *error) {
-        eventDictionary[UPPEventServerBodyKey] = event;
+        if (event) {
+            eventDictionary[UPPEventServerBodyKey] = event;
+        }
     }];
 
     [self.eventDelegate eventReceived:[eventDictionary copy]];

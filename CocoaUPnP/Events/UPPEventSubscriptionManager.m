@@ -5,6 +5,7 @@
 #import "UPPBasicService.h"
 #import "UPPEventSubscription.h"
 #import "NSArray+firstObjectMatchingPredicate.h"
+#import "UPPError.h"
 
 @interface UPPEventSubscriptionManager ()
 @property (strong, nonatomic) NSMutableArray *activeSubscriptions;
@@ -117,8 +118,12 @@
 
         if (!completion) { return; }
 
-        if ([(NSHTTPURLResponse *)response statusCode] != 200) {
-            completion(nil, nil, error);
+        NSInteger code = [(NSHTTPURLResponse *)response statusCode];
+
+        if (code != 200) {
+            NSError *e = error ?: UPPErrorWithCodeAndDescription(code, @"Renew subscription error");
+            completion(nil, nil, e);
+            return;
         }
 
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
@@ -138,10 +143,10 @@
 
     [self sendSubscriptionRequest:request completion:^(NSURLResponse *response, NSError *error) {
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
+
         if (code != 200) {
-            // TODO: Change this to use UPPError
-            NSError *error = [NSError errorWithDomain:@"asdf" code:code userInfo:nil];
-            completion(nil, nil, error);
+            NSError *e = error ?: UPPErrorWithCodeAndDescription(code, @"Event subscription error");
+            completion(nil, nil, e);
             return;
         }
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];

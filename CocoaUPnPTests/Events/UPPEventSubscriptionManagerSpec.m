@@ -279,6 +279,18 @@ describe(@"UPPEventSubscriptionManager", ^{
                 expect(error).to.beNil();
             }];
         });
+
+        it(@"should pass back an error if subscripton fails", ^{
+            StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
+
+            [sut renewSubscription:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+                expect(subscriptionID).to.beNil();
+                expect(expiryDate).to.beNil();
+                expect(error).toNot.beNil();
+                expect(error.code).to.equal(400);
+                expect(error.localizedDescription).to.equal(@"Renew subscription error");
+            }];
+        });
     });
 
     describe(@"when subscription has expired", ^{
@@ -333,7 +345,8 @@ describe(@"UPPEventSubscriptionManager", ^{
                     expect(subscriptionID).to.beNil();
                     expect(expiryDate).to.beNil();
                     expect(error).toNot.beNil();
-                    expect(error.code).to.equal(500);
+                    expect(error.code).to.equal(400);
+                    expect(error.localizedDescription).to.equal(@"Event subscription error");
                     done();
                 }];
             });
@@ -466,7 +479,7 @@ NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
 
 NSURLResponse *(^UnsuccessfulResponse)(void) = ^NSURLResponse *(void) {
     return [[NSHTTPURLResponse alloc] initWithURL:nil
-                                       statusCode:500
+                                       statusCode:400
                                       HTTPVersion:nil
                                      headerFields:nil];
 };

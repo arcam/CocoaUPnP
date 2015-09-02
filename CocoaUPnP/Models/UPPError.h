@@ -46,3 +46,13 @@ typedef NS_ENUM(NSInteger, UPPErrorCode) {
  @return Returns an `NSError` object
  */
 NSError * UPPErrorWithCode(UPPErrorCode code);
+
+/**
+ Create a generic `NSError` object from a code and description
+
+ @param code        The error code
+ @param description The error localised description
+
+ @return A new `NSError` object with code and description populated
+ */
+NSError * UPPErrorWithCodeAndDescription(NSInteger code, NSString *description);

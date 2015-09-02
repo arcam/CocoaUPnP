@@ -5,8 +5,8 @@
 
 NSString * const UPPErrorDomain = @"com.arcam.cocoaupnp.error";
 
-NSError * UPPErrorWithCode(UPPErrorCode code) {
-
+NSError * UPPErrorWithCode(UPPErrorCode code)
+{
     NSString *errorDescription;
 
     switch (code) {
@@ -29,7 +29,12 @@ NSError * UPPErrorWithCode(UPPErrorCode code) {
             break;
     }
 
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : errorDescription };
+    return UPPErrorWithCodeAndDescription(code, errorDescription);
+}
+
+NSError * UPPErrorWithCodeAndDescription(NSInteger code, NSString *description)
+{
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : description };
 
     return [NSError errorWithDomain:UPPErrorDomain code:code userInfo:userInfo];
 }

@@ -120,26 +120,30 @@ describe(@"UPPEventSubscriptionManager", ^{
             [sut subscribeObserver:mockObserver toService:mockService completion:nil];
 
             // Check assertions
-            expect(subscriptions.count).to.equal(1);
+            expect(subscriptions.count).will.equal(1);
             UPPEventSubscription *subscription = [subscriptions firstObject];
-            expect(subscription.subscriptionID).to.equal(UPPTestSID);
-            expect(subscription.manager).to.equal(sut);
+            expect(subscription.subscriptionID).will.equal(UPPTestSID);
+            expect(subscription.manager).will.equal(sut);
 
             NSDate *expectedExpiry = ExpectedExpiryDate();
             NSDate *expiry = subscription.expiryDate;
-            expect(expiry).toNot.beNil();
+            expect(expiry).willNot.beNil();
             NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiry];
-            expect(interval).to.beLessThan(0.01);
+            expect(interval).will.beLessThan(0.01);
 
-            expect(subscription.eventSubscriptionURL).to.equal([NSURL URLWithString:UPPTestFakeURL]);
-            expect([subscription eventObservers]).to.contain(mockObserver);
+            expect(subscription.eventSubscriptionURL).will.equal([NSURL URLWithString:UPPTestFakeURL]);
+            expect([subscription eventObservers]).will.contain(mockObserver);
         });
 
         it(@"should not create a subscription object when unsuccessful", ^{
             expect([sut activeSubscriptions].count).to.equal(0);
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
-            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    done();
+                }];
+            });
 
             expect([sut activeSubscriptions].count).to.equal(0);
         });
@@ -169,7 +173,11 @@ describe(@"UPPEventSubscriptionManager", ^{
             OCMExpect([mockEventServer stopServer]);
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
-            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    done();
+                }];
+            });
 
             OCMVerifyAll(mockEventServer);
         });
@@ -182,7 +190,11 @@ describe(@"UPPEventSubscriptionManager", ^{
             [[mockEventServer reject] stopServer];
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
-            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+            waitUntil(^(DoneCallback done) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                    done();
+                }];
+            });
 
             OCMVerifyAll(mockEventServer);
         });

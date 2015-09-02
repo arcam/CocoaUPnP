@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DFDB41B021A700051717E /* FolderViewController.m */; };
+		0E592A291B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */; };
 		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
 		0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A78301AC944C10013DB95 /* AppDelegate.m */; };
@@ -75,6 +76,8 @@
 /* Begin PBXFileReference section */
 		0E2DFDB31B021A6F0051717E /* FolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
 		0E2DFDB41B021A700051717E /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
+		0E592A271B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+beWithinAMillisecondOf.h"; sourceTree = "<group>"; };
+		0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+beWithinAMillisecondOf.m"; sourceTree = "<group>"; };
 		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
 		0E83B3241B04D13F008FBF27 /* PlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackManager.m; sourceTree = "<group>"; };
 		0E9A78281AC944C10013DB95 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,6 +326,8 @@
 		0EE226471B73A0EC0022119E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0E592A271B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.h */,
+				0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */,
 				0EE226481B73A0EC0022119E /* UPPMetadataHelperSpec.m */,
 			);
 			path = Helpers;
@@ -663,6 +668,7 @@
 				0EE2268F1B73A0EC0022119E /* UPPMediaItemParserSpec.m in Sources */,
 				0EE226711B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m in Sources */,
 				0EE226841B73A0EC0022119E /* UPPServiceSpec.m in Sources */,
+				0E592A291B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m in Sources */,
 				0EE2267D1B73A0EC0022119E /* UPPBasicDeviceSpec.m in Sources */,
 				0EE226801B73A0EC0022119E /* UPPMediaItemResourceSpec.m in Sources */,
 				0EE226911B73A0EC0022119E /* UPPMediaItemProtocolSpec.m in Sources */,

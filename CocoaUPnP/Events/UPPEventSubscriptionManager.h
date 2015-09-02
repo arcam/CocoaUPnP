@@ -59,10 +59,11 @@
  existing observers are kept around and therefore do not need re-adding.
 
  @param subscription The subscription to renew.
- @param completion A block to run when the subscription call finishes. Returns a
- BOOL corresponding to wether the call succeeded or failed.
+ @param completion   A block which is run when the subscription call finishes.
+ Returns the new subscription identifier, the new expiry date, or if renewing
+ failed, an error object.
  */
-- (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
+- (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
 
 /**
  Unsubscribe an observer from a service. If there are no more observers, then

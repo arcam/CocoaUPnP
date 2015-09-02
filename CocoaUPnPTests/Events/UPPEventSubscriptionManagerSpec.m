@@ -7,6 +7,7 @@
 #import <OCMock/OCMock.h>
 #import "UPPEventSubscription.h"
 #import "UPPEventServer.h"
+#import "EXPMatchers+beWithinAMillisecondOf.h"
 
 /*
  NOTE: This spec shouldn't know about the existance of activeSubscriptions, but
@@ -57,7 +58,7 @@ describe(@"UPPEventSubscriptionManager", ^{
         mockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
 
         exampleSubscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
-                                                            expiryDate:nil
+                                                            expiryDate:[NSDate distantPast]
                                                   eventSubscriptionURL:url];
     });
 
@@ -125,11 +126,9 @@ describe(@"UPPEventSubscriptionManager", ^{
             expect(subscription.subscriptionID).will.equal(UPPTestSID);
             expect(subscription.manager).will.equal(sut);
 
-            NSDate *expectedExpiry = ExpectedExpiryDate();
             NSDate *expiry = subscription.expiryDate;
             expect(expiry).willNot.beNil();
-            NSTimeInterval interval = [expectedExpiry timeIntervalSinceDate:expiry];
-            expect(interval).will.beLessThan(0.01);
+            expect(expiry).to.beWithinAMillisecondOf(ExpectedExpiryDate());
 
             expect(subscription.eventSubscriptionURL).will.equal([NSURL URLWithString:UPPTestFakeURL]);
             expect([subscription eventObservers]).will.contain(mockObserver);
@@ -276,8 +275,68 @@ describe(@"UPPEventSubscriptionManager", ^{
             [sut renewSubscription:existingSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
                 expect(subscriptionID).to.equal(existingSubscription.subscriptionID);
                 expect(expiryDate).toNot.equal([NSDate distantPast]);
+                expect(expiryDate).to.beWithinAMillisecondOf(ExpectedExpiryDate());
                 expect(error).to.beNil();
             }];
+        });
+    });
+
+    describe(@"when subscription has expired", ^{
+        it(@"should send a SUBSCRIBE request to the service's event subscription URL", ^{
+            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                return [[request URL] isEqual:[NSURL URLWithString:UPPTestFakeURL]] &&
+                       [[request HTTPMethod] isEqualToString:@"SUBSCRIBE"];
+            }] completionHandler:[OCMArg any]]);
+
+            [sut subscriptionExpired:exampleSubscription completion:nil];
+
+            OCMVerifyAll(mockSession);
+        });
+
+        it(@"should send the required headers in the subscription request", ^{
+            OCMExpect(([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                NSDictionary *headers = request.allHTTPHeaderFields;
+                NSString *host = @"127.0.0.1:54321";
+                expect(headers[@"HOST"]).to.equal(host);
+                NSString *callback = [NSString stringWithFormat:@"<%@>", UPPTestFakeCallbackURL];
+                expect(headers[@"CALLBACK"]).to.equal(callback);
+                return [headers[@"HOST"] isEqualToString:host] &&
+                       [headers[@"CALLBACK"] isEqualToString:callback] &&
+                       [headers[@"NT"] isEqualToString:@"upnp:event"] &&
+                       [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"];
+            }] completionHandler:[OCMArg any]]));
+
+            [sut subscriptionExpired:exampleSubscription completion:nil];
+
+            OCMVerifyAll(mockSession);
+        });
+
+        it(@"should return the new subscription data when successful", ^{
+            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+            waitUntil(^(DoneCallback done) {
+                [sut subscriptionExpired:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+                    expect(subscriptionID).to.equal(UPPTestSID);
+
+                    expect(expiryDate).willNot.beNil();
+                    expect(expiryDate).to.beWithinAMillisecondOf(ExpectedExpiryDate());
+
+                    expect(error).to.beNil();
+                    done();
+                }];
+            });
+        });
+
+        it(@"should return an error when call fails", ^{
+            StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
+            waitUntil(^(DoneCallback done) {
+                [sut subscriptionExpired:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+                    expect(subscriptionID).to.beNil();
+                    expect(expiryDate).to.beNil();
+                    expect(error).toNot.beNil();
+                    expect(error.code).to.equal(500);
+                    done();
+                }];
+            });
         });
     });
 

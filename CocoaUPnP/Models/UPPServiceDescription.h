@@ -6,7 +6,7 @@
 /**
  This class defines a UPnP service
  */
-@interface UPPServiceDescription : NSObject
+@interface UPPServiceDescription : NSObject <NSCoding>
 
 /**
  UPnP compliant service type. E.g.

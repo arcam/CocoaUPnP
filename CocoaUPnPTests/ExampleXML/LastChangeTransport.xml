@@ -1,6 +1,0 @@
-<Event xmlns="urn:schemas-upnp-org:metadata-1-0/AVT/">
-  <InstanceID val="0">
-    <TransportState val="PLAYING"/>
-    <CurrentTransportActions val="Pause,Stop,Next,Previous,Seek,X_DLNA_SeekTime"/>
-  </InstanceID>
-</Event>

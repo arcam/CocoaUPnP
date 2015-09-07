@@ -10,9 +10,9 @@ const NSInteger MockFailSessionErrorCode = 666;
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failureBlock
 {
-    failure(nil, [self error]);
+    failureBlock(nil, [self error]);
     return nil;
 }
 

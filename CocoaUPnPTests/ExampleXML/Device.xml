@@ -54,6 +54,6 @@
         <eventSubURL>/AVTransport/evt</eventSubURL>
       </service>
     </serviceList>
-    <presentationURL>http://127.0.0.0</presentationURL>
+    <presentationURL>http://127.0.0.1</presentationURL>
   </device>
 </root>

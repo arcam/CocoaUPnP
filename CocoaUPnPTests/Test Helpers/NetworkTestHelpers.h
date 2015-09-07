@@ -6,14 +6,14 @@
 
 /**
  Stub an InstanceID dictionary
- 
+
  @return Returns an NSDictionary containing `InstanceID: 0`
  */
 NSDictionary *(^InstanceDict)(void);
 
 /**
  Verify parameters passed into a POST request
- 
+
  @param NSDictionary The parameters
  @param id           The session manager
  @param NSString     The URL the request is POSTed to
@@ -22,7 +22,7 @@ void (^VerifyPostWithParams)(NSDictionary *, id, NSString *);;
 
 /**
  Setup an expectation for a network call, and return stubbed data
- 
+
  @param NSDictionary The parameters passed into the method
  @param id           The session manager to set the expectation on
  @param NSString     The URL the message is posted to
@@ -31,7 +31,7 @@ void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *);
 
 /**
  Setup an expectation for a failed network call, and return stubbed error
- 
+
  @param NSDictionary The parameters passed into the method
  @param id           The session manager to set the expectation on
  @param NSString     The URL the message is posted to

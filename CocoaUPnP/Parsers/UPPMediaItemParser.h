@@ -3,26 +3,32 @@
 
 #import "UPPBaseParser.h"
 
-/**
- Media item parser completion block
- 
- @param items           An array of `UPPMediaItem` objects
- @param resultsReturned Number of results returned in the XML
- @param totalResults    Total number of results
- @param updateID        Content directory update ID
- @param error           An `NSError` is returned in the event of parse failure
- */
-typedef void(^UPPMediaItemCompletionBlock)(NSArray *items, NSNumber *resultsReturned, NSNumber *totalResults, NSNumber *updateID, NSError *error);
+@class ONOXMLDocument;
 
+extern NSString * const UPnPXMLResultsKey;
+
+/**
+ This class is solely responsible for parsing an XML string which contains an
+ array of UPnP containers or items.
+ */
 @interface UPPMediaItemParser : UPPBaseParser
 
 /**
- Parse the previously supplied XML data
- 
- @param completion A completion block returning either an array of
- `UPPMediaItem` objects, with some additional extra information, or an 
- `NSError` object
+ Parse a dictionary of results obtained from a previous network call.
+
+ @param results    The response object returned by the network call.
+ @param completion A block which returns a dictionary of parsed XML, or an
+ error if the parsing failed.
  */
-- (void)parseWithCompletion:(UPPMediaItemCompletionBlock)completion;
++ (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion;
+
+/**
+ Parse items from an XML description.
+
+ @param document The XML document to be parsed.
+
+ @return An array of media items.
+ */
++ (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document;
 
 @end

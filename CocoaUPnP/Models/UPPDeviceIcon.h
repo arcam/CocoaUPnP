@@ -6,7 +6,7 @@
 /**
  This class defines a device's icon object
  */
-@interface UPPDeviceIcon : NSObject
+@interface UPPDeviceIcon : NSObject <NSCoding>
 
 /**
  The mime type of the icon

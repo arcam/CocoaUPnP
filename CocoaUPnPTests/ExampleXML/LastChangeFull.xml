@@ -1,0 +1,24 @@
+<e:propertyset xmlns:e="urn:schemas-upnp-org:event-1-0">
+<e:property>
+<LastChange>&lt;Event xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/AVT/&quot;&gt;&lt;InstanceID val=&quot;0&quot;&gt;&lt;PlaybackStorageMedium val=&quot;NETWORK&quot;/&gt;&lt;TransportState val=&quot;STOPPED&quot;/&gt;&lt;CurrentTransportActions val=&quot;Play&quot;/&gt;&lt;AVTransportURI val=&quot;http://10.54.6.186:80/UPnP/Track/20390.WAV&quot;/&gt;&lt;CurrentTrackURI val=&quot;http://10.54.6.186:80/UPnP/Track/20390.WAV&quot;/&gt;&lt;NumberOfTracks val=&quot;1&quot;/&gt;&lt;CurrentMediaDuration val=&quot;00:04:22&quot;/&gt;&lt;CurrentTrackDuration val=&quot;00:04:22&quot;/&gt;&lt;CurrentTrack val=&quot;1&quot;/&gt;&lt;CurrentTrackMetaData val=&quot;&amp;lt;DIDL-Lite xmlns:dc=&amp;quot;http://purl.org/dc/elements/1.1/&amp;quot; xmlns=&amp;quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&amp;quot; xmlns:upnp=&amp;quot;urn:schemas-upnp-org:metadata-1-0/upnp/&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/ http://www.upnp.org/schemas/av/didl-lite.xsd urn:schemas-upnp-org:metadata-1-0/upnp/ http://www.upnp.org/schemas/av/upnp.xsd&amp;quot;&amp;gt;
+&amp;lt;item id=&amp;quot;all:*:album:*:1593:20390&amp;quot; parentID=&amp;quot;all:*:album:*:1593&amp;quot; restricted=&amp;quot;true&amp;quot; searchable=&amp;quot;false&amp;quot;&amp;gt;
+&amp;lt;dc:title&amp;gt;Still Echoes&amp;lt;/dc:title&amp;gt;
+&amp;lt;upnp:class&amp;gt;object.item.audioItem.musicTrack&amp;lt;/upnp:class&amp;gt;
+&amp;lt;upnp:artist&amp;gt;Lamb of God&amp;lt;/upnp:artist&amp;gt;
+&amp;lt;upnp:album&amp;gt;VII- Sturm und Drang [Deluxe Edition]&amp;lt;/upnp:album&amp;gt;
+&amp;lt;upnp:albumArtURI&amp;gt;http://10.54.6.186:80/TrackData/FileDelivery.vf?type=cover&amp;amp;amp;key=20390&amp;amp;amp;demo=0&amp;amp;amp;imageformat=JPG&amp;amp;amp;imagesize=4&amp;amp;amp;keytype=track&amp;lt;/upnp:albumArtURI&amp;gt;
+&amp;lt;res duration=&amp;quot;00:04:22&amp;quot; protocolInfo=&amp;quot;http-get:*:audio/wav:*&amp;quot;&amp;gt;http://10.54.6.186:80/UPnP/Track/20390.WAV&amp;lt;/res&amp;gt;
+&amp;lt;/item&amp;gt;
+&amp;lt;/DIDL-Lite&amp;gt;&quot;/&gt;&lt;AVTransportURIMetaData val=&quot;&amp;lt;DIDL-Lite xmlns:dc=&amp;quot;http://purl.org/dc/elements/1.1/&amp;quot; xmlns=&amp;quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&amp;quot; xmlns:upnp=&amp;quot;urn:schemas-upnp-org:metadata-1-0/upnp/&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/ http://www.upnp.org/schemas/av/didl-lite.xsd urn:schemas-upnp-org:metadata-1-0/upnp/ http://www.upnp.org/schemas/av/upnp.xsd&amp;quot;&amp;gt;
+&amp;lt;item id=&amp;quot;all:*:album:*:1593:20390&amp;quot; parentID=&amp;quot;all:*:album:*:1593&amp;quot; restricted=&amp;quot;true&amp;quot; searchable=&amp;quot;false&amp;quot;&amp;gt;
+&amp;lt;dc:title&amp;gt;Still Echoes&amp;lt;/dc:title&amp;gt;
+&amp;lt;upnp:class&amp;gt;object.item.audioItem.musicTrack&amp;lt;/upnp:class&amp;gt;
+&amp;lt;upnp:artist&amp;gt;Lamb of God&amp;lt;/upnp:artist&amp;gt;
+&amp;lt;upnp:album&amp;gt;VII- Sturm und Drang [Deluxe Edition]&amp;lt;/upnp:album&amp;gt;
+&amp;lt;upnp:albumArtURI&amp;gt;http://10.54.6.186:80/TrackData/FileDelivery.vf?type=cover&amp;amp;amp;key=20390&amp;amp;amp;demo=0&amp;amp;amp;imageformat=JPG&amp;amp;amp;imagesize=4&amp;amp;amp;keytype=track&amp;lt;/upnp:albumArtURI&amp;gt;
+&amp;lt;res duration=&amp;quot;00:04:22&amp;quot; protocolInfo=&amp;quot;http-get:*:audio/wav:*&amp;quot;&amp;gt;http://10.54.6.186:80/UPnP/Track/20390.WAV&amp;lt;/res&amp;gt;
+&amp;lt;/item&amp;gt;
+&amp;lt;/DIDL-Lite&amp;gt;&quot;/&gt;&lt;/InstanceID&gt;&lt;/Event&gt;</LastChange>
+</e:property>
+</e:propertyset>
+

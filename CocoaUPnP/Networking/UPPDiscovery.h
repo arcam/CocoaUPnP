@@ -17,7 +17,7 @@
 /**
  Inform class that a new UPnP device was found: either through responding to an
  `M-SEARCH` request or from periodic `NOTIFY` messaging to the multicast address.
- 
+
  @param discovery The discovery instance calling the protocol method.
  @param device    The device that was found.
  */
@@ -26,7 +26,7 @@
 /**
  Inform delegate that a UPnP device was removed, usually by the device sending a
  `byebye` message.
- 
+
  @param discovery The discovery instance calling the protocol method.
  @param device    The device that was removed.
  */
@@ -50,9 +50,26 @@
 @property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate;
 
 /**
+ An instance of `SSDPServiceBrowser`. Lazily instantiated for better testing.
+ */
+@property (strong, nonatomic) SSDPServiceBrowser *browser;
+
+/**
  Creates and returns a common shared instance.
  */
 + (UPPDiscovery *)sharedInstance;
+
+/**
+ Start searching for services matching the service type
+
+ @param services The service type to search for. For example, `ssdp:all`
+ */
+- (void)startBrowsingForServices:(NSString *)services;
+
+/**
+ Leave SSDP group and shut down discovery service
+ */
+- (void)stopBrowsingForServices;
 
 /**
  Return an array of all currently known devices.

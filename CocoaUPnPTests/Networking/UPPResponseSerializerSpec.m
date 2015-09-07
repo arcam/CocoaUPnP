@@ -7,25 +7,25 @@
 SpecBegin(UPPResponseSerializer)
 
 describe(@"UPPResponseSerializer", ^{
-    
+
     __block UPPResponseSerializer *serialiser;
-    
+
     beforeEach(^{
         serialiser = [[UPPResponseSerializer alloc] init];
     });
-    
+
     // We should really insert a mock for the parser
     it(@"should partially parse the response", ^{
         NSData *data = LoadDataFromXML(@"GetConnectionID", [self class]);
-        
+
         NSError *error = nil;
         id response = [serialiser responseObjectForResponse:nil data:data error:&error];
-        
+
         expect(error).to.beNil();
         expect(response).toNot.beNil();
         expect(response[@"ConnectionIDs"]).to.equal(@"0");
     });
-    
+
     it(@"should parse errors", ^{
         NSData *data = LoadDataFromXML(@"Error", [self class]);
         NSHTTPURLResponse *httpResponse;
@@ -33,10 +33,10 @@ describe(@"UPPResponseSerializer", ^{
                                                    statusCode:500
                                                   HTTPVersion:nil
                                                  headerFields:nil];
-        
+
         NSError *error = nil;
         id response = [serialiser responseObjectForResponse:httpResponse data:data error:&error];
-        
+
         expect(error).toNot.beNil();
         expect(response).to.beNil();
     });

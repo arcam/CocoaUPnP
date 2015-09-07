@@ -8,17 +8,17 @@
 @class UPPAVTransportService;
 
 /**
- This class describes a UPnP MediaServer device. 
+ This class describes a UPnP MediaServer device.
  @see http://upnp.org/specs/av/UPnP-av-MediaServer-v1-Device.pdf
  */
 @interface UPPMediaServerDevice : UPPBasicDevice
 
 /**
  Convenience initialiser
- 
+
  @param urn     The device's uniform resource name
  @param baseURL The base URL to use with service calls
- 
+
  @return A new `UPPMediaServerDevice`
  */
 + (instancetype)mediaServerWithURN:(NSString *)urn baseURL:(NSURL *)baseURL;

@@ -2,94 +2,109 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPMediaItem.h"
+#import "UPPMediaItemResource.h"
 
 SpecBegin(UPPMediaItem)
 
 describe(@"UPPMediaItem", ^{
-    
+
     __block UPPMediaItem *mediaItem;
     __block NSString *url;
-    
+    __block UPPMediaItemResource *res;
+
     beforeEach(^{
-        mediaItem = [[UPPMediaItem alloc] init];
         url = @"http://localhost/example.png";
+        mediaItem = [[UPPMediaItem alloc] init];
+        mediaItem.albumTitle = @"Title";
+        mediaItem.artist = @"Artist";
+        mediaItem.date = @"1994";
+        mediaItem.genre = @"Rock";
+        mediaItem.isContainer = YES;
+        mediaItem.childCount = @"12";
+        mediaItem.objectClass = @"class";
+        mediaItem.objectID = @"asdf";
+        mediaItem.trackNumber = @"10";
+        mediaItem.parentID = @"sdfg";
+        mediaItem.itemTitle = @"title";
+        mediaItem.albumArtURLString = url;
+        mediaItem.durationInSeconds = 123;
+
+        res = [[UPPMediaItemResource alloc] init];
+        res.numberOfAudioChannels = @"2";
+        res.bitrate = @"bitrate";
+        res.duration = @"duration";
+        res.sampleFrequency = @"sample";
+        res.protocolInfo = @"protocol";
+        res.itemSize = @"size";
+        res.resourceURLString = @"resource";
+        mediaItem.resources = @[ res ];
     });
-    
+
     it(@"should conform to UPPMediaItemProtocol", ^{
         expect(mediaItem).to.conformTo(@protocol(UPPMediaItemProtocol));
     });
-    
-    it(@"should allow setting an album title", ^{
-        NSString *string = @"Title";
-        mediaItem.albumTitle = string;
-        expect(mediaItem.albumTitle).to.equal(string);
-    });
-    
-    it(@"should allow setting an artist", ^{
-        NSString *string = @"Artist";
-        mediaItem.artist = string;
-        expect(mediaItem.artist).to.equal(string);
-    });
-    
-    it(@"should allow setting date", ^{
-        NSString *string = @"1994";
-        mediaItem.date = string;
-        expect(mediaItem.date).to.equal(string);
-    });
-    
-    it(@"should allow setting genre", ^{
-        NSString *string = @"Rock";
-        mediaItem.genre = string;
-        expect(mediaItem.genre).to.equal(string);
-    });
-    
-    it(@"should state if it is a container", ^{
-        mediaItem.isContainer = YES;
-        expect(mediaItem.isContainer).to.equal(YES);
-    });
-    
-    it(@"should allow object class", ^{
-        NSString *string = @"class";
-        mediaItem.objectClass = string;
-        expect(mediaItem.objectClass).to.equal(string);
-    });
-    
-    it(@"should allow setting object identifier", ^{
-        NSString *string = @"asdf";
-        mediaItem.objectID = string;
-        expect(mediaItem.objectID).to.equal(string);
-    });
-    
-    it(@"should allow setting track number", ^{
-        NSString *string = @"10";
-        mediaItem.trackNumber = string;
-        expect(mediaItem.trackNumber).to.equal(string);
-    });
-    
-    it(@"should allow setting parent identifier", ^{
-        NSString *string = @"sdfg";
-        mediaItem.parentID = string;
-        expect(mediaItem.parentID).to.equal(string);
-    });
-    
-    it(@"should allow setting a number of resources", ^{
-        NSString *string = @"resource";
-        NSArray *resources = @[ string, string ];
-        mediaItem.resources = resources;
-        expect(mediaItem.resources).to.equal(resources);
-    });
-    
-    it(@"should allow setting item title", ^{
-        NSString *string = @"title";
-        mediaItem.itemTitle = string;
-        expect(mediaItem.itemTitle).to.equal(string);
+
+    describe(@"duration helper method", ^{
+        beforeEach(^{
+            mediaItem.resources = nil;
+        });
+
+        it(@"should return nil with no resources", ^{
+            expect(mediaItem.resources).to.beNil();
+
+            expect([mediaItem duration]).to.beNil();
+        });
+
+        it(@"should return duration with a resource", ^{
+            NSString *duration = @"0:12:34.567";
+            UPPMediaItemResource *resource = [[UPPMediaItemResource alloc] init];
+            resource.duration = duration;
+            mediaItem.resources = @[ resource ];
+
+            expect([mediaItem duration]).to.equal(duration);
+        });
+
+        it(@"should return nil with a resource that has no duration", ^{
+            UPPMediaItemResource *resource = [[UPPMediaItemResource alloc] init];
+            mediaItem.resources = @[ resource ];
+
+            expect([mediaItem duration]).to.beNil();
+        });
     });
 
-    it(@"should return an album art URL", ^{
-        mediaItem.albumArtURLString = url;
-        expect(mediaItem.albumArtURL.absoluteString).to.equal(url);
+    describe(@"NSCoding", ^{
+        it(@"should conform to NSCoding", ^{
+            expect(mediaItem).to.conformTo(@protocol(NSCoding));
+        });
+
+        it(@"handle archive and unarchive", ^{
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem];
+            UPPMediaItem *newItem = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            expect(newItem.albumTitle).to.equal(mediaItem.albumTitle);
+            expect(newItem.artist).to.equal(mediaItem.artist);
+            expect(newItem.date).to.equal(mediaItem.date);
+            expect(newItem.genre).to.equal(mediaItem.genre);
+            expect(newItem.isContainer).to.equal(mediaItem.isContainer);
+            expect(newItem.childCount).to.equal(mediaItem.childCount);
+            expect(newItem.objectClass).to.equal(mediaItem.objectClass);
+            expect(newItem.objectID).to.equal(mediaItem.objectID);
+            expect(newItem.trackNumber).to.equal(mediaItem.trackNumber);
+            expect(newItem.parentID).to.equal(mediaItem.parentID);
+            expect(newItem.itemTitle).to.equal(mediaItem.itemTitle);
+            expect(newItem.albumArtURLString).to.equal(mediaItem.albumArtURLString);
+            expect(newItem.durationInSeconds).to.equal(mediaItem.durationInSeconds);
+
+            expect(newItem.resources.count).to.equal(1);
+            UPPMediaItemResource *newRes = [newItem.resources firstObject];
+            expect(newRes.numberOfAudioChannels).to.equal(res.numberOfAudioChannels);
+            expect(newRes.bitrate).to.equal(res.bitrate);
+            expect(newRes.duration).to.equal(res.duration);
+            expect(newRes.sampleFrequency).to.equal(res.sampleFrequency);
+            expect(newRes.protocolInfo).to.equal(res.protocolInfo);
+            expect(newRes.itemSize).to.equal(res.itemSize);
+            expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+        });
     });
-    
 });
 
 SpecEnd

@@ -11,7 +11,7 @@
 
 /**
  Get the protocol-related information that the ConnectionManager supports
- 
+
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
@@ -20,12 +20,12 @@
 /**
  Tell device to prepare to connect to the network. See 2.4.2 of the service
  template document
- 
+
  @param protocolInfo          The protocol info that should be used to transfer
      the content
  @param peerConnectionManager The connection manager
  @param peerConnectionId      The connection identifier
- @param completion            A completion block which returns the parsed 
+ @param completion            A completion block which returns the parsed
      information, or an error if unsuccessful
  */
 - (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId completion:(void(^)(NSDictionary *connectionInfo, NSError *error))completion;
@@ -33,15 +33,17 @@
 /**
  Inform the device that connection is complete. See 2.4.3 of the service template
  document
- 
+
  @param connectionId The connection identifier
- @param error        An error which is populated if the call fails
+ @param success      An optional block which returns the success state of the
+ call, along with an error object if the call was unsuccessful.
+
  */
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId error:(NSError * __autoreleasing *)error;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
 
 /**
  Get current connection IDs. See 2.4.4 of the service template
- 
+
  @param completion A completion block which returns the parsed information, or
      an error if unsuccessful
  */
@@ -49,7 +51,7 @@
 
 /**
  Get current connection info. See 2.4.4 of the service template
- 
+
  @param connectionId The connection identifier
  @param completion   A completion block which returns the parsed information, or
      an error if unsuccessful

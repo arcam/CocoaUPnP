@@ -1,34 +1,38 @@
 PODS:
-  - AFNetworking (2.5.3):
-    - AFNetworking/NSURLConnection (= 2.5.3)
-    - AFNetworking/NSURLSession (= 2.5.3)
-    - AFNetworking/Reachability (= 2.5.3)
-    - AFNetworking/Security (= 2.5.3)
-    - AFNetworking/Serialization (= 2.5.3)
-    - AFNetworking/UIKit (= 2.5.3)
-  - AFNetworking/NSURLConnection (2.5.3):
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.3):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.3)
-  - AFNetworking/Security (2.5.3)
-  - AFNetworking/Serialization (2.5.3)
-  - AFNetworking/UIKit (2.5.3):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaAsyncSocket (7.4.1)
+  - CocoaAsyncSocket (7.4.2)
   - CocoaUPnP (0.0.1):
     - AFNetworking (~> 2.5.2)
     - CocoaAsyncSocket (~> 7.4.1)
+    - GCDWebServer (~> 3.2)
     - Ono (~> 1.2)
   - Expecta (1.0.0)
+  - GCDWebServer (3.2.5):
+    - GCDWebServer/Core (= 3.2.5)
+  - GCDWebServer/Core (3.2.5)
   - OCMock (3.1.2)
   - OHHTTPStubs (4.0.1)
-  - Ono (1.2.1)
+  - Ono (1.2.2)
   - Specta (1.0.0)
 
 DEPENDENCIES:
@@ -43,13 +47,14 @@ EXTERNAL SOURCES:
     :path: "../CocoaUPnP.podspec"
 
 SPEC CHECKSUMS:
-  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
-  CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
-  CocoaUPnP: 33eb2a9c74cb0208e3d209ac4f71f9f65edb0d13
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  CocoaUPnP: e4809d038e608cd6a919a1d9bdbe43cb07fda9db
   Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  GCDWebServer: d0e1b23785e3dfd6c87601323d0f7cae059aab18
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
-  Ono: 1122212de602280cc7af19d7ab12ee98a3fc0339
+  Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   Specta: 96fe05fe5c7348b5223f85e862904f6e832abb14
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.38.2

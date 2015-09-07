@@ -3,10 +3,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class UPPServiceDescription;
+
 /**
  This class defines a basic UPnP device.
  */
-@interface UPPBasicDevice : NSObject
+@interface UPPBasicDevice : NSObject <NSCoding>
 
 /**
  UPnP device type, e.g. `urn:schemas-upnp-org:device:MediaRenderer:1`
@@ -85,5 +87,14 @@
  @return Returns a unique service name `udn::deviceType`
  */
 - (NSString *)usn;
+
+/**
+ Find the first service which matches `serviceType`
+
+ @param serviceType The service type to search for
+
+ @return The matching service description, or nil if no matches found
+ */
+- (UPPServiceDescription *)serviceForType:(NSString *)serviceType;
 
 @end

@@ -11,11 +11,11 @@ NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
 void (^VerifyPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
     [[manager expect] POST:url parameters:[OCMArg checkWithBlock:^BOOL(NSDictionary *parameters) {
         return [parameters isEqualToDictionary:params];
-    }] success:nil failure:[OCMArg any]];
+    }] success:[OCMArg any] failure:[OCMArg any]];
 };
 
 void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
-    
+
     // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
     [[[manager expect] andDo:^(NSInvocation *invocation) {
           void (^successBlock)(NSURLSessionTask *task, id responseObject);
@@ -29,7 +29,7 @@ void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDicti
 };
 
 void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {
-    
+
     // This is horrible. Much cleaner in Kiwi with KWCaptureSpy :(
     [[[manager expect]
       andDo:^(NSInvocation *invocation) {

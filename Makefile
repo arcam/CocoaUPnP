@@ -1,6 +1,7 @@
 PROJECT_DIR = Example
 WORKSPACE = ${PROJECT_DIR}/Example.xcworkspace
 SCHEME = Example
+.PHONY: docs
 
 clean:
 	set -o pipefail && xctool -workspace $(WORKSPACE) -scheme $(SCHEME) clean
@@ -22,4 +23,4 @@ docs:
 		--ignore Example/Pods \
 		--ignore "*.m" \
 		--index-desc "README.md" \
-		.
+		CocoaUPnP

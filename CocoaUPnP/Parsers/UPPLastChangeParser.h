@@ -4,61 +4,18 @@
 #import "UPPBaseParser.h"
 
 /**
- The returned transport state
- */
-typedef NS_ENUM(NSInteger, UPPTransportState){
-    /**
-     Undetermined state
-     */
-    UPPTransportStateUnknown,
-    
-    /**
-     Stopped state
-     */
-    UPPTransportStateStopped,
-    
-    /**
-     Transitioning state
-     */
-    UPPTransportStateTransitioning,
-    
-    /**
-     Playing state
-     */
-    UPPTransportStatePlaying,
-    
-    /**
-     Paused state
-     */
-    UPPTransportStatePaused,
-    
-    /**
-     No media present
-     */
-    UPPTransportStateNoMediaPresent
-};
-
-/**
- Last change parser completion block
- 
- @param transportState   The current transport state
- @param transportActions Available transport actions
- @param error            Parsing error
- */
-typedef void(^UPPLastChangeCompletionBlock)(UPPTransportState transportState, NSString *transportActions, NSError *error);
-
-/**
- This classes sole responsibility is parsing a UPnP last change notification 
+ This classes sole responsibility is parsing a UPnP last change notification
  event and returning the results to the caller.
  */
 @interface UPPLastChangeParser : UPPBaseParser
 
 /**
- Parse the previously supplied XML data
- 
- @param completion A completion block returning the current transport state,
- available transport actions, or an `NSError` object
+ Parse a UPnP last change event.
+
+ @param data       XML representation of the XML returned by the service.
+ @param completion A block which returns a dictionary of parsed XML, or an
+ error if the parsing failed.
  */
-- (void)parseWithCompletion:(UPPLastChangeCompletionBlock)completion;
++ (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
 
 @end

@@ -11,33 +11,48 @@ extern NSString * const UPPErrorDomain;
 /**
  Error codes
  */
-typedef NS_ENUM(NSInteger, UPPErrorCode){
+typedef NS_ENUM(NSInteger, UPPErrorCode) {
     /**
      A generic error code
      */
     UPPErrorCodeGeneric,
-    
+
+    /**
+     A network call to a UPnP device returned an error
+     */
+    UPPErrorCodeUPnPErrorReturned,
+
     /**
      Error code when a parser's data object is `nil`
      */
     UPPErrorCodeEmptyData,
-    
+
     /**
      The XML provided does not have a `<device>` tag
      */
     UPPErrorCodeNoDeviceElementFound,
-    
+
     /**
-     A network call to a UPnP device returned an error
+     The XML provided contains no `<item>` or `<container>` tags
      */
-    UPPErrorCodeUPnPErrorReturned
+    UPPErrorCodeNoItemElementsFound
 };
 
 /**
  Create an `NSError` object from a `UPPErrorCode`
- 
+
  @param code The `UPPErrorCode` for the error
- 
+
  @return Returns an `NSError` object
  */
 NSError * UPPErrorWithCode(UPPErrorCode code);
+
+/**
+ Create a generic `NSError` object from a code and description
+
+ @param code        The error code
+ @param description The error localised description
+
+ @return A new `NSError` object with code and description populated
+ */
+NSError * UPPErrorWithCodeAndDescription(NSInteger code, NSString *description);

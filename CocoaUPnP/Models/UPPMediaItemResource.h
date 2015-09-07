@@ -3,7 +3,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UPPMediaItemResource : NSObject
+/**
+ This class describes a UPnP media item resource object.
+ */
+@interface UPPMediaItemResource : NSObject <NSCoding>
 
 /**
  The number of audio channels

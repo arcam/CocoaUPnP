@@ -5,44 +5,63 @@
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
 
+@interface UPPBasicService ()
+@property (strong, nonatomic) NSURL *baseURL;
+@end
+
 @implementation UPPBasicService
+
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description
+{
+    id service = [[[self class] alloc] init];
+    [service setBaseURL:baseURL];
+    [service populateFromServiceDescription:description];
+
+    return service;
+}
 
 - (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action
 {
     NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    
+
     if (action) {
         [wrapper setObject:action forKey:UPPSOAPActionKey];
     }
-    
-    if (self.nameSpace) {
-        [wrapper setObject:self.nameSpace forKey:UPPNameSpaceKey];
+
+    if (self.serviceType) {
+        [wrapper setObject:self.serviceType forKey:UPPNameSpaceKey];
     }
-    
+
     if (parameters) {
         [wrapper setObject:parameters forKey:UPPParametersKey];
     }
-    
+
     return [wrapper copy];
 }
 
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters error:(NSError * __autoreleasing *)error
+- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
 {
     NSMutableDictionary *mergedParameters = [NSMutableDictionary dictionary];
-    
+
     if (instanceId) {
         [mergedParameters setObject:instanceId forKey:@"InstanceID"];
     }
-    
+
     if (parameters) {
         [mergedParameters addEntriesFromDictionary:parameters];
     }
-    
+
     NSDictionary *wrapped = [self wrapParameters:mergedParameters
                                       withAction:action];
-    
-    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:nil failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
-        *error = returnedError;
+
+    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (successBlock) {
+            successBlock(YES, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
+        if (successBlock) {
+            successBlock(NO, returnedError);
+        }
     }];
 }
 
@@ -58,7 +77,7 @@
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
-    
+
     [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -66,12 +85,41 @@
     }];
 }
 
+#pragma mark - Private Methods
+
+- (void)populateFromServiceDescription:(UPPServiceDescription *)description
+{
+    self.serviceType = description.serviceType;
+    self.controlURL = [self urlForComponent:description.controlURL];
+    self.eventSubscriptionURL = [self urlForComponent:description.eventSubURL];
+}
+
+- (NSURL *)urlForComponent:(NSString *)component
+{
+    if (!component) {
+        return nil;
+    }
+
+    return [NSURL URLWithString:component relativeToURL:self.baseURL];
+}
+
+
+- (UPPSessionManager *)sessionManager
+{
+    if (!_sessionManager) {
+        _sessionManager = [[UPPSessionManager alloc] initWithBaseURL:nil];
+    }
+
+    return _sessionManager;
+}
+
+
 #pragma mark - NSObject
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p, nameSpace: %@, controlURL: %@>",
-            NSStringFromClass([self class]), self, self.nameSpace, self.controlURL];
+    return [NSString stringWithFormat:@"<%@: %p, serviceType: %@, controlURL: %@>",
+            NSStringFromClass([self class]), self, self.serviceType, self.controlURL];
 }
 
 @end

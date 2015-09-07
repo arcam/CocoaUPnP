@@ -10,7 +10,7 @@
 - (void)protocolInfoWithCompletion:(void(^)(NSDictionary *protocolInfo, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithParameters:nil action:@"GetProtocolInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -19,27 +19,27 @@
 - (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId completion:(void(^)(NSDictionary *connectionInfo, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     NSDictionary *parameters = @{ @"RemoteProtocolInfo": protocolInfo,
                                   @"PeerConnectionManager": peerConnectionManager,
                                   @"PeerConnectionID": peerConnectionId };
-    
+
     [self _sendPostRequestWithParameters:parameters action:@"PrepareForConnection" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
 }
 
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId error:(NSError *__autoreleasing *)error
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
 {
     NSDictionary *parameters = @{ @"ConnectionID": connectionId };
-    
-    [self _sendPostRequestWithInstanceID:nil action:@"ConnectionComplete" parameters:parameters error:error];
+
+    [self _sendPostRequestWithInstanceID:nil action:@"ConnectionComplete" parameters:parameters success:successBlock];
 }
 
 - (void)currentConnectionIDsWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     [self _sendPostRequestWithParameters:nil action:@"GetCurrentConnectionIDs" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];
@@ -48,9 +48,9 @@
 - (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(void(^)(NSDictionary *response, NSError *error))completion
 {
     if (!completion) { return; }
-    
+
     NSDictionary *parameters = @{ @"ConnectionID": connectionId };
-    
+
     [self _sendPostRequestWithParameters:parameters action:@"GetCurrentConnectionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
         completion(responseObject, error);
     }];

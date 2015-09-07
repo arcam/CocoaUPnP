@@ -9,7 +9,7 @@
  a music track, an album, a podcast etc. The UPnP class of the object can be
  queried by calling the `objectClass` property.
  */
-@interface UPPMediaItem : NSObject <UPPMediaItemProtocol>
+@interface UPPMediaItem : NSObject <NSCoding, UPPMediaItemProtocol>
 
 #pragma mark - Properties
 
@@ -78,13 +78,25 @@
  */
 @property (copy, nonatomic) NSString *albumArtURLString;
 
+/**
+ An integer describing the tracks total duration in seconds.
+ @warning This value is scraped from the duration of the Media Item's resources.
+ This should be accurate enough for the simple display of data.
+ */
+@property (assign, nonatomic) NSInteger durationInSeconds;
+
 #pragma mark - Instance Methods
 
 /**
  The album artwork URL
- 
+
  @return Returns an `NSURL` for the album or song artwork
  */
 - (NSURL *)albumArtURL;
+
+/**
+ Return the first resource `duration` value that is not nil
+ */
+- (NSString *)duration;
 
 @end

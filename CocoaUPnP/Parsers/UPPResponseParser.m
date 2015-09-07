@@ -4,6 +4,7 @@
 #import "UPPResponseParser.h"
 #import "Ono.h"
 #import "UPPError.h"
+#import "UPPMediaItemParser.h"
 
 @implementation UPPResponseParser
 
@@ -12,38 +13,47 @@
     if (!responseBlock) {
         return;
     }
-    
+
     NSError *error = nil;
-    
+
     if (![self data]) {
         responseBlock(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
-    
+
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
-    
+
     if (!document) {
         responseBlock(nil, error);
         return;
     }
-    
+
     __block NSMutableDictionary *responseDictionary;
-    
+
     [document enumerateElementsWithXPath:@"/s:Envelope/s:Body/*/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-        
+
         if (!responseDictionary) {
             responseDictionary = [NSMutableDictionary dictionary];
         }
-        
+
         NSString *tag = element.tag;
         NSString *value = [element stringValue];
-        
+
         if (tag && value) {
-            responseDictionary[tag] = value;
+            if ([tag rangeOfString:@"MetaData"].location != NSNotFound) {
+                ONOXMLDocument *metadata = [ONOXMLDocument XMLDocumentWithString:value encoding:NSUTF8StringEncoding error:nil];
+                NSArray *items = [UPPMediaItemParser parseItemsInDocument:metadata];
+
+                if (items.count > 0) {
+                    responseDictionary[tag] = [items firstObject];
+                }
+            } else {
+                responseDictionary[tag] = value;
+            }
         }
-        
+
     }];
-    
+
     responseBlock(responseDictionary, nil);
 }
 

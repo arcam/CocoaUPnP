@@ -13,13 +13,13 @@
         *error = [UPPErrorParser parseErrorXML:data];
         return nil;
     }
-    
+
     __block NSDictionary *resp;
     UPPResponseParser *parser = [[UPPResponseParser alloc] initWithXMLData:data];
     [parser parseWithResponse:^(NSDictionary *response, NSError *error) {
         resp = response;
     }];
-    
+
     return resp;
 }
 

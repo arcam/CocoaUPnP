@@ -27,6 +27,7 @@ describe(@"UPPMediaItem", ^{
         mediaItem.parentID = @"sdfg";
         mediaItem.itemTitle = @"title";
         mediaItem.albumArtURLString = url;
+        mediaItem.durationInSeconds = 123;
 
         res = [[UPPMediaItemResource alloc] init];
         res.numberOfAudioChannels = @"2";
@@ -91,6 +92,7 @@ describe(@"UPPMediaItem", ^{
             expect(newItem.parentID).to.equal(mediaItem.parentID);
             expect(newItem.itemTitle).to.equal(mediaItem.itemTitle);
             expect(newItem.albumArtURLString).to.equal(mediaItem.albumArtURLString);
+            expect(newItem.durationInSeconds).to.equal(mediaItem.durationInSeconds);
 
             expect(newItem.resources.count).to.equal(1);
             UPPMediaItemResource *newRes = [newItem.resources firstObject];

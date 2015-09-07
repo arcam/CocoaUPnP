@@ -52,6 +52,7 @@
         self.resources = [decoder decodeObjectForKey:@"resources"];
         self.itemTitle = [decoder decodeObjectForKey:@"itemTitle"];
         self.albumArtURLString = [decoder decodeObjectForKey:@"albumArtURLString"];
+        self.durationInSeconds = [[decoder decodeObjectForKey:@"durationInSeconds"] integerValue];
     }
     return self;
 }
@@ -71,6 +72,7 @@
     [encoder encodeObject:self.resources forKey:@"resources"];
     [encoder encodeObject:self.itemTitle forKey:@"itemTitle"];
     [encoder encodeObject:self.albumArtURLString forKey:@"albumArtURLString"];
+    [encoder encodeObject:@(self.durationInSeconds) forKey:@"durationInSeconds"];
 }
 
 @end

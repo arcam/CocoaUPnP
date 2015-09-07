@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DFDB41B021A700051717E /* FolderViewController.m */; };
+		0E32DB3C1B9DAF69003BC803 /* GetPositionInfoResponse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */; };
 		0E592A291B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */; };
 		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
@@ -76,6 +77,7 @@
 /* Begin PBXFileReference section */
 		0E2DFDB31B021A6F0051717E /* FolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
 		0E2DFDB41B021A700051717E /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
+		0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetPositionInfoResponse.xml; sourceTree = "<group>"; };
 		0E592A271B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+beWithinAMillisecondOf.h"; sourceTree = "<group>"; };
 		0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+beWithinAMillisecondOf.m"; sourceTree = "<group>"; };
 		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				0EE2263F1B73A0EC0022119E /* Error.xml */,
 				0EE226401B73A0EC0022119E /* FullMetadata.xml */,
 				0EE226411B73A0EC0022119E /* GetConnectionID.xml */,
+				0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */,
 				0EE226421B73A0EC0022119E /* Items.xml */,
 				0EF0E3121B8B1777007CE522 /* LastChangeFull.xml */,
 				0EE226441B73A0EC0022119E /* MediaServer.xml */,
@@ -545,6 +548,7 @@
 				0EE226761B73A0EC0022119E /* FullMetadata.xml in Resources */,
 				0EE226721B73A0EC0022119E /* Containers.xml in Resources */,
 				0EE2267B1B73A0EC0022119E /* PlayRequest.xml in Resources */,
+				0E32DB3C1B9DAF69003BC803 /* GetPositionInfoResponse.xml in Resources */,
 				0EE226751B73A0EC0022119E /* Error.xml in Resources */,
 				0EE226731B73A0EC0022119E /* Device.xml in Resources */,
 				0EE226781B73A0EC0022119E /* Items.xml in Resources */,

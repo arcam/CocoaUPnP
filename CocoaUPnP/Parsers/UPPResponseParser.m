@@ -4,6 +4,7 @@
 #import "UPPResponseParser.h"
 #import "Ono.h"
 #import "UPPError.h"
+#import "UPPMediaItemParser.h"
 
 @implementation UPPResponseParser
 
@@ -39,7 +40,16 @@
         NSString *value = [element stringValue];
 
         if (tag && value) {
-            responseDictionary[tag] = value;
+            if ([tag rangeOfString:@"MetaData"].location != NSNotFound) {
+                ONOXMLDocument *metadata = [ONOXMLDocument XMLDocumentWithString:value encoding:NSUTF8StringEncoding error:nil];
+                NSArray *items = [UPPMediaItemParser parseItemsInDocument:metadata];
+
+                if (items.count > 0) {
+                    responseDictionary[tag] = [items firstObject];
+                }
+            } else {
+                responseDictionary[tag] = value;
+            }
         }
 
     }];

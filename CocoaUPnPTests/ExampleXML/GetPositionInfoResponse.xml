@@ -1,0 +1,15 @@
+<s:Envelope
+xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<s:Body>
+<u:GetPositionInfoResponse xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
+<Track>1</Track>
+<TrackDuration>0:01:49.440</TrackDuration>
+<TrackMetaData>&lt;?xml version=&quot;1.0&quot;?&gt;&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot; xmlns:dlna=&quot;urn:schemas-dlna-org:metadata-1-0/&quot;&gt;&lt;item id=&quot;0$=Genre$4768$albums$*a411$*i4386&quot; parentID=&quot;0$=Genre$4768$albums$*a411&quot; restricted=&quot;1&quot;&gt;&lt;dc:title&gt;Samon&lt;/dc:title&gt;&lt;upnp:class&gt;object.item.audioItem.musicTrack&lt;/upnp:class&gt;&lt;dc:date&gt;2008-01-01&lt;/dc:date&gt;&lt;upnp:album&gt;Slania&lt;/upnp:album&gt;&lt;upnp:artist&gt;Eluveitie&lt;/upnp:artist&gt;&lt;dc:creator&gt;Eluveitie&lt;/dc:creator&gt;&lt;upnp:genre&gt;Folk Metal&lt;/upnp:genre&gt;&lt;upnp:originalTrackNumber&gt;1&lt;/upnp:originalTrackNumber&gt;&lt;upnp:albumArtURI&gt;http://10.54.6.197:9790/minimserver/*/music/FLAC/Eluveitie/Slania/01*20Samon.flac/$!picture-4609-81884.jpg&lt;/upnp:albumArtURI&gt;&lt;res protocolInfo=&quot;http-get:*:audio/x-flac:DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01700000000000000000000000000000&quot; size=&quot;13120369&quot; bitrate=&quot;176400&quot; duration=&quot;0:01:49.440&quot; nrAudioChannels=&quot;2&quot; sampleFrequency=&quot;44100&quot;&gt;http://10.54.6.197:9790/minimserver/*/music/FLAC/Eluveitie/Slania/01*20Samon.flac&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</TrackMetaData>
+<TrackURI>http://10.54.6.197:9790/minimserver/*/music/FLAC/Eluveitie/Slania/01*20Samon.flac</TrackURI>
+<RelTime>00:00:05</RelTime>
+<AbsTime>00:00:05</AbsTime>
+<RelCount>2147483647</RelCount>
+<AbsCount>2147483647</AbsCount>
+</u:GetPositionInfoResponse>
+</s:Body>
+</s:Envelope>

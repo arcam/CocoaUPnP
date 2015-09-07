@@ -72,7 +72,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
         NSArray *durations = [item.resources valueForKey:@"duration"];
         [durations enumerateObjectsUsingBlock:^(NSString *duration, NSUInteger idx, BOOL *stop) {
-            if (duration) {
+            if (duration && ![duration isEqual:[NSNull null]]) {
                 item.durationInSeconds = [self durationFromString:duration];
                 *stop = YES;
             }

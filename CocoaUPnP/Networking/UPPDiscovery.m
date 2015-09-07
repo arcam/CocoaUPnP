@@ -35,6 +35,12 @@
     [self.browser startBrowsingForServiceTypes:services];
 }
 
+- (void)stopBrowsingForServices
+{
+    [self.browser stopBrowsingForServices];
+    self.browser = nil;
+}
+
 #pragma mark - Lazy Instantiation
 
 - (NSMutableArray *)devices

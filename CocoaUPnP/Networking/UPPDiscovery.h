@@ -67,6 +67,11 @@
 - (void)startBrowsingForServices:(NSString *)services;
 
 /**
+ Leave SSDP group and shut down discovery service
+ */
+- (void)stopBrowsingForServices;
+
+/**
  Return an array of all currently known devices.
  */
 - (NSArray *)availableDevices;

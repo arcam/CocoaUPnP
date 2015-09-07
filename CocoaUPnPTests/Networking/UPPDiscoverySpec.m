@@ -30,6 +30,28 @@ describe(@"UPPDiscovery", ^{
         expect(discovery).to.conformTo(@protocol(SSDPServiceBrowserDelegate));
     });
 
+    describe(@"starting / stopping browsing", ^{
+        __block id mockBrowser;
+
+        beforeEach(^{
+            mockBrowser = OCMClassMock([SSDPServiceBrowser class]);
+            discovery.browser = mockBrowser;
+        });
+
+        it(@"should tell browser to start", ^{
+            NSString *services = @"ssdp:all";
+            OCMExpect([mockBrowser startBrowsingForServiceTypes:services]);
+            [discovery startBrowsingForServices:services];
+            OCMVerifyAll(mockBrowser);
+        });
+
+        it(@"should tell browser to stop", ^{
+            OCMExpect([mockBrowser stopBrowsingForServices]);
+            [discovery stopBrowsingForServices];
+            OCMVerifyAll(mockBrowser);
+        });
+    });
+
     describe(@"when SSDPServiceBrowserDelegate methods called", ^{
 
         __block id mockParser;

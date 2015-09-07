@@ -4,6 +4,7 @@
 #import "UPPEventSubscription.h"
 #import "UPPEventSubscriptionManager.h"
 #import <OCMock/OCMock.h>
+#import "EXPMatchers+beWithinAMillisecondOf.h"
 
 SpecBegin(UPPEventSubscription)
 
@@ -98,7 +99,7 @@ describe(@"UPPEventSubscription", ^{
         });
 
         it(@"should fire 30 seconds before expiration", ^{
-            expect([timer fireDate]).to.equal([expiryDate dateByAddingTimeInterval:-30]);
+            expect([timer fireDate]).to.beWithinAMillisecondOf([expiryDate dateByAddingTimeInterval:-30]);
         });
 
         it(@"should tell manager when firing", ^{
@@ -122,12 +123,12 @@ describe(@"UPPEventSubscription", ^{
         });
 
         it(@"should fire at expiration date", ^{
-            expect([timer fireDate]).to.equal(expiryDate);
+            expect([timer fireDate]).to.beWithinAMillisecondOf(expiryDate);
         });
 
         it(@"should tell manager when firing", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager subscriptionExpired:sut completion:nil]);
+            OCMExpect([mockManager subscriptionExpired:sut completion:[OCMArg any]]);
             sut.manager = mockManager;
 
             [timer fire];
@@ -151,7 +152,7 @@ describe(@"UPPEventSubscription", ^{
 
             NSDate *renewDate = [[sut renewTimer] fireDate];
             expect(renewDate).toNot.equal(oldDate);
-            expect(renewDate).to.equal([newDate dateByAddingTimeInterval:-30]);
+            expect(renewDate).to.beWithinAMillisecondOf([newDate dateByAddingTimeInterval:-30]);
         });
 
         it(@"should update expiration timer", ^{
@@ -161,7 +162,7 @@ describe(@"UPPEventSubscription", ^{
 
             NSDate *expirationDate = [[sut expirationTimer] fireDate];
             expect(expirationDate).toNot.equal(oldDate);
-            expect(expirationDate).to.equal(newDate);
+            expect(expirationDate).to.beWithinAMillisecondOf(newDate);
 
         });
 
@@ -186,6 +187,7 @@ describe(@"UPPEventSubscription", ^{
 
         [sut informObserversOfEvent:event];
 
+        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
         OCMVerifyAll(mockObserver);
     });
 });

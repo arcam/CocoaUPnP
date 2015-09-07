@@ -50,14 +50,18 @@
     [self.expirationTimer invalidate];
     [self.renewTimer invalidate];
 
-    self.expirationTimer = [self timerWithFireDate:expiryDate
-                                          selector:@selector(subscriptionExpired)];
+    self.expirationTimer = [NSTimer scheduledTimerWithTimeInterval:[expiryDate timeIntervalSinceNow]
+                                                            target:self
+                                                          selector:@selector(subscriptionExpired)
+                                                          userInfo:nil
+                                                           repeats:NO];
 
-    self.renewTimer = [self timerWithFireDate:[expiryDate dateByAddingTimeInterval:-30]
-                                     selector:@selector(renewSubscription)];
-
-    [[NSRunLoop currentRunLoop] addTimer:self.expirationTimer forMode:NSDefaultRunLoopMode];
-    [[NSRunLoop currentRunLoop] addTimer:self.renewTimer forMode:NSDefaultRunLoopMode];
+    NSDate *renewTime = [expiryDate dateByAddingTimeInterval:-30];
+    self.renewTimer = [NSTimer scheduledTimerWithTimeInterval:[renewTime timeIntervalSinceNow]
+                                                       target:self
+                                                     selector:@selector(renewSubscription)
+                                                     userInfo:nil
+                                                      repeats:NO];
 }
 
 - (NSTimer *)timerWithFireDate:(NSDate *)date selector:(SEL)selector
@@ -75,13 +79,21 @@
     [self.manager renewSubscription:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
         self.subscriptionID = subscriptionID;
         self.expiryDate = expiryDate;
-        [self updateTimersWithExpiryDate:expiryDate];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateTimersWithExpiryDate:expiryDate];
+        });
     }];
 }
 
 - (void)subscriptionExpired
 {
-    [self.manager subscriptionExpired:self completion:nil];
+    [self.manager subscriptionExpired:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+        self.subscriptionID = subscriptionID;
+        self.expiryDate = expiryDate;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateTimersWithExpiryDate:expiryDate];
+        });
+    }];
 }
 
 #pragma mark - Lazy Instantiation
@@ -127,9 +139,11 @@
 
 - (void)informObserversOfEvent:(NSDictionary *)event
 {
-    for (id<UPPEventSubscriptionDelegate> observer in self.observers) {
-        [observer eventRecieved:event];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (id<UPPEventSubscriptionDelegate> observer in self.observers) {
+            [observer eventRecieved:event];
+        }
+    });
 }
 
 @end

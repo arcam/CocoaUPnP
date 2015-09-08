@@ -4,6 +4,8 @@
 #import <Foundation/Foundation.h>
 #import "UPPMediaItemProtocol.h"
 
+@class UPPMediaItemResource;
+
 /**
  This class defines a universal media item object. The object may describe
  a music track, an album, a podcast etc. The UPnP class of the object can be
@@ -98,5 +100,10 @@
  Return the first resource `duration` value that is not nil
  */
 - (NSString *)duration;
+
+/**
+ Return the first media item resource that is not an image.
+ */
+- (UPPMediaItemResource *)firstPlayableResource;
 
 @end

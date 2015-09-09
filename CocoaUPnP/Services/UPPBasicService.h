@@ -5,6 +5,7 @@
 #import "UPPServiceDescription.h"
 
 @class UPPSessionManager;
+@class UPPParameters;
 
 /** This class serves as a base class for all UPnP services
  */
@@ -92,5 +93,5 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
  @param completion A completion block either returning a dictionary response, or
      an error if the call failed
  */
-- (void)_sendPostRequestWithParameters:(NSDictionary *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
 @end

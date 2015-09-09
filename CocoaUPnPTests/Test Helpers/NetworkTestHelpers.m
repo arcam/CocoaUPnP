@@ -3,6 +3,7 @@
 
 #import "NetworkTestHelpers.h"
 #import "UPPError.h"
+#import "UPPParameters.h"
 
 NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
     return @{ @"InstanceID": @"0" };
@@ -41,4 +42,15 @@ void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *) = ^void (N
      parameters:params
      success:[OCMArg any]
      failure:[OCMArg any]];
+};
+
+void (^ExpectGetWithParams)(id, NSDictionary *, NSString *) = ^void(id manager, NSDictionary *params, NSString *url) {
+    OCMExpect([manager POST:url parameters:params success:[OCMArg any] failure:[OCMArg any]]);
+};
+
+void (^RejectGetWithURL)(id, NSString *) = ^void(id manager, NSString *url) {
+    [[manager reject] POST:url
+                parameters:[OCMArg any]
+                   success:[OCMArg any]
+                   failure:[OCMArg any]];
 };

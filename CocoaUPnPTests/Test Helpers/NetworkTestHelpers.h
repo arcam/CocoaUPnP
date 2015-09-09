@@ -4,6 +4,8 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+@class UPPParameters;
+
 /**
  Stub an InstanceID dictionary
 
@@ -37,3 +39,14 @@ void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *);
  @param NSString     The URL the message is posted to
  */
 void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *);
+
+/**
+ Setup an expectation for a successful network call, passing in a session
+ manager, a dictionary of parameters, and a URL.
+ */
+void (^ExpectGetWithParams)(id, NSDictionary *, NSString *);
+
+/**
+ Reject any network call, passing in a session manager and a URL.
+ */
+void (^RejectGetWithURL)(id, NSString *);

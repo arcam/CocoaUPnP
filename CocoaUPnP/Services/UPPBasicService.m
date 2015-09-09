@@ -4,6 +4,7 @@
 #import "UPPBasicService.h"
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 @interface UPPBasicService ()
 @property (strong, nonatomic) NSURL *baseURL;
@@ -73,7 +74,7 @@
     }];
 }
 
-- (void)_sendPostRequestWithParameters:(NSDictionary *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];

@@ -28,6 +28,11 @@
     return self;
 }
 
++ (instancetype)paramsWithKey:(NSString *)key value:(id)value
+{
+    return [self paramsWithKeys:@[key] values:@[value]];
+}
+
 - (void)enumerateKeysAndValuesUsingBlock:(void (^)(id key, id value, NSUInteger idx, BOOL *stop))block
 {
     [self.keys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {

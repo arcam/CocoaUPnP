@@ -3,6 +3,11 @@
 
 #import "UPPParameters.h"
 
+@interface UPPParameters ()
+@property (copy, nonatomic) NSArray *keys;
+@property (copy, nonatomic) NSArray *values;
+@end
+
 SpecBegin(UPPParameters)
 
 describe(@"UPPParameters", ^{
@@ -24,6 +29,13 @@ describe(@"UPPParameters", ^{
         expect(^{
             [UPPParameters paramsWithKeys:keys values:wrongValues];
         }).to.raiseAny();
+    });
+
+    it(@"should allow adding single entry", ^{
+        UPPParameters *p = [UPPParameters paramsWithKey:@"Hello" value:@"World"];
+        expect(p).toNot.beNil();
+        expect(p.keys).to.equal(@[@"Hello"]);
+        expect(p.values).to.equal(@[@"World"]);
     });
 
     it(@"should enumerate based on the order of the keys", ^{

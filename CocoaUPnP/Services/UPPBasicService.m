@@ -74,6 +74,22 @@
     }];
 }
 
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(void(^)(BOOL success, NSError *error))successBlock
+{
+    NSDictionary *wrapped = [self wrapParameters:parameters
+                                      withAction:action];
+
+    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (successBlock) {
+            successBlock(YES, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
+        if (successBlock) {
+            successBlock(NO, returnedError);
+        }
+    }];
+}
+
 - (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
 {
     NSDictionary *wrapped = [self wrapParameters:parameters

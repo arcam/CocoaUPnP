@@ -7,6 +7,7 @@
 #import "UPPConstants.h"
 #import "UPPError.h"
 #import "MockFailSessionManager.h"
+#import "UPPParameters.h"
 
 SpecBegin(UPPConnectionManagerService)
 
@@ -16,12 +17,13 @@ describe(@"UPPConnectionManagerService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
+    __block void (^noCompletion)(NSDictionary *, NSError *);
 
     beforeEach(^{
         service = [[UPPConnectionManagerService alloc] init];
         service.serviceType = @"urn:schemas-upnp-org:service:ConnectionManager:1";
 
-        sessionManager = OCMClassMock([UPPSessionManager class]);
+        sessionManager = [OCMockObject mockForClass:[UPPSessionManager class]];
         service.sessionManager = sessionManager;
 
         url = @"http://127.0.0.1/ctrl";
@@ -29,6 +31,10 @@ describe(@"UPPConnectionManagerService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
+
+        // We exit early for all GET requests that do not provide a completion
+        // block, so explicity create an "empty" completion block.
+        noCompletion = ^(NSDictionary *d, NSError *e) {};
     });
 
     describe(@"when getting protocol info", ^{
@@ -41,13 +47,8 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should send required parameters", ^{
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-            [service protocolInfoWithCompletion:^(NSDictionary *protocolInfo, NSError *error) {
-                expect(protocolInfo[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+            ExpectGetWithParams(sessionManager, expectedParams, url);
+            [service protocolInfoWithCompletion:noCompletion];
             [sessionManager verify];
         });
 
@@ -62,6 +63,12 @@ describe(@"UPPConnectionManagerService", ^{
 
             [sessionManager verify];
         });
+
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service protocolInfoWithCompletion:nil];
+            [sessionManager verify];
+        });
     });
 
     describe(@"when setting prepare for connection", ^{
@@ -70,15 +77,25 @@ describe(@"UPPConnectionManagerService", ^{
         __block NSString *remoteProtocolInfo;
         __block NSString *peerConnectionManager;
         __block NSString *peerConnectionId;
+        __block NSString *direction;
 
         beforeEach(^{
             remoteProtocolInfo = @"remoteProtocolInfo";
             peerConnectionManager = @"peerConnectionManager";
             peerConnectionId = @"peerConnectionId";
+            direction = @"direction";
 
-            NSDictionary *params = @{ @"RemoteProtocolInfo": remoteProtocolInfo,
-                                      @"PeerConnectionManager": peerConnectionManager,
-                                      @"PeerConnectionID": peerConnectionId };
+            NSArray *k = @[ @"RemoteProtocolInfo",
+                            @"PeerConnectionManager",
+                            @"PeerConnectionID",
+                            @"Direction" ];
+
+            NSArray *v = @[ remoteProtocolInfo,
+                            peerConnectionManager,
+                            peerConnectionId,
+                            direction ];
+
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
 
             expectedParams = @{ UPPSOAPActionKey: @"PrepareForConnection",
                                 UPPNameSpaceKey: service.serviceType,
@@ -86,20 +103,15 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should send required parameters", ^{
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-            [service prepareForConnectionWithProtocolInfo:remoteProtocolInfo peerConnectionManager:peerConnectionManager peerConnectionID:peerConnectionId completion:^(NSDictionary *connectionInfo, NSError *error) {
-                expect(connectionInfo[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+            ExpectGetWithParams(sessionManager, expectedParams, url);
+            [service prepareForConnectionWithProtocolInfo:remoteProtocolInfo peerConnectionManager:peerConnectionManager peerConnectionID:peerConnectionId direction:direction completion:noCompletion];
             [sessionManager verify];
         });
 
         it(@"should return an error if call fails", ^{
             VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
 
-            [service prepareForConnectionWithProtocolInfo:remoteProtocolInfo peerConnectionManager:peerConnectionManager peerConnectionID:peerConnectionId completion:^(NSDictionary *connectionInfo, NSError *error) {
+            [service prepareForConnectionWithProtocolInfo:remoteProtocolInfo peerConnectionManager:peerConnectionManager peerConnectionID:peerConnectionId direction:direction completion:^(NSDictionary *connectionInfo, NSError *error) {
                 expect(connectionInfo).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeGeneric);
@@ -117,7 +129,8 @@ describe(@"UPPConnectionManagerService", ^{
         beforeEach(^{
             peerConnectionId = @"peerConnectionId";
 
-            NSDictionary *params = @{ @"ConnectionID": peerConnectionId };
+            UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
+                                                           value:peerConnectionId];
 
             expectedParams = @{ UPPSOAPActionKey: @"ConnectionComplete",
                                 UPPNameSpaceKey: service.serviceType,
@@ -125,10 +138,8 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should send required parameters", ^{
-            VerifyPostWithParams(expectedParams, sessionManager, url);
-
+            ExpectGetWithParams(sessionManager, expectedParams, url);
             [service connectionCompleteWithConnectionID:peerConnectionId success:nil];
-
             [sessionManager verify];
         });
 
@@ -152,13 +163,8 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should send required parameters", ^{
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-            [service currentConnectionIDsWithCompletion:^(NSDictionary *response, NSError *error) {
-                expect(response[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+            ExpectGetWithParams(sessionManager, expectedParams, url);
+            [service currentConnectionIDsWithCompletion:noCompletion];
             [sessionManager verify];
         });
     });
@@ -170,20 +176,16 @@ describe(@"UPPConnectionManagerService", ^{
 
         beforeEach(^{
             connectionId = @"connectionId";
-            NSDictionary *params = @{ @"ConnectionID": connectionId };
+            UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
+                                                           value:connectionId];
             expectedParams = @{ UPPSOAPActionKey: @"GetCurrentConnectionInfo",
                                 UPPNameSpaceKey: service.serviceType,
                                 UPPParametersKey: params };
         });
 
         it(@"should send required parameters", ^{
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-            [service currentConnectionInfoWithConnectionID:connectionId completion:^(NSDictionary *response, NSError *error) {
-                expect(response[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+            ExpectGetWithParams(sessionManager, expectedParams, url);
+            [service currentConnectionInfoWithConnectionID:connectionId completion:noCompletion];
             [sessionManager verify];
         });
     });

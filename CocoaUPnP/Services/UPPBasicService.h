@@ -86,6 +86,18 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 - (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
 
 /**
+ Send a POST request, with a completion block that returns the success state of
+ the call.
+
+ @param parameters   The parameters for the call.
+ @param action       The UPnP action.
+ @param successBlock A completion block which returns a BOOL for whether the
+ call was successful or not. If the call was unsuccessful, an error object is
+ also returned.
+ */
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(void(^)(BOOL success, NSError *error))successBlock;
+
+/**
  Send a POST request, with a completion block
 
  @param parameters The parameters for the call

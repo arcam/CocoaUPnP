@@ -22,27 +22,27 @@ NSString * const UPPCDSSortCriteriaKey = @"SortCriteria";
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetSearchCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetSearchCapabilities"
+                              completion:completion];
 }
 
 - (void)sortCapabilitiesWithCompletion:(void (^)(NSDictionary *, NSError *))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetSortCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetSortCapabilities"
+                              completion:completion];
 }
 
 - (void)systemUpdateIDWithCompletion:(void (^)(NSDictionary *, NSError *))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetSystemUpdateID" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetSystemUpdateID"
+                              completion:completion];
 }
 
 - (void)browseWithObjectID:(NSString *)objectId browseFlag:(NSString *)browseFlag filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(void (^)(NSDictionary *, NSError *))completion
@@ -120,38 +120,9 @@ NSString * const UPPCDSSortCriteriaKey = @"SortCriteria";
 
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithParameters:params action:@"Search" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
-}
-
-#pragma mark - Private Methods
-
-- (void)_addValuesToParams:(NSMutableDictionary **)parameters filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCriteria:(NSString *)sortCriteria
-{
-    if (filter) {
-        [*parameters setObject:filter forKey:@"Filter"];
-    } else {
-        [*parameters setObject:@"*" forKey:@"Filter"];
-    }
-
-    if (startingIndex) {
-        [*parameters setObject:startingIndex forKey:@"StartingIndex"];
-    } else {
-        [*parameters setObject:@0 forKey:@"StartingIndex"];
-    }
-
-    if (requestedCount) {
-        [*parameters setObject:requestedCount forKey:@"RequestedCount"];
-    } else {
-        [*parameters setObject:@20 forKey:@"RequestedCount"];
-    }
-
-    if (sortCriteria) {
-        [*parameters setObject:sortCriteria forKey:@"SortCriteria"];
-    } else {
-        [*parameters setObject:@"" forKey:@"SortCriteria"];
-    }
+    [self _sendPostRequestWithParameters:params
+                                  action:@"Search"
+                              completion:completion];
 }
 
 @end

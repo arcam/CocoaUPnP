@@ -12,9 +12,9 @@
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetProtocolInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetProtocolInfo"
+                              completion:completion];
 }
 
 - (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(UPPResponseBlock)completion
@@ -33,9 +33,9 @@
 
     UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
 
-    [self _sendPostRequestWithParameters:params action:@"PrepareForConnection" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"PrepareForConnection"
+                              completion:completion];
 }
 
 - (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
@@ -52,9 +52,9 @@
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetCurrentConnectionIDs" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetCurrentConnectionIDs"
+                              completion:completion];
 }
 
 - (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion
@@ -63,9 +63,9 @@
 
     UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID" value:connectionId];
 
-    [self _sendPostRequestWithParameters:params action:@"GetCurrentConnectionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"GetCurrentConnectionInfo"
+                              completion:completion];
 }
 
 @end

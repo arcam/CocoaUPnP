@@ -5,8 +5,8 @@
 #import "UPPError.h"
 #import "UPPParameters.h"
 
-NSDictionary *(^InstanceDict)(void) = ^NSDictionary*(void) {
-    return @{ @"InstanceID": @"0" };
+UPPParameters *(^InstanceParams)(void) = ^UPPParameters*(void) {
+    return [UPPParameters paramsWithKey:@"InstanceID" value:@"0"];
 };
 
 void (^VerifyPostWithParams)(NSDictionary *, id, NSString *) = ^void (NSDictionary *params, id manager, NSString *url) {

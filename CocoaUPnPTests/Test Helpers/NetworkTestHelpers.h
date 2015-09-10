@@ -7,11 +7,11 @@
 @class UPPParameters;
 
 /**
- Stub an InstanceID dictionary
+ Stub a parameters object containing a single instance ID key and value.
 
- @return Returns an NSDictionary containing `InstanceID: 0`
+ @return Returns a UPPParamaters object containing `InstanceID: 0`.
  */
-NSDictionary *(^InstanceDict)(void);
+UPPParameters *(^InstanceParams)(void);
 
 /**
  Verify parameters passed into a POST request

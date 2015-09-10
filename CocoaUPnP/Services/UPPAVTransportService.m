@@ -4,6 +4,7 @@
 #import "UPPAVTransportService.h"
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 @implementation UPPAVTransportService
 
@@ -12,23 +13,25 @@
 
 - (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 {
-    NSDictionary *parameters = @{ @"CurrentURI": currentURI,
-                                  @"CurrentURIMetaData": currentURIMetaData ?: @"" };
+    NSArray *keys = @[ @"InstanceID", @"CurrentURI", @"CurrentURIMetaData" ];
+    NSString *c = currentURIMetaData ?: @"";
+    NSArray *values = @[ instanceId, currentURI, c ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetAVTransportURI"
-                              parameters:parameters
                                  success:successBlock];
 }
 
 - (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
 {
-    NSDictionary *parameters = @{ @"NextURI": nextURI,
-                                  @"NextURIMetaData": nextURIMetaData ?: @"" };
+    NSArray *keys = @[ @"InstanceID", @"NextURI", @"NextURIMetaData" ];
+    NSString *n = nextURIMetaData ?: @"";
+    NSArray *values = @[ instanceId, nextURI, n ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetNextAVTransportURI"
-                              parameters:parameters
                                  success:successBlock];
 }
 
@@ -39,61 +42,63 @@
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetMediaInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetMediaInfo"
+                              completion:completion];
 }
 
 - (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportInfo, NSError *error))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetTransportInfo"
+                              completion:completion];
 }
 
 - (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *positionInfo,  NSError *error))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetPositionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetPositionInfo"
+                              completion:completion];
 }
 
 - (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *deviceCapabilities, NSError *error))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetDeviceCapabilities" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetDeviceCapabilities"
+                              completion:completion];
 }
 
 - (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportSettings, NSError *error))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportSettings" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetTransportSettings"
+                              completion:completion];
 }
 
 - (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithInstanceID:instanceId action:@"GetTransportActions" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"GetTransportActions"
+                              completion:completion];
 }
 
 #pragma mark - General Transport Controls
 
 - (void)stopWithInstanceID:(NSString *)instanceId success:(void (^)(BOOL, NSError *))successBlock
 {
-    [self _sendPostRequestWithInstanceID:instanceId action:@"Stop" parameters:nil success:successBlock];
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
+                                  action:@"Stop"
+                                 success:successBlock];
 }
 
 - (void)playWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
@@ -103,54 +108,51 @@
 
 - (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(void(^)(BOOL success, NSError *error))successBlock;
 {
-    NSDictionary *parameters = @{ @"Speed": speed };
+    NSArray *keys = @[ @"InstanceID", @"Speed" ];
+    NSArray *values = @[ instanceId, speed ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"Play"
-                              parameters:parameters
                                  success:successBlock];
 }
 
 - (void)pauseWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Pause"
-                              parameters:nil
                                  success:successBlock];
 }
 
 - (void)recordWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Record"
-                              parameters:nil
                                  success:successBlock];
 }
 
 - (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    NSDictionary *parameters = @{ @"Unit": unit,
-                                  @"Target": target };
+    NSArray *keys = @[ @"InstanceID", @"Unit", @"Target" ];
+    NSArray *values = @[ instanceId, unit, target ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"Seek"
-                              parameters:parameters
                                  success:successBlock];
 }
 
 - (void)nextWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Next"
-                              parameters:nil
                                  success:successBlock];
 }
 
 - (void)previousWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Previous"
-                              parameters:nil
                                  success:successBlock];
 }
 
@@ -159,22 +161,31 @@
 
 - (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    NSDictionary *parameters = @{ @"NewPlayMode": newPlayMode };
+    NSArray *keys = @[ @"InstanceID", @"NewPlayMode" ];
+    NSArray *values = @[ instanceId, newPlayMode ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetPlayMode"
-                              parameters:parameters
                                  success:successBlock];
 }
 
 - (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    NSDictionary *parameters = @{ @"NewRecordMode": newRecordMode };
+    NSArray *keys = @[ @"InstanceID", @"NewRecordMode" ];
+    NSArray *values = @[ instanceId, newRecordMode ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetRecordMode"
-                              parameters:parameters
                                  success:successBlock];
+}
+
+#pragma mark - Private Methods
+
+- (UPPParameters *)paramsWithInstanceID:(NSString *)iid
+{
+    return [UPPParameters paramsWithKey:@"InstanceID" value:iid];
 }
 
 @end

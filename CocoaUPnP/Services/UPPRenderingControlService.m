@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPRenderingControlService.h"
+#import "UPPParameters.h"
 
 @implementation UPPRenderingControlService
 
@@ -9,23 +10,25 @@
 {
     if (!completion) { return; }
 
-    NSDictionary *parameters = @{ @"InstanceID": instanceId,
-                                  @"Channel": channel ?: @"Master" };
+    NSArray *keys = @[ @"InstanceID", @"Channel" ];
+    NSString *ch = channel ?: @"Master";
+    NSArray *values = @[ instanceId, ch ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithParameters:parameters action:@"GetMute" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"GetMute"
+                              completion:completion];
 }
 
 - (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    NSNumber *muteNumber = mute ? @1 : @0;
-    NSDictionary *parameters = @{ @"Channel": channel ?: @"Master",
-                                  @"DesiredMute": muteNumber };
+    NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredMute" ];
+    NSString *ch = channel ?: @"Master";
+    NSArray *values = @[ instanceId, ch, @(mute) ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetMute"
-                              parameters:parameters
                                  success:successBlock];
 }
 
@@ -33,22 +36,25 @@
 {
     if (!completion) { return; }
 
-    NSDictionary *parameters = @{ @"InstanceID": instanceId,
-                                  @"Channel": channel ?: @"Master" };
+    NSArray *keys = @[ @"InstanceID", @"Channel" ];
+    NSString *ch = channel ?: @"Master";
+    NSArray *values = @[ instanceId, ch ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithParameters:parameters action:@"GetVolume" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"GetVolume"
+                              completion:completion];
 }
 
 - (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock
 {
-    NSDictionary *parameters = @{ @"Channel": channel ?: @"Master" ,
-                                  @"DesiredVolume": volume };
+    NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredVolume" ];
+    NSString *ch = channel ?: @"Master";
+    NSArray *values = @[ instanceId, ch, volume ];
+    UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithInstanceID:instanceId
+    [self _sendPostRequestWithParameters:params
                                   action:@"SetVolume"
-                              parameters:parameters
                                  success:successBlock];
 }
 

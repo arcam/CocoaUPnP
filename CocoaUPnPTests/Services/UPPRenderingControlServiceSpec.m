@@ -15,7 +15,7 @@ describe(@"UPPRenderingControlService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
-    __block void (^noCompletion)(NSDictionary *, NSError *);
+    __block UPPResponseBlock noCompletion;
 
     beforeEach(^{
         service = [[UPPRenderingControlService alloc] init];

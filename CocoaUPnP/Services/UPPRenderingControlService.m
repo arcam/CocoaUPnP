@@ -6,7 +6,7 @@
 
 @implementation UPPRenderingControlService
 
-- (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -20,7 +20,7 @@
                               completion:completion];
 }
 
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
 {
     NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredMute" ];
     NSString *ch = channel ?: @"Master";
@@ -32,7 +32,7 @@
                                  success:successBlock];
 }
 
-- (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -46,7 +46,7 @@
                               completion:completion];
 }
 
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
 {
     NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredVolume" ];
     NSString *ch = channel ?: @"Master";

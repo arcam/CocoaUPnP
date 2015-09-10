@@ -18,7 +18,7 @@ NSString * const UPPCDSSortCriteriaKey = @"SortCriteria";
 
 @implementation UPPContentDirectoryService
 
-- (void)searchCapabilitiesWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)searchCapabilitiesWithCompletion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 

@@ -11,7 +11,7 @@
 
 #pragma mark - Transport URI Methods
 
-- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
 {
     NSArray *keys = @[ @"InstanceID", @"CurrentURI", @"CurrentURIMetaData" ];
     NSString *c = currentURIMetaData ?: @"";
@@ -23,7 +23,7 @@
                                  success:successBlock];
 }
 
-- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
 {
     NSArray *keys = @[ @"InstanceID", @"NextURI", @"NextURIMetaData" ];
     NSString *n = nextURIMetaData ?: @"";
@@ -38,7 +38,7 @@
 
 #pragma mark - Getting Information
 
-- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *mediaInfo, NSError *error))completion
+- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -47,7 +47,7 @@
                               completion:completion];
 }
 
-- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportInfo, NSError *error))completion
+- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -56,7 +56,7 @@
                               completion:completion];
 }
 
-- (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *positionInfo,  NSError *error))completion
+- (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -65,7 +65,7 @@
                               completion:completion];
 }
 
-- (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *deviceCapabilities, NSError *error))completion
+- (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -74,7 +74,7 @@
                               completion:completion];
 }
 
-- (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportSettings, NSError *error))completion
+- (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -83,7 +83,7 @@
                               completion:completion];
 }
 
-- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(void(^)(NSDictionary *transportActions, NSError *error))completion
+- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -94,19 +94,19 @@
 
 #pragma mark - General Transport Controls
 
-- (void)stopWithInstanceID:(NSString *)instanceId success:(void (^)(BOOL, NSError *))successBlock
+- (void)stopWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Stop"
                                  success:successBlock];
 }
 
-- (void)playWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)playWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
 {
     [self playWithInstanceID:instanceId speed:@"1" success:successBlock];
 }
 
-- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(UPPSuccessBlock)successBlock;
 {
     NSArray *keys = @[ @"InstanceID", @"Speed" ];
     NSArray *values = @[ instanceId, speed ];
@@ -117,21 +117,21 @@
                                  success:successBlock];
 }
 
-- (void)pauseWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)pauseWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Pause"
                                  success:successBlock];
 }
 
-- (void)recordWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)recordWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Record"
                                  success:successBlock];
 }
 
-- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(UPPSuccessBlock)successBlock
 {
     NSArray *keys = @[ @"InstanceID", @"Unit", @"Target" ];
     NSArray *values = @[ instanceId, unit, target ];
@@ -142,14 +142,14 @@
                                  success:successBlock];
 }
 
-- (void)nextWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)nextWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Next"
                                  success:successBlock];
 }
 
-- (void)previousWithInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)previousWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Previous"
@@ -159,7 +159,7 @@
 
 #pragma mark - Mode Setting
 
-- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     NSArray *keys = @[ @"InstanceID", @"NewPlayMode" ];
     NSArray *values = @[ instanceId, newPlayMode ];
@@ -170,7 +170,7 @@
                                  success:successBlock];
 }
 
-- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
 {
     NSArray *keys = @[ @"InstanceID", @"NewRecordMode" ];
     NSArray *values = @[ instanceId, newRecordMode ];

@@ -8,7 +8,7 @@
 
 @implementation UPPConnectionManagerService
 
-- (void)protocolInfoWithCompletion:(void(^)(NSDictionary *protocolInfo, NSError *error))completion
+- (void)protocolInfoWithCompletion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -17,7 +17,7 @@
     }];
 }
 
-- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(void(^)(NSDictionary *connectionInfo, NSError *error))completion
+- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -38,7 +38,7 @@
     }];
 }
 
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
 {
     UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
                                                    value:connectionId];
@@ -48,7 +48,7 @@
                                  success:successBlock];
 }
 
-- (void)currentConnectionIDsWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)currentConnectionIDsWithCompletion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
@@ -57,7 +57,7 @@
     }];
 }
 
-- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 

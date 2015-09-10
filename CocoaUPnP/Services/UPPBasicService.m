@@ -40,7 +40,7 @@
     return [wrapper copy];
 }
 
-- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(void(^)(BOOL success, NSError *error))successBlock
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(UPPSuccessBlock)successBlock
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
@@ -56,7 +56,7 @@
     }];
 }
 
-- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(UPPResponseBlock)completion
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];

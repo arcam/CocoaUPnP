@@ -14,7 +14,7 @@ describe(@"UPPContentDirectoryService", ^{
     __block UPPContentDirectoryService *service;
     __block id sessionManager;
     __block NSString *url;
-    __block void (^noCompletion)(NSDictionary *, NSError *);
+    __block UPPResponseBlock noCompletion;
 
     beforeEach(^{
         service = [[UPPContentDirectoryService alloc] init];

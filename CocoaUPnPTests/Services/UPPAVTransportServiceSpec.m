@@ -153,7 +153,7 @@ describe(@"UPPAVTransportService", ^{
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: InstanceParams() };
 
-            VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectAndReturnErrorWithParams(expectedParams, sessionManager, url);
 
             [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
                 expect(mediaInfo).to.beNil();

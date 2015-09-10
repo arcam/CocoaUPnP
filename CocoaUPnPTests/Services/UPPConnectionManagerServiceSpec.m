@@ -53,7 +53,7 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should return an error if call fails", ^{
-            VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectAndReturnErrorWithParams(expectedParams, sessionManager, url);
 
             [service protocolInfoWithCompletion:^(NSDictionary *protocolInfo, NSError *error) {
                 expect(protocolInfo).to.beNil();
@@ -109,7 +109,7 @@ describe(@"UPPConnectionManagerService", ^{
         });
 
         it(@"should return an error if call fails", ^{
-            VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectAndReturnErrorWithParams(expectedParams, sessionManager, url);
 
             [service prepareForConnectionWithProtocolInfo:remoteProtocolInfo peerConnectionManager:peerConnectionManager peerConnectionID:peerConnectionId direction:direction completion:^(NSDictionary *connectionInfo, NSError *error) {
                 expect(connectionInfo).to.beNil();

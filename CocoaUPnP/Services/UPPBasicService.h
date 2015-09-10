@@ -65,27 +65,6 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 + (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description;
 
 /**
- Send a POST request, with an error pointer
-
- @param instanceId The instance identifier
- @param action     The UPnP action
- @param parameters UPnP parameters
- @param success    An optional block which returns the success state of the call,
- along with an error object if the call was unsuccessful.
- */
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
-
-/**
- Send a POST request, with a completion block
-
- @param instanceId The instance identifier
- @param action     The UPnP action
- @param completion A completion block either returning a dictionary response, or
-     an error if the call failed
- */
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
-
-/**
  Send a POST request, with a completion block that returns the success state of
  the call.
 
@@ -106,4 +85,5 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
      an error if the call failed
  */
 - (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
+
 @end

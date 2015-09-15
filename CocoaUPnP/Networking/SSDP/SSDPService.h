@@ -33,7 +33,7 @@
 /**
  The location of the service's description XML file
  */
-@property (readonly, nonatomic) NSURL *location;
+@property (readonly, nonatomic) NSURL *xmlLocation;
 
 /**
  The UPnP service type of the device

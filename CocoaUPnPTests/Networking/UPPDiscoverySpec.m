@@ -71,7 +71,7 @@ describe(@"UPPDiscovery", ^{
             discovery.parser = mockParser;
             mockDevice = OCMClassMock([UPPBasicDevice class]);
             mockService = OCMClassMock([SSDPService class]);
-            OCMStub([mockService location]).andReturn(url);
+            OCMStub([mockService xmlLocation]).andReturn(url);
             mockDelegate = OCMProtocolMock(@protocol(UPPDiscoveryDelegate));
             discovery.delegate = mockDelegate;
 

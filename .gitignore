@@ -5,6 +5,7 @@
 build/
 DerivedData
 *.gcno
+*.gcda
 
 ## Various Settings
 *.pbxuser

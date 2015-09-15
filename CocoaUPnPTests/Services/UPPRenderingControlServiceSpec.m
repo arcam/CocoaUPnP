@@ -5,6 +5,7 @@
 #import "UPPConstants.h"
 #import "UPPSessionManager.h"
 #import "NetworkTestHelpers.h"
+#import "UPPParameters.h"
 
 SpecBegin(UPPRenderingControlService)
 
@@ -14,6 +15,7 @@ describe(@"UPPRenderingControlService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
+    __block UPPResponseBlock noCompletion;
 
     beforeEach(^{
         service = [[UPPRenderingControlService alloc] init];
@@ -27,11 +29,14 @@ describe(@"UPPRenderingControlService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
+
+        // We exit early for all GET requests that do not provide a completion
+        // block, so explicity create an "empty" completion block.
+        noCompletion = ^(NSDictionary *d, NSError *e) {};
     });
 
     describe(@"mute status", ^{
 
-        __block NSDictionary *params;
         __block NSDictionary *expectedParams;
         __block NSString *channel;
 
@@ -41,49 +46,40 @@ describe(@"UPPRenderingControlService", ^{
 
         describe(@"when getting mute", ^{
             beforeEach(^{
-                params = @{ @"InstanceID": instanceId,
-                            @"Channel": channel };
+                NSArray *k = @[ @"InstanceID", @"Channel" ];
+                NSArray *v = @[ instanceId, channel ];
+                UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
+
                 expectedParams = @{ UPPSOAPActionKey: @"GetMute",
                                     UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
 
             it(@"should send required parameters", ^{
-                VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-                [service muteWithInstanceID:instanceId channel:channel completion:^(NSDictionary *response, NSError *error) {
-                    expect(response).toNot.beNil();
-                    expect(error).to.beNil();
-                }];
-
+                ExpectGetWithParams(sessionManager, expectedParams, url);
+                [service muteWithInstanceID:instanceId channel:channel completion:noCompletion];
                 [sessionManager verify];
             });
 
             it(@"should send required parameters with nil channel", ^{
-                VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-                [service muteWithInstanceID:instanceId channel:nil completion:^(NSDictionary *response, NSError *error) {
-                    expect(response).toNot.beNil();
-                    expect(error).to.beNil();
-                }];
-
+                ExpectGetWithParams(sessionManager, expectedParams, url);
+                [service muteWithInstanceID:instanceId channel:nil completion:noCompletion];
                 [sessionManager verify];
             });
         });
 
         describe(@"when setting mute", ^{
             beforeEach(^{
-                params = @{ @"InstanceID": instanceId,
-                            @"Channel": channel,
-                            @"DesiredMute": @1 };
-
+                NSArray *k = @[ @"InstanceID", @"Channel", @"DesiredMute" ];
+                NSArray *v = @[ instanceId, channel, @YES ];
+                UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
                 expectedParams = @{ UPPSOAPActionKey: @"SetMute",
                                     UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
 
             it(@"should send required parameters", ^{
-                VerifyPostWithParams(expectedParams, sessionManager, url);
+                ExpectGetWithParams(sessionManager, expectedParams, url);
 
                 [service setMute:YES
                   withInstanceID:instanceId
@@ -94,7 +90,7 @@ describe(@"UPPRenderingControlService", ^{
             });
 
             it(@"should send required parameters with nil channel", ^{
-                VerifyPostWithParams(expectedParams, sessionManager, url);
+                ExpectGetWithParams(sessionManager, expectedParams, url);
 
                 [service setMute:YES
                   withInstanceID:instanceId
@@ -105,14 +101,14 @@ describe(@"UPPRenderingControlService", ^{
             });
 
             it(@"should send required parameters with mute off", ^{
-                params = @{ @"InstanceID": instanceId,
-                            @"Channel": channel,
-                            @"DesiredMute": @0 };
+                NSArray *k = @[ @"InstanceID", @"Channel", @"DesiredMute" ];
+                NSArray *v = @[ instanceId, channel, @NO ];
+                UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
 
                 expectedParams = @{ UPPSOAPActionKey: @"SetMute",
                                     UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
-                VerifyPostWithParams(expectedParams, sessionManager, url);
+                ExpectGetWithParams(sessionManager, expectedParams, url);
 
                 [service setMute:NO
                   withInstanceID:instanceId
@@ -126,7 +122,6 @@ describe(@"UPPRenderingControlService", ^{
 
     describe(@"volume", ^{
 
-        __block NSDictionary *params;
         __block NSDictionary *expectedParams;
         __block NSString *channel;
 
@@ -136,49 +131,39 @@ describe(@"UPPRenderingControlService", ^{
 
         describe(@"when getting volume", ^{
             beforeEach(^{
-                params = @{ @"InstanceID": instanceId,
-                            @"Channel": channel };
+                NSArray *k = @[ @"InstanceID", @"Channel" ];
+                NSArray *v = @[ instanceId, channel ];
+                UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
                 expectedParams = @{ UPPSOAPActionKey: @"GetVolume",
                                     UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
 
             it(@"should send required parameters", ^{
-                VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-                [service volumeWithInstanceID:instanceId channel:channel completion:^(NSDictionary *response, NSError *error) {
-                    expect(response).toNot.beNil();
-                    expect(error).to.beNil();
-                }];
-
+                ExpectGetWithParams(sessionManager, expectedParams, url);
+                [service volumeWithInstanceID:instanceId channel:channel completion:noCompletion];
                 [sessionManager verify];
             });
 
             it(@"should send required parameters with nil channel", ^{
-                VerifyGetPostWithParams(expectedParams, sessionManager, url);
-
-                [service volumeWithInstanceID:instanceId channel:nil completion:^(NSDictionary *response, NSError *error) {
-                    expect(response).toNot.beNil();
-                    expect(error).to.beNil();
-                }];
-
+                ExpectGetWithParams(sessionManager, expectedParams, url);
+                [service volumeWithInstanceID:instanceId channel:nil completion:noCompletion];
                 [sessionManager verify];
             });
         });
 
         describe(@"when setting volume", ^{
             beforeEach(^{
-                params = @{ @"InstanceID": instanceId,
-                            @"Channel": channel,
-                            @"DesiredVolume": @1 };
-
+                NSArray *k = @[ @"InstanceID", @"Channel", @"DesiredVolume" ];
+                NSArray *v = @[ instanceId, channel, @1 ];
+                UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
                 expectedParams = @{ UPPSOAPActionKey: @"SetVolume",
                                     UPPNameSpaceKey: service.serviceType,
                                     UPPParametersKey: params };
             });
 
             it(@"should send required parameters", ^{
-                VerifyPostWithParams(expectedParams, sessionManager, url);
+                ExpectGetWithParams(sessionManager, expectedParams, url);
 
                 [service setVolume:@1
                     withInstanceID:instanceId
@@ -189,7 +174,7 @@ describe(@"UPPRenderingControlService", ^{
             });
 
             it(@"should send required parameters with nil channel", ^{
-                VerifyPostWithParams(expectedParams, sessionManager, url);
+                ExpectGetWithParams(sessionManager, expectedParams, url);
 
                 [service setVolume:@1
                     withInstanceID:instanceId

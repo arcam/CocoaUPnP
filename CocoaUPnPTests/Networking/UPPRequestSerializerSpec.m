@@ -3,6 +3,7 @@
 
 #import "UPPRequestSerializer.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 SpecBegin(UPPRequestSerializer)
 
@@ -24,7 +25,10 @@ describe(@"UPPRequestSerializer", ^{
 
         soapAction = @"Play";
         serviceType = @"urn:schemas-upnp-org:service:AVTransport:1";
-        NSDictionary *params = @{ @"InstanceID" : @"0", @"Speed" : @"1" };
+        NSArray *keys = @[ @"InstanceID", @"Speed" ];
+        NSArray *values = @[ @"0", @"1" ];
+        UPPParameters *params = [UPPParameters paramsWithKeys:keys
+                                                       values:values];
 
         NSDictionary *paramWrapper = @{ UPPSOAPActionKey: soapAction,
                                         UPPNameSpaceKey: serviceType,

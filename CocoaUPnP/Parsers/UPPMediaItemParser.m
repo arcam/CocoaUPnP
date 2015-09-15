@@ -46,10 +46,8 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
-    [document definePrefix:@"didl" forDefaultNamespace:@"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"];
-
     __block NSMutableArray *items;
-    [document enumerateElementsWithXPath:@"/didl:DIDL-Lite/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+    [document enumerateElementsWithXPath:@"/*[local-name() = 'DIDL-Lite']/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 
         UPPMediaItem *item = [[UPPMediaItem alloc] init];
 

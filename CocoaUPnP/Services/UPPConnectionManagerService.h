@@ -15,7 +15,7 @@
  @param completion A completion block which returns the parsed response, or an
      error if unsuccessful
  */
-- (void)protocolInfoWithCompletion:(void(^)(NSDictionary *protocolInfo, NSError *error))completion;
+- (void)protocolInfoWithCompletion:(UPPResponseBlock)completion;
 
 /**
  Tell device to prepare to connect to the network. See 2.4.2 of the service
@@ -25,10 +25,11 @@
      the content
  @param peerConnectionManager The connection manager
  @param peerConnectionId      The connection identifier
+ @param peerConnectionId      The direction: either Input or Output
  @param completion            A completion block which returns the parsed
      information, or an error if unsuccessful
  */
-- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId completion:(void(^)(NSDictionary *connectionInfo, NSError *error))completion;
+- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(UPPResponseBlock)completion;
 
 /**
  Inform the device that connection is complete. See 2.4.3 of the service template
@@ -39,7 +40,7 @@
  call, along with an error object if the call was unsuccessful.
 
  */
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
 
 /**
  Get current connection IDs. See 2.4.4 of the service template
@@ -47,7 +48,7 @@
  @param completion A completion block which returns the parsed information, or
      an error if unsuccessful
  */
-- (void)currentConnectionIDsWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)currentConnectionIDsWithCompletion:(UPPResponseBlock)completion;
 
 /**
  Get current connection info. See 2.4.4 of the service template
@@ -56,6 +57,6 @@
  @param completion   A completion block which returns the parsed information, or
      an error if unsuccessful
  */
-- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(void(^)(NSDictionary *response, NSError *error))completion;
+- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion;
 
 @end

@@ -7,6 +7,7 @@
 #import "UPPConstants.h"
 #import "UPPError.h"
 #import "NetworkTestHelpers.h"
+#import "UPPParameters.h"
 
 SpecBegin(UPPAVTransportService)
 
@@ -16,6 +17,7 @@ describe(@"UPPAVTransportService", ^{
     __block id sessionManager;
     __block NSString *url;
     __block NSString *instanceId;
+    __block UPPResponseBlock noCompletion;
 
     beforeEach(^{
         service = [[UPPAVTransportService alloc] init];
@@ -29,27 +31,31 @@ describe(@"UPPAVTransportService", ^{
         service.controlURL = controlURL;
 
         instanceId = @"0";
+
+        // We exit early for all GET requests that do not provide a completion
+        // block, so explicity create an "empty" completion block.
+        noCompletion = ^(NSDictionary *d, NSError *e) {};
     });
 
     describe(@"when setting current transport URI", ^{
         __block NSString *currentURI;
         __block NSString *currentURIMetaData;
+        __block NSArray *keys;
 
         beforeEach(^{
             currentURI = @"currentURI";
             currentURIMetaData = @"currentURIMetaData";
+            keys = @[ @"InstanceID", @"CurrentURI", @"CurrentURIMetaData" ];
         });
 
         it(@"should send parameters", ^{
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"CurrentURI": currentURI,
-                                      @"CurrentURIMetaData": currentURIMetaData };
-
+            NSArray *v = @[ instanceId, currentURI, currentURIMetaData ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetAVTransportURI",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service setAVTransportURI:currentURI
                     currentURIMetaData:currentURIMetaData
@@ -60,15 +66,13 @@ describe(@"UPPAVTransportService", ^{
         });
 
         it(@"should not raise an exception with no metadata", ^{
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"CurrentURI": currentURI,
-                                      @"CurrentURIMetaData": @"" };
-
+            NSArray *v = @[ instanceId, currentURI, @"" ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetAVTransportURI",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service setAVTransportURI:currentURI
                     currentURIMetaData:nil
@@ -90,23 +94,22 @@ describe(@"UPPAVTransportService", ^{
 
     describe(@"when setting next transport URI", ^{
         __block NSString *nextURI;
+        __block NSArray *keys;
 
         beforeEach(^{
             nextURI = @"nextURI";
+            keys = @[ @"InstanceID", @"NextURI", @"NextURIMetaData" ];
         });
 
         it(@"should send parameters", ^{
             NSString *nextURIMetaData = @"nextURIMetaData";
-
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"NextURI": nextURI,
-                                      @"NextURIMetaData": nextURIMetaData };
-
+            NSArray *v = @[ instanceId, nextURI, nextURIMetaData ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetNextAVTransportURI",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service setNextAVTransportURI:nextURI
                            nextURIMetaData:nextURIMetaData
@@ -117,15 +120,13 @@ describe(@"UPPAVTransportService", ^{
         });
 
         it(@"should not raise an exception with nil metadata", ^{
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"NextURI": nextURI,
-                                      @"NextURIMetaData": @"" };
-
+            NSArray *v = @[ instanceId, nextURI, @"" ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetNextAVTransportURI",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service setNextAVTransportURI:nextURI
                            nextURIMetaData:nil
@@ -140,21 +141,19 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
-                expect(mediaInfo[@"Hello"]).to.equal(@"World");
-            }];
+            [service mediaInfoWithInstanceID:instanceId completion:noCompletion];
         });
 
         it(@"should return an error when call fails", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetMediaInfo",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyFailedGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectAndReturnErrorWithParams(expectedParams, sessionManager, url);
 
             [service mediaInfoWithInstanceID:instanceId completion:^(NSDictionary *mediaInfo, NSError *error) {
                 expect(mediaInfo).to.beNil();
@@ -170,14 +169,11 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetTransportInfo",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service transportInfoWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
-                expect(dict[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
+            [service transportInfoWithInstanceID:instanceId completion:noCompletion];
         });
     });
 
@@ -185,14 +181,11 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetPositionInfo",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service positionInfoWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
-                expect(dict[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
+            [service positionInfoWithInstanceID:instanceId completion:noCompletion];
         });
     });
 
@@ -200,14 +193,11 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetDeviceCapabilities",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service deviceCapabilitiesWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
-                expect(dict[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
+            [service deviceCapabilitiesWithInstanceID:instanceId completion:noCompletion];
         });
     });
 
@@ -215,14 +205,11 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetTransportSettings",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service transportSettingsWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
-                expect(dict[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
+            [service transportSettingsWithInstanceID:instanceId completion:noCompletion];
         });
     });
 
@@ -230,9 +217,9 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send stop command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Stop",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service stopWithInstanceID:instanceId success:nil];
 
@@ -242,37 +229,33 @@ describe(@"UPPAVTransportService", ^{
 
     describe(@"when starting playback", ^{
         it(@"should send play command", ^{
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"Speed": @"1" };
-
+            NSArray *k = @[ @"InstanceID", @"Speed" ];
+            NSArray *v = @[ instanceId, @"1" ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service playWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
 
         it(@"should send play command with speed", ^{
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"Speed": @"2" };
-
+            NSArray *k = @[ @"InstanceID", @"Speed" ];
+            NSArray *v = @[ instanceId, @"2" ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Play",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service playWithInstanceID:instanceId speed:@"2" success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -280,15 +263,13 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send pause command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Pause",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service pauseWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -296,15 +277,13 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send record command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Record",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service recordWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -312,24 +291,21 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send seek command", ^{
             NSString *unit = @"REL_TIME";
             NSString *target = @"01:02:04.0000";
-
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"Unit": unit,
-                                      @"Target": target };
+            NSArray *k = @[ @"InstanceID", @"Unit", @"Target" ];
+            NSArray *v = @[ instanceId, unit, target ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Seek",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service setSeekWithInstanceID:instanceId
                                       unit:unit
                                     target:target
                                    success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -337,15 +313,13 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send next command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Next",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service nextWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -353,59 +327,53 @@ describe(@"UPPAVTransportService", ^{
         it(@"should send previous command", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Previous",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service previousWithInstanceID:instanceId success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
     describe(@"when setting play mode", ^{
         it(@"should send play mode command", ^{
             NSString *newPlayMode = @"SHUFFLE";
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"NewPlayMode": newPlayMode };
-
+            NSArray *k = @[ @"InstanceID", @"NewPlayMode" ];
+            NSArray *v = @[ instanceId, newPlayMode ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetPlayMode",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
-            [service setPlayMode:(NSString *)newPlayMode
+            [service setPlayMode:newPlayMode
                   withInstanceID:instanceId
                          success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
     describe(@"when setting record mode", ^{
         it(@"should send record mode command", ^{
             NSString *newRecordMode = @"0:BASIC";
-            NSDictionary *params = @{ @"InstanceID": instanceId,
-                                      @"NewRecordMode": newRecordMode };
-
+            NSArray *k = @[ @"InstanceID", @"NewRecordMode" ];
+            NSArray *v = @[ instanceId, newRecordMode ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"SetRecordMode",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            NSError *error = nil;
             [service setRecordMode:(NSString *)newRecordMode
                     withInstanceID:instanceId
                            success:nil];
 
             [sessionManager verify];
-            expect(error).to.beNil();
         });
     });
 
@@ -413,14 +381,11 @@ describe(@"UPPAVTransportService", ^{
         it(@"should return information", ^{
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetCurrentTransportActions",
                                               UPPNameSpaceKey: service.serviceType,
-                                              UPPParametersKey: InstanceDict() };
+                                              UPPParametersKey: InstanceParams() };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service transportActionsWithInstanceID:instanceId completion:^(NSDictionary *dict, NSError *error) {
-                expect(dict[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
+            [service transportActionsWithInstanceID:instanceId completion:noCompletion];
         });
     });
 });

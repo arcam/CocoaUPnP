@@ -4,30 +4,14 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-/**
- Stub an InstanceID dictionary
-
- @return Returns an NSDictionary containing `InstanceID: 0`
- */
-NSDictionary *(^InstanceDict)(void);
+@class UPPParameters;
 
 /**
- Verify parameters passed into a POST request
+ Stub a parameters object containing a single instance ID key and value.
 
- @param NSDictionary The parameters
- @param id           The session manager
- @param NSString     The URL the request is POSTed to
+ @return Returns a UPPParamaters object containing `InstanceID: 0`.
  */
-void (^VerifyPostWithParams)(NSDictionary *, id, NSString *);;
-
-/**
- Setup an expectation for a network call, and return stubbed data
-
- @param NSDictionary The parameters passed into the method
- @param id           The session manager to set the expectation on
- @param NSString     The URL the message is posted to
- */
-void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *);
+UPPParameters *(^InstanceParams)(void);
 
 /**
  Setup an expectation for a failed network call, and return stubbed error
@@ -36,4 +20,15 @@ void (^VerifyGetPostWithParams)(NSDictionary *, id, NSString *);
  @param id           The session manager to set the expectation on
  @param NSString     The URL the message is posted to
  */
-void (^VerifyFailedGetPostWithParams)(NSDictionary *, id, NSString *);
+void (^ExpectAndReturnErrorWithParams)(NSDictionary *, id, NSString *);
+
+/**
+ Setup an expectation for a successful network call, passing in a session
+ manager, a dictionary of parameters, and a URL.
+ */
+void (^ExpectGetWithParams)(id, NSDictionary *, NSString *);
+
+/**
+ Reject any network call, passing in a session manager and a URL.
+ */
+void (^RejectGetWithURL)(id, NSString *);

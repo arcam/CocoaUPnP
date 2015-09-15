@@ -50,28 +50,21 @@
     [self.expirationTimer invalidate];
     [self.renewTimer invalidate];
 
-    self.expirationTimer = [NSTimer scheduledTimerWithTimeInterval:[expiryDate timeIntervalSinceNow]
-                                                            target:self
-                                                          selector:@selector(subscriptionExpired)
-                                                          userInfo:nil
-                                                           repeats:NO];
+    self.expirationTimer = [self timerWithInterval:[expiryDate timeIntervalSinceNow]
+                                          selector:@selector(subscriptionExpired)];
 
     NSDate *renewTime = [expiryDate dateByAddingTimeInterval:-30];
-    self.renewTimer = [NSTimer scheduledTimerWithTimeInterval:[renewTime timeIntervalSinceNow]
-                                                       target:self
-                                                     selector:@selector(renewSubscription)
-                                                     userInfo:nil
-                                                      repeats:NO];
+    self.renewTimer = [self timerWithInterval:[renewTime timeIntervalSinceNow]
+                                     selector:@selector(renewSubscription)];
 }
 
-- (NSTimer *)timerWithFireDate:(NSDate *)date selector:(SEL)selector
+- (NSTimer *)timerWithInterval:(NSTimeInterval)interval selector:(SEL)selector
 {
-    return [[NSTimer alloc] initWithFireDate:date
-                                    interval:0
-                                      target:self
-                                    selector:selector
-                                    userInfo:nil
-                                     repeats:NO];
+    return [NSTimer scheduledTimerWithTimeInterval:interval
+                                            target:self
+                                          selector:selector
+                                          userInfo:nil
+                                           repeats:NO];
 }
 
 - (void)renewSubscription

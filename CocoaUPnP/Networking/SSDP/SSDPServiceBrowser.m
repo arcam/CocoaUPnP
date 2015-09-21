@@ -56,7 +56,11 @@ typedef enum : NSUInteger {
 - (void)startBrowsingForServiceTypes:(NSString *)serviceType {
 
     if (self.multicastSocket.isClosed) {
-        [self setupSocket];
+        [self setupMulticastSocket];
+    }
+
+    if (self.unicastSocket.isClosed) {
+        [self setupUnicastSocket];
     }
 
     NSString *searchHeader;
@@ -70,7 +74,7 @@ typedef enum : NSUInteger {
                                tag:11];
 }
 
-- (void)setupSocket
+- (void)setupMulticastSocket
 {
     [self.multicastSocket setIPv6Enabled:NO];
 
@@ -99,6 +103,28 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)setupUnicastSocket
+{
+    [self.unicastSocket setIPv6Enabled:NO];
+
+    NSError *err = nil;
+
+    if (![self.unicastSocket bindToPort:1900 error:&err]) {
+        [self _notifyDelegateWithError:err];
+        return;
+    }
+
+    if (![self.unicastSocket joinMulticastGroup:SSDPMulticastGroupAddress error:&err]) {
+        [self _notifyDelegateWithError:err];
+        return;
+    }
+
+    if (![self.unicastSocket beginReceiving:&err]) {
+        [self _notifyDelegateWithError:err];
+        return;
+    }
+}
+
 - (GCDAsyncUdpSocket *)multicastSocket
 {
     if (!_multicastSocket) {
@@ -109,10 +135,29 @@ typedef enum : NSUInteger {
     return _multicastSocket;
 }
 
-- (void)stopBrowsingForServices {
-    [self.multicastSocket leaveMulticastGroup:SSDPMulticastGroupAddress error:nil];
-    [self.multicastSocket close];
+- (GCDAsyncUdpSocket *)unicastSocket
+{
+    if (!_unicastSocket) {
+        _unicastSocket = [[GCDAsyncUdpSocket alloc]
+                            initWithDelegate:self
+                            delegateQueue:dispatch_get_main_queue()];
+    }
+    return _unicastSocket;
+}
+
+- (void)stopBrowsingForServices
+{
+    [self closeSocket:self.multicastSocket];
     self.multicastSocket = nil;
+
+    [self closeSocket:self.unicastSocket];
+    self.unicastSocket = nil;
+}
+
+- (void)closeSocket:(GCDAsyncUdpSocket *)socket
+{
+    [socket leaveMulticastGroup:SSDPMulticastGroupAddress error:nil];
+    [socket close];
 }
 
 #pragma mark - GCDAsyncUdpSocketDelegate

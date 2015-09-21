@@ -93,6 +93,7 @@ describe(@"UPPDiscovery", ^{
                     completionBlock(mockDevice, nil);
                 });
                 OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
+                OCMStub([mockDevice valueForKey:@"udn"]).andReturn(uniqueDeviceName);
             });
 
             it(@"should add parsed device to availableDevices", ^{

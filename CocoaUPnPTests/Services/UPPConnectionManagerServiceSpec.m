@@ -1,13 +1,9 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPConnectionManagerService.h"
-#import "UPPSessionManager.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 #import "NetworkTestHelpers.h"
-#import "UPPConstants.h"
-#import "UPPError.h"
 #import "MockFailSessionManager.h"
-#import "UPPParameters.h"
 
 SpecBegin(UPPConnectionManagerService)
 

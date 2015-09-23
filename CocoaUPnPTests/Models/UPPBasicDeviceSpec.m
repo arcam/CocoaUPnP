@@ -1,9 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPBasicDevice.h"
-#import "UPPDeviceIcon.h"
-#import "UPPServiceDescription.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 SpecBegin(UPPBasicDevice)
 

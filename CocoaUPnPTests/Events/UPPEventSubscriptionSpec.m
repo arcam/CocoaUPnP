@@ -1,10 +1,9 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPEventSubscription.h"
-#import "UPPEventSubscriptionManager.h"
 #import <OCMock/OCMock.h>
 #import "EXPMatchers+beWithinAMillisecondOf.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 SpecBegin(UPPEventSubscription)
 

@@ -2,11 +2,8 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "Specta.h"
-#import "UPPMediaItemParser.h"
-#import "UPPMediaItem.h"
-#import "UPPMediaItemResource.h"
-#import "UPPError.h"
-#import "Ono.h"
+#import <CocoaUPnP/CocoaUPnP.h>
+#import <Ono/Ono.h>
 
 SpecBegin(UPPMediaItemParser)
 

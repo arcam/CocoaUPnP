@@ -1,11 +1,9 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPDiscovery.h"
-#import "SSDPServiceBrowser.h"
-#import "SSDPService.h"
-#import "UPPBasicDevice.h"
-#import "UPPDeviceParser.h"
+#import <CocoaUPnP/CocoaUPnP.h>
+#import <CocoaUPnP/SSDPServiceBrowser.h>
+#import <CocoaUPnP/SSDPService.h>
 
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;

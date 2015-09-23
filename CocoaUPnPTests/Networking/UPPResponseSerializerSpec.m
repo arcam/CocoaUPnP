@@ -1,8 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPResponseSerializer.h"
-#import "UPPResponseParser.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 SpecBegin(UPPResponseSerializer)
 

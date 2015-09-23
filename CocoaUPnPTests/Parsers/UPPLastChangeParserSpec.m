@@ -1,9 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPLastChangeParser.h"
-#import "UPPError.h"
-#import "UPPMediaItem.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 NSData *(^StubEventWithTransportState)(NSString *) = ^NSData * (NSString *transportState) {
 

@@ -26,12 +26,12 @@ PODS:
     - CocoaAsyncSocket (~> 7.4.1)
     - GCDWebServer (~> 3.2)
     - Ono (~> 1.2)
-  - Expecta (1.0.0)
-  - GCDWebServer (3.2.5):
-    - GCDWebServer/Core (= 3.2.5)
-  - GCDWebServer/Core (3.2.5)
-  - OCMock (3.1.2)
-  - OHHTTPStubs (4.0.1)
+  - Expecta (1.0.3)
+  - GCDWebServer (3.2.7):
+    - GCDWebServer/Core (= 3.2.7)
+  - GCDWebServer/Core (3.2.7)
+  - OCMock (3.1.5)
+  - OHHTTPStubs (4.0.2)
   - Ono (1.2.2)
   - Specta (1.0.4)
 
@@ -50,10 +50,10 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaUPnP: e4809d038e608cd6a919a1d9bdbe43cb07fda9db
-  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
-  GCDWebServer: d0e1b23785e3dfd6c87601323d0f7cae059aab18
-  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
-  OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
+  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
+  GCDWebServer: 76a9540371d5f12f850b32ec7f555dd2d266e543
+  OCMock: 4c2925291f80407c3738dd1db14d21d0cc278864
+  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
 

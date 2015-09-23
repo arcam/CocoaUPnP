@@ -29,7 +29,7 @@ describe(@"UPPResponseSerializer", ^{
     it(@"should parse errors", ^{
         NSData *data = LoadDataFromXML(@"Error", [self class]);
         NSHTTPURLResponse *httpResponse;
-        httpResponse = [[NSHTTPURLResponse alloc] initWithURL:nil
+        httpResponse = [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"http://127.0.0.1"]
                                                    statusCode:500
                                                   HTTPVersion:nil
                                                  headerFields:nil];

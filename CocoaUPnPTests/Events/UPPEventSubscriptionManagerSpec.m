@@ -470,7 +470,7 @@ NSDate *(^ExpectedExpiryDate)(void) = ^NSDate *(void) {
 };
 
 NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
-    return [[NSHTTPURLResponse alloc] initWithURL:nil
+    return [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"http://127.0.0.1"]
                                        statusCode:200
                                       HTTPVersion:nil
                                      headerFields:@{ @"SID": UPPTestSID,
@@ -478,7 +478,7 @@ NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
 };
 
 NSURLResponse *(^UnsuccessfulResponse)(void) = ^NSURLResponse *(void) {
-    return [[NSHTTPURLResponse alloc] initWithURL:nil
+    return [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"http://127.0.0.1"]
                                        statusCode:400
                                       HTTPVersion:nil
                                      headerFields:nil];

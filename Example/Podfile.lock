@@ -33,7 +33,7 @@ PODS:
   - OCMock (3.1.2)
   - OHHTTPStubs (4.0.1)
   - Ono (1.2.2)
-  - Specta (1.0.0)
+  - Specta (1.0.4)
 
 DEPENDENCIES:
   - CocoaUPnP (from `../CocoaUPnP.podspec`)
@@ -55,6 +55,6 @@ SPEC CHECKSUMS:
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
-  Specta: 96fe05fe5c7348b5223f85e862904f6e832abb14
+  Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
 
 COCOAPODS: 0.38.2

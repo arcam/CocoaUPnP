@@ -19,7 +19,9 @@
 {
     if ((self = [super init])) {
         if (keys.count != values.count) {
-            [NSException raise:@"Key value counts do not match" format:nil];
+            NSString *name = @"Count mismatch";
+            NSString *format = @"Key / value array counts do not match";
+            [NSException raise:name format:@"%@", format];
         }
 
         self.keys = keys;

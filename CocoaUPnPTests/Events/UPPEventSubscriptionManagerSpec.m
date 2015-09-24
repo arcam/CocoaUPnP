@@ -455,6 +455,36 @@ describe(@"UPPEventSubscriptionManager", ^{
             OCMVerifyAll(mockSubscription);
         });
     });
+
+    describe(@"when app is going into background", ^{
+        it(@"should cancel all subscription timers", ^{
+            id mockSubscription = OCMClassMock([UPPEventSubscription class]);
+            OCMExpect([mockSubscription invalidateTimers]);
+            [sut.activeSubscriptions addObject:mockSubscription];
+            expect(sut.activeSubscriptions).to.haveACountOf(1);
+
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:UIApplicationDidEnterBackgroundNotification
+             object:nil];
+
+            OCMVerifyAll(mockSubscription);
+        });
+    });
+
+    describe(@"when the app is resuming from background", ^{
+        it(@"should renew timers", ^{
+            id mockSubscription = OCMClassMock([UPPEventSubscription class]);
+            OCMExpect([mockSubscription renewTimers]);
+            [sut.activeSubscriptions addObject:mockSubscription];
+            expect(sut.activeSubscriptions).to.haveACountOf(1);
+
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:UIApplicationDidBecomeActiveNotification
+             object:nil];
+
+            OCMVerifyAll(mockSubscription);
+        });
+    });
 });
 
 SpecEnd

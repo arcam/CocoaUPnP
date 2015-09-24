@@ -189,6 +189,48 @@ describe(@"UPPEventSubscription", ^{
         [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
         OCMVerifyAll(mockObserver);
     });
+
+    it(@"should invalidate all timers", ^{
+        expect([sut.expirationTimer isValid]).to.beTruthy();
+        expect([sut.renewTimer isValid]).to.beTruthy();
+
+        [sut invalidateTimers];
+
+        expect(sut.expirationTimer).to.beNil();
+        expect(sut.renewTimer).to.beNil();
+    });
+
+    describe(@"when renewing timers", ^{
+        __block id mockManager;
+
+        beforeEach(^{
+            mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
+        });
+
+        it(@"should resubscribe valid subscriptions", ^{
+            sut = [UPPEventSubscription subscriptionWithID:subscriptionID
+                                                expiryDate:[NSDate distantFuture]
+                                      eventSubscriptionURL:subscriptionURL];
+            sut.manager = mockManager;
+            OCMExpect([mockManager renewSubscription:sut completion:[OCMArg any]]);
+
+            [sut renewTimers];
+
+            OCMVerifyAll(mockManager);
+        });
+
+        it(@"should subscribe invalid subscriptions", ^{
+            sut = [UPPEventSubscription subscriptionWithID:subscriptionID
+                                                expiryDate:[NSDate distantPast]
+                                      eventSubscriptionURL:subscriptionURL];
+            sut.manager = mockManager;
+            OCMExpect([mockManager subscriptionExpired:sut completion:[OCMArg any]]);
+
+            [sut renewTimers];
+
+            OCMVerifyAll(mockManager);
+        });
+    });
 });
 
 SpecEnd

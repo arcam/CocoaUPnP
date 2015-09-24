@@ -31,9 +31,30 @@
 {
     if ((self = [super init])) {
         self.session = session;
+        [self addNotificationObservers];
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)addNotificationObservers
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    [nc addObserver:self
+           selector:@selector(invalidateAllTimers)
+               name:UIApplicationDidEnterBackgroundNotification
+             object:nil];
+
+    [nc addObserver:self
+           selector:@selector(renewAllTimers)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
 }
 
 #pragma mark - Lazy Instantiation
@@ -244,6 +265,20 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)invalidateAllTimers
+{
+    for (UPPEventSubscription *subscription in self.activeSubscriptions) {
+        [subscription invalidateTimers];
+    }
+}
+
+- (void)renewAllTimers
+{
+    for (UPPEventSubscription *subscription in self.activeSubscriptions) {
+        [subscription renewTimers];
+    }
+}
 
 - (UPPEventSubscription *)subscriptionWithURL:(NSURL *)url
 {

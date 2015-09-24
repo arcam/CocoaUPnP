@@ -130,4 +130,22 @@
  */
 - (void)informObserversOfEvent:(NSDictionary *)event;
 
+
+#pragma mark - Background Helpers
+
+///-----------------------------------------------------------------------------
+/// @name Events
+///-----------------------------------------------------------------------------
+
+/**
+ Invalidate both expiration and renew subscription timers.
+ */
+- (void)invalidateTimers;
+
+/**
+ Renew both expiration and renew subscription timers after returning from
+ background operation.
+ */
+- (void)renewTimers;
+
 @end

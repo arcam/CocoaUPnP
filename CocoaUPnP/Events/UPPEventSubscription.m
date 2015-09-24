@@ -45,10 +45,27 @@
 
 #pragma mark - Timers
 
-- (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
+- (void)invalidateTimers
 {
     [self.expirationTimer invalidate];
     [self.renewTimer invalidate];
+
+    self.expirationTimer = nil;
+    self.renewTimer = nil;
+}
+
+- (void)renewTimers
+{
+    if ([self.expiryDate timeIntervalSinceNow] < 0) {
+        [self subscriptionExpired];
+    } else {
+        [self renewSubscription];
+    }
+}
+
+- (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
+{
+    [self invalidateTimers];
 
     self.expirationTimer = [self timerWithInterval:[expiryDate timeIntervalSinceNow]
                                           selector:@selector(subscriptionExpired)];

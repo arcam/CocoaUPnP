@@ -79,23 +79,46 @@
 
 #pragma mark - Public Methods
 
-- (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
+- (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(UPPEventSubscription *subscription, NSError *error))completion
 {
     if (![self.eventServer isRunning]) {
         self.eventServer.eventDelegate = self;
         [self.eventServer startServer];
     }
 
-    UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
-    if (subscripton) {
-        [subscripton addEventObserver:observer];
+    // If we already have an existing subscription, add the new observer then
+    // bail out early.
+    UPPEventSubscription *subscription = [self subscriptionWithURL:service.eventSubscriptionURL];
+    if (subscription) {
+        [subscription addEventObserver:observer];
         if (completion) {
-            completion(YES); // This probably should return an error when NO
+            completion(subscription, nil);
         }
         return;
     }
 
+    // Create a new subscription.
     NSURL *url = service.eventSubscriptionURL;
+    subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url];
+    [self subscribe:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+        if (error) {
+            if (completion) {
+                completion(nil, error);
+            }
+            return;
+        }
+        [subscription updateSubscriptionID:subscriptionID expiryDate:expiryDate];
+        [subscription addEventObserver:observer];
+        [self.activeSubscriptions addObject:subscription];
+        if (completion) {
+            completion(subscription, nil);
+        }
+    }];
+}
+
+- (void)subscribe:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
+{
+    NSURL *url = subscription.eventSubscriptionURL;
     NSURLRequest *request = [self subscriptionRequestWithEventSubscriptionURL:url];
 
     [self sendSubscriptionRequest:request completion:^(NSURLResponse *response, NSError *error) {
@@ -105,26 +128,25 @@
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];
             }
-            if (completion) {
-                completion(NO);
-            }
+            completion(nil, nil, error);
             return;
-        }
-
-        NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        UPPEventSubscription *subscription;
-        subscription = [self subscriptionWithURL:url
-                                         headers:headers
-                                        observer:observer];
-        [self.activeSubscriptions addObject:subscription];
-        if (completion) {
-            completion(YES);
+        } else {
+            NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
+            NSString *subId = headers[@"SID"];
+            NSDate *expiry = [self dateFromHeader:headers[@"TIMEOUT"]];
+            completion(subId, expiry, nil);
         }
     }];
 }
 
-- (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
+- (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
 {
+    if (!subscription.subscriptionID) {
+        [self subscribe:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+            [subscription updateSubscriptionID:subscriptionID expiryDate:expiryDate];
+        }];
+        return;
+    }
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],

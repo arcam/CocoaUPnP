@@ -21,9 +21,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.4.2)
-  - CocoaUPnP (0.0.1):
+  - CocoaUPnP (0.1.0):
     - AFNetworking (~> 2.6)
-    - CocoaAsyncSocket (~> 7.4.1)
+    - CocoaAsyncSocket (~> 7.4)
     - GCDWebServer (~> 3.2)
     - Ono (~> 1.2)
   - Expecta (1.0.3)
@@ -49,7 +49,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
-  CocoaUPnP: 093e8310cf8c4c545349ed5d148db004c5562d8d
+  CocoaUPnP: fc75b2e462f671990c292c0bc653c0cb5bbd9968
   Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
   GCDWebServer: 76a9540371d5f12f850b32ec7f555dd2d266e543
   OCMock: 4c2925291f80407c3738dd1db14d21d0cc278864

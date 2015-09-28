@@ -17,6 +17,13 @@
 
 #pragma mark - Initialisation
 
++ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL
+{
+    return [[[self class] alloc] initWithSubscriptionID:nil
+                                             expiryDate:nil
+                                   eventSubscriptionURL:eventSubscriptionURL];
+}
+
 + (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL
 {
     return [[[self class] alloc] initWithSubscriptionID:subscriptionID

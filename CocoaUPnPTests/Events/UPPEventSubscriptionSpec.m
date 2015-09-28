@@ -36,6 +36,13 @@ describe(@"UPPEventSubscription", ^{
         expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
     });
 
+    it(@"should have a basic initialiser", ^{
+        sut = [UPPEventSubscription subscriptionWithSubscriptionURL:subscriptionURL];
+        expect([sut subscriptionID]).to.beNil();
+        expect([sut expiryDate]).to.beNil();
+        expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
+    });
+
     describe(@"when storing observers", ^{
 
         __block id mockObserver;

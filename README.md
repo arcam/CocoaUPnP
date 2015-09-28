@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/arcam/CocoaUPnP.svg)](https://travis-ci.org/arcam/CocoaUPnP)
 [![Coverage Status](https://coveralls.io/repos/arcam/CocoaUPnP/badge.svg)](https://coveralls.io/r/arcam/CocoaUPnP)
-[![Pod Version](https://img.shields.io/cocoapods/v/AFNetworking.svg)](http://cocoadocs.org/docsets/)
+[![Pod Version](https://img.shields.io/cocoapods/v/CocoaUPnP.svg)](http://cocoadocs.org/docsets/CocoaUPnP/)
 
 CocoaUPnP is a logical progression of [upnpx](https://github.com/fkuehne/upnpx) - designed to be easy, modern and block-based. It is written in Objective-C and is currently available iOS. Mac OS X compatibility is currently unknown, but we don't see a major reason why this wouldn't work.
 

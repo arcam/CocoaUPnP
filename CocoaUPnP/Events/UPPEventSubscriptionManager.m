@@ -181,23 +181,7 @@
 
 - (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
 {
-    NSURL *url = subscription.eventSubscriptionURL;
-    NSURLRequest *request = [self subscriptionRequestWithEventSubscriptionURL:url];
-
-    [self sendSubscriptionRequest:request completion:^(NSURLResponse *response, NSError *error) {
-        NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-
-        if (code != 200) {
-            NSError *e = error ?: UPPErrorWithCodeAndDescription(code, @"Event subscription error");
-            completion(nil, nil, e);
-            return;
-        }
-        NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        NSString *subscriptionID = headers[@"SID"];
-        NSDate *expiryDate = [self dateFromHeader:headers[@"TIMEOUT"]];
-
-        completion(subscriptionID, expiryDate, nil);
-    }];
+    [self subscribe:subscription completion:completion];
 }
 
 - (NSURLRequest *)subscriptionRequestWithEventSubscriptionURL:(NSURL *)url

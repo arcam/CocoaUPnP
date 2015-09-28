@@ -1,8 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPMediaItem.h"
-#import "UPPMediaItemResource.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 SpecBegin(UPPMediaItem)
 
@@ -69,6 +68,35 @@ describe(@"UPPMediaItem", ^{
             mediaItem.resources = @[ resource ];
 
             expect([mediaItem duration]).to.beNil();
+        });
+    });
+
+    describe(@"first resource method", ^{
+        it(@"should return a resource", ^{
+            expect([mediaItem firstPlayableResource]).toNot.beNil();
+        });
+
+        it(@"should not return an image", ^{
+            res = [[UPPMediaItemResource alloc] init];
+            res.protocolInfo = @"http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN";
+            mediaItem.resources = @[ res ];
+
+            expect([mediaItem firstPlayableResource]).to.beNil();
+        });
+
+        it(@"should find the first non image resource", ^{
+            UPPMediaItemResource *imageRes = [[UPPMediaItemResource alloc] init];
+            imageRes.protocolInfo = @"http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN";
+
+            UPPMediaItemResource *trackRes = [[UPPMediaItemResource alloc] init];
+            trackRes.protocolInfo = @"http-get:*:audio/mpeg";
+
+            UPPMediaItemResource *track2Res = [[UPPMediaItemResource alloc] init];
+            track2Res.protocolInfo = @"http-get:*:audio/mpeg";
+
+            mediaItem.resources = @[ imageRes, trackRes, track2Res ];
+
+            expect([mediaItem firstPlayableResource]).to.beIdenticalTo(trackRes);
         });
     });
 

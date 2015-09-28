@@ -1,9 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPContentDirectoryService.h"
-#import "UPPConstants.h"
-#import "UPPSessionManager.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 #import "NetworkTestHelpers.h"
 
 SpecBegin(UPPContentDirectoryService)
@@ -13,6 +11,7 @@ describe(@"UPPContentDirectoryService", ^{
     __block UPPContentDirectoryService *service;
     __block id sessionManager;
     __block NSString *url;
+    __block UPPResponseBlock noCompletion;
 
     beforeEach(^{
         service = [[UPPContentDirectoryService alloc] init];
@@ -24,104 +23,136 @@ describe(@"UPPContentDirectoryService", ^{
         url = @"http://127.0.0.1/ctrl";
         NSURL *controlURL = [NSURL URLWithString:url];
         service.controlURL = controlURL;
+
+        // We exit early for all GET requests that do not provide a completion
+        // block, so explicity create an "empty" completion block.
+        noCompletion = ^(NSDictionary *d, NSError *e) {};
     });
 
     describe(@"when getting search capabilities", ^{
         it(@"should send required parameters", ^{
-            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSearchCapabilities",
-                                              UPPNameSpaceKey: service.serviceType };
+            NSDictionary *params = @{ UPPSOAPActionKey: @"GetSearchCapabilities",
+                                      UPPNameSpaceKey: service.serviceType };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, params, url);
+            [service searchCapabilitiesWithCompletion:noCompletion];
+            [sessionManager verify];
+        });
 
-            [service searchCapabilitiesWithCompletion:^(NSDictionary *response, NSError *error) {
-                expect(response[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service searchCapabilitiesWithCompletion:nil];
             [sessionManager verify];
         });
     });
 
     describe(@"when getting sort capabilities", ^{
         it(@"should send required parameters", ^{
-            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSortCapabilities",
-                                              UPPNameSpaceKey: service.serviceType };
+            NSDictionary *params = @{ UPPSOAPActionKey: @"GetSortCapabilities",
+                                      UPPNameSpaceKey: service.serviceType };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, params, url);
+            [service sortCapabilitiesWithCompletion:noCompletion];
+            [sessionManager verify];
+        });
 
-            [service sortCapabilitiesWithCompletion:^(NSDictionary *response, NSError *error) {
-                expect(response[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service sortCapabilitiesWithCompletion:nil];
             [sessionManager verify];
         });
     });
 
     describe(@"when getting system update id", ^{
         it(@"should send required parameters", ^{
-            NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"GetSystemUpdateID",
-                                              UPPNameSpaceKey: service.serviceType };
+            NSDictionary *params = @{ UPPSOAPActionKey: @"GetSystemUpdateID",
+                                      UPPNameSpaceKey: service.serviceType };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, params, url);
+            [service systemUpdateIDWithCompletion:noCompletion];
+            [sessionManager verify];
+        });
 
-            [service systemUpdateIDWithCompletion:^(NSDictionary *response, NSError *error) {
-                expect(response[@"Hello"]).to.equal(@"World");
-                expect(error).to.beNil();
-            }];
-
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service systemUpdateIDWithCompletion:nil];
             [sessionManager verify];
         });
     });
 
     describe(@"when browsing directory", ^{
+        __block NSArray *keys;
+
+        beforeEach(^{
+            keys = @[ @"ObjectID",
+                      @"BrowseFlag",
+                      @"Filter",
+                      @"StartingIndex",
+                      @"RequestedCount",
+                      @"SortCriteria" ];
+        });
+
         it(@"should send required parameters", ^{
             NSString *objectID = @"0";
             NSString *browseFlag = @"BrowseDirectChildren";
             NSString *filter = @"*";
             NSNumber *startingIndex = @0;
             NSNumber *requestedCount = @20;
-            NSString *sortCriteria = @"+dc:title";
+            NSString *sortCriteria = @"+dc:title,+upnp:originalTrackNumber";
 
-            NSDictionary *params = @{ @"ObjectID": objectID,
-                                      @"BrowseFlag": browseFlag,
-                                      @"Filter": filter,
-                                      @"StartingIndex": startingIndex,
-                                      @"RequestedCount": requestedCount,
-                                      @"SortCriteria": sortCriteria };
+            NSArray *v = @[ objectID,
+                            browseFlag,
+                            filter,
+                            startingIndex,
+                            requestedCount,
+                            sortCriteria ];
+
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
+
 
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service browseWithObjectID:objectID browseFlag:BrowseDirectChildren filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) { }];
+            [service browseWithObjectID:objectID browseFlag:BrowseDirectChildren filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:noCompletion];
 
             [sessionManager verify];
         });
 
         it(@"should set sane defaults", ^{
-            NSDictionary *params = @{ @"ObjectID": @0,
-                                      @"BrowseFlag": @"BrowseMetadata",
-                                      @"Filter": @"*",
-                                      @"StartingIndex": @0,
-                                      @"RequestedCount": @20,
-                                      @"SortCriteria": @"" };
-
+            NSArray *v = @[ @"0", @"BrowseMetadata", @"*", @0, @20, @"" ];
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Browse",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
-            [service browseWithObjectID:nil browseFlag:BrowseMetadata filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:^(NSDictionary *response, NSError *error) {}];
+            [service browseWithObjectID:nil browseFlag:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:noCompletion];
 
+            [sessionManager verify];
+        });
+
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service browseWithObjectID:nil browseFlag:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:nil];
             [sessionManager verify];
         });
     });
 
     describe(@"when searching directory", ^{
+        __block NSArray *keys;
+
+        beforeEach(^{
+            keys = @[ @"ContainerID",
+                      @"SearchCriteria",
+                      @"Filter",
+                      @"StartingIndex",
+                      @"RequestedCount",
+                      @"SortCriteria" ];
+        });
         it(@"should send required parameters", ^{
             NSString *containerID = @"1$5";
             NSString *searchCriteria = @"(upnp:class derivedfrom \"object.item.audioItem.musicTrack\")";
@@ -130,18 +161,20 @@ describe(@"UPPContentDirectoryService", ^{
             NSNumber *requestedCount = @8;
             NSString *sortCriteria = @"+dc:title";
 
-            NSDictionary *params = @{ @"ContainerID": containerID,
-                                      @"SearchCriteria": searchCriteria,
-                                      @"Filter": filter,
-                                      @"StartingIndex": startingIndex,
-                                      @"RequestedCount": requestedCount,
-                                      @"SortCriteria": sortCriteria };
+            NSArray *v = @[ containerID,
+                            searchCriteria,
+                            filter,
+                            startingIndex,
+                            requestedCount,
+                            sortCriteria ];
+
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
 
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service searchWithContainerID:containerID searchCriteria:searchCriteria filter:filter startingIndex:startingIndex requestedCount:requestedCount sortCritera:sortCriteria completion:^(NSDictionary *response, NSError *error) {
                 expect(response).toNot.beNil();
@@ -152,21 +185,23 @@ describe(@"UPPContentDirectoryService", ^{
         });
 
         it(@"should set sane defaults", ^{
-            NSDictionary *params = @{ @"ContainerID": @0,
-                                      @"SearchCriteria": @"",
-                                      @"Filter": @"*",
-                                      @"StartingIndex": @0,
-                                      @"RequestedCount": @20,
-                                      @"SortCriteria": @"" };
+            NSArray *v = @[ @"0", @"", @"*", @0, @20, @"" ];
 
+            UPPParameters *params = [UPPParameters paramsWithKeys:keys values:v];
             NSDictionary *expectedParams = @{ UPPSOAPActionKey: @"Search",
                                               UPPNameSpaceKey: service.serviceType,
                                               UPPParametersKey: params };
 
-            VerifyGetPostWithParams(expectedParams, sessionManager, url);
+            ExpectGetWithParams(sessionManager, expectedParams, url);
 
             [service searchWithContainerID:nil searchCriteria:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:^(NSDictionary *response, NSError *error) { }];
 
+            [sessionManager verify];
+        });
+
+        it(@"should exit early when given no completion block", ^{
+            RejectGetWithURL(sessionManager, url);
+            [service searchWithContainerID:nil searchCriteria:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:nil];
             [sessionManager verify];
         });
     });

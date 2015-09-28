@@ -4,20 +4,15 @@
 #import "UPPBasicService.h"
 
 /**
- Browse flag
+ BrowseMetadataFlag states that the properties of the object should be returned.
  */
-typedef NS_ENUM(NSInteger, UPPBrowseFlag){
-    /**
-     BrowseMetadata states that the properties of the object should be returned.
-     */
-    BrowseMetadata,
+extern NSString * const BrowseMetaDataFlag;
 
-    /**
-     BrowseDirectChildren states that the direct children of the object will be
-     returned in the result.
-     */
-    BrowseDirectChildren
-};
+/**
+ BrowseDirectChildrenFlag states that the direct children of the object will be
+ returned in the result.
+ */
+extern NSString * const BrowseDirectChildren;
 
 /**
  This class contains all the network calls needed for the UPnP [AVTransport1
@@ -73,7 +68,7 @@ typedef NS_ENUM(NSInteger, UPPBrowseFlag){
  @param completion     A completion block which returns the parsed response, or
      an error if unsuccessful
  */
-- (void)browseWithObjectID:(NSString *)objectId browseFlag:(UPPBrowseFlag)browseFlag filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(UPPResponseBlock)completion;
+- (void)browseWithObjectID:(NSString *)objectId browseFlag:(NSString *)browseFlag filter:(NSString *)filter startingIndex:(NSNumber *)startingIndex requestedCount:(NSNumber *)requestedCount sortCritera:(NSString *)sortCriteria completion:(UPPResponseBlock)completion;
 
 /**
  Search the content directory service

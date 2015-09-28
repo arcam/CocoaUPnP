@@ -4,56 +4,68 @@
 #import "UPPConnectionManagerService.h"
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 @implementation UPPConnectionManagerService
 
-- (void)protocolInfoWithCompletion:(void(^)(NSDictionary *protocolInfo, NSError *error))completion
+- (void)protocolInfoWithCompletion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetProtocolInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetProtocolInfo"
+                              completion:completion];
 }
 
-- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId completion:(void(^)(NSDictionary *connectionInfo, NSError *error))completion
+- (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
-    NSDictionary *parameters = @{ @"RemoteProtocolInfo": protocolInfo,
-                                  @"PeerConnectionManager": peerConnectionManager,
-                                  @"PeerConnectionID": peerConnectionId };
+    NSArray *k = @[ @"RemoteProtocolInfo",
+                    @"PeerConnectionManager",
+                    @"PeerConnectionID",
+                    @"Direction" ];
 
-    [self _sendPostRequestWithParameters:parameters action:@"PrepareForConnection" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    NSArray *v = @[ protocolInfo,
+                    peerConnectionManager,
+                    peerConnectionId,
+                    direction ];
+
+    UPPParameters *params = [UPPParameters paramsWithKeys:k values:v];
+
+    [self _sendPostRequestWithParameters:params
+                                  action:@"PrepareForConnection"
+                              completion:completion];
 }
 
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
 {
-    NSDictionary *parameters = @{ @"ConnectionID": connectionId };
+    UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
+                                                   value:connectionId];
 
-    [self _sendPostRequestWithInstanceID:nil action:@"ConnectionComplete" parameters:parameters success:successBlock];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"ConnectionComplete"
+                                 success:successBlock];
 }
 
-- (void)currentConnectionIDsWithCompletion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)currentConnectionIDsWithCompletion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
-    [self _sendPostRequestWithParameters:nil action:@"GetCurrentConnectionIDs" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:nil
+                                  action:@"GetCurrentConnectionIDs"
+                              completion:completion];
 }
 
-- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(void(^)(NSDictionary *response, NSError *error))completion
+- (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion
 {
     if (!completion) { return; }
 
-    NSDictionary *parameters = @{ @"ConnectionID": connectionId };
+    UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID" value:connectionId];
 
-    [self _sendPostRequestWithParameters:parameters action:@"GetCurrentConnectionInfo" completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
+    [self _sendPostRequestWithParameters:params
+                                  action:@"GetCurrentConnectionInfo"
+                              completion:completion];
 }
 
 @end

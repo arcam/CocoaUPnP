@@ -74,7 +74,19 @@
 ///-----------------------------------------------------------------------------
 
 /**
- Convenience initialiser which returns a new subscription object.
+ Convenience initialiser which returns a new subscription object when passed in
+ an event subscription URL.
+
+ @param eventSubscriptionURL The full event subscription URL, which is used when
+ resubscribing or unsubscribing from events.
+
+ @return Returns a new subscription object.
+ */
++ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL;
+
+/**
+ Convenience initialiser which returns a new subscription object when given a
+ subscription identifier, an expiry date and an event subscription URL.
 
  @param subscriptionID       The subscription identifier returned by the service.
  @param expiryDate           The date at which the subscription is expired by the
@@ -129,5 +141,23 @@
  @param event A dictionary containing parsed XML related to the event.
  */
 - (void)informObserversOfEvent:(NSDictionary *)event;
+
+
+#pragma mark - Background Helpers
+
+///-----------------------------------------------------------------------------
+/// @name Events
+///-----------------------------------------------------------------------------
+
+/**
+ Invalidate both expiration and renew subscription timers.
+ */
+- (void)invalidateTimers;
+
+/**
+ Renew both expiration and renew subscription timers after returning from
+ background operation.
+ */
+- (void)renewTimers;
 
 @end

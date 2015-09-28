@@ -26,6 +26,20 @@
     return nil;
 }
 
+- (UPPMediaItemResource *)firstPlayableResource
+{
+    __block UPPMediaItemResource *resource;
+    [self.resources enumerateObjectsUsingBlock:^(UPPMediaItemResource *r, NSUInteger idx, BOOL *stop) {
+        NSString *protocolInfo = r.protocolInfo;
+        if ([protocolInfo rangeOfString:@"image"].location == NSNotFound) {
+            resource = r;
+            *stop = YES;
+        }
+    }];
+
+    return resource;
+}
+
 #pragma mark - NSObject
 
 - (NSString *)description

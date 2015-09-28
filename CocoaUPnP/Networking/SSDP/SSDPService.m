@@ -30,7 +30,7 @@
 - (id)initWithHeaders:(NSDictionary *)headers {
     self = [super init];
     if (self) {
-        _location = [NSURL URLWithString:[headers objectForKey:@"location"]];
+        _xmlLocation = [NSURL URLWithString:[headers objectForKey:@"location"]];
         _serviceType = [headers objectForKey:@"st"] ?: [headers objectForKey:@"nt"];
         _uniqueServiceName = [headers objectForKey:@"usn"];
         _server = [headers objectForKey:@"server"];

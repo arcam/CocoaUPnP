@@ -1,11 +1,11 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPEventServer.h"
 #import <OCMock/OCMock.h>
-#import "GCDWebServerDataRequest.h"
-#import "GCDWebServerFunctions.h"
-#import "GCDWebServer.h"
+#import <CocoaUPnP/CocoaUPnP.h>
+#import <GCDWebServer/GCDWebServerDataRequest.h>
+#import <GCDWebServer/GCDWebServerFunctions.h>
+#import <GCDWebServer/GCDWebServer.h>
 #import "TestHelpers.h"
 
 SpecBegin(UPPEventServer)
@@ -44,7 +44,7 @@ describe(@"UPPEventServer", ^{
         });
 
         it(@"should start up the server on the correct port", ^{
-            OCMExpect([mockServer startWithPort:UPPEventServerPort bonjourName:nil]);
+            OCMExpect([mockServer startWithPort:54123 bonjourName:nil]);
 
             [sut startServer];
 

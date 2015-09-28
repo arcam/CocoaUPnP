@@ -1,6 +1,13 @@
 # Xcode
 #
+#
+## Build generated
 build/
+DerivedData
+*.gcno
+*.gcda
+
+## Various Settings
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -10,12 +17,16 @@ build/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
+
+## Other
 *.xccheckout
 *.moved-aside
-DerivedData
+*.xcuserstate
+*.xcscmblueprint
+
+## Obj-C/Swift Specific
 *.hmap
 *.ipa
-*.xcuserstate
 
 # CocoaPods
 #
@@ -25,5 +36,5 @@ DerivedData
 #
 Pods/
 
-# Hide the docs folder
+# Project Specific
 docs/

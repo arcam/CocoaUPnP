@@ -3,6 +3,7 @@
 
 #import "UPPRequestSerializer.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 @implementation UPPRequestSerializer
 
@@ -42,27 +43,13 @@
     return [mutableRequest copy];
 }
 
-- (NSString *)upp_stringForParameters:(NSDictionary *)parameters
+- (NSString *)upp_stringForParameters:(UPPParameters *)parameters
 {
-    NSArray *keys;
-
-    // NSDictionary is not guaranteed to return keys in order, so we need to sort
-    // them for running the unit tests.
-    if (NSClassFromString(@"XCTest") != nil) {
-        keys = [[parameters allKeys]
-                sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    }
-
-    // ... But in production, sorting doesn't matter so just pull them in as is.
-    else {
-        keys = [parameters allKeys];
-    }
-
     NSMutableString *string = [NSMutableString string];
 
-    for (id key in keys) {
-        [string appendFormat:@"<%@>%@</%@>", key, parameters[key], key];
-    }
+    [parameters enumerateKeysAndValuesUsingBlock:^(id key, id value, NSUInteger idx, BOOL *stop) {
+        [string appendFormat:@"<%@>%@</%@>", key, value, key];
+    }];
 
     return [string copy];
 }

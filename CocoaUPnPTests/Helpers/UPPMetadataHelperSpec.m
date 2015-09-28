@@ -1,10 +1,8 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPMetadataHelper.h"
-#import "UPPMediaItem.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 #import "TestHelpers.h"
-#import "UPPMediaItemResource.h"
 
 static UPPMediaItem * CreateMediaItem() {
     UPPMediaItem *item = [[UPPMediaItem alloc] init];

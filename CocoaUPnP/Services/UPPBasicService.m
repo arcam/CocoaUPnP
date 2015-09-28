@@ -4,6 +4,7 @@
 #import "UPPBasicService.h"
 #import "UPPSessionManager.h"
 #import "UPPConstants.h"
+#import "UPPParameters.h"
 
 @interface UPPBasicService ()
 @property (strong, nonatomic) NSURL *baseURL;
@@ -20,7 +21,7 @@
     return service;
 }
 
-- (NSDictionary *)wrapParameters:(NSDictionary *)parameters withAction:(NSString *)action
+- (NSDictionary *)wrapParameters:(UPPParameters *)parameters withAction:(NSString *)action
 {
     NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 
@@ -39,19 +40,9 @@
     return [wrapper copy];
 }
 
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(UPPSuccessBlock)successBlock
 {
-    NSMutableDictionary *mergedParameters = [NSMutableDictionary dictionary];
-
-    if (instanceId) {
-        [mergedParameters setObject:instanceId forKey:@"InstanceID"];
-    }
-
-    if (parameters) {
-        [mergedParameters addEntriesFromDictionary:parameters];
-    }
-
-    NSDictionary *wrapped = [self wrapParameters:mergedParameters
+    NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
 
     [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -65,15 +56,7 @@
     }];
 }
 
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
-{
-    NSDictionary *parameters = @{ @"InstanceID": instanceId };
-    [self _sendPostRequestWithParameters:parameters action:action completion:^(NSDictionary *responseObject, NSError *error) {
-        completion(responseObject, error);
-    }];
-}
-
-- (void)_sendPostRequestWithParameters:(NSDictionary *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(UPPResponseBlock)completion
 {
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
@@ -112,7 +95,6 @@
 
     return _sessionManager;
 }
-
 
 #pragma mark - NSObject
 

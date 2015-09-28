@@ -30,7 +30,7 @@
 
     __block NSMutableDictionary *responseDictionary;
 
-    [document enumerateElementsWithXPath:@"/s:Envelope/s:Body/*/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+    [document enumerateElementsWithXPath:@"/*[local-name() = 'Envelope']/*[local-name() = 'Body']/*/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 
         if (!responseDictionary) {
             responseDictionary = [NSMutableDictionary dictionary];

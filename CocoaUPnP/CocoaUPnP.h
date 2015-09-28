@@ -22,6 +22,7 @@
 #import "UPPMediaItemResource.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"
+#import "UPPParameters.h"
 #import "UPPServiceDescription.h"
 
 // Networking

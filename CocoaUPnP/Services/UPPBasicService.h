@@ -5,6 +5,7 @@
 #import "UPPServiceDescription.h"
 
 @class UPPSessionManager;
+@class UPPParameters;
 
 /** This class serves as a base class for all UPnP services
  */
@@ -17,7 +18,16 @@
  @param error    An optional `NSError` which is returned in the event of parse
                  failure
  */
-typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
+typedef void (^UPPResponseBlock)(NSDictionary *response, NSError *error);
+
+/**
+ A generic success / failure block
+
+ @param success The success state of the network call
+ @param error   If the call was unsucessful, an `NSError` is returned with more
+ information
+ */
+typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
 
 #pragma mark - Properties
 
@@ -64,25 +74,16 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
 + (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description;
 
 /**
- Send a POST request, with an error pointer
+ Send a POST request, with a completion block that returns the success state of
+ the call.
 
- @param instanceId The instance identifier
- @param action     The UPnP action
- @param parameters UPnP parameters
- @param success    An optional block which returns the success state of the call,
- along with an error object if the call was unsuccessful.
+ @param parameters   The parameters for the call.
+ @param action       The UPnP action.
+ @param successBlock A completion block which returns a BOOL for whether the
+ call was successful or not. If the call was unsuccessful, an error object is
+ also returned.
  */
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action parameters:(NSDictionary *)parameters success:(void(^)(BOOL success, NSError *error))successBlock;
-
-/**
- Send a POST request, with a completion block
-
- @param instanceId The instance identifier
- @param action     The UPnP action
- @param completion A completion block either returning a dictionary response, or
-     an error if the call failed
- */
-- (void)_sendPostRequestWithInstanceID:(NSString *)instanceId action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action success:(UPPSuccessBlock)successBlock;
 
 /**
  Send a POST request, with a completion block
@@ -92,5 +93,6 @@ typedef void (^UPPResponseBlock)(NSDictionary *, NSError *);
  @param completion A completion block either returning a dictionary response, or
      an error if the call failed
  */
-- (void)_sendPostRequestWithParameters:(NSDictionary *)parameters action:(NSString *)action completion:(void (^)(NSDictionary *responseObject, NSError *error))completion;
+- (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(UPPResponseBlock)completion;
+
 @end

@@ -17,6 +17,13 @@
 
 #pragma mark - Initialisation
 
++ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL
+{
+    return [[[self class] alloc] initWithSubscriptionID:nil
+                                             expiryDate:nil
+                                   eventSubscriptionURL:eventSubscriptionURL];
+}
+
 + (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL
 {
     return [[[self class] alloc] initWithSubscriptionID:subscriptionID
@@ -45,33 +52,43 @@
 
 #pragma mark - Timers
 
-- (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
+- (void)invalidateTimers
 {
     [self.expirationTimer invalidate];
     [self.renewTimer invalidate];
 
-    self.expirationTimer = [NSTimer scheduledTimerWithTimeInterval:[expiryDate timeIntervalSinceNow]
-                                                            target:self
-                                                          selector:@selector(subscriptionExpired)
-                                                          userInfo:nil
-                                                           repeats:NO];
-
-    NSDate *renewTime = [expiryDate dateByAddingTimeInterval:-30];
-    self.renewTimer = [NSTimer scheduledTimerWithTimeInterval:[renewTime timeIntervalSinceNow]
-                                                       target:self
-                                                     selector:@selector(renewSubscription)
-                                                     userInfo:nil
-                                                      repeats:NO];
+    self.expirationTimer = nil;
+    self.renewTimer = nil;
 }
 
-- (NSTimer *)timerWithFireDate:(NSDate *)date selector:(SEL)selector
+- (void)renewTimers
 {
-    return [[NSTimer alloc] initWithFireDate:date
-                                    interval:0
-                                      target:self
-                                    selector:selector
-                                    userInfo:nil
-                                     repeats:NO];
+    if ([self.expiryDate timeIntervalSinceNow] < 0) {
+        [self subscriptionExpired];
+    } else {
+        [self renewSubscription];
+    }
+}
+
+- (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
+{
+    [self invalidateTimers];
+
+    self.expirationTimer = [self timerWithInterval:[expiryDate timeIntervalSinceNow]
+                                          selector:@selector(subscriptionExpired)];
+
+    NSDate *renewTime = [expiryDate dateByAddingTimeInterval:-30];
+    self.renewTimer = [self timerWithInterval:[renewTime timeIntervalSinceNow]
+                                     selector:@selector(renewSubscription)];
+}
+
+- (NSTimer *)timerWithInterval:(NSTimeInterval)interval selector:(SEL)selector
+{
+    return [NSTimer scheduledTimerWithTimeInterval:interval
+                                            target:self
+                                          selector:selector
+                                          userInfo:nil
+                                           repeats:NO];
 }
 
 - (void)renewSubscription

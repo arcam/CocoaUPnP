@@ -1,10 +1,9 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPEventSubscription.h"
-#import "UPPEventSubscriptionManager.h"
 #import <OCMock/OCMock.h>
 #import "EXPMatchers+beWithinAMillisecondOf.h"
+#import <CocoaUPnP/CocoaUPnP.h>
 
 SpecBegin(UPPEventSubscription)
 
@@ -34,6 +33,13 @@ describe(@"UPPEventSubscription", ^{
     });
 
     it(@"should store event subscription URL", ^{
+        expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
+    });
+
+    it(@"should have a basic initialiser", ^{
+        sut = [UPPEventSubscription subscriptionWithSubscriptionURL:subscriptionURL];
+        expect([sut subscriptionID]).to.beNil();
+        expect([sut expiryDate]).to.beNil();
         expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
     });
 
@@ -189,6 +195,48 @@ describe(@"UPPEventSubscription", ^{
 
         [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
         OCMVerifyAll(mockObserver);
+    });
+
+    it(@"should invalidate all timers", ^{
+        expect([sut.expirationTimer isValid]).to.beTruthy();
+        expect([sut.renewTimer isValid]).to.beTruthy();
+
+        [sut invalidateTimers];
+
+        expect(sut.expirationTimer).to.beNil();
+        expect(sut.renewTimer).to.beNil();
+    });
+
+    describe(@"when renewing timers", ^{
+        __block id mockManager;
+
+        beforeEach(^{
+            mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
+        });
+
+        it(@"should resubscribe valid subscriptions", ^{
+            sut = [UPPEventSubscription subscriptionWithID:subscriptionID
+                                                expiryDate:[NSDate distantFuture]
+                                      eventSubscriptionURL:subscriptionURL];
+            sut.manager = mockManager;
+            OCMExpect([mockManager renewSubscription:sut completion:[OCMArg any]]);
+
+            [sut renewTimers];
+
+            OCMVerifyAll(mockManager);
+        });
+
+        it(@"should subscribe invalid subscriptions", ^{
+            sut = [UPPEventSubscription subscriptionWithID:subscriptionID
+                                                expiryDate:[NSDate distantPast]
+                                      eventSubscriptionURL:subscriptionURL];
+            sut.manager = mockManager;
+            OCMExpect([mockManager subscriptionExpired:sut completion:[OCMArg any]]);
+
+            [sut renewTimers];
+
+            OCMVerifyAll(mockManager);
+        });
     });
 });
 

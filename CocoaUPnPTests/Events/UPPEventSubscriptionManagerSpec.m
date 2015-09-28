@@ -1,13 +1,10 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "UPPEventSubscriptionManager.h"
-#import "UPPBasicService.h"
-
 #import <OCMock/OCMock.h>
-#import "UPPEventSubscription.h"
-#import "UPPEventServer.h"
 #import "EXPMatchers+beWithinAMillisecondOf.h"
+#import <CocoaUPnP/CocoaUPnP.h>
+#import "UPPError.h"
 
 /*
  NOTE: This spec shouldn't know about the existance of activeSubscriptions, but
@@ -117,29 +114,39 @@ describe(@"UPPEventSubscriptionManager", ^{
             expect(subscriptions.count).to.equal(0);
 
             // Stub out data task and return canned response
-            StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
-            [sut subscribeObserver:mockObserver toService:mockService completion:nil];
+            __block UPPEventSubscription *sub;
+            waitUntil(^(DoneCallback done) {
+                StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(UPPEventSubscription *subscription, NSError *error) {
+                    expect(subscription).toNot.beNil();
+                    expect(error).to.beNil();
+                    sub = subscription;
+                    done();
+                }];
+            });
 
             // Check assertions
             expect(subscriptions.count).will.equal(1);
-            UPPEventSubscription *subscription = [subscriptions firstObject];
-            expect(subscription.subscriptionID).will.equal(UPPTestSID);
-            expect(subscription.manager).will.equal(sut);
+            expect(subscriptions).to.contain(sub);
+            expect(sub.subscriptionID).will.equal(UPPTestSID);
+            expect(sub.manager).will.equal(sut);
 
-            NSDate *expiry = subscription.expiryDate;
+            NSDate *expiry = sub.expiryDate;
             expect(expiry).willNot.beNil();
             expect(expiry).to.beWithinAMillisecondOf(ExpectedExpiryDate());
 
-            expect(subscription.eventSubscriptionURL).will.equal([NSURL URLWithString:UPPTestFakeURL]);
-            expect([subscription eventObservers]).will.contain(mockObserver);
+            expect(sub.eventSubscriptionURL).will.equal([NSURL URLWithString:UPPTestFakeURL]);
+            expect([sub eventObservers]).will.contain(mockObserver);
         });
 
-        it(@"should not create a subscription object when unsuccessful", ^{
+        fit(@"should not create a subscription object when unsuccessful", ^{
             expect([sut activeSubscriptions].count).to.equal(0);
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
             waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(UPPEventSubscription *sub, NSError *err) {
+                    expect(sub).to.beNil();
+                    expect(err).toNot.beNil();
                     done();
                 }];
             });
@@ -173,7 +180,9 @@ describe(@"UPPEventSubscriptionManager", ^{
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
             waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(UPPEventSubscription *sub, NSError *err) {
+                    expect(sub).to.beNil();
+                    expect(err).toNot.beNil();
                     done();
                 }];
             });
@@ -190,7 +199,9 @@ describe(@"UPPEventSubscriptionManager", ^{
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
             waitUntil(^(DoneCallback done) {
-                [sut subscribeObserver:mockObserver toService:mockService completion:^(BOOL success) {
+                [sut subscribeObserver:mockObserver toService:mockService completion:^(UPPEventSubscription *sub, NSError *err) {
+                    expect(sub).to.beNil();
+                    expect(err).toNot.beNil();
                     done();
                 }];
             });
@@ -216,16 +227,20 @@ describe(@"UPPEventSubscriptionManager", ^{
             });
 
             it(@"should add a new observer", ^{
+                expect(sut.activeSubscriptions.count).to.equal(1);
                 id anotherMockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
 
-                [sut subscribeObserver:anotherMockObserver toService:mockService completion:nil];
+                [sut subscribeObserver:anotherMockObserver toService:mockService completion:^(UPPEventSubscription *sub, NSError *err) {
+                    expect(sub).toNot.beNil();
+                    expect(err).to.beNil();
+                }];
 
                 expect(sut.activeSubscriptions.count).to.equal(1);
                 expect(exampleSubscription.eventObservers.count).to.equal(2);
                 expect([exampleSubscription.eventObservers lastObject]).to.equal(anotherMockObserver);
             });
 
-            it(@"should not add the same observer", ^{
+            it(@"should not add the same observer twice", ^{
                 [sut subscribeObserver:mockObserver toService:mockService completion:nil];
                 UPPEventSubscription *addedSubscription = [sut.activeSubscriptions lastObject];
                 expect(addedSubscription.eventObservers.count).to.equal(1);
@@ -280,7 +295,7 @@ describe(@"UPPEventSubscriptionManager", ^{
             }];
         });
 
-        it(@"should pass back an error if subscripton fails", ^{
+        it(@"should pass back an error if subscription fails", ^{
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
 
             [sut renewSubscription:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
@@ -290,6 +305,35 @@ describe(@"UPPEventSubscriptionManager", ^{
                 expect(error.code).to.equal(400);
                 expect(error.localizedDescription).to.equal(@"Renew subscription error");
             }];
+        });
+
+        it(@"should send a new subscription request when subscription ID missing", ^{
+            // it should not contain SID
+            OCMExpect(([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
+                NSDictionary *headers = request.allHTTPHeaderFields;
+                NSString *host = @"127.0.0.1:54321";
+                expect(headers[@"HOST"]).to.equal(host);
+                NSString *callback = [NSString stringWithFormat:@"<%@>", UPPTestFakeCallbackURL];
+                expect(headers[@"CALLBACK"]).to.equal(callback);
+                expect(headers[@"SID"]).to.beNil();
+                return [headers[@"HOST"] isEqualToString:host] &&
+                [headers[@"CALLBACK"] isEqualToString:callback] &&
+                [headers[@"NT"] isEqualToString:@"upnp:event"] &&
+                [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"] &&
+                !headers[@"SID"];
+            }] completionHandler:[OCMArg any]]));
+
+            NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
+            exampleSubscription = [UPPEventSubscription subscriptionWithID:nil
+                                                                expiryDate:[NSDate date]
+                                                      eventSubscriptionURL:url];
+            [sut renewSubscription:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+                expect(exampleSubscription.subscriptionID).to.equal(subscriptionID);
+                expect(exampleSubscription.expiryDate).to.equal(expiryDate);
+                expect(error).to.beNil();
+            }];
+
+            OCMVerifyAll(mockSession);
         });
     });
 
@@ -459,6 +503,36 @@ describe(@"UPPEventSubscriptionManager", ^{
             OCMVerifyAll(mockSubscription);
         });
     });
+
+    describe(@"when app is going into background", ^{
+        it(@"should cancel all subscription timers", ^{
+            id mockSubscription = OCMClassMock([UPPEventSubscription class]);
+            OCMExpect([mockSubscription invalidateTimers]);
+            [sut.activeSubscriptions addObject:mockSubscription];
+            expect(sut.activeSubscriptions).to.haveACountOf(1);
+
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:UIApplicationDidEnterBackgroundNotification
+             object:nil];
+
+            OCMVerifyAll(mockSubscription);
+        });
+    });
+
+    describe(@"when the app is resuming from background", ^{
+        it(@"should renew timers", ^{
+            id mockSubscription = OCMClassMock([UPPEventSubscription class]);
+            OCMExpect([mockSubscription renewTimers]);
+            [sut.activeSubscriptions addObject:mockSubscription];
+            expect(sut.activeSubscriptions).to.haveACountOf(1);
+
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:UIApplicationDidBecomeActiveNotification
+             object:nil];
+
+            OCMVerifyAll(mockSubscription);
+        });
+    });
 });
 
 SpecEnd
@@ -470,7 +544,7 @@ NSDate *(^ExpectedExpiryDate)(void) = ^NSDate *(void) {
 };
 
 NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
-    return [[NSHTTPURLResponse alloc] initWithURL:nil
+    return [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"http://127.0.0.1"]
                                        statusCode:200
                                       HTTPVersion:nil
                                      headerFields:@{ @"SID": UPPTestSID,
@@ -478,7 +552,7 @@ NSURLResponse *(^SuccessfulResponse)(void) = ^NSURLResponse *(void) {
 };
 
 NSURLResponse *(^UnsuccessfulResponse)(void) = ^NSURLResponse *(void) {
-    return [[NSHTTPURLResponse alloc] initWithURL:nil
+    return [[NSHTTPURLResponse alloc] initWithURL:[NSURL URLWithString:@"http://127.0.0.1"]
                                        statusCode:400
                                       HTTPVersion:nil
                                      headerFields:nil];
@@ -486,10 +560,17 @@ NSURLResponse *(^UnsuccessfulResponse)(void) = ^NSURLResponse *(void) {
 
 void StubDataTaskAndReturnResponse(id session, NSURLResponse *response)
 {
+    NSError *error = nil;
+    NSInteger code = [(NSHTTPURLResponse *)response statusCode];
+    if (code != 200) {
+        error = [NSError errorWithDomain:UPPErrorDomain
+                                    code:code
+                                userInfo:nil];
+    }
     [[[session stub] andDo:^(NSInvocation *invocation) {
         void (^successBlock)(NSData *, NSURLResponse *, NSError *) = nil;
         [invocation getArgument:&successBlock atIndex:3];
-        successBlock(nil, response, nil);
+        successBlock(nil, response, error);
 
     }] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
 }

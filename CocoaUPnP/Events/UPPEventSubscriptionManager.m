@@ -109,6 +109,7 @@
         }
         [subscription updateSubscriptionID:subscriptionID expiryDate:expiryDate];
         [subscription addEventObserver:observer];
+        [subscription setManager:self];
         [self.activeSubscriptions addObject:subscription];
         if (completion) {
             completion(subscription, nil);
@@ -282,7 +283,7 @@
 - (void)renewAllTimers
 {
     for (UPPEventSubscription *subscription in self.activeSubscriptions) {
-        [subscription renewTimers];
+        [subscription renewSubscription];
     }
 }
 
@@ -325,7 +326,6 @@
     subscription = [UPPEventSubscription subscriptionWithID:headers[@"SID"]
                                                  expiryDate:[self dateFromHeader:headers[@"TIMEOUT"]]
                                        eventSubscriptionURL:subscriptionURL];
-    [subscription setManager:self];
     [subscription addEventObserver:observer];
 
     return subscription;

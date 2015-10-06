@@ -60,15 +60,6 @@
     self.renewTimer = nil;
 }
 
-- (void)renewTimers
-{
-    if ([self.expiryDate timeIntervalSinceNow] < 0) {
-        [self subscriptionExpired];
-    } else {
-        [self renewSubscription];
-    }
-}
-
 - (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
 {
     [self invalidateTimers];

@@ -1,0 +1,34 @@
+require 'yaml'
+fastlane_version "1.30.1"
+
+before_all do
+  xctool
+end
+
+desc "Bump the podspec"
+lane :bump do
+  ensure_git_status_clean
+  current_version = version_get_podspec(path: podspec_path)
+  puts "Current version: #{current_version}"
+  bump_type ||= 'major' if prompt(text: "Breaking changes?", boolean: true)
+  bump_type ||= 'minor' if bump_type.nil? && prompt(text: "New Feature?", boolean: true)
+  bump_type ||= 'patch' if bump_type.nil? && prompt(text: "Bugfix/Improvements?", boolean: true)
+
+  if bump_type
+    new_version = version_bump_podspec(path: path, bump_type: bump_type) # get new bumped version
+    # I'd really like something that generates a CHANGELOG.md from YAML right here
+    git_commit(path: path, message: "Version Bump by Fastlane") # commit the bumped podspec
+    push_to_git_remote
+  else
+    puts "Doing nothing..."
+  end
+end
+
+desc "Release a new version out into the wild"
+lane :release do
+  ensure_git_status_clean
+  ensure_git_branch(branch: 'master')
+  git_pull
+  push_to_git_remote
+  pod_push
+end

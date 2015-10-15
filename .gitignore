@@ -38,3 +38,6 @@ Pods/
 
 # Project Specific
 docs/
+
+# Fastlane
+fastlane/report.xml

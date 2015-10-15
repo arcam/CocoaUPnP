@@ -2,6 +2,5 @@
   "-workspace", "Example/Example.xcworkspace",
   "-scheme", "Example",
   "-configuration", "Debug",
-  "-sdk", "iphonesimulator",
-  "-arch", "i386"
+  "-sdk", "iphonesimulator"
 ]

@@ -2,67 +2,33 @@ require 'yaml'
 fastlane_version "1.30.1"
 
 before_all do
-  #ensure_git_status_clean
-  #gym(scheme: "Example") # Build your app - more options available
-  #xctool # run the tests of your app
-  #ensure_git_branch(branch: 'develop')
+  xctool
 end
 
-desc "Runs all the tests"
-lane :test do
-end
-
-desc "Prepare for pod release"
-desc "This will perform the following actions:"
-desc "- Get the latest version number from CHANGELOG"
-desc "- Ensure the CHANGELOG has notes for current version"
-desc "- Update CocoaUPnP.podspec to the latest version"
-desc "- Update the Example app version number"
-desc "- Commit update changes to git"
-desc "- Push to develop branch"
-lane :pod do
-  # Load latest change from changelog
-  changelog = YAML.load_file('../CHANGELOG.yml')
-  latest_change = changelog['releases'].first
-
-  # Check there is at least one change for the latest version
-  if latest_change['notes'].count == 0
-    raise("No update notes in changelog for latest version")
-  end
-
-  # Check that new version is greater than current podspec version
-  new_version_number = latest_change['version']
-  podspec_path = "CocoaUPnP.podspec"
+desc "Bump the podspec"
+lane :bump do
+  ensure_git_status_clean
   current_version = version_get_podspec(path: podspec_path)
-  if new_version_number <= current_version
-    raise("New version is not greater than current version")
+  puts "Current version: #{current_version}"
+  bump_type ||= 'major' if prompt(text: "Breaking changes?", boolean: true)
+  bump_type ||= 'minor' if bump_type.nil? && prompt(text: "New Feature?", boolean: true)
+  bump_type ||= 'patch' if bump_type.nil? && prompt(text: "Bugfix/Improvements?", boolean: true)
+
+  if bump_type
+    new_version = version_bump_podspec(path: path, bump_type: bump_type) # get new bumped version
+    # I'd really like something that generates a CHANGELOG.md from YAML right here
+    git_commit(path: path, message: "Version Bump by Fastlane") # commit the bumped podspec
+    push_to_git_remote
+  else
+    puts "Doing nothing..."
   end
-
-  # Update PodSpec with new version number
-  version_bump_podspec(path: podspec_path,
-                       version_number: new_version_number)
-
-  # Update Example project with new version
-  increment_version_number(version_number: new_version_number,
-                           xcodeproj: "Example/Example.xcodeproj")
-
-  # Commit updated files
-  paths = 'CocoaUPnP.podspec Example/Example/Info.plist Example/ExampleTests-Info.plist'
-  message = "Updating Pod to version #{new_version_number}"
-  git_commit(path: paths, message: message)
-
-  # Push to develop branch
-  push_to_git_remote(local_branch: 'develop',
-                     remote_branch: 'develop')
 end
 
-after_all do |lane|
-  # This block is called, only if the executed lane was successful
+desc "Release a new version out into the wild"
+lane :release do
+  ensure_git_status_clean
+  ensure_git_branch(branch: 'master')
+  git_pull
+  push_to_git_remote
+  pod_push
 end
-
-error do |lane, exception|
-end
-
-
-# More information about multiple platforms in fastlane: 
-# https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md

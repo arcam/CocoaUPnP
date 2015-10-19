@@ -155,9 +155,8 @@
 - (void)invalidateTimers;
 
 /**
- Renew both expiration and renew subscription timers after returning from
- background operation.
+ Renew subscription after returning from background operation.
  */
-- (void)renewTimers;
+- (void)renewSubscription;
 
 @end

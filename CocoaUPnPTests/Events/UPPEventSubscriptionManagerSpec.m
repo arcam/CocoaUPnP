@@ -126,20 +126,20 @@ describe(@"UPPEventSubscriptionManager", ^{
             });
 
             // Check assertions
-            expect(subscriptions.count).will.equal(1);
+            expect(subscriptions.count).to.equal(1);
             expect(subscriptions).to.contain(sub);
-            expect(sub.subscriptionID).will.equal(UPPTestSID);
-            expect(sub.manager).will.equal(sut);
+            expect(sub.subscriptionID).to.equal(UPPTestSID);
+            expect(sub.manager).to.equal(sut);
 
             NSDate *expiry = sub.expiryDate;
-            expect(expiry).willNot.beNil();
+            expect(expiry).toNot.beNil();
             expect(expiry).to.beWithinAMillisecondOf(ExpectedExpiryDate());
 
-            expect(sub.eventSubscriptionURL).will.equal([NSURL URLWithString:UPPTestFakeURL]);
-            expect([sub eventObservers]).will.contain(mockObserver);
+            expect(sub.eventSubscriptionURL).to.equal([NSURL URLWithString:UPPTestFakeURL]);
+            expect([sub eventObservers]).to.contain(mockObserver);
         });
 
-        fit(@"should not create a subscription object when unsuccessful", ^{
+        it(@"should not create a subscription object when unsuccessful", ^{
             expect([sut activeSubscriptions].count).to.equal(0);
 
             StubDataTaskAndReturnResponse(mockSession, UnsuccessfulResponse());
@@ -303,7 +303,7 @@ describe(@"UPPEventSubscriptionManager", ^{
                 expect(expiryDate).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(400);
-                expect(error.localizedDescription).to.equal(@"Renew subscription error");
+                expect(error.localizedDescription).to.equal(@"Dummy error");
             }];
         });
 
@@ -373,7 +373,7 @@ describe(@"UPPEventSubscriptionManager", ^{
                 [sut subscriptionExpired:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
                     expect(subscriptionID).to.equal(UPPTestSID);
 
-                    expect(expiryDate).willNot.beNil();
+                    expect(expiryDate).toNot.beNil();
                     expect(expiryDate).to.beWithinAMillisecondOf(ExpectedExpiryDate());
 
                     expect(error).to.beNil();
@@ -390,7 +390,7 @@ describe(@"UPPEventSubscriptionManager", ^{
                     expect(expiryDate).to.beNil();
                     expect(error).toNot.beNil();
                     expect(error.code).to.equal(400);
-                    expect(error.localizedDescription).to.equal(@"Event subscription error");
+                    expect(error.localizedDescription).to.equal(@"Dummy error");
                     done();
                 }];
             });
@@ -522,7 +522,7 @@ describe(@"UPPEventSubscriptionManager", ^{
     describe(@"when the app is resuming from background", ^{
         it(@"should renew timers", ^{
             id mockSubscription = OCMClassMock([UPPEventSubscription class]);
-            OCMExpect([mockSubscription renewTimers]);
+            OCMExpect([mockSubscription renewSubscription]);
             [sut.activeSubscriptions addObject:mockSubscription];
             expect(sut.activeSubscriptions).to.haveACountOf(1);
 
@@ -563,9 +563,10 @@ void StubDataTaskAndReturnResponse(id session, NSURLResponse *response)
     NSError *error = nil;
     NSInteger code = [(NSHTTPURLResponse *)response statusCode];
     if (code != 200) {
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"Dummy error" };
         error = [NSError errorWithDomain:UPPErrorDomain
                                     code:code
-                                userInfo:nil];
+                                userInfo:userInfo];
     }
     [[[session stub] andDo:^(NSInvocation *invocation) {
         void (^successBlock)(NSData *, NSURLResponse *, NSError *) = nil;

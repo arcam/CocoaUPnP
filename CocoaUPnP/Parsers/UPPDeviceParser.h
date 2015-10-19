@@ -12,7 +12,7 @@
 
  @param error  If parsing fails, an `NSError` object is returned
  */
-typedef void(^CompletionBlock)(UPPBasicDevice *device, NSError *error);
+typedef void(^CompletionBlock)(NSArray *devices, NSError *error);
 
 /**
  This class defines an object whose sole responsibility is to parse a device

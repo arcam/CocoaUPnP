@@ -24,8 +24,8 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
         UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];
-        [parser parseWithBaseURL:url completion:^(UPPBasicDevice *device, NSError *error) {
-            completion(device, error);
+        [parser parseWithBaseURL:url completion:^(NSArray *devices, NSError *error) {
+            completion(devices, error);
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, error);
@@ -53,10 +53,12 @@
         return;
     }
 
-    __block UPPBasicDevice *device;
+    __block NSMutableArray *devices;
 
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
+
+        UPPBasicDevice *device;
 
         if ([deviceType rangeOfString:@":MediaRenderer:"].location != NSNotFound) {
             device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
@@ -68,14 +70,24 @@
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
+
+        if (!device) {
+            return;
+        }
+
+        if (!devices) {
+            devices = [NSMutableArray array];
+        }
+
+        [devices addObject:device];
     }];
 
-    if (!device) {
+    if (!devices) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeNoDeviceElementFound));
         return;
     }
 
-    completion(device, nil);
+    completion([devices copy], nil);
 }
 
 - (void)parseElement:(ONOXMLElement *)element intoDevice:(UPPBasicDevice *)device

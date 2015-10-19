@@ -35,7 +35,6 @@
 {
     if ((self = [super init])) {
         self.subscriptionID = subscriptionID;
-        self.expiryDate = expiryDate;
         self.eventSubscriptionURL = eventSubscriptionURL;
         [self updateTimersWithExpiryDate:expiryDate];
     }
@@ -61,18 +60,10 @@
     self.renewTimer = nil;
 }
 
-- (void)renewTimers
-{
-    if ([self.expiryDate timeIntervalSinceNow] < 0) {
-        [self subscriptionExpired];
-    } else {
-        [self renewSubscription];
-    }
-}
-
 - (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
 {
     [self invalidateTimers];
+    self.expiryDate = expiryDate;
 
     self.expirationTimer = [self timerWithInterval:[expiryDate timeIntervalSinceNow]
                                           selector:@selector(subscriptionExpired)];

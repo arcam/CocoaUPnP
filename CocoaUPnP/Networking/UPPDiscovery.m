@@ -108,10 +108,12 @@
     }
 
     [self.unparsedUUIDs addObject:udn];
-    [UPPDeviceParser parseURL:service.xmlLocation withCompletion:^(UPPBasicDevice *device, NSError *error) {
-        if (device) {
-            [self addDevice:device];
-            [self.unparsedUUIDs removeObject:udn];
+    [UPPDeviceParser parseURL:service.xmlLocation withCompletion:^(NSArray *devices, NSError *error) {
+        [self.unparsedUUIDs removeObject:udn];
+        if (devices) {
+            for (UPPBasicDevice *device in devices) {
+                [self addDevice:device];
+            }
         }
     }];
 }

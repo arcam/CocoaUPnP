@@ -26,8 +26,9 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(id device, NSError *error) {
-                UPPMediaRendererDevice *renderer = device;
+            [UPPDeviceParser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
+                expect(devices.count).to.equal(1);
+                UPPMediaRendererDevice *renderer = [devices firstObject];
                 expect(renderer).toNot.beNil();
                 expect(renderer).to.beKindOf([UPPMediaRendererDevice class]);
 
@@ -97,8 +98,9 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(id device, NSError *error) {
-                UPPMediaServerDevice *server = device;
+            [UPPDeviceParser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
+                expect(devices.count).to.equal(1);
+                UPPMediaServerDevice *server = [devices firstObject];
                 expect(server).toNot.beNil();
                 expect(server).to.beKindOf([UPPMediaServerDevice class]);
 

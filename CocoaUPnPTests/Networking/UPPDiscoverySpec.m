@@ -86,9 +86,9 @@ describe(@"UPPDiscovery", ^{
         describe(@"when a device is added", ^{
             beforeEach(^{
                 OCMStub([mockParser parseURL:url withCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
-                    void(^completionBlock)(UPPBasicDevice *device, NSError *error);
+                    void(^completionBlock)(NSArray *devices, NSError *error);
                     [invocation getArgument:&completionBlock atIndex:3];
-                    completionBlock(mockDevice, nil);
+                    completionBlock(@[mockDevice], nil);
                 });
                 OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
                 OCMStub([mockDevice valueForKey:@"udn"]).andReturn(uniqueDeviceName);

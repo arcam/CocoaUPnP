@@ -461,6 +461,7 @@
 				0E9A78251AC944C10013DB95 /* Frameworks */,
 				0E9A78261AC944C10013DB95 /* Resources */,
 				CF0FE24CE47BE64E6C55CA71 /* Copy Pods Resources */,
+				545F87F7C92B8700327E35A1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -481,6 +482,7 @@
 				0E9A783E1AC944C20013DB95 /* Frameworks */,
 				0E9A783F1AC944C20013DB95 /* Resources */,
 				1550F4C9F3F619418E57165A /* Copy Pods Resources */,
+				149C5093797FED15C685A0AF /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -589,6 +591,21 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"Cleaning Profiler Information\"\ncd \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\"\n# Delete *.gcda files in the current target\nrm -f *.gcda";
 		};
+		149C5093797FED15C685A0AF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1550F4C9F3F619418E57165A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -602,6 +619,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		545F87F7C92B8700327E35A1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		63E5DCBEF8D958F8567F45BE /* Check Pods Manifest.lock */ = {

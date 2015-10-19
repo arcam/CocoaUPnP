@@ -1,27 +1,27 @@
 PODS:
-  - AFNetworking (2.6.0):
-    - AFNetworking/NSURLConnection (= 2.6.0)
-    - AFNetworking/NSURLSession (= 2.6.0)
-    - AFNetworking/Reachability (= 2.6.0)
-    - AFNetworking/Security (= 2.6.0)
-    - AFNetworking/Serialization (= 2.6.0)
-    - AFNetworking/UIKit (= 2.6.0)
-  - AFNetworking/NSURLConnection (2.6.0):
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.0):
+  - AFNetworking/NSURLSession (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.0)
-  - AFNetworking/Security (2.6.0)
-  - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.4.2)
-  - CocoaUPnP (0.1.0):
+  - CocoaUPnP (0.1.1):
     - AFNetworking (~> 2.6)
     - CocoaAsyncSocket (~> 7.4)
     - GCDWebServer (~> 3.2)
@@ -47,9 +47,9 @@ EXTERNAL SOURCES:
     :path: "../CocoaUPnP.podspec"
 
 SPEC CHECKSUMS:
-  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
-  CocoaUPnP: fc75b2e462f671990c292c0bc653c0cb5bbd9968
+  CocoaUPnP: ab28ccbdb6a952ab6e2392f5d2453b9bb1db7866
   Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
   GCDWebServer: 76a9540371d5f12f850b32ec7f555dd2d266e543
   OCMock: 4c2925291f80407c3738dd1db14d21d0cc278864
@@ -57,4 +57,4 @@ SPEC CHECKSUMS:
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

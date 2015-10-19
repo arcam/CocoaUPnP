@@ -120,6 +120,10 @@
 
 - (void)addDevice:(UPPBasicDevice *)device
 {
+    if ([self deviceKnown:device.udn]) {
+        return;
+    }
+
     [self.devices addObject:device];
 
     if ([self.delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {

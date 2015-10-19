@@ -18,7 +18,7 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
-		0EBE95CB1BC3C27D0050626C /* UPPTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		0EA80D8F1BD5013E00DF02F8 /* UPPTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		0EC8FE6B1B7DE7E400B58D3B /* UPPEventServerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC8FE6A1B7DE7E400B58D3B /* UPPEventServerSpec.m */; };
 		0EE226711B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */; };
 		0EE226721B73A0EC0022119E /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE2263C1B73A0EC0022119E /* Containers.xml */; };
@@ -658,7 +658,7 @@
 			files = (
 				0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */,
 				0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */,
-				0EBE95CB1BC3C27D0050626C /* UPPTestAppDelegate.m in Sources */,
+				0EA80D8F1BD5013E00DF02F8 /* UPPTestAppDelegate.m in Sources */,
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
 				0E9A78311AC944C10013DB95 /* AppDelegate.m in Sources */,
 				0E9A782E1AC944C10013DB95 /* main.m in Sources */,

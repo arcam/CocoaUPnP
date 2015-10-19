@@ -6,10 +6,10 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        Class appDelegateClass = NSClassFromString(@"UPPTestAppDelegate");
-        if (appDelegateClass == nil) {
-            appDelegateClass = [AppDelegate class];
+        if (NSClassFromString(@"XCTestCase") != nil) {
+            return UIApplicationMain(argc, argv, nil, @"UPPTestAppDelegate");
         }
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass(appDelegateClass));
+
+        return UIApplicationMain(argc, argv, nil, @"AppDelegate");
     }
 }

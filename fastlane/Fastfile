@@ -13,7 +13,8 @@ end
 desc "Bump the podspec"
 lane :bump do
   ensure_git_status_clean
-  current_version = version_get_podspec(path: podspec_path)
+  path = './CocoaUPnP.podspec'
+  current_version = version_get_podspec(path: path)
   puts "Current version: #{current_version}"
   bump_type ||= 'major' if prompt(text: "Breaking changes?", boolean: true)
   bump_type ||= 'minor' if bump_type.nil? && prompt(text: "New Feature?", boolean: true)

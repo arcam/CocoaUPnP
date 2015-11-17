@@ -48,6 +48,23 @@ describe(@"UPPMediaItemResource", ^{
         expect(res.resourceURLString).to.equal(@"http://127.0.0.1");
     });
 
+    describe(@"NSCopying", ^{
+        it(@"should conform to NSCopying", ^{
+            expect(res).to.conformTo(@protocol(NSCopying));
+        });
+
+        it(@"should implement copyWithZone", ^{
+            UPPMediaItemResource *newRes = [res copy];
+            expect(newRes).toNot.beIdenticalTo(res);
+            expect(newRes.numberOfAudioChannels).to.equal(res.numberOfAudioChannels);
+            expect(newRes.bitrate).to.equal(res.bitrate);
+            expect(newRes.duration).to.equal(res.duration);
+            expect(newRes.sampleFrequency).to.equal(res.sampleFrequency);
+            expect(newRes.protocolInfo).to.equal(res.protocolInfo);
+            expect(newRes.itemSize).to.equal(res.itemSize);
+            expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+        });
+    });
 });
 
 SpecEnd

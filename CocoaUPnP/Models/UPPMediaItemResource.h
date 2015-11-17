@@ -6,7 +6,7 @@
 /**
  This class describes a UPnP media item resource object.
  */
-@interface UPPMediaItemResource : NSObject <NSCoding>
+@interface UPPMediaItemResource : NSObject <NSCoding, NSCopying>
 
 /**
  The number of audio channels

@@ -32,4 +32,17 @@
     [encoder encodeObject:self.resourceURLString forKey:@"resourceURLString"];
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    UPPMediaItemResource *newRes = [[[self class] alloc] init];
+    newRes->_numberOfAudioChannels = [_numberOfAudioChannels copyWithZone:zone];
+    newRes->_bitrate = [_bitrate copyWithZone:zone];
+    newRes->_duration = [_duration copyWithZone:zone];
+    newRes->_sampleFrequency = [_sampleFrequency copyWithZone:zone];
+    newRes->_protocolInfo = [_protocolInfo copyWithZone:zone];
+    newRes->_itemSize = [_itemSize copyWithZone:zone];
+    newRes->_resourceURLString = [_resourceURLString copyWithZone:zone];
+    return newRes;
+}
+
 @end

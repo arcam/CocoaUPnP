@@ -482,6 +482,26 @@ describe(@"UPPEventSubscriptionManager", ^{
 
             OCMVerifyAll(mockEventServer);
         });
+
+        it(@"should exit early when given an invalid subscription", ^{
+            [[mockSession reject] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
+            UPPEventSubscription *invalidSubscription = [UPPEventSubscription
+                                                         subscriptionWithID:nil
+                                                         expiryDate:nil
+                                                         eventSubscriptionURL:nil];
+            [sut.activeSubscriptions addObject:invalidSubscription];
+            expect(sut.activeSubscriptions.count).to.equal(2);
+
+            waitUntil(^(DoneCallback done) {
+                [sut unsubscribe:invalidSubscription completion:^(BOOL success) {
+                    expect(success).to.beFalsy();
+                    done();
+                }];
+            });
+
+            expect(sut.activeSubscriptions.count).to.equal(1);
+            OCMVerifyAll(mockSession);
+        });
     });
 
     describe(@"when recieving an event", ^{

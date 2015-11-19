@@ -133,6 +133,40 @@ describe(@"UPPMediaItem", ^{
             expect(newRes.resourceURLString).to.equal(res.resourceURLString);
         });
     });
+
+    describe(@"NSCopying", ^{
+        it(@"should conform to NSCopying", ^{
+            expect(mediaItem).to.conformTo(@protocol(NSCopying));
+        });
+
+        it(@"should implement copyWithZone", ^{
+            UPPMediaItem *newItem = [mediaItem copy];
+            expect(newItem).toNot.beIdenticalTo(mediaItem);
+            expect(newItem.albumTitle).to.equal(mediaItem.albumTitle);
+            expect(newItem.artist).to.equal(mediaItem.artist);
+            expect(newItem.date).to.equal(mediaItem.date);
+            expect(newItem.genre).to.equal(mediaItem.genre);
+            expect(newItem.isContainer).to.equal(mediaItem.isContainer);
+            expect(newItem.childCount).to.equal(mediaItem.childCount);
+            expect(newItem.objectClass).to.equal(mediaItem.objectClass);
+            expect(newItem.objectID).to.equal(mediaItem.objectID);
+            expect(newItem.trackNumber).to.equal(mediaItem.trackNumber);
+            expect(newItem.parentID).to.equal(mediaItem.parentID);
+            expect(newItem.itemTitle).to.equal(mediaItem.itemTitle);
+            expect(newItem.albumArtURLString).to.equal(mediaItem.albumArtURLString);
+            expect(newItem.durationInSeconds).to.equal(mediaItem.durationInSeconds);
+
+            expect(newItem.resources.count).to.equal(1);
+            UPPMediaItemResource *newRes = [newItem.resources firstObject];
+            expect(newRes.numberOfAudioChannels).to.equal(res.numberOfAudioChannels);
+            expect(newRes.bitrate).to.equal(res.bitrate);
+            expect(newRes.duration).to.equal(res.duration);
+            expect(newRes.sampleFrequency).to.equal(res.sampleFrequency);
+            expect(newRes.protocolInfo).to.equal(res.protocolInfo);
+            expect(newRes.itemSize).to.equal(res.itemSize);
+            expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+        });
+    });
 });
 
 SpecEnd

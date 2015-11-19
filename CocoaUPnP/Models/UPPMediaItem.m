@@ -89,4 +89,25 @@
     [encoder encodeObject:@(self.durationInSeconds) forKey:@"durationInSeconds"];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    UPPMediaItem *newItem = [[[self class] alloc] init];
+    newItem->_albumTitle = [_albumTitle copyWithZone:zone];
+    newItem->_artist = [_artist copyWithZone:zone];
+    newItem->_date = [_date copyWithZone:zone];
+    newItem->_genre = [_genre copyWithZone:zone];
+    newItem->_isContainer = _isContainer;
+    newItem->_childCount = [_childCount copyWithZone:zone];
+    newItem->_objectClass = [_objectClass copyWithZone:zone];
+    newItem->_objectID = [_objectID copyWithZone:zone];
+    newItem->_trackNumber = [_trackNumber copyWithZone:zone];
+    newItem->_parentID = [_parentID copyWithZone:zone];
+    newItem->_resources = [_resources copyWithZone:zone];
+    newItem->_itemTitle = [_itemTitle copyWithZone:zone];
+    newItem->_albumArtURLString = [_albumArtURLString copyWithZone:zone];
+    newItem->_durationInSeconds = _durationInSeconds;
+
+    return newItem;
+}
+
 @end

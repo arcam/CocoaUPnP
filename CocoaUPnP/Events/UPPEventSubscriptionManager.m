@@ -208,6 +208,12 @@
 
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
+    if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {
+        completion(NO);
+        [self.activeSubscriptions removeObject:subscription];
+        return;
+    }
+
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
 
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],

@@ -10,9 +10,7 @@
 
 + (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
 {
-    if (!completion) {
-        return;
-    }
+    if (!completion) { return; }
 
     if (!data) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));

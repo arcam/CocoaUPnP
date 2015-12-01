@@ -193,7 +193,7 @@ describe(@"UPPEventSubscription", ^{
 
         [sut informObserversOfEvent:event];
 
-        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         OCMVerifyAll(mockObserver);
     });
 

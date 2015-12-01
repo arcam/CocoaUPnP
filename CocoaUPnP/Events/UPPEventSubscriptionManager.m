@@ -119,6 +119,8 @@
 
 - (void)subscribe:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
 {
+    if (!completion) { return; }
+
     NSURL *url = subscription.eventSubscriptionURL;
     NSURLRequest *request = [self subscriptionRequestWithEventSubscriptionURL:url];
 

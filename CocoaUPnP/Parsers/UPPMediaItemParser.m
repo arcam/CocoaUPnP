@@ -13,9 +13,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion
 {
-    if (!results || !completion) {
-        return;
-    }
+    if (!results || !completion) { return; }
 
     NSString *resultsString = results[UPnPXMLResultsKey];
 

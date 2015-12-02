@@ -344,7 +344,7 @@ describe(@"UPPEventSubscriptionManager", ^{
                        [[request HTTPMethod] isEqualToString:@"SUBSCRIBE"];
             }] completionHandler:[OCMArg any]]);
 
-            [sut subscriptionExpired:exampleSubscription completion:nil];
+            [sut subscriptionExpired:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) { }];
 
             OCMVerifyAll(mockSession);
         });
@@ -362,7 +362,7 @@ describe(@"UPPEventSubscriptionManager", ^{
                        [headers[@"TIMEOUT"] isEqualToString:@"Second-1800"];
             }] completionHandler:[OCMArg any]]));
 
-            [sut subscriptionExpired:exampleSubscription completion:nil];
+            [sut subscriptionExpired:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) { }];
 
             OCMVerifyAll(mockSession);
         });

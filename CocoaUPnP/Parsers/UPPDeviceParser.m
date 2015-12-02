@@ -16,9 +16,7 @@
 
 + (void)parseURL:(NSURL *)url withCompletion:(CompletionBlock)completion
 {
-    if (!completion) {
-        return;
-    }
+    if (!completion) { return; }
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -36,9 +34,7 @@
 
 - (void)parseWithBaseURL:(NSURL *)baseURL completion:(CompletionBlock)completion
 {
-    if (!completion) {
-        return;
-    }
+    if (!completion) { return; }
 
     if (self.data.length == 0) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));

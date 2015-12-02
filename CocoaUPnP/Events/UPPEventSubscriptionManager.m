@@ -119,6 +119,8 @@
 
 - (void)subscribe:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
 {
+    if (!completion) { return; }
+
     NSURL *url = subscription.eventSubscriptionURL;
     NSURLRequest *request = [self subscriptionRequestWithEventSubscriptionURL:url];
 
@@ -209,7 +211,7 @@
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
     if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {
-        completion(NO);
+        if (completion) { completion(NO); }
         [self.activeSubscriptions removeObject:subscription];
         return;
     }

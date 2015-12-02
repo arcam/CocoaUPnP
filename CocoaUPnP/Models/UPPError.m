@@ -38,3 +38,9 @@ NSError * UPPErrorWithCodeAndDescription(NSInteger code, NSString *description)
 
     return [NSError errorWithDomain:UPPErrorDomain code:code userInfo:userInfo];
 }
+
+NSError * UPPErrorWithMethodAndParam(NSString *methodName, NSString *paramName)
+{
+    NSString *description = [NSString stringWithFormat:@"Error calling %@: missing %@ parameter", methodName, paramName];
+    return UPPErrorWithCodeAndDescription(404, description);
+}

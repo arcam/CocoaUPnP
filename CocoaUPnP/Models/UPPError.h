@@ -56,3 +56,9 @@ NSError * UPPErrorWithCode(UPPErrorCode code);
  @return A new `NSError` object with code and description populated
  */
 NSError * UPPErrorWithCodeAndDescription(NSInteger code, NSString *description);
+
+/**
+ Create an `NSError` object to inform developers of a missing parameter from a
+ network call.
+*/
+NSError * UPPErrorWithMethodAndParam(NSString *methodName, NSString *paramName);

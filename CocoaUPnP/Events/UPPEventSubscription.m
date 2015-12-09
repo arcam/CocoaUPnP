@@ -84,13 +84,10 @@
 
 - (void)renewSubscription
 {
-    [self.manager renewSubscription:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
-        self.subscriptionID = subscriptionID;
-        self.expiryDate = expiryDate;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateTimersWithExpiryDate:expiryDate];
-        });
-    }];
+    // It seems some devices have issues with renewing subscriptions. After
+    // sending renew subscription, AV Transport will return 705 - Access Denied.
+    // Easiest way round this is to just fully renew the subscription each time.
+    [self subscriptionExpired];
 }
 
 - (void)subscriptionExpired

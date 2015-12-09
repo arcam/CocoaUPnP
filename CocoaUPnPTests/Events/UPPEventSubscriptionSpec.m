@@ -110,7 +110,7 @@ describe(@"UPPEventSubscription", ^{
 
         it(@"should tell manager when firing", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager renewSubscription:sut completion:[OCMArg any]]);
+            OCMExpect([mockManager subscriptionExpired:sut completion:[OCMArg any]]);
             sut.manager = mockManager;
 
             [timer fire];

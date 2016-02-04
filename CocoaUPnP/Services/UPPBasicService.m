@@ -45,13 +45,13 @@
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
 
-    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (successBlock) {
             successBlock(YES, nil);
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *returnedError) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (successBlock) {
-            successBlock(NO, returnedError);
+            successBlock(NO, error);
         }
     }];
 }
@@ -61,7 +61,7 @@
     NSDictionary *wrapped = [self wrapParameters:parameters
                                       withAction:action];
 
-    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.sessionManager POST:[self.controlURL absoluteString] parameters:wrapped progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         completion(responseObject, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, error);

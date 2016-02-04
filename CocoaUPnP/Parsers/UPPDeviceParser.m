@@ -20,12 +20,12 @@
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask *task, NSData *data) {
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSData *data) {
         UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];
         [parser parseWithBaseURL:url completion:^(NSArray *devices, NSError *error) {
             completion(devices, error);
         }];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];
 }

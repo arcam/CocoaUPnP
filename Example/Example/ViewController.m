@@ -25,7 +25,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UPPDiscovery sharedInstance] setDelegate:self];
+    [[UPPDiscovery sharedInstance] addBrowserObserver:self];
     [self setupSearchTimer];
 }
 
@@ -43,6 +43,7 @@
 {
     [super viewWillDisappear:animated];
     [self.searchTimer invalidate];
+    [[UPPDiscovery sharedInstance] removeBrowserObserver:self];
 }
 
 - (void)timerFired:(NSTimer *)timer

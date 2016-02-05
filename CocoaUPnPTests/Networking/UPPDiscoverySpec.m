@@ -71,7 +71,7 @@ describe(@"UPPDiscovery", ^{
             mockService = OCMClassMock([SSDPService class]);
             OCMStub([mockService xmlLocation]).andReturn(url);
             mockDelegate = OCMProtocolMock(@protocol(UPPDiscoveryDelegate));
-            discovery.delegate = mockDelegate;
+            [discovery addBrowserObserver:mockDelegate];
 
             expect(discovery.availableDevices.count).to.equal(0);
         });
@@ -81,6 +81,36 @@ describe(@"UPPDiscovery", ^{
             [mockDevice stopMocking];
             [mockService stopMocking];
             [mockDelegate stopMocking];
+        });
+
+        describe(@"deprecated delegate", ^{
+            beforeEach(^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                discovery.delegate = mockDelegate;
+#pragma clang diagnostic pop
+            });
+
+            describe(@"should inform delegate when adding a device", ^{
+                [discovery removeBrowserObserver:mockDelegate];
+                OCMExpect([mockDelegate discovery:discovery didFindDevice:mockDevice]);
+
+                [discovery ssdpBrowser:nil didFindService:mockService];
+
+                OCMVerifyAll(mockDelegate);
+            });
+
+            it(@"should inform delegate when removing a device", ^{
+                UPPBasicDevice *device = [UPPBasicDevice new];
+                device.udn = uniqueDeviceName;
+                [discovery.devices addObject:device];
+                OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
+                OCMExpect([mockDelegate discovery:discovery didRemoveDevice:device]);
+
+                [discovery ssdpBrowser:nil didRemoveService:mockService];
+
+                OCMVerifyAll(mockDelegate);
+            });
         });
 
         describe(@"when a device is added", ^{

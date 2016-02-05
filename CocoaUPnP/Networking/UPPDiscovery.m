@@ -10,6 +10,7 @@
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSMutableArray *unparsedUUIDs;
+@property (strong, nonatomic) NSMutableSet *observers;
 @end
 
 @implementation UPPDiscovery
@@ -68,6 +69,27 @@
     return _browser;
 }
 
+- (NSMutableSet *)observers
+{
+    if (!_observers) {
+        _observers = [NSMutableSet set];
+    }
+
+    return _observers;
+}
+
+#pragma mark - Browser Discovery Delegate Methods
+
+- (void)addBrowserObserver:(id<UPPDiscoveryDelegate>)observer
+{
+    [self.observers addObject:observer];
+}
+
+- (void)removeBrowserObserver:(id<UPPDiscoveryDelegate>)observer
+{
+    [self.observers removeObject:observer];
+}
+
 #pragma mark - SSDPServiceBrowserDelegate
 
 - (void)ssdpBrowser:(SSDPServiceBrowser *)browser didFindService:(SSDPService *)service
@@ -86,8 +108,18 @@
 
     for (UPPBasicDevice *device in devices) {
         [self.devices removeObject:device];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         if ([self.delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
             [self.delegate discovery:self didRemoveDevice:device];
+        }
+#pragma clang diagnostic pop
+
+        for (id <UPPDiscoveryDelegate>delegate in self.observers) {
+            if ([delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
+                [delegate discovery:self didRemoveDevice:device];
+            }
         }
     }
 }
@@ -126,8 +158,17 @@
 
     [self.devices addObject:device];
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self.delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
         [self.delegate discovery:self didFindDevice:device];
+    }
+#pragma clang diagnostic pop
+
+    for (id <UPPDiscoveryDelegate>delegate in self.observers) {
+        if ([delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
+            [delegate discovery:self didFindDevice:device];
+        }
     }
 }
 

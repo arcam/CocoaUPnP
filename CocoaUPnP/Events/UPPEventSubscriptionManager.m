@@ -210,9 +210,10 @@
 
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
+    [self.activeSubscriptions removeObject:subscription];
+
     if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {
         if (completion) { completion(NO); }
-        [self.activeSubscriptions removeObject:subscription];
         return;
     }
 
@@ -230,7 +231,6 @@
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
 
         if (code == 200) {
-            [self.activeSubscriptions removeObject:subscription];
 
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];

@@ -46,8 +46,11 @@
 
 /**
  The object who wished to be informed of add/remove device notices.
+ @warning This method is deprecated and will go away in a future release.
+ @see addBrowserObserver:
+ @see removeBrowserObserver:
  */
-@property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate;
+@property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate DEPRECATED_ATTRIBUTE;
 
 /**
  An instance of `SSDPServiceBrowser`. Lazily instantiated for better testing.
@@ -75,5 +78,19 @@
  Return an array of all currently known devices.
  */
 - (NSArray *)availableDevices;
+
+/**
+ Add an observer to be notified as devices are discovered or removed.
+
+ @param observer An observer conforming to `UPPDiscoveryDelegate`.
+ */
+- (void)addBrowserObserver:(id<UPPDiscoveryDelegate>)observer;
+
+/**
+ Remove an observer from being notified as devices are discovered or removed.
+
+ @param observer An observer conforming to `UPPDiscoveryDelegate`.
+ */
+- (void)removeBrowserObserver:(id<UPPDiscoveryDelegate>)observer;
 
 @end

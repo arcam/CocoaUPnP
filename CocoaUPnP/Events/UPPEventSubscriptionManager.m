@@ -99,7 +99,8 @@
 
     // Create a new subscription.
     NSURL *url = service.eventSubscriptionURL;
-    subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url];
+    subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url
+                                                       serviceIdentifier:service.uniqueServiceName];
     [self subscribe:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
         if (error) {
             if (completion) {

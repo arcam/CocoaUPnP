@@ -264,6 +264,21 @@
     }
 }
 
+- (void)removeSubscriptionsForServices:(NSArray *)services
+{
+    NSMutableArray *objectsToRemove = [NSMutableArray array];
+
+    for (UPPBasicService *service in services) {
+        NSString *identifier = service.uniqueServiceName;
+        NSArray *objects = [self subscriptionsForServiceIdentifier:identifier];
+        [objectsToRemove addObjectsFromArray:objects];
+    }
+
+    if (objectsToRemove.count > 0) {
+        [self.activeSubscriptions removeObjectsInArray:objectsToRemove];
+    }
+}
+
 #pragma mark - UPPEventServerDelegate
 
 - (void)eventReceived:(NSDictionary *)event
@@ -302,6 +317,12 @@
     NSArray *matches = [self.activeSubscriptions filteredArrayUsingPredicate:predicate];
 
     return [matches firstObject];
+}
+
+- (NSArray *)subscriptionsForServiceIdentifier:(NSString *)serviceIdentifier
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueServiceName = %@", serviceIdentifier];
+    return [self.activeSubscriptions filteredArrayUsingPredicate:predicate];
 }
 
 - (NSDate *)dateFromHeader:(NSString *)header

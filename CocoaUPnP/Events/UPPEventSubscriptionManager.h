@@ -87,4 +87,12 @@
  */
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 
+/**
+ Remove all subscriptions for an array of services. This is run when discovery
+ is removing a device to prevent stale subscriptions being kept around.
+
+ @param services An array of `UPPBasicService` objects.
+ */
+- (void)removeSubscriptionsForServices:(NSArray *)services;
+
 @end

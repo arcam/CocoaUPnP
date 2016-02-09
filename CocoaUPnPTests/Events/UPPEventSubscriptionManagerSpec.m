@@ -566,6 +566,22 @@ describe(@"UPPEventSubscriptionManager", ^{
             OCMVerifyAll(mockSubscription);
         });
     });
+
+    describe(@"when removing all subscriptions from services", ^{
+        beforeEach(^{
+            UPPEventSubscription *sub = [UPPEventSubscription subscriptionWithSubscriptionURL:nil serviceIdentifier:serviceIdentifier];
+            OCMStub([mockService uniqueServiceName]).andReturn(serviceIdentifier);
+            [sut.activeSubscriptions addObject:sub];
+        });
+
+        it(@"should remove subscriptions for a given service", ^{
+            expect(sut.activeSubscriptions.count).to.equal(1);
+
+            [sut removeSubscriptionsForServices:@[mockService]];
+
+            expect(sut.activeSubscriptions.count).to.equal(0);
+        });
+    });
 });
 
 SpecEnd

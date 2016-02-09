@@ -36,7 +36,8 @@
 
         _contentDirectoryService = [UPPContentDirectoryService
                                     serviceWithBaseURL:self.baseURL
-                                    description:service];
+                                    description:service
+                                    uniqueDeviceName:self.udn];
     }
     return _contentDirectoryService;
 }
@@ -53,7 +54,8 @@
 
         _connectionManagerService = [UPPConnectionManagerService
                                      serviceWithBaseURL:self.baseURL
-                                     description:service];
+                                     description:service
+                                     uniqueDeviceName:self.udn];
     }
     return _connectionManagerService;
 }
@@ -70,7 +72,8 @@
 
         _avTransportService = [UPPAVTransportService
                                serviceWithBaseURL:self.baseURL
-                               description:service];
+                               description:service
+                               uniqueDeviceName:self.udn];
     }
     return _avTransportService;
 }

@@ -13,10 +13,12 @@ describe(@"UPPEventSubscription", ^{
     __block NSString *subscriptionID;
     __block NSDate *expiryDate;
     __block NSURL *subscriptionURL;
+    __block NSString *serviceUDN;
 
     beforeEach(^{
         subscriptionID = @"uuid:123456";
         expiryDate = [NSDate date];
+        serviceUDN = @"udn:1234:abcd";
         subscriptionURL = [NSURL URLWithString:@"http://127.0.0.1/Event/"];
         sut = [UPPEventSubscription subscriptionWithID:subscriptionID
                                             expiryDate:expiryDate

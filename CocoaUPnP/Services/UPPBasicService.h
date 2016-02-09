@@ -55,7 +55,6 @@ typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
  */
 @property (copy, nonatomic) NSString *serviceType;
 
-
 #pragma mark - Methods
 
 ///-----------------------------------------------------------------------------
@@ -66,12 +65,20 @@ typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
  A convenience initialiser for creating a new service from a base URL and
  `UPPServiceDescription`
 
- @param baseURL     The base URL for the service
- @param description The basic service description
+ @param baseURL          The base URL for the service
+ @param description      The basic service description
+ @param uniqueDeviceName The unique device name of the parent device
 
  @return A new basic service instance
  */
-+ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description;
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn;
+
+/**
+ Returns a unique service name, comprised of the parent devices unique device name,
+ concatenated with the service type
+ */
+
+- (NSString *)uniqueServiceName;
 
 /**
  Send a POST request, with a completion block that returns the success state of

@@ -37,7 +37,8 @@
 
         _renderingControlService = [UPPRenderingControlService
                                     serviceWithBaseURL:self.baseURL
-                                    description:service];
+                                    description:service
+                                    uniqueDeviceName:self.udn];
     }
 
     return _renderingControlService;
@@ -55,7 +56,8 @@
 
         _connectionManagerService = [UPPConnectionManagerService
                                      serviceWithBaseURL:self.baseURL
-                                     description:service];
+                                     description:service
+                                     uniqueDeviceName:self.udn];
     }
     return _connectionManagerService;
 }
@@ -72,7 +74,8 @@
 
         _avTransportService = [UPPAVTransportService
                                serviceWithBaseURL:self.baseURL
-                               description:service];
+                               description:service
+                               uniqueDeviceName:self.udn];
     }
     return _avTransportService;
 }

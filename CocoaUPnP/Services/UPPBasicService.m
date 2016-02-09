@@ -8,17 +8,24 @@
 
 @interface UPPBasicService ()
 @property (strong, nonatomic) NSURL *baseURL;
+@property (copy, nonatomic) NSString *usn;
 @end
 
 @implementation UPPBasicService
 
-+ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn
 {
     id service = [[[self class] alloc] init];
     [service setBaseURL:baseURL];
     [service populateFromServiceDescription:description];
+    [service createUniqueServiceNameWithDeviceName:udn];
 
     return service;
+}
+
+- (NSString *)uniqueServiceName
+{
+    return self.usn;
 }
 
 - (NSDictionary *)wrapParameters:(UPPParameters *)parameters withAction:(NSString *)action
@@ -86,6 +93,10 @@
     return [NSURL URLWithString:component relativeToURL:self.baseURL];
 }
 
+- (void)createUniqueServiceNameWithDeviceName:(NSString *)uniqueDeviceName
+{
+    self.usn = [NSString stringWithFormat:@"%@::%@", uniqueDeviceName, self.serviceType];
+}
 
 - (UPPSessionManager *)sessionManager
 {

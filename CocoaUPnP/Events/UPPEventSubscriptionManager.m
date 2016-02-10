@@ -350,6 +350,7 @@
 - (void)sendSubscriptionRequest:(NSURLRequest *)request completion:(void (^)(NSURLResponse *response, NSError *error))completion
 {
     if (!completion) { return; }
+    if (!request) { return; }
 
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

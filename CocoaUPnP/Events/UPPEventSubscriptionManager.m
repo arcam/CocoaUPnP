@@ -254,10 +254,13 @@
 - (void)removeObserver:(id<UPPEventSubscriptionDelegate>)observer fromService:(UPPBasicService *)service completion:(void (^)(BOOL))completion
 {
     UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
-    [subscripton removeEventObserver:observer];
 
-    if ([subscripton eventObservers].count == 0) {
-        [self unsubscribe:subscripton completion:nil];
+    if (subscripton) {
+        [subscripton removeEventObserver:observer];
+
+        if ([subscripton eventObservers].count == 0) {
+            [self unsubscribe:subscripton completion:nil];
+        }
     }
 
     if (completion) {

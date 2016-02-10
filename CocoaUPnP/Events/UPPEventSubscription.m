@@ -66,6 +66,8 @@
 
 - (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
 {
+    if (!expiryDate) { return; }
+
     [self invalidateTimers];
     self.expiryDate = expiryDate;
 

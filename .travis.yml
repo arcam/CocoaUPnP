@@ -1,8 +1,6 @@
 osx_image: xcode7
 language: objective-c
 before_install:
-  - brew update
-  - brew outdated xctool || brew upgrade xctool
   - gem install cocoapods slather -N
 podfile: Example/Podfile
 script: 

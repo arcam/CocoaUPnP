@@ -9,6 +9,10 @@ const NSUInteger UPPEventServerPort = 54123;
 NSString * const UPPEventServerSIDKey = @"SID";
 NSString * const UPPEventServerBodyKey = @"Event";
 
+@interface UPPEventServer ()
+@property (copy, nonatomic) NSURL *callbackURL;
+@end
+
 @implementation UPPEventServer
 
 - (void)startServer
@@ -22,7 +26,10 @@ NSString * const UPPEventServerBodyKey = @"Event";
         return [[GCDWebServerResponse alloc] init];
     }];
 
-    [self.webServer startWithPort:UPPEventServerPort bonjourName:nil];
+    if ([self.webServer startWithPort:UPPEventServerPort bonjourName:nil]) {
+        NSURL *baseURL = self.webServer.serverURL;
+        self.callbackURL = [baseURL URLByAppendingPathComponent:@"Event"];
+    }
 }
 
 - (void)stopServer
@@ -34,11 +41,7 @@ NSString * const UPPEventServerBodyKey = @"Event";
 
 - (NSURL *)eventServerCallbackURL
 {
-    if (!self.webServer.isRunning) {
-        return nil;
-    }
-    NSURL *baseURL = self.webServer.serverURL;
-    return [baseURL URLByAppendingPathComponent:@"Event"];
+    return _callbackURL;
 }
 
 - (BOOL)isRunning

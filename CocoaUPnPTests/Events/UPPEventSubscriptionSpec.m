@@ -13,14 +13,17 @@ describe(@"UPPEventSubscription", ^{
     __block NSString *subscriptionID;
     __block NSDate *expiryDate;
     __block NSURL *subscriptionURL;
+    __block NSString *serviceUDN;
 
     beforeEach(^{
         subscriptionID = @"uuid:123456";
         expiryDate = [NSDate date];
+        serviceUDN = @"udn:1234:abcd";
         subscriptionURL = [NSURL URLWithString:@"http://127.0.0.1/Event/"];
         sut = [UPPEventSubscription subscriptionWithID:subscriptionID
                                             expiryDate:expiryDate
-                                  eventSubscriptionURL:subscriptionURL];
+                                  eventSubscriptionURL:subscriptionURL
+                                     serviceIdentifier:serviceUDN];
         expect(sut).toNot.beNil();
     });
 
@@ -36,11 +39,17 @@ describe(@"UPPEventSubscription", ^{
         expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
     });
 
+    it(@"should store unique service name", ^{
+        expect(sut.uniqueServiceName).to.equal(serviceUDN);
+    });
+
     it(@"should have a basic initialiser", ^{
-        sut = [UPPEventSubscription subscriptionWithSubscriptionURL:subscriptionURL];
+        sut = [UPPEventSubscription subscriptionWithSubscriptionURL:subscriptionURL
+                                                  serviceIdentifier:serviceUDN];
         expect([sut subscriptionID]).to.beNil();
         expect([sut expiryDate]).to.beNil();
         expect([sut eventSubscriptionURL]).to.equal(subscriptionURL);
+        expect(sut.uniqueServiceName).to.equal(serviceUDN);
     });
 
     describe(@"when storing observers", ^{

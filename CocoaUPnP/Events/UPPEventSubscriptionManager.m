@@ -99,7 +99,8 @@
 
     // Create a new subscription.
     NSURL *url = service.eventSubscriptionURL;
-    subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url];
+    subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url
+                                                       serviceIdentifier:service.uniqueServiceName];
     [self subscribe:subscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
         if (error) {
             if (completion) {
@@ -210,6 +211,7 @@
 
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
+    [subscription invalidateTimers];
     [self.activeSubscriptions removeObject:subscription];
 
     if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {
@@ -252,14 +254,38 @@
 - (void)removeObserver:(id<UPPEventSubscriptionDelegate>)observer fromService:(UPPBasicService *)service completion:(void (^)(BOOL))completion
 {
     UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
-    [subscripton removeEventObserver:observer];
 
-    if ([subscripton eventObservers].count == 0) {
-        [self unsubscribe:subscripton completion:nil];
+    if (subscripton) {
+        [subscripton removeEventObserver:observer];
+
+        if ([subscripton eventObservers].count == 0) {
+            [self unsubscribe:subscripton completion:nil];
+        }
     }
 
     if (completion) {
         completion(NO);
+    }
+}
+
+- (void)removeSubscriptionsForServices:(NSArray *)services deviceId:(NSString *)deviceId
+{
+    NSMutableArray *subscriptions = [NSMutableArray array];
+
+    for (UPPServiceDescription *service in services) {
+        NSString *identifier = [NSString stringWithFormat:@"%@::%@",
+                                deviceId, service.serviceType];
+        NSArray *objects = [self subscriptionsForServiceIdentifier:identifier];
+        [subscriptions addObjectsFromArray:objects];
+    }
+
+    if (subscriptions.count == 0) {
+        return;
+    }
+
+    for (UPPEventSubscription *subscription in subscriptions) {
+        [subscription invalidateTimers];
+        [self.activeSubscriptions removeObject:subscription];
     }
 }
 
@@ -303,6 +329,12 @@
     return [matches firstObject];
 }
 
+- (NSArray *)subscriptionsForServiceIdentifier:(NSString *)serviceIdentifier
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueServiceName = %@", serviceIdentifier];
+    return [self.activeSubscriptions filteredArrayUsingPredicate:predicate];
+}
+
 - (NSDate *)dateFromHeader:(NSString *)header
 {
     if (!header) {
@@ -318,6 +350,7 @@
 - (void)sendSubscriptionRequest:(NSURLRequest *)request completion:(void (^)(NSURLResponse *response, NSError *error))completion
 {
     if (!completion) { return; }
+    if (!request) { return; }
 
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -326,17 +359,6 @@
     }];
 
     [task resume];
-}
-
-- (UPPEventSubscription *)subscriptionWithURL:(NSURL *)subscriptionURL headers:(NSDictionary *)headers observer:(id<UPPEventSubscriptionDelegate>)observer
-{
-    UPPEventSubscription *subscription;
-    subscription = [UPPEventSubscription subscriptionWithID:headers[@"SID"]
-                                                 expiryDate:[self dateFromHeader:headers[@"TIMEOUT"]]
-                                       eventSubscriptionURL:subscriptionURL];
-    [subscription addEventObserver:observer];
-
-    return subscription;
 }
 
 - (NSMutableURLRequest *)requestWithURL:(NSURL *)url method:(NSString *)method headers:(NSDictionary *)headers
@@ -348,7 +370,7 @@
         [request setValue:value forHTTPHeaderField:header];
     }];
 
-    return request;
+    return [request copy];
 }
 
 @end

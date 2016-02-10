@@ -10,6 +10,7 @@
 		0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DFDB41B021A700051717E /* FolderViewController.m */; };
 		0E32DB3C1B9DAF69003BC803 /* GetPositionInfoResponse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */; };
 		0E32DB401BA019AD003BC803 /* UPPParametersSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E32DB3F1BA019AD003BC803 /* UPPParametersSpec.m */; };
+		0E4935731C69FFB5006EB6A8 /* UPPBasicServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4935711C69FF89006EB6A8 /* UPPBasicServiceSpec.m */; };
 		0E592A291B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */; };
 		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
@@ -18,7 +19,7 @@
 		0E9A78371AC944C10013DB95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78351AC944C10013DB95 /* Main.storyboard */; };
 		0E9A78391AC944C10013DB95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A78381AC944C10013DB95 /* Images.xcassets */; };
 		0E9A783C1AC944C10013DB95 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9A783A1AC944C10013DB95 /* LaunchScreen.xib */; };
-		0EA80D8F1BD5013E00DF02F8 /* UPPTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		0EA80D8F1BD5013E00DF02F8 /* UPPTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF4AB21AFBA9A500871EBE /* UPPTestAppDelegate.m */; };
 		0EC8FE6B1B7DE7E400B58D3B /* UPPEventServerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC8FE6A1B7DE7E400B58D3B /* UPPEventServerSpec.m */; };
 		0EE226711B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2263A1B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m */; };
 		0EE226721B73A0EC0022119E /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EE2263C1B73A0EC0022119E /* Containers.xml */; };
@@ -80,6 +81,7 @@
 		0E2DFDB41B021A700051717E /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
 		0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetPositionInfoResponse.xml; sourceTree = "<group>"; };
 		0E32DB3F1BA019AD003BC803 /* UPPParametersSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPParametersSpec.m; sourceTree = "<group>"; };
+		0E4935711C69FF89006EB6A8 /* UPPBasicServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPBasicServiceSpec.m; sourceTree = "<group>"; };
 		0E592A271B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+beWithinAMillisecondOf.h"; sourceTree = "<group>"; };
 		0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+beWithinAMillisecondOf.m"; sourceTree = "<group>"; };
 		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE2264A1B73A0EC0022119E /* UPPBasicDeviceSpec.m */,
+				0E4935711C69FF89006EB6A8 /* UPPBasicServiceSpec.m */,
 				0EE2264B1B73A0EC0022119E /* UPPDeviceIconSpec.m */,
 				0EE2264C1B73A0EC0022119E /* UPPErrorSpec.m */,
 				0EE2264D1B73A0EC0022119E /* UPPMediaItemResourceSpec.m */,
@@ -706,6 +709,7 @@
 				0EE226971B73A0EC0022119E /* NetworkTestHelpers.m in Sources */,
 				0E32DB401BA019AD003BC803 /* UPPParametersSpec.m in Sources */,
 				0EE226981B73A0EC0022119E /* TestHelpers.m in Sources */,
+				0E4935731C69FFB5006EB6A8 /* UPPBasicServiceSpec.m in Sources */,
 				0EE2268F1B73A0EC0022119E /* UPPMediaItemParserSpec.m in Sources */,
 				0EE226711B73A0EC0022119E /* UPPEventSubscriptionManagerSpec.m in Sources */,
 				0EE226841B73A0EC0022119E /* UPPServiceSpec.m in Sources */,

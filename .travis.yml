@@ -6,6 +6,5 @@ before_install:
   - gem install cocoapods slather -N
 podfile: Example/Podfile
 script: 
-  - make build
-  - make tests
+  - scan
 after_success: slather

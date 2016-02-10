@@ -52,9 +52,14 @@ describe(@"UPPEventServer", ^{
         });
 
         it(@"should expose the URL of the server when running", ^{
+            OCMStub([mockServer startWithPort:UPPEventServerPort bonjourName:nil]).andReturn(YES);
             OCMStub([mockServer isRunning]).andReturn(YES);
+
+            [sut startServer];
+            NSURL *callbackURL = [sut eventServerCallbackURL];
+
             NSURL *expected = [NSURL URLWithString:@"http://127.0.0.1/Event"];
-            expect([sut eventServerCallbackURL]).to.equal(expected);
+            expect(callbackURL).to.equal(expected);
         });
 
         it(@"should return nil for URL server not running", ^{

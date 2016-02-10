@@ -37,6 +37,7 @@ describe(@"UPPEventSubscriptionManager", ^{
     __block id mockObserver;
     __block id mockEventServer;
     __block UPPEventSubscription *exampleSubscription;
+    __block NSString *serviceIdentifier;
 
     beforeEach(^{
         mockSession = OCMClassMock([NSURLSession class]);
@@ -54,9 +55,11 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         mockObserver = OCMProtocolMock(@protocol(UPPEventSubscriptionDelegate));
 
+        serviceIdentifier = @"usn:service:identifier";
         exampleSubscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
                                                             expiryDate:[NSDate distantPast]
-                                                  eventSubscriptionURL:url];
+                                                  eventSubscriptionURL:url
+                                                     serviceIdentifier:serviceIdentifier];
     });
 
     it(@"should conform to UPPEventServerDelegate", ^{
@@ -192,7 +195,10 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         it(@"should not shut down the event server if there are subscribers and subscription was unsuccessful", ^{
             NSURL *url = [NSURL URLWithString:@"http://123.123.123.123"];
-            UPPEventSubscription *anotherSubscription = [UPPEventSubscription subscriptionWithID:@"aDifferentSID" expiryDate:[NSDate distantFuture] eventSubscriptionURL:url];
+            UPPEventSubscription *anotherSubscription = [UPPEventSubscription subscriptionWithID:@"aDifferentSID"
+                                                                                      expiryDate:[NSDate distantFuture]
+                                                                            eventSubscriptionURL:url
+                                                                               serviceIdentifier:serviceIdentifier];
             [sut.activeSubscriptions addObject:anotherSubscription];
             expect([sut activeSubscriptions].count).to.equal(1);
             [[mockEventServer reject] stopServer];
@@ -281,7 +287,8 @@ describe(@"UPPEventSubscriptionManager", ^{
             existingSubscription = [UPPEventSubscription
                                     subscriptionWithID:UPPTestSID
                                     expiryDate:[NSDate distantPast]
-                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]];
+                                    eventSubscriptionURL:[NSURL URLWithString:UPPTestFakeURL]
+                                    serviceIdentifier:serviceIdentifier];
             [sut.activeSubscriptions addObject:existingSubscription];
             expect(sut.activeSubscriptions.count).to.equal(1);
 
@@ -326,7 +333,8 @@ describe(@"UPPEventSubscriptionManager", ^{
             NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
             exampleSubscription = [UPPEventSubscription subscriptionWithID:nil
                                                                 expiryDate:[NSDate date]
-                                                      eventSubscriptionURL:url];
+                                                      eventSubscriptionURL:url
+                                                         serviceIdentifier:serviceIdentifier];
             [sut renewSubscription:exampleSubscription completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
                 expect(exampleSubscription.subscriptionID).to.equal(subscriptionID);
                 expect(exampleSubscription.expiryDate).to.equal(expiryDate);
@@ -403,8 +411,9 @@ describe(@"UPPEventSubscriptionManager", ^{
             NSURL *url = [NSURL URLWithString:UPPTestFakeURL];
 
             exampleSubscription = [UPPEventSubscription subscriptionWithID:UPPTestSID
-                                                         expiryDate:expiry
-                                               eventSubscriptionURL:url];
+                                                                expiryDate:expiry
+                                                      eventSubscriptionURL:url
+                                                         serviceIdentifier:serviceIdentifier];
             [exampleSubscription addEventObserver:mockObserver];
             [sut.activeSubscriptions addObject:exampleSubscription];
 
@@ -472,7 +481,10 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         it(@"should not shut down event server if more subscriptions exist", ^{
             NSURL *url = [NSURL URLWithString:@"http://123.123.123.123"];
-            UPPEventSubscription *anotherSubscripton = [UPPEventSubscription subscriptionWithID:nil expiryDate:nil eventSubscriptionURL:url];
+            UPPEventSubscription *anotherSubscripton = [UPPEventSubscription subscriptionWithID:nil
+                                                                                     expiryDate:nil
+                                                                           eventSubscriptionURL:url
+                                                                              serviceIdentifier:serviceIdentifier];
             [sut.activeSubscriptions addObject:anotherSubscripton];
             expect(sut.activeSubscriptions.count).to.equal(2);
             [[mockEventServer reject] stopServer];
@@ -488,7 +500,8 @@ describe(@"UPPEventSubscriptionManager", ^{
             UPPEventSubscription *invalidSubscription = [UPPEventSubscription
                                                          subscriptionWithID:nil
                                                          expiryDate:nil
-                                                         eventSubscriptionURL:nil];
+                                                         eventSubscriptionURL:nil
+                                                         serviceIdentifier:nil];
             [sut.activeSubscriptions addObject:invalidSubscription];
             expect(sut.activeSubscriptions.count).to.equal(2);
 
@@ -551,6 +564,24 @@ describe(@"UPPEventSubscriptionManager", ^{
              object:nil];
 
             OCMVerifyAll(mockSubscription);
+        });
+    });
+
+    describe(@"when removing all subscriptions from services", ^{
+        beforeEach(^{
+            NSString *serviceName = [NSString stringWithFormat:@"udn:something::%@", serviceIdentifier];
+            UPPEventSubscription *sub = [UPPEventSubscription subscriptionWithSubscriptionURL:nil serviceIdentifier:serviceName];
+            [sut.activeSubscriptions addObject:sub];
+
+            OCMStub([mockService serviceType]).andReturn(serviceIdentifier);
+        });
+
+        it(@"should remove subscriptions for a given service", ^{
+            expect(sut.activeSubscriptions.count).to.equal(1);
+
+            [sut removeSubscriptionsForServices:@[mockService] deviceId:@"udn:something"];
+
+            expect(sut.activeSubscriptions.count).to.equal(0);
         });
     });
 });

@@ -11,32 +11,36 @@
 @property (strong, nonatomic, readwrite) NSURL *eventSubscriptionURL;
 @property (strong, nonatomic, readwrite) NSTimer *renewTimer;
 @property (strong, nonatomic, readwrite) NSTimer *expirationTimer;
+@property (copy, nonatomic, readwrite) NSString *uniqueServiceName;
 @end
 
 @implementation UPPEventSubscription
 
 #pragma mark - Initialisation
 
-+ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL
++ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName
 {
     return [[[self class] alloc] initWithSubscriptionID:nil
                                              expiryDate:nil
-                                   eventSubscriptionURL:eventSubscriptionURL];
+                                   eventSubscriptionURL:eventSubscriptionURL
+                                      serviceIdentifier:uniqueServiceName];
 }
 
-+ (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL
++ (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName
 {
     return [[[self class] alloc] initWithSubscriptionID:subscriptionID
                                              expiryDate:expiryDate
-                                   eventSubscriptionURL:eventSubscriptionURL];
+                                   eventSubscriptionURL:eventSubscriptionURL
+                                      serviceIdentifier:uniqueServiceName];
 }
 
-- (instancetype)initWithSubscriptionID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL
+- (instancetype)initWithSubscriptionID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName
 {
     if ((self = [super init])) {
         self.subscriptionID = subscriptionID;
         self.eventSubscriptionURL = eventSubscriptionURL;
         [self updateTimersWithExpiryDate:expiryDate];
+        self.uniqueServiceName = uniqueServiceName;
     }
     return self;
 }
@@ -62,6 +66,8 @@
 
 - (void)updateTimersWithExpiryDate:(NSDate *)expiryDate
 {
+    if (!expiryDate) { return; }
+
     [self invalidateTimers];
     self.expiryDate = expiryDate;
 

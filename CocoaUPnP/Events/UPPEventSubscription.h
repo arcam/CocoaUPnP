@@ -66,6 +66,11 @@
  */
 @property (weak, nonatomic) UPPEventSubscriptionManager *manager;
 
+/**
+ The unique name of the service that the subscription applies to
+ */
+@property (copy, nonatomic, readonly) NSString *uniqueServiceName;
+
 
 #pragma mark - Initialisation
 
@@ -79,10 +84,12 @@
 
  @param eventSubscriptionURL The full event subscription URL, which is used when
  resubscribing or unsubscribing from events.
+ @param serviceIdentifier    The unique name of the service the subscription
+ relates to
 
  @return Returns a new subscription object.
  */
-+ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL;
++ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName;
 
 /**
  Convenience initialiser which returns a new subscription object when given a
@@ -93,10 +100,11 @@
  service.
  @param eventSubscriptionURL The full event subscription URL, which is used when
  resubscribing or unsubscribing from events.
+ @param serviceIdentifier    The unique name of the service the subscription.
 
  @return Returns a new subscription object.
  */
-+ (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL;
++ (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName;
 
 /**
  Update the object after renewing a subscription.

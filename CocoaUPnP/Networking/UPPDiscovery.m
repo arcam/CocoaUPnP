@@ -6,6 +6,7 @@
 #import "UPPSessionManager.h"
 #import "UPPDeviceParser.h"
 #import "UPPBasicDevice.h"
+#import "UPPEventSubscriptionManager.h"
 
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
@@ -107,6 +108,11 @@
     NSArray *devices = [self devicesMatchingName:uniqueDeviceName];
 
     for (UPPBasicDevice *device in devices) {
+        NSArray *services = device.services;
+        [[UPPEventSubscriptionManager sharedManager]
+         removeSubscriptionsForServices:services
+         deviceId:device.udn];
+
         [self.devices removeObject:device];
 
 #pragma clang diagnostic push

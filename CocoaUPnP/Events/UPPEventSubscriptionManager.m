@@ -211,6 +211,7 @@
 
 - (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
 {
+    [subscription invalidateTimers];
     [self.activeSubscriptions removeObject:subscription];
 
     if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {

@@ -381,7 +381,7 @@
         [request setValue:value forHTTPHeaderField:header];
     }];
 
-    return request;
+    return [request copy];
 }
 
 @end

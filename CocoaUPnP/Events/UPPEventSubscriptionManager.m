@@ -264,18 +264,24 @@
     }
 }
 
-- (void)removeSubscriptionsForServices:(NSArray *)services
+- (void)removeSubscriptionsForServices:(NSArray *)services deviceId:(NSString *)deviceId
 {
-    NSMutableArray *objectsToRemove = [NSMutableArray array];
+    NSMutableArray *subscriptions = [NSMutableArray array];
 
-    for (UPPBasicService *service in services) {
-        NSString *identifier = service.uniqueServiceName;
+    for (UPPServiceDescription *service in services) {
+        NSString *identifier = [NSString stringWithFormat:@"%@::%@",
+                                deviceId, service.serviceType];
         NSArray *objects = [self subscriptionsForServiceIdentifier:identifier];
-        [objectsToRemove addObjectsFromArray:objects];
+        [subscriptions addObjectsFromArray:objects];
     }
 
-    if (objectsToRemove.count > 0) {
-        [self.activeSubscriptions removeObjectsInArray:objectsToRemove];
+    if (subscriptions.count == 0) {
+        return;
+    }
+
+    for (UPPEventSubscription *subscription in subscriptions) {
+        [subscription invalidateTimers];
+        [self.activeSubscriptions removeObject:subscription];
     }
 }
 

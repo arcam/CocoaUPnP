@@ -569,15 +569,17 @@ describe(@"UPPEventSubscriptionManager", ^{
 
     describe(@"when removing all subscriptions from services", ^{
         beforeEach(^{
-            UPPEventSubscription *sub = [UPPEventSubscription subscriptionWithSubscriptionURL:nil serviceIdentifier:serviceIdentifier];
-            OCMStub([mockService uniqueServiceName]).andReturn(serviceIdentifier);
+            NSString *serviceName = [NSString stringWithFormat:@"udn:something::%@", serviceIdentifier];
+            UPPEventSubscription *sub = [UPPEventSubscription subscriptionWithSubscriptionURL:nil serviceIdentifier:serviceName];
             [sut.activeSubscriptions addObject:sub];
+
+            OCMStub([mockService serviceType]).andReturn(serviceIdentifier);
         });
 
         it(@"should remove subscriptions for a given service", ^{
             expect(sut.activeSubscriptions.count).to.equal(1);
 
-            [sut removeSubscriptionsForServices:@[mockService]];
+            [sut removeSubscriptionsForServices:@[mockService] deviceId:@"udn:something"];
 
             expect(sut.activeSubscriptions.count).to.equal(0);
         });

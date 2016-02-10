@@ -92,7 +92,8 @@
  is removing a device to prevent stale subscriptions being kept around.
 
  @param services An array of `UPPBasicService` objects.
+ @param deviceId The parent unique device name.
  */
-- (void)removeSubscriptionsForServices:(NSArray *)services;
+- (void)removeSubscriptionsForServices:(NSArray *)services deviceId:(NSString *)deviceId;
 
 @end

@@ -361,17 +361,6 @@
     [task resume];
 }
 
-- (UPPEventSubscription *)subscriptionWithURL:(NSURL *)subscriptionURL headers:(NSDictionary *)headers observer:(id<UPPEventSubscriptionDelegate>)observer
-{
-    UPPEventSubscription *subscription;
-    subscription = [UPPEventSubscription subscriptionWithID:headers[@"SID"]
-                                                 expiryDate:[self dateFromHeader:headers[@"TIMEOUT"]]
-                                       eventSubscriptionURL:subscriptionURL];
-    [subscription addEventObserver:observer];
-
-    return subscription;
-}
-
 - (NSMutableURLRequest *)requestWithURL:(NSURL *)url method:(NSString *)method headers:(NSDictionary *)headers
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

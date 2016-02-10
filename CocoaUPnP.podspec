@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CocoaUPnP"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "A modern and well tested UPnP library which feature asynchronous network calls."
 
   s.description  = <<-DESC

@@ -3,4 +3,4 @@ coverage_service: coveralls
 xcodeproj: Example/Example.xcodeproj
 source_directory: CocoaUPnP
 ignore:
-  - Example/Pods/*
+  - Example/*

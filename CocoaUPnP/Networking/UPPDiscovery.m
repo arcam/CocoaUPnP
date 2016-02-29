@@ -145,6 +145,12 @@
         return;
     }
 
+    NSURL *url = service.xmlLocation;
+
+    if (!url) {
+        return;
+    }
+
     [self.unparsedUUIDs addObject:udn];
     [UPPDeviceParser parseURL:service.xmlLocation withCompletion:^(NSArray *devices, NSError *error) {
         [self.unparsedUUIDs removeObject:udn];

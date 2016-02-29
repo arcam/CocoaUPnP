@@ -32,5 +32,5 @@ lane :release do
   ensure_git_branch(branch: 'master')
   git_pull
   push_to_git_remote
-  pod_push
+  pod_push(allow_warnings: true)
 end

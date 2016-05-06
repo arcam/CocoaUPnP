@@ -63,13 +63,14 @@
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
         }
-        [self parseElement:element intoDevice:device];
-        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
-        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
 
         if (!device) {
             return;
         }
+
+        [self parseElement:element intoDevice:device];
+        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
+        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
 
         if (!devices) {
             devices = [NSMutableArray array];

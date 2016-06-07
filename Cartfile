@@ -1,0 +1,6 @@
+
+github "drekka/Ono" "develop"
+
+github "robbiehanson/CocoaAsyncSocket"
+github "AFNetworking/AFNetworking"
+github "swisspol/GCDWebServer"

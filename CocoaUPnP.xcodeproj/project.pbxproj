@@ -74,6 +74,10 @@
 		6C3EE84F1D06EE1400506613 /* UPPContentDirectoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE80C1D06EE1400506613 /* UPPContentDirectoryService.m */; };
 		6C3EE8501D06EE1400506613 /* UPPRenderingControlService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE80D1D06EE1400506613 /* UPPRenderingControlService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE8511D06EE1400506613 /* UPPRenderingControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE80E1D06EE1400506613 /* UPPRenderingControlService.m */; };
+		6C3EE86C1D06F9F400506613 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE8681D06F9F400506613 /* AFNetworking.framework */; };
+		6C3EE86D1D06F9F400506613 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */; };
+		6C3EE86E1D06F9F400506613 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */; };
+		6C3EE86F1D06F9F400506613 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86B1D06F9F400506613 /* Ono.framework */; };
 		6CA6C7761D06ED8800BA8CF1 /* CocoaUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CA6C7751D06ED8800BA8CF1 /* CocoaUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -146,6 +150,10 @@
 		6C3EE80D1D06EE1400506613 /* UPPRenderingControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPRenderingControlService.h; sourceTree = "<group>"; };
 		6C3EE80E1D06EE1400506613 /* UPPRenderingControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRenderingControlService.m; sourceTree = "<group>"; };
 		6C3EE8521D06EE8100506613 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		6C3EE8681D06F9F400506613 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/iOS/AFNetworking.framework; sourceTree = "<group>"; };
+		6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDWebServers.framework; path = Carthage/Build/iOS/GCDWebServers.framework; sourceTree = "<group>"; };
+		6C3EE86B1D06F9F400506613 /* Ono.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ono.framework; path = Carthage/Build/iOS/Ono.framework; sourceTree = "<group>"; };
 		6CA6C7721D06ED8700BA8CF1 /* CocoaUPnP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaUPnP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA6C7751D06ED8800BA8CF1 /* CocoaUPnP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CocoaUPnP.h; sourceTree = "<group>"; };
 		6CA6C7771D06ED8800BA8CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -156,6 +164,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C3EE86C1D06F9F400506613 /* AFNetworking.framework in Frameworks */,
+				6C3EE86D1D06F9F400506613 /* CocoaAsyncSocket.framework in Frameworks */,
+				6C3EE86E1D06F9F400506613 /* GCDWebServers.framework in Frameworks */,
+				6C3EE86F1D06F9F400506613 /* Ono.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +301,10 @@
 		6CA6C7681D06ED8700BA8CF1 = {
 			isa = PBXGroup;
 			children = (
+				6C3EE8681D06F9F400506613 /* AFNetworking.framework */,
+				6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */,
+				6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */,
+				6C3EE86B1D06F9F400506613 /* Ono.framework */,
 				6C3EE8521D06EE8100506613 /* Cartfile */,
 				6CA6C7771D06ED8800BA8CF1 /* Info.plist */,
 				6CA6C7741D06ED8800BA8CF1 /* CocoaUPnP */,
@@ -567,6 +583,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -583,6 +603,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

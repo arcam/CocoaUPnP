@@ -1,6 +1,8 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
+@import UIKit;
+
 #import "UPPEventSubscriptionManager.h"
 #import "UPPBasicService.h"
 #import "UPPEventSubscription.h"
@@ -17,13 +19,13 @@
 + (instancetype)sharedManager
 {
     static dispatch_once_t onceToken = 0;
-
+    
     __strong static id _sharedManager = nil;
     dispatch_once(&onceToken, ^{
         NSURLSession *session = [NSURLSession sharedSession];
         _sharedManager = [[self alloc] initWithSession:session];
     });
-
+    
     return _sharedManager;
 }
 
@@ -33,7 +35,7 @@
         self.session = session;
         [self addNotificationObservers];
     }
-
+    
     return self;
 }
 
@@ -45,12 +47,12 @@
 - (void)addNotificationObservers
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-
+    
     [nc addObserver:self
            selector:@selector(invalidateAllTimers)
                name:UIApplicationDidEnterBackgroundNotification
              object:nil];
-
+    
     [nc addObserver:self
            selector:@selector(renewAllTimers)
                name:UIApplicationDidBecomeActiveNotification
@@ -64,7 +66,7 @@
     if (!_activeSubscriptions) {
         _activeSubscriptions = [NSMutableArray array];
     }
-
+    
     return _activeSubscriptions;
 }
 
@@ -73,7 +75,7 @@
     if (!_eventServer) {
         _eventServer = [[UPPEventServer alloc] init];
     }
-
+    
     return _eventServer;
 }
 
@@ -85,7 +87,7 @@
         self.eventServer.eventDelegate = self;
         [self.eventServer startServer];
     }
-
+    
     // If we already have an existing subscription, add the new observer then
     // bail out early.
     UPPEventSubscription *subscription = [self subscriptionWithURL:service.eventSubscriptionURL];
@@ -96,7 +98,7 @@
         }
         return;
     }
-
+    
     // Create a new subscription.
     NSURL *url = service.eventSubscriptionURL;
     subscription = [UPPEventSubscription subscriptionWithSubscriptionURL:url
@@ -121,13 +123,13 @@
 - (void)subscribe:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion
 {
     if (!completion) { return; }
-
+    
     NSURL *url = subscription.eventSubscriptionURL;
     NSURLRequest *request = [self subscriptionRequestWithEventSubscriptionURL:url];
-
+    
     [self sendSubscriptionRequest:request completion:^(NSURLResponse *response, NSError *error) {
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-
+        
         if (code != 200) {
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];
@@ -152,34 +154,34 @@
         return;
     }
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
-
+    
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
                                @"SID": [subscription subscriptionID],
                                @"TIMEOUT": @"Second-1800" };
-
+    
     NSMutableURLRequest *request = [self requestWithURL:subscriptionURL
                                                  method:@"SUBSCRIBE"
                                                 headers:headers];
-
+    
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
+        
         if (!completion) { return; }
-
+        
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-
+        
         if (code != 200) {
             NSError *e = error ?: UPPErrorWithCodeAndDescription(code, @"Renew subscription error");
             completion(nil, nil, e);
             return;
         }
-
+        
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
         NSString *subscriptionID = headers[@"SID"];
         NSDate *expiryDate = [self dateFromHeader:headers[@"TIMEOUT"]];
-
+        
         completion(subscriptionID, expiryDate, nil);
     }];
-
+    
     [task resume];
 }
 
@@ -194,18 +196,18 @@
     NSString *host = [NSString stringWithFormat:@"%@:%@",
                       [subscriptionURL host],
                       [subscriptionURL port]];
-
+    
     NSURL *callbackURL = [self.eventServer eventServerCallbackURL];
     NSString *callback = [NSString stringWithFormat:@"<%@>",
                           [callbackURL absoluteString]];
-
+    
     NSDictionary *headers = @{ @"HOST": host,
                                @"USER-AGENT": @"iOS/8.4 UPnP/1.1 Example/1.0",
                                @"CALLBACK": callback,
                                @"NT": @"upnp:event",
                                @"TIMEOUT": @"Second-1800" };
-
-
+    
+    
     return [self requestWithURL:url method:@"SUBSCRIBE" headers:headers];
 }
 
@@ -213,27 +215,27 @@
 {
     [subscription invalidateTimers];
     [self.activeSubscriptions removeObject:subscription];
-
+    
     if (!subscription.eventSubscriptionURL || !subscription.subscriptionID) {
         if (completion) { completion(NO); }
         return;
     }
-
+    
     NSURL *subscriptionURL = subscription.eventSubscriptionURL;
-
+    
     NSDictionary *headers = @{ @"HOST": [subscriptionURL absoluteString],
                                @"SID": [subscription subscriptionID] };
-
+    
     NSMutableURLRequest *request = [self requestWithURL:subscriptionURL
                                                  method:@"UNSUBSCRIBE"
                                                 headers:headers];
-
+    
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
+        
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-
+        
         if (code == 200) {
-
+            
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];
                 self.eventServer = nil;
@@ -247,22 +249,22 @@
             }
         }
     }];
-
+    
     [task resume];
 }
 
 - (void)removeObserver:(id<UPPEventSubscriptionDelegate>)observer fromService:(UPPBasicService *)service completion:(void (^)(BOOL))completion
 {
     UPPEventSubscription *subscripton = [self subscriptionWithURL:service.eventSubscriptionURL];
-
+    
     if (subscripton) {
         [subscripton removeEventObserver:observer];
-
+        
         if ([subscripton eventObservers].count == 0) {
             [self unsubscribe:subscripton completion:nil];
         }
     }
-
+    
     if (completion) {
         completion(NO);
     }
@@ -271,18 +273,18 @@
 - (void)removeSubscriptionsForServices:(NSArray *)services deviceId:(NSString *)deviceId
 {
     NSMutableArray *subscriptions = [NSMutableArray array];
-
+    
     for (UPPServiceDescription *service in services) {
         NSString *identifier = [NSString stringWithFormat:@"%@::%@",
                                 deviceId, service.serviceType];
         NSArray *objects = [self subscriptionsForServiceIdentifier:identifier];
         [subscriptions addObjectsFromArray:objects];
     }
-
+    
     if (subscriptions.count == 0) {
         return;
     }
-
+    
     for (UPPEventSubscription *subscription in subscriptions) {
         [subscription invalidateTimers];
         [self.activeSubscriptions removeObject:subscription];
@@ -297,11 +299,11 @@
     NSPredicate *predicate = [NSPredicate
                               predicateWithFormat:@"subscriptionID == %@", sid];
     UPPEventSubscription *subscription = [self.activeSubscriptions upp_firstObjectMatchingPredicate:predicate];
-
+    
     if (!subscription) {
         return;
     }
-
+    
     [subscription informObserversOfEvent:event];
 }
 
@@ -325,7 +327,7 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"eventSubscriptionURL = %@", url];
     NSArray *matches = [self.activeSubscriptions filteredArrayUsingPredicate:predicate];
-
+    
     return [matches firstObject];
 }
 
@@ -340,10 +342,10 @@
     if (!header) {
         return nil;
     }
-
+    
     NSString *timeout = [header stringByReplacingOccurrencesOfString:@"Second-"
                                                           withString:@""];
-
+    
     return [NSDate dateWithTimeIntervalSinceNow:[timeout doubleValue]];
 }
 
@@ -351,13 +353,13 @@
 {
     if (!completion) { return; }
     if (!request) { return; }
-
+    
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(response, error);
         });
     }];
-
+    
     [task resume];
 }
 
@@ -365,11 +367,11 @@
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:method];
-
+    
     [headers enumerateKeysAndObjectsUsingBlock:^(NSString *header, NSString *value, BOOL *stop) {
         [request setValue:value forHTTPHeaderField:header];
     }];
-
+    
     return [request copy];
 }
 

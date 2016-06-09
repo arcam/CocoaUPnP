@@ -57,7 +57,7 @@
 		6C3EE83E1D06EE1400506613 /* UPPDeviceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7F91D06EE1400506613 /* UPPDeviceParser.m */; };
 		6C3EE83F1D06EE1400506613 /* UPPErrorParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7FA1D06EE1400506613 /* UPPErrorParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE8401D06EE1400506613 /* UPPErrorParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7FB1D06EE1400506613 /* UPPErrorParser.m */; };
-		6C3EE8411D06EE1400506613 /* UPPLastChangeParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7FC1D06EE1400506613 /* UPPLastChangeParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C3EE8411D06EE1400506613 /* UPPLastChangeParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7FC1D06EE1400506613 /* UPPLastChangeParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6C3EE8421D06EE1400506613 /* UPPLastChangeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7FD1D06EE1400506613 /* UPPLastChangeParser.m */; };
 		6C3EE8431D06EE1400506613 /* UPPMediaItemParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7FE1D06EE1400506613 /* UPPMediaItemParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE8441D06EE1400506613 /* UPPMediaItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7FF1D06EE1400506613 /* UPPMediaItemParser.m */; };
@@ -157,6 +157,8 @@
 		6CA6C7721D06ED8700BA8CF1 /* CocoaUPnP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaUPnP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA6C7751D06ED8800BA8CF1 /* CocoaUPnP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CocoaUPnP.h; sourceTree = "<group>"; };
 		6CA6C7771D06ED8800BA8CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CA741F01D09A76B007CCFEF /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		6CA741F11D09A76B007CCFEF /* module.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.private.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,10 +303,9 @@
 		6CA6C7681D06ED8700BA8CF1 = {
 			isa = PBXGroup;
 			children = (
-				6C3EE8681D06F9F400506613 /* AFNetworking.framework */,
-				6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */,
-				6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */,
-				6C3EE86B1D06F9F400506613 /* Ono.framework */,
+				6CA741F01D09A76B007CCFEF /* module.modulemap */,
+				6CA741F11D09A76B007CCFEF /* module.private.modulemap */,
+				6CA741EF1D09A6AF007CCFEF /* New Group */,
 				6C3EE8521D06EE8100506613 /* Cartfile */,
 				6CA6C7771D06ED8800BA8CF1 /* Info.plist */,
 				6CA6C7741D06ED8800BA8CF1 /* CocoaUPnP */,
@@ -333,6 +334,17 @@
 				6CA6C7751D06ED8800BA8CF1 /* CocoaUPnP.h */,
 			);
 			path = CocoaUPnP;
+			sourceTree = "<group>";
+		};
+		6CA741EF1D09A6AF007CCFEF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				6C3EE8681D06F9F400506613 /* AFNetworking.framework */,
+				6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */,
+				6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */,
+				6C3EE86B1D06F9F400506613 /* Ono.framework */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +602,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = module.modulemap;
+				MODULEMAP_PRIVATE_FILE = module.private.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.com.arcam.cocoaupnp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -610,6 +624,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = module.modulemap;
+				MODULEMAP_PRIVATE_FILE = module.private.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.com.arcam.cocoaupnp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -129,7 +129,7 @@
 
     [self sendSubscriptionRequest:request completion:^(NSURLResponse *response, NSError *error) {
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-        
+
         if (code != 200) {
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];
@@ -164,21 +164,21 @@
                                                 headers:headers];
 
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
+
         if (!completion) { return; }
-        
+
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-        
+
         if (code != 200) {
             NSError *e = error ?: UPPErrorWithCodeAndDescription(code, @"Renew subscription error");
             completion(nil, nil, e);
             return;
         }
-        
+
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
         NSString *subscriptionID = headers[@"SID"];
         NSDate *expiryDate = [self dateFromHeader:headers[@"TIMEOUT"]];
-        
+
         completion(subscriptionID, expiryDate, nil);
     }];
 
@@ -231,11 +231,11 @@
                                                 headers:headers];
 
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
+
         NSInteger code = [(NSHTTPURLResponse *)response statusCode];
-        
+
         if (code == 200) {
-            
+
             if (self.activeSubscriptions.count == 0) {
                 [self.eventServer stopServer];
                 self.eventServer = nil;
@@ -259,7 +259,7 @@
 
     if (subscripton) {
         [subscripton removeEventObserver:observer];
-        
+
         if ([subscripton eventObservers].count == 0) {
             [self unsubscribe:subscripton completion:nil];
         }

@@ -324,7 +324,7 @@ typedef enum : NSUInteger {
                 [addresses setObject:data forKey:if_name];
             }
         }
-        
+
         freeifaddrs(interfaces);
     }
 

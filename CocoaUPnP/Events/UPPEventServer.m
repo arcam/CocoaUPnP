@@ -18,14 +18,14 @@ NSString * const UPPEventServerBodyKey = @"Event";
 - (void)startServer
 {
     __weak typeof(self) weakSelf = self;
-    
+
     [self.webServer addHandlerForMethod:@"NOTIFY" path:@"/Event" requestClass:[GCDWebServerDataRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
         if (request != nil) {
             [weakSelf requestRecieved:(GCDWebServerDataRequest *)request];
         }
         return [[GCDWebServerResponse alloc] init];
     }];
-    
+
     if ([self.webServer startWithPort:UPPEventServerPort bonjourName:nil]) {
         NSURL *baseURL = self.webServer.serverURL;
         self.callbackURL = [baseURL URLByAppendingPathComponent:@"Event"];
@@ -65,18 +65,18 @@ NSString * const UPPEventServerBodyKey = @"Event";
 {
     NSDictionary *headers = request.headers;
     NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
-    
+
     NSString *sid = headers[@"SID"];
     if (sid) {
         [eventDictionary setObject:sid forKey:UPPEventServerSIDKey];
     }
-    
+
     [UPPLastChangeParser parseData:request.data completion:^(NSDictionary *event, NSError *error) {
         if (event) {
             eventDictionary[UPPEventServerBodyKey] = event;
         }
     }];
-    
+
     [self.eventDelegate eventReceived:[eventDictionary copy]];
 }
 

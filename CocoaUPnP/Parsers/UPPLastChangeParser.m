@@ -50,7 +50,7 @@
             if (value.length == 0) {
                 value = [element stringValue];
             }
-            
+
             if (tag && value) {
                 responseDictionary[tag] = value;
             }

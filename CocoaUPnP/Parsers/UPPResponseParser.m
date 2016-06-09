@@ -13,23 +13,23 @@
     if (!responseBlock) {
         return;
     }
-    
+
     NSError *error = nil;
-    
+
     if (![self data]) {
         responseBlock(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
-    
+
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
-    
+
     if (!document) {
         responseBlock(nil, error);
         return;
     }
-    
+
     __block NSMutableDictionary *responseDictionary;
-    
+
     [document enumerateElementsWithXPath:@"/*[local-name() = 'Envelope']/*[local-name() = 'Body']/*/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         
         if (!responseDictionary) {
@@ -53,7 +53,7 @@
         }
         
     }];
-    
+
     responseBlock(responseDictionary, nil);
 }
 

@@ -87,7 +87,7 @@
 		6C3EE7C71D06EE1400506613 /* UPPEventSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPEventSubscription.h; sourceTree = "<group>"; };
 		6C3EE7C81D06EE1400506613 /* UPPEventSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscription.m; sourceTree = "<group>"; };
 		6C3EE7C91D06EE1400506613 /* UPPEventSubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPEventSubscriptionManager.h; sourceTree = "<group>"; };
-		6C3EE7CA1D06EE1400506613 /* UPPEventSubscriptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionManager.m; sourceTree = "<group>"; };
+		6C3EE7CA1D06EE1400506613 /* UPPEventSubscriptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UPPEventSubscriptionManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C3EE7CC1D06EE1400506613 /* NSArray+firstObjectMatchingPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+firstObjectMatchingPredicate.h"; sourceTree = "<group>"; };
 		6C3EE7CD1D06EE1400506613 /* NSArray+firstObjectMatchingPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+firstObjectMatchingPredicate.m"; sourceTree = "<group>"; };
 		6C3EE7CE1D06EE1400506613 /* NSMutableString+xmlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+xmlNode.h"; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		6C3EE7E91D06EE1400506613 /* SSDPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDPService.h; sourceTree = "<group>"; };
 		6C3EE7EA1D06EE1400506613 /* SSDPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPService.m; sourceTree = "<group>"; };
 		6C3EE7EB1D06EE1400506613 /* SSDPServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDPServiceBrowser.h; sourceTree = "<group>"; };
-		6C3EE7EC1D06EE1400506613 /* SSDPServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowser.m; sourceTree = "<group>"; };
+		6C3EE7EC1D06EE1400506613 /* SSDPServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SSDPServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C3EE7ED1D06EE1400506613 /* UPPDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPDiscovery.h; sourceTree = "<group>"; };
 		6C3EE7EE1D06EE1400506613 /* UPPDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDiscovery.m; sourceTree = "<group>"; };
 		6C3EE7EF1D06EE1400506613 /* UPPRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPRequestSerializer.h; sourceTree = "<group>"; };

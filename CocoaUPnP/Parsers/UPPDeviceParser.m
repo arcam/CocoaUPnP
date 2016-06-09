@@ -1,13 +1,14 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
+#import <Ono/Ono.h>
+#import <AFNetworking/AFNetworking.h>
+
 #import "UPPDeviceParser.h"
 #import "UPPBasicDevice.h"
-#import "Ono.h"
 #import "UPPDeviceIcon.h"
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
-#import "AFHTTPSessionManager.h"
 #import "UPPRequestSerializer.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"
@@ -17,7 +18,7 @@
 + (void)parseURL:(NSURL *)url withCompletion:(CompletionBlock)completion
 {
     if (!completion) { return; }
-
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSData *data) {
@@ -35,27 +36,27 @@
 - (void)parseWithBaseURL:(NSURL *)baseURL completion:(CompletionBlock)completion
 {
     if (!completion) { return; }
-
+    
     if (self.data.length == 0) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));
         return;
     }
-
+    
     NSError *error = nil;
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:self.data error:&error];
-
+    
     if (!document) {
         completion(nil, error);
         return;
     }
-
+    
     __block NSMutableArray *devices;
-
+    
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
-
+        
         UPPBasicDevice *device;
-
+        
         if ([deviceType rangeOfString:@":MediaRenderer:"].location != NSNotFound) {
             device = [UPPMediaRendererDevice mediaRendererWithURN:deviceType
                                                           baseURL:baseURL];
@@ -66,23 +67,23 @@
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
-
+        
         if (!device) {
             return;
         }
-
+        
         if (!devices) {
             devices = [NSMutableArray array];
         }
-
+        
         [devices addObject:device];
     }];
-
+    
     if (!devices) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeNoDeviceElementFound));
         return;
     }
-
+    
     completion([devices copy], nil);
 }
 
@@ -95,7 +96,7 @@
     device.modelNumber = [[element firstChildWithTag:@"modelNumber"] stringValue];
     device.serialNumber = [[element firstChildWithTag:@"serialNumber"] stringValue];
     device.udn = [[element firstChildWithTag:@"UDN"] stringValue];
-
+    
     NSString *url = [[element firstChildWithTag:@"manufacturerURL"] stringValue];
     device.manufacturerURL = [NSURL URLWithString:url];
     url = [[element firstChildWithTag:@"modelURL"] stringValue];
@@ -114,7 +115,7 @@
         icon.url = [[iconElement firstChildWithTag:@"url"] stringValue];
         [icons addObject:icon];
     }];
-
+    
     if (icons.count > 0) {
         device.iconList = [icons copy];
     }
@@ -132,7 +133,7 @@
         service.eventSubURL = [[serviceElement firstChildWithTag:@"eventSubURL"] stringValue];
         [services addObject:service];
     }];
-
+    
     if (services.count > 0) {
         device.services = [services copy];
     }

@@ -1,7 +1,12 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <CocoaUPnP/CocoaUPnP.h>
+@import CocoaUPnP;
+@import CocoaUPnP.Private;
+
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import "TestHelpers.h"
 
 NSData *(^StubEventWithTransportState)(NSString *) = ^NSData * (NSString *transportState) {
 

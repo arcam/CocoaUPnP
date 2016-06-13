@@ -4,6 +4,9 @@
 #import <CocoaUPnP/CocoaUPnP.h>
 #import "MockFailSessionManager.h"
 #import "NetworkTestHelpers.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import <OCMock/OCMock.h>
 
 SpecBegin(UPPAVTransportService)
 

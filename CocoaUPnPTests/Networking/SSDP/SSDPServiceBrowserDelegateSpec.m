@@ -4,6 +4,10 @@
 #import <CocoaUPnP/SSDPServiceBrowser.h>
 #import <CocoaUPnP/SSDPService.h>
 #import "SSDPDelegateTestHelper.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import <OCMock/OCMock.h>
+#import <CocoaAsyncSocket/CocoaAsyncSocket.h>
 
 SpecBegin(SSDPServiceBrowserDelegate)
 

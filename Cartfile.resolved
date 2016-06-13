@@ -1,4 +1,8 @@
 github "AFNetworking/AFNetworking" "3.1.0"
 github "robbiehanson/CocoaAsyncSocket" "7.4.3"
 github "swisspol/GCDWebServer" "3.3.2"
+github "AliSoftware/OHHTTPStubs" "5.1.0"
 github "drekka/Ono" "67259eb5ed591564149156d88eee38a4669fb183"
+github "specta/expecta" "v1.0.5"
+github "erikdoe/ocmock" "v3.3"
+github "specta/specta" "v1.0.5"

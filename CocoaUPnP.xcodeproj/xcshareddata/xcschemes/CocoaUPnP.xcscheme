@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6CA741F51D09A8A9007CCFEF"
+               BuildableName = "CocoaUPnPTests.xctest"
+               BlueprintName = "CocoaUPnPTests"
+               ReferencedContainer = "container:CocoaUPnP.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6CA6C7711D06ED8700BA8CF1"
+            BuildableName = "CocoaUPnP.framework"
+            BlueprintName = "CocoaUPnP"
+            ReferencedContainer = "container:CocoaUPnP.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C3E411A1D0ADD29002119F5 /* CocoaUPnP.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E41191D0ADD29002119F5 /* CocoaUPnP.podspec */; };
+		6C3E411E1D0AE656002119F5 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3E411B1D0AE656002119F5 /* Expecta.framework */; };
+		6C3E411F1D0AE656002119F5 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3E411C1D0AE656002119F5 /* OCMock.framework */; };
+		6C3E41201D0AE656002119F5 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3E411D1D0AE656002119F5 /* OHHTTPStubs.framework */; };
+		6C3E41221D0AE7B3002119F5 /* Specta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3E41211D0AE7B3002119F5 /* Specta.framework */; };
+		6C3E41231D0E940F002119F5 /* TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7423E1D09A8DD007CCFEF /* TestHelpers.m */; };
+		6C3E41251D0E96F2002119F5 /* NetworkTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7423C1D09A8DD007CCFEF /* NetworkTestHelpers.m */; };
 		6C3EE80F1D06EE1400506613 /* UPPEventServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7C51D06EE1400506613 /* UPPEventServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE8101D06EE1400506613 /* UPPEventServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7C61D06EE1400506613 /* UPPEventServer.m */; };
 		6C3EE8111D06EE1400506613 /* UPPEventSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7C71D06EE1400506613 /* UPPEventSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,9 +46,9 @@
 		6C3EE82C1D06EE1400506613 /* UPPParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7E41D06EE1400506613 /* UPPParameters.m */; };
 		6C3EE82D1D06EE1400506613 /* UPPServiceDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7E51D06EE1400506613 /* UPPServiceDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE82E1D06EE1400506613 /* UPPServiceDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7E61D06EE1400506613 /* UPPServiceDescription.m */; };
-		6C3EE82F1D06EE1400506613 /* SSDPService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7E91D06EE1400506613 /* SSDPService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C3EE82F1D06EE1400506613 /* SSDPService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7E91D06EE1400506613 /* SSDPService.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6C3EE8301D06EE1400506613 /* SSDPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7EA1D06EE1400506613 /* SSDPService.m */; };
-		6C3EE8311D06EE1400506613 /* SSDPServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7EB1D06EE1400506613 /* SSDPServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C3EE8311D06EE1400506613 /* SSDPServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7EB1D06EE1400506613 /* SSDPServiceBrowser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6C3EE8321D06EE1400506613 /* SSDPServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7EC1D06EE1400506613 /* SSDPServiceBrowser.m */; };
 		6C3EE8331D06EE1400506613 /* UPPDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C3EE7ED1D06EE1400506613 /* UPPDiscovery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C3EE8341D06EE1400506613 /* UPPDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3EE7EE1D06EE1400506613 /* UPPDiscovery.m */; };
@@ -79,9 +86,73 @@
 		6C3EE86E1D06F9F400506613 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */; };
 		6C3EE86F1D06F9F400506613 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86B1D06F9F400506613 /* Ono.framework */; };
 		6CA6C7761D06ED8800BA8CF1 /* CocoaUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CA6C7751D06ED8800BA8CF1 /* CocoaUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CA741FB1D09A8A9007CCFEF /* CocoaUPnP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA6C7721D06ED8700BA8CF1 /* CocoaUPnP.framework */; };
+		6CA7423F1D09A8DD007CCFEF /* UPPEventServerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742021D09A8DD007CCFEF /* UPPEventServerSpec.m */; };
+		6CA742401D09A8DD007CCFEF /* UPPEventSubscriptionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742031D09A8DD007CCFEF /* UPPEventSubscriptionManagerSpec.m */; };
+		6CA742411D09A8DD007CCFEF /* UPPEventSubscriptionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742041D09A8DD007CCFEF /* UPPEventSubscriptionSpec.m */; };
+		6CA742421D09A8DD007CCFEF /* Containers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA742061D09A8DD007CCFEF /* Containers.xml */; };
+		6CA742431D09A8DD007CCFEF /* Device.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA742071D09A8DD007CCFEF /* Device.xml */; };
+		6CA742441D09A8DD007CCFEF /* Empty.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA742081D09A8DD007CCFEF /* Empty.xml */; };
+		6CA742451D09A8DD007CCFEF /* Error.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA742091D09A8DD007CCFEF /* Error.xml */; };
+		6CA742461D09A8DD007CCFEF /* FullMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420A1D09A8DD007CCFEF /* FullMetadata.xml */; };
+		6CA742471D09A8DD007CCFEF /* GetConnectionID.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420B1D09A8DD007CCFEF /* GetConnectionID.xml */; };
+		6CA742481D09A8DD007CCFEF /* GetPositionInfoResponse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420C1D09A8DD007CCFEF /* GetPositionInfoResponse.xml */; };
+		6CA742491D09A8DD007CCFEF /* Items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420D1D09A8DD007CCFEF /* Items.xml */; };
+		6CA7424A1D09A8DD007CCFEF /* LastChangeFull.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420E1D09A8DD007CCFEF /* LastChangeFull.xml */; };
+		6CA7424B1D09A8DD007CCFEF /* MediaServer.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7420F1D09A8DD007CCFEF /* MediaServer.xml */; };
+		6CA7424C1D09A8DD007CCFEF /* PlayRequest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA742111D09A8DD007CCFEF /* PlayRequest.xml */; };
+		6CA7424D1D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742141D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.m */; };
+		6CA7424E1D09A8DD007CCFEF /* UPPMetadataHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742151D09A8DD007CCFEF /* UPPMetadataHelperSpec.m */; };
+		6CA7424F1D09A8DD007CCFEF /* UPPBasicDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742171D09A8DD007CCFEF /* UPPBasicDeviceSpec.m */; };
+		6CA742501D09A8DD007CCFEF /* UPPBasicServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742181D09A8DD007CCFEF /* UPPBasicServiceSpec.m */; };
+		6CA742511D09A8DD007CCFEF /* UPPDeviceIconSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742191D09A8DD007CCFEF /* UPPDeviceIconSpec.m */; };
+		6CA742521D09A8DD007CCFEF /* UPPErrorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421A1D09A8DD007CCFEF /* UPPErrorSpec.m */; };
+		6CA742531D09A8DD007CCFEF /* UPPMediaItemResourceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421B1D09A8DD007CCFEF /* UPPMediaItemResourceSpec.m */; };
+		6CA742541D09A8DD007CCFEF /* UPPMediaItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421C1D09A8DD007CCFEF /* UPPMediaItemSpec.m */; };
+		6CA742551D09A8DD007CCFEF /* UPPMediaRendererDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421D1D09A8DD007CCFEF /* UPPMediaRendererDeviceSpec.m */; };
+		6CA742561D09A8DD007CCFEF /* UPPMediaServerDeviceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421E1D09A8DD007CCFEF /* UPPMediaServerDeviceSpec.m */; };
+		6CA742571D09A8DD007CCFEF /* UPPParametersSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7421F1D09A8DD007CCFEF /* UPPParametersSpec.m */; };
+		6CA742581D09A8DD007CCFEF /* UPPServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742201D09A8DD007CCFEF /* UPPServiceSpec.m */; };
+		6CA742591D09A8DD007CCFEF /* SSDPDelegateTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742241D09A8DD007CCFEF /* SSDPDelegateTestHelper.m */; };
+		6CA7425A1D09A8DD007CCFEF /* SSDPServiceBrowserDelegateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742251D09A8DD007CCFEF /* SSDPServiceBrowserDelegateSpec.m */; };
+		6CA7425B1D09A8DD007CCFEF /* SSDPServiceBrowserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742261D09A8DD007CCFEF /* SSDPServiceBrowserSpec.m */; };
+		6CA7425C1D09A8DD007CCFEF /* UPPDiscoverySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742271D09A8DD007CCFEF /* UPPDiscoverySpec.m */; };
+		6CA7425D1D09A8DD007CCFEF /* UPPRequestSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742281D09A8DD007CCFEF /* UPPRequestSerializerSpec.m */; };
+		6CA7425E1D09A8DD007CCFEF /* UPPResponseSerializerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742291D09A8DD007CCFEF /* UPPResponseSerializerSpec.m */; };
+		6CA7425F1D09A8DD007CCFEF /* UPPSessionManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7422A1D09A8DD007CCFEF /* UPPSessionManagerSpec.m */; };
+		6CA742601D09A8DD007CCFEF /* UPPDeviceParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7422C1D09A8DD007CCFEF /* UPPDeviceParserSpec.m */; };
+		6CA742611D09A8DD007CCFEF /* UPPErrorParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7422D1D09A8DD007CCFEF /* UPPErrorParserSpec.m */; };
+		6CA742621D09A8DD007CCFEF /* UPPLastChangeParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7422E1D09A8DD007CCFEF /* UPPLastChangeParserSpec.m */; };
+		6CA742631D09A8DD007CCFEF /* UPPMediaItemParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7422F1D09A8DD007CCFEF /* UPPMediaItemParserSpec.m */; };
+		6CA742641D09A8DD007CCFEF /* UPPResponseParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742301D09A8DD007CCFEF /* UPPResponseParserSpec.m */; };
+		6CA742651D09A8DD007CCFEF /* UPPMediaItemProtocolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742321D09A8DD007CCFEF /* UPPMediaItemProtocolSpec.m */; };
+		6CA742661D09A8DD007CCFEF /* UPPAVTransportServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742341D09A8DD007CCFEF /* UPPAVTransportServiceSpec.m */; };
+		6CA742671D09A8DD007CCFEF /* UPPConnectionManagerServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742351D09A8DD007CCFEF /* UPPConnectionManagerServiceSpec.m */; };
+		6CA742681D09A8DD007CCFEF /* UPPContentDirectoryServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742361D09A8DD007CCFEF /* UPPContentDirectoryServiceSpec.m */; };
+		6CA742691D09A8DD007CCFEF /* UPPRenderingControlServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA742371D09A8DD007CCFEF /* UPPRenderingControlServiceSpec.m */; };
+		6CA7426A1D09A8DD007CCFEF /* MockFailSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7423A1D09A8DD007CCFEF /* MockFailSessionManager.m */; };
+		6CA7426D1D09A93B007CCFEF /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE8681D06F9F400506613 /* AFNetworking.framework */; };
+		6CA7426E1D09A93B007CCFEF /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */; };
+		6CA7426F1D09A93B007CCFEF /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */; };
+		6CA742701D09A93B007CCFEF /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3EE86B1D06F9F400506613 /* Ono.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6CA741FC1D09A8A9007CCFEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CA6C7691D06ED8700BA8CF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CA6C7711D06ED8700BA8CF1;
+			remoteInfo = CocoaUPnP;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6C3E41191D0ADD29002119F5 /* CocoaUPnP.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaUPnP.podspec; sourceTree = "<group>"; };
+		6C3E411B1D0AE656002119F5 /* Expecta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Expecta.framework; path = Carthage/Build/iOS/Expecta.framework; sourceTree = "<group>"; };
+		6C3E411C1D0AE656002119F5 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Carthage/Build/iOS/OCMock.framework; sourceTree = "<group>"; };
+		6C3E411D1D0AE656002119F5 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
+		6C3E41211D0AE7B3002119F5 /* Specta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Specta.framework; path = Carthage/Build/iOS/Specta.framework; sourceTree = "<group>"; };
 		6C3EE7C51D06EE1400506613 /* UPPEventServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPEventServer.h; sourceTree = "<group>"; };
 		6C3EE7C61D06EE1400506613 /* UPPEventServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventServer.m; sourceTree = "<group>"; };
 		6C3EE7C71D06EE1400506613 /* UPPEventSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPEventSubscription.h; sourceTree = "<group>"; };
@@ -159,6 +230,59 @@
 		6CA6C7771D06ED8800BA8CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CA741F01D09A76B007CCFEF /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		6CA741F11D09A76B007CCFEF /* module.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.private.modulemap; sourceTree = "<group>"; };
+		6CA741F61D09A8A9007CCFEF /* CocoaUPnPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaUPnPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA741FA1D09A8A9007CCFEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CA742021D09A8DD007CCFEF /* UPPEventServerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventServerSpec.m; sourceTree = "<group>"; };
+		6CA742031D09A8DD007CCFEF /* UPPEventSubscriptionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionManagerSpec.m; sourceTree = "<group>"; };
+		6CA742041D09A8DD007CCFEF /* UPPEventSubscriptionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPEventSubscriptionSpec.m; sourceTree = "<group>"; };
+		6CA742061D09A8DD007CCFEF /* Containers.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Containers.xml; sourceTree = "<group>"; };
+		6CA742071D09A8DD007CCFEF /* Device.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Device.xml; sourceTree = "<group>"; };
+		6CA742081D09A8DD007CCFEF /* Empty.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Empty.xml; sourceTree = "<group>"; };
+		6CA742091D09A8DD007CCFEF /* Error.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Error.xml; sourceTree = "<group>"; };
+		6CA7420A1D09A8DD007CCFEF /* FullMetadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = FullMetadata.xml; sourceTree = "<group>"; };
+		6CA7420B1D09A8DD007CCFEF /* GetConnectionID.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetConnectionID.xml; sourceTree = "<group>"; };
+		6CA7420C1D09A8DD007CCFEF /* GetPositionInfoResponse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetPositionInfoResponse.xml; sourceTree = "<group>"; };
+		6CA7420D1D09A8DD007CCFEF /* Items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Items.xml; sourceTree = "<group>"; };
+		6CA7420E1D09A8DD007CCFEF /* LastChangeFull.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LastChangeFull.xml; sourceTree = "<group>"; };
+		6CA7420F1D09A8DD007CCFEF /* MediaServer.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MediaServer.xml; sourceTree = "<group>"; };
+		6CA742111D09A8DD007CCFEF /* PlayRequest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PlayRequest.xml; sourceTree = "<group>"; };
+		6CA742131D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+beWithinAMillisecondOf.h"; sourceTree = "<group>"; };
+		6CA742141D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+beWithinAMillisecondOf.m"; sourceTree = "<group>"; };
+		6CA742151D09A8DD007CCFEF /* UPPMetadataHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMetadataHelperSpec.m; sourceTree = "<group>"; };
+		6CA742171D09A8DD007CCFEF /* UPPBasicDeviceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPBasicDeviceSpec.m; sourceTree = "<group>"; };
+		6CA742181D09A8DD007CCFEF /* UPPBasicServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPBasicServiceSpec.m; sourceTree = "<group>"; };
+		6CA742191D09A8DD007CCFEF /* UPPDeviceIconSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDeviceIconSpec.m; sourceTree = "<group>"; };
+		6CA7421A1D09A8DD007CCFEF /* UPPErrorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorSpec.m; sourceTree = "<group>"; };
+		6CA7421B1D09A8DD007CCFEF /* UPPMediaItemResourceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemResourceSpec.m; sourceTree = "<group>"; };
+		6CA7421C1D09A8DD007CCFEF /* UPPMediaItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemSpec.m; sourceTree = "<group>"; };
+		6CA7421D1D09A8DD007CCFEF /* UPPMediaRendererDeviceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaRendererDeviceSpec.m; sourceTree = "<group>"; };
+		6CA7421E1D09A8DD007CCFEF /* UPPMediaServerDeviceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaServerDeviceSpec.m; sourceTree = "<group>"; };
+		6CA7421F1D09A8DD007CCFEF /* UPPParametersSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPParametersSpec.m; sourceTree = "<group>"; };
+		6CA742201D09A8DD007CCFEF /* UPPServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPServiceSpec.m; sourceTree = "<group>"; };
+		6CA742231D09A8DD007CCFEF /* SSDPDelegateTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDPDelegateTestHelper.h; sourceTree = "<group>"; };
+		6CA742241D09A8DD007CCFEF /* SSDPDelegateTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPDelegateTestHelper.m; sourceTree = "<group>"; };
+		6CA742251D09A8DD007CCFEF /* SSDPServiceBrowserDelegateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserDelegateSpec.m; sourceTree = "<group>"; };
+		6CA742261D09A8DD007CCFEF /* SSDPServiceBrowserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDPServiceBrowserSpec.m; sourceTree = "<group>"; };
+		6CA742271D09A8DD007CCFEF /* UPPDiscoverySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDiscoverySpec.m; sourceTree = "<group>"; };
+		6CA742281D09A8DD007CCFEF /* UPPRequestSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRequestSerializerSpec.m; sourceTree = "<group>"; };
+		6CA742291D09A8DD007CCFEF /* UPPResponseSerializerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPResponseSerializerSpec.m; sourceTree = "<group>"; };
+		6CA7422A1D09A8DD007CCFEF /* UPPSessionManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPSessionManagerSpec.m; sourceTree = "<group>"; };
+		6CA7422C1D09A8DD007CCFEF /* UPPDeviceParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPDeviceParserSpec.m; sourceTree = "<group>"; };
+		6CA7422D1D09A8DD007CCFEF /* UPPErrorParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPErrorParserSpec.m; sourceTree = "<group>"; };
+		6CA7422E1D09A8DD007CCFEF /* UPPLastChangeParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPLastChangeParserSpec.m; sourceTree = "<group>"; };
+		6CA7422F1D09A8DD007CCFEF /* UPPMediaItemParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemParserSpec.m; sourceTree = "<group>"; };
+		6CA742301D09A8DD007CCFEF /* UPPResponseParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPResponseParserSpec.m; sourceTree = "<group>"; };
+		6CA742321D09A8DD007CCFEF /* UPPMediaItemProtocolSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPMediaItemProtocolSpec.m; sourceTree = "<group>"; };
+		6CA742341D09A8DD007CCFEF /* UPPAVTransportServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPAVTransportServiceSpec.m; sourceTree = "<group>"; };
+		6CA742351D09A8DD007CCFEF /* UPPConnectionManagerServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPConnectionManagerServiceSpec.m; sourceTree = "<group>"; };
+		6CA742361D09A8DD007CCFEF /* UPPContentDirectoryServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPContentDirectoryServiceSpec.m; sourceTree = "<group>"; };
+		6CA742371D09A8DD007CCFEF /* UPPRenderingControlServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPRenderingControlServiceSpec.m; sourceTree = "<group>"; };
+		6CA742391D09A8DD007CCFEF /* MockFailSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockFailSessionManager.h; sourceTree = "<group>"; };
+		6CA7423A1D09A8DD007CCFEF /* MockFailSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockFailSessionManager.m; sourceTree = "<group>"; };
+		6CA7423B1D09A8DD007CCFEF /* NetworkTestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTestHelpers.h; sourceTree = "<group>"; };
+		6CA7423C1D09A8DD007CCFEF /* NetworkTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTestHelpers.m; sourceTree = "<group>"; };
+		6CA7423D1D09A8DD007CCFEF /* TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelpers.h; sourceTree = "<group>"; };
+		6CA7423E1D09A8DD007CCFEF /* TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +294,22 @@
 				6C3EE86D1D06F9F400506613 /* CocoaAsyncSocket.framework in Frameworks */,
 				6C3EE86E1D06F9F400506613 /* GCDWebServers.framework in Frameworks */,
 				6C3EE86F1D06F9F400506613 /* Ono.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CA741F31D09A8A9007CCFEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C3E41221D0AE7B3002119F5 /* Specta.framework in Frameworks */,
+				6C3E411E1D0AE656002119F5 /* Expecta.framework in Frameworks */,
+				6C3E411F1D0AE656002119F5 /* OCMock.framework in Frameworks */,
+				6C3E41201D0AE656002119F5 /* OHHTTPStubs.framework in Frameworks */,
+				6CA742701D09A93B007CCFEF /* Ono.framework in Frameworks */,
+				6CA7426E1D09A93B007CCFEF /* CocoaAsyncSocket.framework in Frameworks */,
+				6CA7426F1D09A93B007CCFEF /* GCDWebServers.framework in Frameworks */,
+				6CA741FB1D09A8A9007CCFEF /* CocoaUPnP.framework in Frameworks */,
+				6CA7426D1D09A93B007CCFEF /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,12 +443,14 @@
 		6CA6C7681D06ED8700BA8CF1 = {
 			isa = PBXGroup;
 			children = (
+				6C3EE8521D06EE8100506613 /* Cartfile */,
+				6CA6C7741D06ED8800BA8CF1 /* CocoaUPnP */,
+				6C3E41191D0ADD29002119F5 /* CocoaUPnP.podspec */,
+				6CA741F71D09A8A9007CCFEF /* CocoaUPnPTests */,
+				6CA741EF1D09A6AF007CCFEF /* Frameworks */,
+				6CA6C7771D06ED8800BA8CF1 /* Info.plist */,
 				6CA741F01D09A76B007CCFEF /* module.modulemap */,
 				6CA741F11D09A76B007CCFEF /* module.private.modulemap */,
-				6CA741EF1D09A6AF007CCFEF /* New Group */,
-				6C3EE8521D06EE8100506613 /* Cartfile */,
-				6CA6C7771D06ED8800BA8CF1 /* Info.plist */,
-				6CA6C7741D06ED8800BA8CF1 /* CocoaUPnP */,
 				6CA6C7731D06ED8700BA8CF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -317,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				6CA6C7721D06ED8700BA8CF1 /* CocoaUPnP.framework */,
+				6CA741F61D09A8A9007CCFEF /* CocoaUPnPTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,15 +479,166 @@
 			path = CocoaUPnP;
 			sourceTree = "<group>";
 		};
-		6CA741EF1D09A6AF007CCFEF /* New Group */ = {
+		6CA741EF1D09A6AF007CCFEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C3E41211D0AE7B3002119F5 /* Specta.framework */,
+				6C3E411B1D0AE656002119F5 /* Expecta.framework */,
+				6C3E411C1D0AE656002119F5 /* OCMock.framework */,
+				6C3E411D1D0AE656002119F5 /* OHHTTPStubs.framework */,
 				6C3EE8681D06F9F400506613 /* AFNetworking.framework */,
 				6C3EE8691D06F9F400506613 /* CocoaAsyncSocket.framework */,
 				6C3EE86A1D06F9F400506613 /* GCDWebServers.framework */,
 				6C3EE86B1D06F9F400506613 /* Ono.framework */,
 			);
-			name = "New Group";
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CA741F71D09A8A9007CCFEF /* CocoaUPnPTests */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742011D09A8DD007CCFEF /* Events */,
+				6CA742051D09A8DD007CCFEF /* ExampleXML */,
+				6CA742121D09A8DD007CCFEF /* Helpers */,
+				6CA742161D09A8DD007CCFEF /* Models */,
+				6CA742211D09A8DD007CCFEF /* Networking */,
+				6CA7422B1D09A8DD007CCFEF /* Parsers */,
+				6CA742311D09A8DD007CCFEF /* Protocols */,
+				6CA742331D09A8DD007CCFEF /* Services */,
+				6CA742381D09A8DD007CCFEF /* Test Helpers */,
+				6CA741FA1D09A8A9007CCFEF /* Info.plist */,
+			);
+			path = CocoaUPnPTests;
+			sourceTree = "<group>";
+		};
+		6CA742011D09A8DD007CCFEF /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742021D09A8DD007CCFEF /* UPPEventServerSpec.m */,
+				6CA742031D09A8DD007CCFEF /* UPPEventSubscriptionManagerSpec.m */,
+				6CA742041D09A8DD007CCFEF /* UPPEventSubscriptionSpec.m */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		6CA742051D09A8DD007CCFEF /* ExampleXML */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742061D09A8DD007CCFEF /* Containers.xml */,
+				6CA742071D09A8DD007CCFEF /* Device.xml */,
+				6CA742081D09A8DD007CCFEF /* Empty.xml */,
+				6CA742091D09A8DD007CCFEF /* Error.xml */,
+				6CA7420A1D09A8DD007CCFEF /* FullMetadata.xml */,
+				6CA7420B1D09A8DD007CCFEF /* GetConnectionID.xml */,
+				6CA7420C1D09A8DD007CCFEF /* GetPositionInfoResponse.xml */,
+				6CA7420D1D09A8DD007CCFEF /* Items.xml */,
+				6CA7420E1D09A8DD007CCFEF /* LastChangeFull.xml */,
+				6CA7420F1D09A8DD007CCFEF /* MediaServer.xml */,
+				6CA742101D09A8DD007CCFEF /* Requests */,
+			);
+			path = ExampleXML;
+			sourceTree = "<group>";
+		};
+		6CA742101D09A8DD007CCFEF /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742111D09A8DD007CCFEF /* PlayRequest.xml */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		6CA742121D09A8DD007CCFEF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742131D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.h */,
+				6CA742141D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.m */,
+				6CA742151D09A8DD007CCFEF /* UPPMetadataHelperSpec.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6CA742161D09A8DD007CCFEF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742171D09A8DD007CCFEF /* UPPBasicDeviceSpec.m */,
+				6CA742181D09A8DD007CCFEF /* UPPBasicServiceSpec.m */,
+				6CA742191D09A8DD007CCFEF /* UPPDeviceIconSpec.m */,
+				6CA7421A1D09A8DD007CCFEF /* UPPErrorSpec.m */,
+				6CA7421B1D09A8DD007CCFEF /* UPPMediaItemResourceSpec.m */,
+				6CA7421C1D09A8DD007CCFEF /* UPPMediaItemSpec.m */,
+				6CA7421D1D09A8DD007CCFEF /* UPPMediaRendererDeviceSpec.m */,
+				6CA7421E1D09A8DD007CCFEF /* UPPMediaServerDeviceSpec.m */,
+				6CA7421F1D09A8DD007CCFEF /* UPPParametersSpec.m */,
+				6CA742201D09A8DD007CCFEF /* UPPServiceSpec.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6CA742211D09A8DD007CCFEF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742221D09A8DD007CCFEF /* SSDP */,
+				6CA742271D09A8DD007CCFEF /* UPPDiscoverySpec.m */,
+				6CA742281D09A8DD007CCFEF /* UPPRequestSerializerSpec.m */,
+				6CA742291D09A8DD007CCFEF /* UPPResponseSerializerSpec.m */,
+				6CA7422A1D09A8DD007CCFEF /* UPPSessionManagerSpec.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		6CA742221D09A8DD007CCFEF /* SSDP */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742231D09A8DD007CCFEF /* SSDPDelegateTestHelper.h */,
+				6CA742241D09A8DD007CCFEF /* SSDPDelegateTestHelper.m */,
+				6CA742251D09A8DD007CCFEF /* SSDPServiceBrowserDelegateSpec.m */,
+				6CA742261D09A8DD007CCFEF /* SSDPServiceBrowserSpec.m */,
+			);
+			path = SSDP;
+			sourceTree = "<group>";
+		};
+		6CA7422B1D09A8DD007CCFEF /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				6CA7422C1D09A8DD007CCFEF /* UPPDeviceParserSpec.m */,
+				6CA7422D1D09A8DD007CCFEF /* UPPErrorParserSpec.m */,
+				6CA7422E1D09A8DD007CCFEF /* UPPLastChangeParserSpec.m */,
+				6CA7422F1D09A8DD007CCFEF /* UPPMediaItemParserSpec.m */,
+				6CA742301D09A8DD007CCFEF /* UPPResponseParserSpec.m */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		6CA742311D09A8DD007CCFEF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742321D09A8DD007CCFEF /* UPPMediaItemProtocolSpec.m */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6CA742331D09A8DD007CCFEF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742341D09A8DD007CCFEF /* UPPAVTransportServiceSpec.m */,
+				6CA742351D09A8DD007CCFEF /* UPPConnectionManagerServiceSpec.m */,
+				6CA742361D09A8DD007CCFEF /* UPPContentDirectoryServiceSpec.m */,
+				6CA742371D09A8DD007CCFEF /* UPPRenderingControlServiceSpec.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6CA742381D09A8DD007CCFEF /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CA742391D09A8DD007CCFEF /* MockFailSessionManager.h */,
+				6CA7423A1D09A8DD007CCFEF /* MockFailSessionManager.m */,
+				6CA7423B1D09A8DD007CCFEF /* NetworkTestHelpers.h */,
+				6CA7423C1D09A8DD007CCFEF /* NetworkTestHelpers.m */,
+				6CA7423D1D09A8DD007CCFEF /* TestHelpers.h */,
+				6CA7423E1D09A8DD007CCFEF /* TestHelpers.m */,
+			);
+			path = "Test Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +707,25 @@
 			productReference = 6CA6C7721D06ED8700BA8CF1 /* CocoaUPnP.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6CA741F51D09A8A9007CCFEF /* CocoaUPnPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CA741FE1D09A8A9007CCFEF /* Build configuration list for PBXNativeTarget "CocoaUPnPTests" */;
+			buildPhases = (
+				6CA741F21D09A8A9007CCFEF /* Sources */,
+				6CA741F31D09A8A9007CCFEF /* Frameworks */,
+				6CA741F41D09A8A9007CCFEF /* Resources */,
+				6C86CC361D0EC0D000D06C48 /* Carthage copy frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CA741FD1D09A8A9007CCFEF /* PBXTargetDependency */,
+			);
+			name = CocoaUPnPTests;
+			productName = CocoaUPnPTests;
+			productReference = 6CA741F61D09A8A9007CCFEF /* CocoaUPnPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -423,6 +736,9 @@
 				ORGANIZATIONNAME = ARCAM;
 				TargetAttributes = {
 					6CA6C7711D06ED8700BA8CF1 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					6CA741F51D09A8A9007CCFEF = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -440,6 +756,7 @@
 			projectRoot = "";
 			targets = (
 				6CA6C7711D06ED8700BA8CF1 /* CocoaUPnP */,
+				6CA741F51D09A8A9007CCFEF /* CocoaUPnPTests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,10 +766,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C3E411A1D0ADD29002119F5 /* CocoaUPnP.podspec in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CA741F41D09A8A9007CCFEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CA742441D09A8DD007CCFEF /* Empty.xml in Resources */,
+				6CA742471D09A8DD007CCFEF /* GetConnectionID.xml in Resources */,
+				6CA742491D09A8DD007CCFEF /* Items.xml in Resources */,
+				6CA742461D09A8DD007CCFEF /* FullMetadata.xml in Resources */,
+				6CA742421D09A8DD007CCFEF /* Containers.xml in Resources */,
+				6CA7424C1D09A8DD007CCFEF /* PlayRequest.xml in Resources */,
+				6CA742451D09A8DD007CCFEF /* Error.xml in Resources */,
+				6CA742431D09A8DD007CCFEF /* Device.xml in Resources */,
+				6CA7424B1D09A8DD007CCFEF /* MediaServer.xml in Resources */,
+				6CA742481D09A8DD007CCFEF /* GetPositionInfoResponse.xml in Resources */,
+				6CA7424A1D09A8DD007CCFEF /* LastChangeFull.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C86CC361D0EC0D000D06C48 /* Carthage copy frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Specta.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Expecta.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OCMock.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OHHTTPStubs.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AFNetworking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaAsyncSocket.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/GCDWebServers.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Ono.framework",
+			);
+			name = "Carthage copy frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6CA6C76D1D06ED8700BA8CF1 /* Sources */ = {
@@ -495,7 +856,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CA741F21D09A8A9007CCFEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CA7425D1D09A8DD007CCFEF /* UPPRequestSerializerSpec.m in Sources */,
+				6CA7425C1D09A8DD007CCFEF /* UPPDiscoverySpec.m in Sources */,
+				6CA742521D09A8DD007CCFEF /* UPPErrorSpec.m in Sources */,
+				6CA742411D09A8DD007CCFEF /* UPPEventSubscriptionSpec.m in Sources */,
+				6CA742681D09A8DD007CCFEF /* UPPContentDirectoryServiceSpec.m in Sources */,
+				6CA7424D1D09A8DD007CCFEF /* EXPMatchers+beWithinAMillisecondOf.m in Sources */,
+				6CA742621D09A8DD007CCFEF /* UPPLastChangeParserSpec.m in Sources */,
+				6CA742401D09A8DD007CCFEF /* UPPEventSubscriptionManagerSpec.m in Sources */,
+				6CA742611D09A8DD007CCFEF /* UPPErrorParserSpec.m in Sources */,
+				6CA742531D09A8DD007CCFEF /* UPPMediaItemResourceSpec.m in Sources */,
+				6CA742641D09A8DD007CCFEF /* UPPResponseParserSpec.m in Sources */,
+				6CA742671D09A8DD007CCFEF /* UPPConnectionManagerServiceSpec.m in Sources */,
+				6CA742651D09A8DD007CCFEF /* UPPMediaItemProtocolSpec.m in Sources */,
+				6CA7426A1D09A8DD007CCFEF /* MockFailSessionManager.m in Sources */,
+				6CA7424F1D09A8DD007CCFEF /* UPPBasicDeviceSpec.m in Sources */,
+				6CA742541D09A8DD007CCFEF /* UPPMediaItemSpec.m in Sources */,
+				6CA7424E1D09A8DD007CCFEF /* UPPMetadataHelperSpec.m in Sources */,
+				6CA742591D09A8DD007CCFEF /* SSDPDelegateTestHelper.m in Sources */,
+				6CA742661D09A8DD007CCFEF /* UPPAVTransportServiceSpec.m in Sources */,
+				6CA742581D09A8DD007CCFEF /* UPPServiceSpec.m in Sources */,
+				6CA742601D09A8DD007CCFEF /* UPPDeviceParserSpec.m in Sources */,
+				6CA7425A1D09A8DD007CCFEF /* SSDPServiceBrowserDelegateSpec.m in Sources */,
+				6CA7425F1D09A8DD007CCFEF /* UPPSessionManagerSpec.m in Sources */,
+				6CA742691D09A8DD007CCFEF /* UPPRenderingControlServiceSpec.m in Sources */,
+				6CA742561D09A8DD007CCFEF /* UPPMediaServerDeviceSpec.m in Sources */,
+				6CA7425E1D09A8DD007CCFEF /* UPPResponseSerializerSpec.m in Sources */,
+				6CA742501D09A8DD007CCFEF /* UPPBasicServiceSpec.m in Sources */,
+				6C3E41231D0E940F002119F5 /* TestHelpers.m in Sources */,
+				6CA742571D09A8DD007CCFEF /* UPPParametersSpec.m in Sources */,
+				6CA7423F1D09A8DD007CCFEF /* UPPEventServerSpec.m in Sources */,
+				6CA7425B1D09A8DD007CCFEF /* SSDPServiceBrowserSpec.m in Sources */,
+				6CA742631D09A8DD007CCFEF /* UPPMediaItemParserSpec.m in Sources */,
+				6C3E41251D0E96F2002119F5 /* NetworkTestHelpers.m in Sources */,
+				6CA742551D09A8DD007CCFEF /* UPPMediaRendererDeviceSpec.m in Sources */,
+				6CA742511D09A8DD007CCFEF /* UPPDeviceIconSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CA741FD1D09A8A9007CCFEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CA6C7711D06ED8700BA8CF1 /* CocoaUPnP */;
+			targetProxy = 6CA741FC1D09A8A9007CCFEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6CA6C7781D06ED8800BA8CF1 /* Debug */ = {
@@ -632,6 +1043,36 @@
 			};
 			name = Release;
 		};
+		6CA741FF1D09A8A9007CCFEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CocoaUPnPTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.com.arcam.CocoaUPnPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6CA742001D09A8A9007CCFEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CocoaUPnPTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.com.arcam.CocoaUPnPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -649,6 +1090,15 @@
 			buildConfigurations = (
 				6CA6C77B1D06ED8800BA8CF1 /* Debug */,
 				6CA6C77C1D06ED8800BA8CF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CA741FE1D09A8A9007CCFEF /* Build configuration list for PBXNativeTarget "CocoaUPnPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CA741FF1D09A8A9007CCFEF /* Debug */,
+				6CA742001D09A8A9007CCFEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

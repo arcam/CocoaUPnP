@@ -1,6 +1,14 @@
 
+# Modified to support carthage.
 github "drekka/Ono" "develop"
 
+# Already carthage friendly.
 github "robbiehanson/CocoaAsyncSocket"
 github "AFNetworking/AFNetworking"
 github "swisspol/GCDWebServer"
+
+# Testing
+github "erikdoe/ocmock"
+github "specta/specta"
+github "specta/expecta"
+github "AliSoftware/OHHTTPStubs"

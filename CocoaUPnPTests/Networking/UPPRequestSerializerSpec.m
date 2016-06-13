@@ -2,6 +2,10 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <CocoaUPnP/CocoaUPnP.h>
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import <AFNetworking/AFNetworking.h>
+#import "TestHelpers.h"
 
 SpecBegin(UPPRequestSerializer)
 

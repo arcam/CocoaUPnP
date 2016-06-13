@@ -3,9 +3,9 @@
 
 #import "TestHelpers.h"
 
-NSData *(^LoadDataFromXML)(NSString *, Class) = ^NSData *(NSString *fileName, Class class)
+NSData *LoadDataFromXML(NSString *filename, Class aClass)
 {
-    NSBundle *bundle = [NSBundle bundleForClass:class];
-    NSString *filePath = [bundle pathForResource:fileName ofType:@"xml"];
+    NSBundle *bundle = [NSBundle bundleForClass:aClass];
+    NSString *filePath = [bundle pathForResource:filename ofType:@"xml"];
     return [NSData dataWithContentsOfFile:filePath];
 };

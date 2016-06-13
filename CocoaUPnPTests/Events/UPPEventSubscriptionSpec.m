@@ -4,6 +4,8 @@
 #import <OCMock/OCMock.h>
 #import "EXPMatchers+beWithinAMillisecondOf.h"
 #import <CocoaUPnP/CocoaUPnP.h>
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
 
 SpecBegin(UPPEventSubscription)
 

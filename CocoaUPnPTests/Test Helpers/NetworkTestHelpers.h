@@ -2,7 +2,6 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFNetworking.h>
 
 @class UPPParameters;
 
@@ -11,7 +10,7 @@
 
  @return Returns a UPPParamaters object containing `InstanceID: 0`.
  */
-UPPParameters *(^InstanceParams)(void);
+UPPParameters * InstanceParams(void);
 
 /**
  Setup an expectation for a failed network call, and return stubbed error
@@ -20,15 +19,15 @@ UPPParameters *(^InstanceParams)(void);
  @param id           The session manager to set the expectation on
  @param NSString     The URL the message is posted to
  */
-void (^ExpectAndReturnErrorWithParams)(NSDictionary *, id, NSString *);
+void ExpectAndReturnErrorWithParams(NSDictionary *params, id sessionManager, NSString *url);
 
 /**
  Setup an expectation for a successful network call, passing in a session
  manager, a dictionary of parameters, and a URL.
  */
-void (^ExpectGetWithParams)(id, NSDictionary *, NSString *);
+void ExpectGetWithParams(id sessionManager, NSDictionary *params, NSString *url);
 
 /**
  Reject any network call, passing in a session manager and a URL.
  */
-void (^RejectGetWithURL)(id, NSString *);
+void RejectGetWithURL(id sessionManager, NSString *url);

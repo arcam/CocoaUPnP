@@ -5,6 +5,8 @@
 #import "EXPMatchers+beWithinAMillisecondOf.h"
 #import <CocoaUPnP/CocoaUPnP.h>
 #import "UPPError.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
 
 /*
  NOTE: This spec shouldn't know about the existance of activeSubscriptions, but

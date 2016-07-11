@@ -5,7 +5,7 @@
 
 @class ONOXMLDocument;
 
-extern NSString * const UPnPXMLResultsKey;
+extern NSString * _Nonnull const UPnPXMLResultsKey;
 
 /**
  This class is solely responsible for parsing an XML string which contains an

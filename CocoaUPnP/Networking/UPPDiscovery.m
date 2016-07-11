@@ -40,7 +40,11 @@
 - (void)stopBrowsingForServices
 {
     [self.browser stopBrowsingForServices];
+    // Setting browser to nil, causes Discovery to create a new browser when needed.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     self.browser = nil;
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Lazy Instantiation

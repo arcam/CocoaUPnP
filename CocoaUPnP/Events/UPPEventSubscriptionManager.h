@@ -15,7 +15,7 @@
 /**
  An event server instance for service event callbacks.
  */
-@property (strong, nonatomic, nonnull) UPPEventServer *eventServer;
+@property (strong, nonatomic, nullable) UPPEventServer *eventServer;
 
 /**
  @return A shared event subscription manager instance, with the `NSURLSession`
@@ -85,7 +85,7 @@
  @param completion A block to run when the subscription call finishes. Returns a
  BOOL corresponding to whether the call succeeded or failed.
  */
-- (void)unsubscribe:(nonnull UPPEventSubscription *)subscription completion:(nonnull void(^)(BOOL success))completion;
+- (void)unsubscribe:(nonnull UPPEventSubscription *)subscription completion:(nullable void(^)(BOOL success))completion;
 
 /**
  Remove all subscriptions for an array of services. This is run when discovery

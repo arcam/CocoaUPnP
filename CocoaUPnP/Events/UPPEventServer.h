@@ -14,7 +14,7 @@
  @param event A dictionary representation of an event. It contains two key/value
  pairs: one for the subscription ID, and one for the event body.
  */
-- (void)eventReceived:(NSDictionary *)event;
+- (void)eventReceived:(nonnull NSDictionary *)event;
 @end
 
 /**
@@ -25,12 +25,12 @@ extern const NSUInteger UPPEventServerPort;
 /**
  The dictionary key to be used with the events subscription ID value.
  */
-extern NSString * const UPPEventServerSIDKey;
+extern NSString * _Nonnull const UPPEventServerSIDKey;
 
 /**
  The dictionary key to be used with the events body value.
  */
-extern NSString * const UPPEventServerBodyKey;
+extern NSString * _Nonnull const UPPEventServerBodyKey;
 
 /**
  This class is responsible for running a lightweight web server for the purpose

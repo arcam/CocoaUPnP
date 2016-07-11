@@ -18,22 +18,22 @@
 /**
  The album title for the item
  */
-@property (copy, nonatomic) NSString *albumTitle;
+@property (copy, nonatomic, nullable) NSString *albumTitle;
 
 /**
  The artist of the item
  */
-@property (copy, nonatomic) NSString *artist;
+@property (copy, nonatomic, nullable) NSString *artist;
 
 /**
  The date of the media item. E.g. the album release year
  */
-@property (copy, nonatomic) NSString *date;
+@property (copy, nonatomic, nullable) NSString *date;
 
 /**
  The genre of the media item
  */
-@property (copy, nonatomic) NSString *genre;
+@property (copy, nonatomic, nullable) NSString *genre;
 
 /**
  If the media item is a container, e.g. a music album
@@ -43,42 +43,42 @@
 /**
  Number of items in container
  */
-@property (copy, nonatomic) NSString *childCount;
+@property (copy, nonatomic, nullable) NSString *childCount;
 
 /**
  The UPnP class of the media item, e.g. `object.container.album.musicAlbum`
  */
-@property (copy, nonatomic) NSString *objectClass;
+@property (copy, nonatomic, nonnull) NSString *objectClass;
 
 /**
  The object identifier of the media item
  */
-@property (copy, nonatomic) NSString *objectID;
+@property (copy, nonatomic, nonnull) NSString *objectID;
 
 /**
  The original track number of the media item
  */
-@property (copy, nonatomic) NSString *trackNumber;
+@property (copy, nonatomic, nullable) NSString *trackNumber;
 
 /**
  The parents object identifier
  */
-@property (copy, nonatomic) NSString *parentID;
+@property (copy, nonatomic, nonnull) NSString *parentID;
 
 /**
  An array of media resources
  */
-@property (copy, nonatomic) NSArray *resources;
+@property (copy, nonatomic, nullable) NSArray *resources;
 
 /**
  The media item title
  */
-@property (copy, nonatomic) NSString *itemTitle;
+@property (copy, nonatomic, nonnull) NSString *itemTitle;
 
 /**
  A string representation of the album artwork URL
  */
-@property (copy, nonatomic) NSString *albumArtURLString;
+@property (copy, nonatomic, nullable) NSString *albumArtURLString;
 
 /**
  An integer describing the tracks total duration in seconds.
@@ -94,16 +94,16 @@
 
  @return Returns an `NSURL` for the album or song artwork
  */
-- (NSURL *)albumArtURL;
+- (nullable NSURL *)albumArtURL;
 
 /**
  Return the first resource `duration` value that is not nil
  */
-- (NSString *)duration;
+- (nullable NSString *)duration;
 
 /**
  Return the first media item resource that is not an image.
  */
-- (UPPMediaItemResource *)firstPlayableResource;
+- (nullable UPPMediaItemResource *)firstPlayableResource;
 
 @end

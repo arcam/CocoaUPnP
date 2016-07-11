@@ -11,36 +11,36 @@
 /**
  The number of audio channels
  */
-@property (copy, nonatomic) NSString *numberOfAudioChannels;
+@property (copy, nonatomic, nullable) NSString *numberOfAudioChannels;
 
 /**
  The bitrate of the resource
  */
-@property (copy, nonatomic) NSString *bitrate;
+@property (copy, nonatomic, nullable) NSString *bitrate;
 
 /**
  The duration of the item in HH:MM:SS
  */
-@property (copy, nonatomic) NSString *duration;
+@property (copy, nonatomic, nullable) NSString *duration;
 
 /**
  The sample frequency of the media item
  */
-@property (copy, nonatomic) NSString *sampleFrequency;
+@property (copy, nonatomic, nullable) NSString *sampleFrequency;
 
 /**
  The protocol info string of the media item
  */
-@property (copy, nonatomic) NSString *protocolInfo;
+@property (copy, nonatomic, nonnull) NSString *protocolInfo;
 
 /**
  The size in bytes of the media item
  */
-@property (copy, nonatomic) NSString *itemSize;
+@property (copy, nonatomic, nullable) NSString *itemSize;
 
 /**
  A string representation of the media item URL
  */
-@property (copy, nonatomic) NSString *resourceURLString;
+@property (copy, nonatomic, nonnull) NSString *resourceURLString;
 
 @end

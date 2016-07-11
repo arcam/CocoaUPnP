@@ -7,6 +7,8 @@
 @class UPPSessionManager;
 @class UPPParameters;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** This class serves as a base class for all UPnP services
  */
 @interface UPPBasicService : NSObject
@@ -18,7 +20,7 @@
  @param error    An optional `NSError` which is returned in the event of parse
                  failure
  */
-typedef void (^UPPResponseBlock)(NSDictionary *response, NSError *error);
+typedef void (^UPPResponseBlock)(NSDictionary * _Nullable response, NSError *error);
 
 /**
  A generic success / failure block
@@ -27,7 +29,7 @@ typedef void (^UPPResponseBlock)(NSDictionary *response, NSError *error);
  @param error   If the call was unsucessful, an `NSError` is returned with more
  information
  */
-typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
+typedef void (^UPPSuccessBlock)(BOOL success, NSError * _Nullable error);
 
 #pragma mark - Properties
 
@@ -71,7 +73,7 @@ typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
 
  @return A new basic service instance
  */
-+ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn;
++ (nullable instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn;
 
 /**
  Returns a unique service name, comprised of the parent devices unique device name,
@@ -103,3 +105,5 @@ typedef void (^UPPSuccessBlock)(BOOL success, NSError *error);
 - (void)_sendPostRequestWithParameters:(UPPParameters *)parameters action:(NSString *)action completion:(UPPResponseBlock)completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

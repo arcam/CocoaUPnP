@@ -40,19 +40,6 @@
 @interface UPPDiscovery : NSObject <SSDPServiceBrowserDelegate>
 
 /**
- A parser which will parse headers as they come in.
- */
-@property (strong, nonatomic) UPPDeviceParser *parser;
-
-/**
- The object who wished to be informed of add/remove device notices.
- @warning This method is deprecated and will go away in a future release.
- @see addBrowserObserver:
- @see removeBrowserObserver:
- */
-@property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate DEPRECATED_ATTRIBUTE;
-
-/**
  An instance of `SSDPServiceBrowser`. Lazily instantiated for better testing.
  */
 @property (strong, nonatomic, nonnull) SSDPServiceBrowser *browser;

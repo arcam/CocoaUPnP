@@ -30,10 +30,21 @@
 - (id)initWithHeaders:(NSDictionary *)headers {
     self = [super init];
     if (self) {
-        _xmlLocation = [NSURL URLWithString:[headers objectForKey:@"location"]];
-        _serviceType = [headers objectForKey:@"st"] ?: [headers objectForKey:@"nt"];
-        _uniqueServiceName = [headers objectForKey:@"usn"];
-        _server = [headers objectForKey:@"server"];
+        NSURL *location = [NSURL URLWithString:[headers objectForKey:@"location"]];
+        if (!location) { return nil; }
+        _xmlLocation = location;
+
+        NSString *serviceType = [headers objectForKey:@"st"] ?: [headers objectForKey:@"nt"];
+        if (!serviceType) { return nil; }
+        _serviceType = serviceType;
+
+        NSString *usn = [headers objectForKey:@"usn"];
+        if (!usn) { return nil; }
+        _uniqueServiceName = usn;
+
+        NSString *server = [headers objectForKey:@"server"];
+        if (!server) { return nil; }
+        _server = server;
 
         NSString *cacheControl = [headers objectForKey:@"cache-control"];
         if (cacheControl) {

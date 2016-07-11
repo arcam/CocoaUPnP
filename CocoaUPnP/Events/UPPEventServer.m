@@ -46,7 +46,7 @@ NSString * const UPPEventServerBodyKey = @"Event";
 
 - (BOOL)isRunning
 {
-    return self.webServer.isRunning;
+    return self.webServer.isRunning ?: NO;
 }
 
 #pragma mark - Lazy Instantiation

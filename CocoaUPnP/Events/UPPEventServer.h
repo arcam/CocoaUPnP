@@ -41,12 +41,12 @@ extern NSString * const UPPEventServerBodyKey;
 /**
  An instance of GCDWebServer which handles incoming notifications.
  */
-@property (strong, nonatomic) GCDWebServer *webServer;
+@property (strong, nonatomic, nonnull) GCDWebServer *webServer;
 
 /**
  The delegate which should recieve parsed notifications.
  */
-@property (weak, nonatomic) id <UPPEventServerDelegate> eventDelegate;
+@property (weak, nonatomic, nullable) id <UPPEventServerDelegate> eventDelegate;
 
 /**
  Start the event server.
@@ -61,7 +61,7 @@ extern NSString * const UPPEventServerBodyKey;
 /**
  @return The event servers callback URL.
  */
-- (NSURL *)eventServerCallbackURL;
+- (nullable NSURL *)eventServerCallbackURL;
 
 /**
  @return Return the running status of the web server.

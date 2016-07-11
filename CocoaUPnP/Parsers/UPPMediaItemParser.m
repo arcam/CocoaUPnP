@@ -35,7 +35,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
     }
 
     NSArray *items = [self parseItemsInDocument:document];
-    if (items) {
+    if (items.count > 0) {
         NSMutableDictionary *parsedResults = [results mutableCopy];
         [parsedResults setObject:items forKey:UPnPXMLResultsKey];
         completion([parsedResults copy], nil);

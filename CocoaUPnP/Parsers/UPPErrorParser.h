@@ -17,6 +17,6 @@
  @return Returns an `NSError` with the `<errorCode>` and `<errorDescription>` in
  the localised description.
  */
-+ (NSError *)parseErrorXML:(NSData *)data;
++ (nonnull NSError *)parseErrorXML:(nonnull NSData *)data;
 
 @end

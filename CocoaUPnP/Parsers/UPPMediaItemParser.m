@@ -14,7 +14,8 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion
 {
-    if (!results || !completion) { return; }
+    NSParameterAssert(results);
+    NSParameterAssert(completion);
 
     NSString *resultsString = results[UPnPXMLResultsKey];
 
@@ -45,7 +46,9 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
-    __block NSMutableArray *items;
+    NSParameterAssert(document);
+
+    __block NSMutableArray *items = [NSMutableArray array];
     [document enumerateElementsWithXPath:@"/*[local-name() = 'DIDL-Lite']/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 
         UPPMediaItem *item = [[UPPMediaItem alloc] init];
@@ -94,10 +97,6 @@ NSString * const UPnPXMLResultsKey = @"Result";
                 *stop = YES;
             }
         }];
-
-        if (!items) {
-            items = [NSMutableArray array];
-        }
 
         [items addObject:item];
     }];

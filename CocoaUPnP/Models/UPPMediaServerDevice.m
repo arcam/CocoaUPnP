@@ -17,6 +17,7 @@
 
 + (instancetype)mediaServerWithURN:(NSString *)urn baseURL:(NSURL *)baseURL
 {
+    if (!urn || !baseURL) { return nil; }
     UPPMediaServerDevice *device = [[UPPMediaServerDevice alloc] init];
     device.deviceType = urn;
     device.baseURL = baseURL;

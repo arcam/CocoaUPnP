@@ -20,13 +20,6 @@ describe(@"UPPErrorParser", ^{
 
     });
 
-    it(@"should return nil when no data passed in", ^{
-
-        NSError *error = [UPPErrorParser parseErrorXML:nil];
-        expect(error).to.beNil();
-
-    });
-
 });
 
 SpecEnd

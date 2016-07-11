@@ -38,12 +38,6 @@ describe(@"UPPContentDirectoryService", ^{
             [service searchCapabilitiesWithCompletion:noCompletion];
             [sessionManager verify];
         });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service searchCapabilitiesWithCompletion:nil];
-            [sessionManager verify];
-        });
     });
 
     describe(@"when getting sort capabilities", ^{
@@ -55,12 +49,6 @@ describe(@"UPPContentDirectoryService", ^{
             [service sortCapabilitiesWithCompletion:noCompletion];
             [sessionManager verify];
         });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service sortCapabilitiesWithCompletion:nil];
-            [sessionManager verify];
-        });
     });
 
     describe(@"when getting system update id", ^{
@@ -70,12 +58,6 @@ describe(@"UPPContentDirectoryService", ^{
 
             ExpectGetWithParams(sessionManager, params, url);
             [service systemUpdateIDWithCompletion:noCompletion];
-            [sessionManager verify];
-        });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service systemUpdateIDWithCompletion:nil];
             [sessionManager verify];
         });
     });
@@ -132,12 +114,6 @@ describe(@"UPPContentDirectoryService", ^{
 
             [service browseWithObjectID:nil browseFlag:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:noCompletion];
 
-            [sessionManager verify];
-        });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service browseWithObjectID:nil browseFlag:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:nil];
             [sessionManager verify];
         });
     });
@@ -198,59 +174,7 @@ describe(@"UPPContentDirectoryService", ^{
 
             [sessionManager verify];
         });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service searchWithContainerID:nil searchCriteria:nil filter:nil startingIndex:nil requestedCount:nil sortCritera:nil completion:nil];
-            [sessionManager verify];
-        });
     });
-
-    describe(@"when creating object", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when destroying object", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when updating object", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when importing resource", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when exporting resource", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when stopping transfer resource", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when getting transfer progress", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when deleting resource", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
-    describe(@"when creating reference", ^{
-        xit(@"should send required parameters", ^{
-        });
-    });
-
 });
 
 SpecEnd

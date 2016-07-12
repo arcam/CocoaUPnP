@@ -63,6 +63,6 @@
  @return Returns a new `SSDPService` instance, populated from the headers
  dictionary
  */
-- (id)initWithHeaders:(nonnull NSDictionary *)headers;
+- (nonnull id)initWithHeaders:(nonnull NSDictionary *)headers;
 
 @end

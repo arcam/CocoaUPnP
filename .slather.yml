@@ -1,6 +1,10 @@
-ci_service: travis_ci
-coverage_service: coveralls
+coverage_service: cobertura_xml
 xcodeproj: Example/Example.xcodeproj
+workspace: Example/Example.xcworkspace
+scheme: Example
 source_directory: CocoaUPnP
 ignore:
   - Example/*
+  - CocoaUPnPTests/*
+  - ../*
+

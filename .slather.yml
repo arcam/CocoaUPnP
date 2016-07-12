@@ -1,7 +1,7 @@
 coverage_service: cobertura_xml
 xcodeproj: Example/Example.xcodeproj
 scheme: ExampleTests
-source_directory: CocoaUPnP
+source_directory: CocoaUPnP/CocoaUPnP
 ignore:
   - Example/*
 

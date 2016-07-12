@@ -11,6 +11,7 @@
 #import "UPPRequestSerializer.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"
+#import "ONOXMLDocument+StringValueOrNil.h"
 
 @implementation UPPDeviceParser
 
@@ -63,13 +64,14 @@
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
         }
-        [self parseElement:element intoDevice:device];
-        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
-        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
 
         if (!device) {
             return;
         }
+
+        [self parseElement:element intoDevice:device];
+        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
+        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
 
         if (!devices) {
             devices = [NSMutableArray array];
@@ -89,17 +91,17 @@
 - (void)parseElement:(ONOXMLElement *)element intoDevice:(UPPBasicDevice *)device
 {
     device.friendlyName = [[element firstChildWithTag:@"friendlyName"] stringValue];
-    device.manufacturer = [[element firstChildWithTag:@"manufacturer"] stringValue];
-    device.modelDescription = [[element firstChildWithTag:@"modelDescription"] stringValue];
+    device.manufacturer = [[element firstChildWithTag:@"manufacturer"] stringValueOrNil];
+    device.modelDescription = [[element firstChildWithTag:@"modelDescription"] stringValueOrNil];
     device.modelName = [[element firstChildWithTag:@"modelName"] stringValue];
-    device.modelNumber = [[element firstChildWithTag:@"modelNumber"] stringValue];
-    device.serialNumber = [[element firstChildWithTag:@"serialNumber"] stringValue];
+    device.modelNumber = [[element firstChildWithTag:@"modelNumber"] stringValueOrNil];
+    device.serialNumber = [[element firstChildWithTag:@"serialNumber"] stringValueOrNil];
     device.udn = [[element firstChildWithTag:@"UDN"] stringValue];
 
-    NSString *url = [[element firstChildWithTag:@"manufacturerURL"] stringValue];
-    device.manufacturerURL = [NSURL URLWithString:url];
-    url = [[element firstChildWithTag:@"modelURL"] stringValue];
-    device.modelURL = [NSURL URLWithString:url];
+    NSString *url = [[element firstChildWithTag:@"manufacturerURL"] stringValueOrNil];
+    if (url) { device.manufacturerURL = [NSURL URLWithString:url]; }
+    url = [[element firstChildWithTag:@"modelURL"] stringValueOrNil];
+    if (url) { device.modelURL = [NSURL URLWithString:url]; }
 }
 
 - (void)parseIcons:(ONOXMLElement *)iconList intoDevice:(UPPBasicDevice *)device
@@ -125,11 +127,26 @@
     NSMutableArray *services = [NSMutableArray array];
     [serviceList.children enumerateObjectsUsingBlock:^(ONOXMLElement *serviceElement, NSUInteger idx, BOOL *stop) {
         UPPServiceDescription *service = [[UPPServiceDescription alloc] init];
-        service.serviceType = [[serviceElement firstChildWithTag:@"serviceType"] stringValue];
-        service.serviceId = [[serviceElement firstChildWithTag:@"serviceId"] stringValue];
-        service.descriptionURL = [[serviceElement firstChildWithTag:@"SCPDURL"] stringValue];
-        service.controlURL = [[serviceElement firstChildWithTag:@"controlURL"] stringValue];
-        service.eventSubURL = [[serviceElement firstChildWithTag:@"eventSubURL"] stringValue];
+        ONOXMLElement *serviceType = [serviceElement firstChildWithTag:@"serviceType"];
+        if (!serviceType) { return; }
+        service.serviceType = [serviceType stringValue];
+
+        ONOXMLElement *serviceId = [serviceElement firstChildWithTag:@"serviceId"];
+        if (!serviceId) { return; }
+        service.serviceId = [serviceId stringValue];
+
+        ONOXMLElement *descriptionURL = [serviceElement firstChildWithTag:@"SCPDURL"];
+        if (!descriptionURL) { return; }
+        service.descriptionURL = [descriptionURL stringValue];
+
+        ONOXMLElement *controlURL = [serviceElement firstChildWithTag:@"controlURL"];
+        if (!controlURL) { return; }
+        service.controlURL = [controlURL stringValue];
+
+        ONOXMLElement *eventSubURL = [serviceElement firstChildWithTag:@"eventSubURL"];
+        if (!eventSubURL) { return; }
+        service.eventSubURL = [eventSubURL stringValue];
+
         [services addObject:service];
     }];
 

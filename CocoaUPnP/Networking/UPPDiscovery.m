@@ -40,7 +40,11 @@
 - (void)stopBrowsingForServices
 {
     [self.browser stopBrowsingForServices];
+    // Setting browser to nil, causes Discovery to create a new browser when needed.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     self.browser = nil;
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Lazy Instantiation
@@ -115,13 +119,6 @@
 
         [self.devices removeObject:device];
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        if ([self.delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
-            [self.delegate discovery:self didRemoveDevice:device];
-        }
-#pragma clang diagnostic pop
-
         for (id <UPPDiscoveryDelegate>delegate in self.observers) {
             if ([delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
                 [delegate discovery:self didRemoveDevice:device];
@@ -169,13 +166,6 @@
     }
 
     [self.devices addObject:device];
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self.delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
-        [self.delegate discovery:self didFindDevice:device];
-    }
-#pragma clang diagnostic pop
 
     for (id <UPPDiscoveryDelegate>delegate in self.observers) {
         if ([delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {

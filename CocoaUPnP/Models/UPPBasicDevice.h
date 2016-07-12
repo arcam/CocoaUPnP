@@ -13,80 +13,80 @@
 /**
  UPnP device type, e.g. `urn:schemas-upnp-org:device:MediaRenderer:1`
  */
-@property (copy, nonatomic) NSString *deviceType;
+@property (copy, nonatomic, nonnull) NSString *deviceType;
 
 /**
  Device XML location
  */
-@property (copy, nonatomic) NSURL *xmlLocation;
+@property (copy, nonatomic, nonnull) NSURL *xmlLocation;
 
 /**
  The base URL of the device.
  */
-@property (copy, nonatomic) NSURL *baseURL;
+@property (copy, nonatomic, nonnull) NSURL *baseURL;
 
 /**
  The device's friendly name
  */
-@property (copy, nonatomic) NSString *friendlyName;
+@property (copy, nonatomic, nonnull) NSString *friendlyName;
 
 /**
  Device manufacturer
  */
-@property (copy, nonatomic) NSString *manufacturer;
+@property (copy, nonatomic, nullable) NSString *manufacturer;
 
 /**
  Device manufacturer's URL
  */
-@property (copy, nonatomic) NSURL *manufacturerURL;
+@property (copy, nonatomic, nullable) NSURL *manufacturerURL;
 
 /**
  Device description
  */
-@property (copy, nonatomic) NSString *modelDescription;
+@property (copy, nonatomic, nullable) NSString *modelDescription;
 
 /**
  Model name
  */
-@property (copy, nonatomic) NSString *modelName;
+@property (copy, nonatomic, nonnull) NSString *modelName;
 
 /**
  Model number
  */
-@property (copy, nonatomic) NSString *modelNumber;
+@property (copy, nonatomic, nullable) NSString *modelNumber;
 
 /**
  Model URL
  */
-@property (copy, nonatomic) NSURL *modelURL;
+@property (copy, nonatomic, nullable) NSURL *modelURL;
 
 /**
  Device serial number
  */
-@property (copy, nonatomic) NSString *serialNumber;
+@property (copy, nonatomic, nullable) NSString *serialNumber;
 
 /**
  Unique device number
  */
-@property (copy, nonatomic) NSString *udn;
+@property (copy, nonatomic, nonnull) NSString *udn;
 
 /**
  An array of icon objects as presented by the device.
  @see UPPDeviceIcon
  */
-@property (copy, nonatomic) NSArray *iconList;
+@property (copy, nonatomic, nullable) NSArray *iconList;
 
 /**
  An array of service objects supported by the device. @see UPPServiceDescription
  */
-@property (copy, nonatomic) NSArray *services;
+@property (copy, nonatomic, nonnull) NSArray *services;
 
 /**
  Unique service name
  *
  @return Returns a unique service name `udn::deviceType`
  */
-- (NSString *)usn;
+- (nonnull NSString *)usn;
 
 /**
  Find the first service which matches `serviceType`
@@ -95,6 +95,6 @@
 
  @return The matching service description, or nil if no matches found
  */
-- (UPPServiceDescription *)serviceForType:(NSString *)serviceType;
+- (nullable UPPServiceDescription *)serviceForType:(nonnull NSString *)serviceType;
 
 @end

@@ -21,21 +21,21 @@
 
  @return A new `UPPMediaServerDevice`
  */
-+ (instancetype)mediaRendererWithURN:(NSString *)urn baseURL:(NSURL *)baseURL;
++ (nullable instancetype)mediaRendererWithURN:(nonnull NSString *)urn baseURL:(nonnull NSURL *)baseURL;
 
 /**
  Returns the first result in `services` matching `:service:RenderingControl:`
  */
-- (UPPRenderingControlService *)renderingControlService;
+- (nullable UPPRenderingControlService *)renderingControlService;
 
 /**
  Returns the first result in `services` matching `:service:ConnectionManager:`
  */
-- (UPPConnectionManagerService *)connectionManagerService;
+- (nullable UPPConnectionManagerService *)connectionManagerService;
 
 /**
  Returns the first result in `services` matching `:service:AVTransport:`
  */
-- (UPPAVTransportService *)avTransportService;
+- (nullable UPPAVTransportService *)avTransportService;
 
 @end

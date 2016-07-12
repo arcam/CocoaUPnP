@@ -59,12 +59,6 @@ describe(@"UPPConnectionManagerService", ^{
 
             [sessionManager verify];
         });
-
-        it(@"should exit early when given no completion block", ^{
-            RejectGetWithURL(sessionManager, url);
-            [service protocolInfoWithCompletion:nil];
-            [sessionManager verify];
-        });
     });
 
     describe(@"when setting prepare for connection", ^{
@@ -135,7 +129,7 @@ describe(@"UPPConnectionManagerService", ^{
 
         it(@"should send required parameters", ^{
             ExpectGetWithParams(sessionManager, expectedParams, url);
-            [service connectionCompleteWithConnectionID:peerConnectionId success:nil];
+            [service connectionCompleteWithConnectionID:peerConnectionId success:^(BOOL success, NSError * _Nullable error) { }];
             [sessionManager verify];
         });
 

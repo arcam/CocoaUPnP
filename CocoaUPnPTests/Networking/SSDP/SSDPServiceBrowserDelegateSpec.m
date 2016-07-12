@@ -129,7 +129,7 @@ describe(@"SSDPServiceBrowser", ^{
         [browser udpSocket:nil didReceiveData:data fromAddress:nil withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
-        OCMVerifyAllWithDelay(mockDelegate, 0.5);
+        OCMVerifyAllWithDelay(mockDelegate, 5.0);
     });
 
     it(@"should inform delegate when socket closes", ^{

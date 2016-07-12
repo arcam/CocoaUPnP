@@ -3,6 +3,8 @@
 
 #import "UPPBasicService.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class contains all the network calls needed for the UPnP [AVTransport1
  service](http://upnp.org/specs/av/UPnP-av-AVTransport-v1-Service.pdf).
@@ -25,7 +27,7 @@
  the call, along with an error object if the call was unsuccessful.
 
  */
-- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(nullable NSString *)currentURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Set the next transport URI
@@ -36,7 +38,7 @@
  @param success         An optional block which returns the success state of the
  call, along with an error object if the call was unsuccessful.
  */
-- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(nullable NSString *)nextURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 
 #pragma mark - Getting Information
@@ -49,55 +51,55 @@
  Get media information from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)mediaInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)mediaInfoWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 /**
  Get transport information from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)transportInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)transportInfoWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 /**
  Get position information from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)positionInfoWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)positionInfoWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 /**
  Get device capabilities from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)deviceCapabilitiesWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)deviceCapabilitiesWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 /**
  Get tranport settings from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)transportSettingsWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)transportSettingsWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 /**
  Get tranport actions from the service
 
  @param instanceId The instance identifier
- @param completion A completion block which returns the parsed response, or an
-     error if unsuccessful
+ @param completion A required completion block which returns the parsed response,
+ or an error if unsuccessful
  */
-- (void)transportActionsWithInstanceID:(NSString *)instanceId completion:(UPPResponseBlock)completion;
+- (void)transportActionsWithInstanceID:(nullable NSString *)instanceId completion:(UPPResponseBlock)completion;
 
 
 #pragma mark - General Transport Controls
@@ -114,7 +116,7 @@
  along with an error object if the call was unsuccessful.
 
  */
-- (void)stopWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)stopWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send play command, with speed set to `1`
@@ -122,8 +124,8 @@
  @param instanceId The instance identifier
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
-*/
-- (void)playWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+ */
+- (void)playWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send play command with a speed setting
@@ -133,7 +135,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(UPPSuccessBlock)successBlock;
+- (void)playWithInstanceID:(nullable NSString *)instanceId speed:(nullable NSString *)speed success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send pause command
@@ -142,7 +144,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)pauseWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)pauseWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send record command
@@ -151,7 +153,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)recordWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)recordWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Seek to time
@@ -162,7 +164,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(UPPSuccessBlock)successBlock;
+- (void)setSeekWithInstanceID:(nullable NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send next command
@@ -171,7 +173,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)nextWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)nextWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Send previous command
@@ -180,7 +182,7 @@
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)previousWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)previousWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 
 #pragma mark - Mode Setting
@@ -197,7 +199,7 @@
  @param success     An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 /**
  Set record mode
@@ -205,8 +207,10 @@
  @param newRecordMode The new record mode
  @param instanceId    The instance identifier
  @param success       An optional block which returns the success state of the
-     call, along with an error object if the call was unsuccessful.
+ call, along with an error object if the call was unsuccessful.
  */
-- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -15,6 +15,10 @@
 
 + (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn
 {
+    if (!baseURL) {
+        return nil;
+    }
+
     id service = [[[self class] alloc] init];
     [service setBaseURL:baseURL];
     [service populateFromServiceDescription:description];

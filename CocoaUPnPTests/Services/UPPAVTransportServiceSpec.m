@@ -34,13 +34,11 @@ describe(@"UPPAVTransportService", ^{
     });
 
     describe(@"when setting current transport URI", ^{
-        __block NSString *currentURI;
-        __block NSString *currentURIMetaData;
+        __block NSString *currentURI = @"currentURI";
+        __block NSString *currentURIMetaData = @"currentURIMetaData";
         __block NSArray *keys;
 
         beforeEach(^{
-            currentURI = @"currentURI";
-            currentURIMetaData = @"currentURIMetaData";
             keys = @[ @"InstanceID", @"CurrentURI", @"CurrentURIMetaData" ];
         });
 

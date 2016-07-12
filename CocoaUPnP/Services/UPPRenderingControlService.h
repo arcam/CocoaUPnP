@@ -3,6 +3,8 @@
 
 #import "UPPBasicService.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class contains all the network calls needed for the UPnP [AVTransport1
  service](http://upnp.org/specs/av/UPnP-av-RenderingControl-v1-Service.pdf).
@@ -22,7 +24,7 @@
  @param channel    The channel to retrieve mute status for. Defaults to `Master`.
  @param completion A completion block which returns the parsed response, or an
  */
-- (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion;
+- (void)muteWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(UPPResponseBlock)completion;
 
 /**
  Set mute status for a specific channel
@@ -33,7 +35,7 @@
  @param success    A block which returns the success state of the call, along
      with an error object if the call was unsuccessful.
  */
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock;
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(UPPSuccessBlock)successBlock;
 
 
 #pragma mark - Volume
@@ -50,7 +52,7 @@
      `Master`.
  @param completion A completion block which returns the parsed response, or an
  */
-- (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion;
+- (void)volumeWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(UPPResponseBlock)completion;
 
 /**
  Set volume for a specific channel
@@ -62,6 +64,8 @@
  @param success    An optional block which returns the success state of the call,
       along with an error object if the call was unsuccessful.
  */
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock;
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(UPPSuccessBlock)successBlock;
+
+NS_ASSUME_NONNULL_END
 
 @end

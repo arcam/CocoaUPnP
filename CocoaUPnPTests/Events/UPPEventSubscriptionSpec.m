@@ -95,7 +95,7 @@ describe(@"UPPEventSubscription", ^{
 
         it(@"should tell manager to unsubscribe when no observers are left", ^{
             id mockManager = OCMClassMock([UPPEventSubscriptionManager class]);
-            OCMExpect([mockManager unsubscribe:sut completion:nil]);
+            OCMExpect([mockManager unsubscribe:sut completion:[OCMArg any]]);
             sut.manager = mockManager;
 
             [sut removeEventObserver:mockObserver];
@@ -202,8 +202,7 @@ describe(@"UPPEventSubscription", ^{
 
         [sut informObserversOfEvent:event];
 
-        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
-        OCMVerifyAll(mockObserver);
+        OCMVerifyAllWithDelay(mockObserver, 5.0);
     });
 
     it(@"should invalidate all timers", ^{

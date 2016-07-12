@@ -10,7 +10,7 @@
  @param error    An optional `NSError` which is returned in the event of parse
                  failure
  */
-typedef void(^Response)(NSDictionary *response, NSError *error);
+typedef void(^Response)(NSDictionary * _Nullable response, NSError * _Nullable error);
 
 /**
  This class is responsible for the initial parsing of SOAP responses
@@ -23,6 +23,6 @@ typedef void(^Response)(NSDictionary *response, NSError *error);
  @param responseBlock A completion block returning either a `UPPDevice` object
  or an `NSError` object
  */
-- (void)parseWithResponse:(Response)responseBlock;
+- (void)parseWithResponse:(nonnull Response)responseBlock;
 
 @end

@@ -1,8 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-plugin 'slather'
-
 platform :ios, '7.0'
-#inhibit_all_warnings!
 
 target 'Example' do
   pod 'CocoaUPnP', :path => '../CocoaUPnP.podspec'

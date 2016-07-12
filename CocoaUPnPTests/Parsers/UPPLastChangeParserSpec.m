@@ -53,6 +53,8 @@ describe(@"UPPLastChangeParser", ^{
         });
     });
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     it(@"should return an error when no data set", ^{
         waitUntil(^(DoneCallback done) {
             [UPPLastChangeParser parseData:nil completion:^(NSDictionary *event, NSError *error) {
@@ -63,6 +65,7 @@ describe(@"UPPLastChangeParser", ^{
             }];
         });
     });
+#pragma clang diagnostic pop
 });
 
 SpecEnd

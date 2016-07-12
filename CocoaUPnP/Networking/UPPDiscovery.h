@@ -21,7 +21,7 @@
  @param discovery The discovery instance calling the protocol method.
  @param device    The device that was found.
  */
-- (void)discovery:(UPPDiscovery *)discovery didFindDevice:(UPPBasicDevice *)device;
+- (void)discovery:(nonnull UPPDiscovery *)discovery didFindDevice:(nonnull UPPBasicDevice *)device;
 
 /**
  Inform delegate that a UPnP device was removed, usually by the device sending a
@@ -30,7 +30,7 @@
  @param discovery The discovery instance calling the protocol method.
  @param device    The device that was removed.
  */
-- (void)discovery:(UPPDiscovery *)discovery didRemoveDevice:(UPPBasicDevice *)device;
+- (void)discovery:(nonnull UPPDiscovery *)discovery didRemoveDevice:(nonnull UPPBasicDevice *)device;
 @end
 
 /**
@@ -40,34 +40,21 @@
 @interface UPPDiscovery : NSObject <SSDPServiceBrowserDelegate>
 
 /**
- A parser which will parse headers as they come in.
- */
-@property (strong, nonatomic) UPPDeviceParser *parser;
-
-/**
- The object who wished to be informed of add/remove device notices.
- @warning This method is deprecated and will go away in a future release.
- @see addBrowserObserver:
- @see removeBrowserObserver:
- */
-@property (weak, nonatomic) id <UPPDiscoveryDelegate> delegate DEPRECATED_ATTRIBUTE;
-
-/**
  An instance of `SSDPServiceBrowser`. Lazily instantiated for better testing.
  */
-@property (strong, nonatomic) SSDPServiceBrowser *browser;
+@property (strong, nonatomic, nonnull) SSDPServiceBrowser *browser;
 
 /**
  Creates and returns a common shared instance.
  */
-+ (UPPDiscovery *)sharedInstance;
++ (nonnull UPPDiscovery *)sharedInstance;
 
 /**
  Start searching for services matching the service type
 
  @param services The service type to search for. For example, `ssdp:all`
  */
-- (void)startBrowsingForServices:(NSString *)services;
+- (void)startBrowsingForServices:(nullable NSString *)services;
 
 /**
  Leave SSDP group and shut down discovery service
@@ -77,20 +64,20 @@
 /**
  Return an array of all currently known devices.
  */
-- (NSArray *)availableDevices;
+- (nonnull NSArray *)availableDevices;
 
 /**
  Add an observer to be notified as devices are discovered or removed.
 
  @param observer An observer conforming to `UPPDiscoveryDelegate`.
  */
-- (void)addBrowserObserver:(id<UPPDiscoveryDelegate>)observer;
+- (void)addBrowserObserver:(nonnull id<UPPDiscoveryDelegate>)observer;
 
 /**
  Remove an observer from being notified as devices are discovered or removed.
 
  @param observer An observer conforming to `UPPDiscoveryDelegate`.
  */
-- (void)removeBrowserObserver:(id<UPPDiscoveryDelegate>)observer;
+- (void)removeBrowserObserver:(nonnull id<UPPDiscoveryDelegate>)observer;
 
 @end

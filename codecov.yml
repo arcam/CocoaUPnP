@@ -1,5 +1,6 @@
-ignore:
-  - "Example/*"
-  - "CocoaUPnPTests/*"
-  - "../*"
+coverage:
+  ignore:
+    - "Example/*"
+    - "CocoaUPnPTests/*"
+    - "../*"
 

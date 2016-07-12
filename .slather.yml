@@ -1,5 +1,5 @@
 coverage_service: cobertura_xml
-workspace: Example/Example.xcworkspace
+xcodeproj: Example/Example.xcodeproj
 scheme: ExampleTests
 source_directory: CocoaUPnP
 ignore:

@@ -3,6 +3,9 @@
 
 #import <CocoaUPnP/CocoaUPnP.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import "TestHelpers.h"
 
 SpecBegin(UPPDeviceParser)
 

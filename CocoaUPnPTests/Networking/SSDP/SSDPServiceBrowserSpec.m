@@ -1,8 +1,13 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import <CocoaUPnP/SSDPServiceBrowser.h>
-#import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
+@import CocoaUPnP;
+@import CocoaUPnP.Private;
+
+#import <CocoaAsyncSocket/CocoaAsyncSocket.h>
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import <OCMock/OCMock.h>
 
 // Expose private methods
 @interface SSDPServiceBrowser ()
@@ -78,7 +83,7 @@ describe(@"SSDPServiceBrowser", ^{
 
                 // We don't really care about what the methods parameters are,
                 // just need to state we expect it to be called.
-                [[[strictMock expect] ignoringNonObjectArgs] sendData:[OCMArg any]
+                [(GCDAsyncUdpSocket *)[[strictMock expect] ignoringNonObjectArgs] sendData:[OCMArg any]
                                                                toHost:[OCMArg any]
                                                                  port:123
                                                           withTimeout:123
@@ -103,7 +108,7 @@ describe(@"SSDPServiceBrowser", ^{
                                           [browser _userAgentString]];
                 NSData *data = [searchHeader dataUsingEncoding:NSUTF8StringEncoding];
 
-                OCMExpect([mockMulticastSocket sendData:data
+                OCMExpect([(GCDAsyncUdpSocket *)mockMulticastSocket sendData:data
                                                  toHost:@"239.255.255.250"
                                                    port:1900
                                             withTimeout:-1
@@ -127,7 +132,7 @@ describe(@"SSDPServiceBrowser", ^{
                                           [browser _userAgentString]];
                 NSData *data = [searchHeader dataUsingEncoding:NSUTF8StringEncoding];
 
-                OCMExpect([mockMulticastSocket sendData:data
+                OCMExpect([(GCDAsyncUdpSocket *)mockMulticastSocket sendData:data
                                                  toHost:@"239.255.255.250"
                                                    port:1900
                                             withTimeout:-1

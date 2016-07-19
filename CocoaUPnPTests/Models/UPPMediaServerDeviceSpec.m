@@ -2,6 +2,8 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <CocoaUPnP/CocoaUPnP.h>
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
 
 SpecBegin(UPPMediaServerDevice)
 

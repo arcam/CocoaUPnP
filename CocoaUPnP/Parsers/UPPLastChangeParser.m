@@ -2,7 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPLastChangeParser.h"
-#import "Ono.h"
+#import <Ono/Ono.h>
 #import "UPPError.h"
 #import "UPPMediaItemParser.h"
 
@@ -47,7 +47,7 @@
             if (value.length == 0) {
                 value = [element stringValue];
             }
-            
+
             if (tag && value) {
                 responseDictionary[tag] = value;
             }

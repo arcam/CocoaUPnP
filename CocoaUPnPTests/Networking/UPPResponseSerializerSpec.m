@@ -1,7 +1,11 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
+#import <AFNetworking/AFNetworking.h>
 #import <CocoaUPnP/CocoaUPnP.h>
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
+#import "TestHelpers.h"
 
 SpecBegin(UPPResponseSerializer)
 

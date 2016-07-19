@@ -3,6 +3,9 @@
 
 #import <CocoaUPnP/CocoaUPnP.h>
 #import "TestHelpers.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import "TestHelpers.h"
 
 static UPPMediaItem * CreateMediaItem() {
     UPPMediaItem *item = [[UPPMediaItem alloc] init];

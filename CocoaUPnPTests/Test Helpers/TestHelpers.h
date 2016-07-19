@@ -11,4 +11,4 @@
  *
  *  @return Returns `NSData` with contents of file
  */
-NSData *(^LoadDataFromXML)(NSString *, Class);
+NSData *LoadDataFromXML(NSString *filename, Class aClass);

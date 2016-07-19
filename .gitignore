@@ -42,3 +42,5 @@ docs/
 # Fastlane
 fastlane/report.xml
 fastlane/test_output
+Carthage
+.DS_Store

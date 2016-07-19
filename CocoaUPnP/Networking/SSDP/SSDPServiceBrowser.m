@@ -22,9 +22,11 @@
 //  Expanded for CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 //  Copyright 2015 Arcam. See LICENSE file.
 
+@import UIKit;
+
 #import "SSDPServiceBrowser.h"
 
-#import "GCDAsyncUdpSocket.h"
+#import <CocoaAsyncSocket/CocoaAsyncSocket.h>
 #import "SSDPService.h"
 
 #import <ifaddrs.h>
@@ -139,8 +141,8 @@ typedef enum : NSUInteger {
 {
     if (!_unicastSocket) {
         _unicastSocket = [[GCDAsyncUdpSocket alloc]
-                            initWithDelegate:self
-                            delegateQueue:dispatch_get_main_queue()];
+                          initWithDelegate:self
+                          delegateQueue:dispatch_get_main_queue()];
     }
     return _unicastSocket;
 }

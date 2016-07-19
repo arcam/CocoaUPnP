@@ -1,9 +1,11 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
-#import "Specta.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
 #import <CocoaUPnP/CocoaUPnP.h>
 #import <Ono/Ono.h>
+#import "TestHelpers.h"
 
 SpecBegin(UPPMediaItemParser)
 

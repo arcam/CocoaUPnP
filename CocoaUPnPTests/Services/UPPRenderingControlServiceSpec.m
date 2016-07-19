@@ -3,6 +3,10 @@
 
 #import <CocoaUPnP/CocoaUPnP.h>
 #import "NetworkTestHelpers.h"
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import "TestHelpers.h"
+#import <OCMock/OCMock.h>
 
 SpecBegin(UPPRenderingControlService)
 

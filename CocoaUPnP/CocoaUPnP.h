@@ -3,6 +3,12 @@
 
 #import <Foundation/Foundation.h>
 
+//! Project version number for CocoaUPnP.
+FOUNDATION_EXPORT double CocoaUPnPVersionNumber;
+
+//! Project version string for CocoaUPnP.
+FOUNDATION_EXPORT const unsigned char CocoaUPnPVersionString[];
+
 // Events
 #import "UPPEventServer.h"
 #import "UPPEventSubscription.h"
@@ -35,7 +41,7 @@
 #import "UPPBaseParser.h"
 #import "UPPDeviceParser.h"
 #import "UPPErrorParser.h"
-#import "UPPLastChangeParser.h"
+//#import "UPPLastChangeParser.h"
 #import "UPPMediaItemParser.h"
 #import "UPPResponseParser.h"
 

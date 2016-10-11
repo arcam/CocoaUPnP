@@ -48,7 +48,19 @@
     NSMutableString *string = [NSMutableString string];
 
     [parameters enumerateKeysAndValuesUsingBlock:^(id key, id value, NSUInteger idx, BOOL *stop) {
-        [string appendFormat:@"<%@>%@</%@>", key, value, key];
+        if ([value isKindOfClass:[NSString class]]) {
+            NSString *v = value;
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"&(?!(lt|gt|apos|quot))(amp;)?" options:NSRegularExpressionCaseInsensitive error:nil];
+            v = [regex stringByReplacingMatchesInString:v options:0 range:NSMakeRange(0, [v length]) withTemplate:@"&amp;"];
+            v = [v stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+            v = [v stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+            v = [v stringByReplacingOccurrencesOfString:@"'" withString:@"&apos;"];
+            v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
+            [string appendFormat:@"<%@>%@</%@>", key, v, key];
+        }
+        else {
+            [string appendFormat:@"<%@>%@</%@>", key, value, key];
+        }
     }];
 
     return [string copy];

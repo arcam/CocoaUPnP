@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param channel    The channel to retrieve mute status for. Defaults to `Master`.
  @param completion A completion block which returns the parsed response, or an
  */
-- (void)muteWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(UPPResponseBlock)completion;
+- (void)muteWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(nullable UPPResponseBlock)completion;
 
 /**
  Set mute status for a specific channel
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    A block which returns the success state of the call, along
      with an error object if the call was unsuccessful.
  */
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(UPPSuccessBlock)successBlock;
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)successBlock;
 
 
 #pragma mark - Volume
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
      `Master`.
  @param completion A completion block which returns the parsed response, or an
  */
-- (void)volumeWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(UPPResponseBlock)completion;
+- (void)volumeWithInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel completion:(nullable UPPResponseBlock)completion;
 
 /**
  Set volume for a specific channel
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
       along with an error object if the call was unsuccessful.
  */
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(UPPSuccessBlock)successBlock;
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)successBlock;
 
 NS_ASSUME_NONNULL_END
 

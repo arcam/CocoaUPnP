@@ -41,7 +41,7 @@
  @param completion A block to run when the subscription call finishes. Returns a
  BOOL corresponding to wether the call succeeded or failed.
  */
-- (void)subscribeObserver:(nonnull id<UPPEventSubscriptionDelegate>)observer toService:(nonnull UPPBasicService *)service completion:(nonnull void(^)(UPPEventSubscription * _Nullable subscription, NSError * _Nullable error))completion;
+- (void)subscribeObserver:(nonnull id<UPPEventSubscriptionDelegate>)observer toService:(nonnull UPPBasicService *)service completion:(nullable void(^)(UPPEventSubscription * _Nullable subscription, NSError * _Nullable error))completion;
 
 /**
  Renew a current subscription.

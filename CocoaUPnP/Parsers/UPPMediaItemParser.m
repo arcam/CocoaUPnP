@@ -16,6 +16,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 {
     NSParameterAssert(results);
     NSParameterAssert(completion);
+    if (!results || !completion) { return; }
 
     NSString *resultsString = results[UPnPXMLResultsKey];
 
@@ -46,7 +47,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
-    NSParameterAssert(document);
+    if (!document) { return @[]; }
 
     __block NSMutableArray *items = [NSMutableArray array];
     [document enumerateElementsWithXPath:@"/*[local-name() = 'DIDL-Lite']/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {

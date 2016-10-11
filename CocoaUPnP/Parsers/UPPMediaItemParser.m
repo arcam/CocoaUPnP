@@ -84,7 +84,15 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
         // Optional parameters. Ignore any missing keys.
         item.albumTitle = [[element firstChildWithTag:@"album"] stringValueOrNil];
-        item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+
+        NSString *albumArtist = [[element firstChildWithTag:@"albumArtist"] stringValueOrNil];
+
+        if (albumArtist) {
+            item.artist = albumArtist;
+        } else {
+            item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+        }
+
         item.date = [[element firstChildWithTag:@"date"] stringValueOrNil];
         item.genre = [[element firstChildWithTag:@"genre"] stringValueOrNil];
         item.trackNumber = [[element firstChildWithTag:@"originalTrackNumber"] stringValueOrNil];

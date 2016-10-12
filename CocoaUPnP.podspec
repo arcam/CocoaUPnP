@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   s.dependency 'CocoaAsyncSocket', '~> 7.5'
   s.dependency 'Ono', '~> 1.2'
   s.dependency 'AFNetworking', '~> 3'
-  s.dependency 'GCDWebServer', '~> 3.2'
+  s.dependency 'GCDWebServer', '~> 3'
 end

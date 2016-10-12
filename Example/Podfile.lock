@@ -17,10 +17,10 @@ PODS:
   - CocoaAsyncSocket (7.5.0):
     - CocoaAsyncSocket/GCD (= 7.5.0)
   - CocoaAsyncSocket/GCD (7.5.0)
-  - CocoaUPnP (0.2.1):
+  - CocoaUPnP (1.0.0):
     - AFNetworking (~> 3)
     - CocoaAsyncSocket (~> 7.5)
-    - GCDWebServer (~> 3.2)
+    - GCDWebServer (~> 3)
     - Ono (~> 1.2)
   - Expecta (1.0.5)
   - GCDWebServer (3.3.3):
@@ -57,7 +57,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CocoaAsyncSocket: 3baeb1ddd969f81cf9fca81053ae49ef2d1cbbfa
-  CocoaUPnP: d32c96e6b73147ebe5129205b7c741db71af14b4
+  CocoaUPnP: ed86ab5200fb18e4c9d3a62fc6eed643ba66bfc3
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
-PODFILE CHECKSUM: 9e1772380f1e27a384e369f809fb813dd704bcc4
+PODFILE CHECKSUM: 8a391c9b7fffbc070de1991f51811553e05842ae
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.0.rc.3

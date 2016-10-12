@@ -57,6 +57,8 @@ describe(@"SSDPServiceBrowser", ^{
                 OCMExpect([mockMulticastSocket isClosed]).andReturn(YES);
                 OCMExpect([mockMulticastSocket setIPv6Enabled:NO]);
 
+                OCMExpect([mockMulticastSocket enableReusePort:YES error:[OCMArg anyObjectRef]]).andReturn(YES);
+
                 OCMExpect([mockMulticastSocket bindToAddress:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(YES);
 
                 OCMExpect([mockMulticastSocket
@@ -143,6 +145,7 @@ describe(@"SSDPServiceBrowser", ^{
             it(@"should get setup", ^{
                 OCMExpect([mockUnicastSocket isClosed]).andReturn(YES);
                 OCMExpect([mockUnicastSocket setIPv6Enabled:NO]);
+                OCMExpect([mockUnicastSocket enableReusePort:YES error:[OCMArg anyObjectRef]]).andReturn(YES);
                 OCMExpect([mockUnicastSocket bindToPort:1900 error:[OCMArg anyObjectRef]]).andReturn(YES);
                 OCMExpect([mockUnicastSocket joinMulticastGroup:@"239.255.255.250" error:[OCMArg anyObjectRef]]).andReturn(YES);
                 OCMExpect([mockUnicastSocket beginReceiving:[OCMArg anyObjectRef]]).andReturn(YES);

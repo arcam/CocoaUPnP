@@ -11,7 +11,7 @@
 
  @return Returns a UPPParamaters object containing `InstanceID: 0`.
  */
-UPPParameters *(^InstanceParams)(void);
+extern UPPParameters *(^InstanceParams)(void);
 
 /**
  Setup an expectation for a failed network call, and return stubbed error
@@ -20,15 +20,15 @@ UPPParameters *(^InstanceParams)(void);
  @param id           The session manager to set the expectation on
  @param NSString     The URL the message is posted to
  */
-void (^ExpectAndReturnErrorWithParams)(NSDictionary *, id, NSString *);
+extern void (^ExpectAndReturnErrorWithParams)(NSDictionary *, id, NSString *);
 
 /**
  Setup an expectation for a successful network call, passing in a session
  manager, a dictionary of parameters, and a URL.
  */
-void (^ExpectGetWithParams)(id, NSDictionary *, NSString *);
+extern void (^ExpectGetWithParams)(id, NSDictionary *, NSString *);
 
 /**
  Reject any network call, passing in a session manager and a URL.
  */
-void (^RejectGetWithURL)(id, NSString *);
+extern void (^RejectGetWithURL)(id, NSString *);

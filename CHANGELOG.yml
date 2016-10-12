@@ -1,8 +1,0 @@
-releases:
-  - version: 0.1.1
-    notes:
-      - Prevent main app from launching during testing
-      - Fix an issue with subscriptions silently breaking after backgrounding
-  - version: 0.1.0
-    notes:
-      - Initial release

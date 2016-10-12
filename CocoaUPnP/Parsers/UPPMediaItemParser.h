@@ -5,7 +5,7 @@
 
 @class ONOXMLDocument;
 
-extern NSString * const UPnPXMLResultsKey;
+extern NSString * _Nonnull const UPnPXMLResultsKey;
 
 /**
  This class is solely responsible for parsing an XML string which contains an
@@ -20,7 +20,7 @@ extern NSString * const UPnPXMLResultsKey;
  @param completion A block which returns a dictionary of parsed XML, or an
  error if the parsing failed.
  */
-+ (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion;
++ (void)parseResults:(nonnull NSDictionary *)results withCompletion:(nonnull void (^)(NSDictionary * _Nullable results, NSError * _Nullable error))completion;
 
 /**
  Parse items from an XML description.
@@ -29,6 +29,6 @@ extern NSString * const UPnPXMLResultsKey;
 
  @return An array of media items.
  */
-+ (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document;
++ (nonnull NSArray *)parseItemsInDocument:(nonnull ONOXMLDocument *)document;
 
 @end

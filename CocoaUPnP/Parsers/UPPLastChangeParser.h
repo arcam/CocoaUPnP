@@ -16,6 +16,6 @@
  @param completion A block which returns a dictionary of parsed XML, or an
  error if the parsing failed.
  */
-+ (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
++ (void)parseData:(nonnull NSData *)data completion:(nonnull void (^)(NSDictionary * _Nullable event, NSError * _Nullable error))completion;
 
 @end

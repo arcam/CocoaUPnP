@@ -20,9 +20,10 @@ lane :bump do
     new_version = version_bump_podspec(path: path, bump_type: bump_type) # get new bumped version
     # I'd really like something that generates a CHANGELOG.md from YAML right here
     git_commit(path: path, message: "Version Bump by Fastlane") # commit the bumped podspec
+    puts "New version: #{new_version} 👌"
     push_to_git_remote
   else
-    puts "Doing nothing..."
+    puts "Doing nothing... 🙈"
   end
 end
 

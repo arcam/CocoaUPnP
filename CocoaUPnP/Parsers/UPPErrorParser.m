@@ -9,9 +9,8 @@
 
 + (NSError *)parseErrorXML:(NSData *)data
 {
-    if (!data) {
-        return nil;
-    }
+    NSParameterAssert(data);
+    if (!data) { return nil; }
 
     NSError *error;
     ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:data

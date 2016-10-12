@@ -3,6 +3,8 @@
 
 #import "UPPBasicService.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class contains all the network calls needed for the UPnP [AVTransport1
  service](http://upnp.org/specs/av/UPnP-av-ConnectionManager-v1-Service.pdf).
@@ -58,5 +60,7 @@
      an error if unsuccessful
  */
 - (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion;
+
+NS_ASSUME_NONNULL_END
 
 @end

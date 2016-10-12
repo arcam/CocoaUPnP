@@ -17,7 +17,7 @@
  @param event A dictionary representation of the XML sent by the subscribed
  service.
  */
-- (void)eventRecieved:(NSDictionary *)event;
+- (void)eventRecieved:(nonnull NSDictionary *)event;
 @end
 
 
@@ -37,39 +37,39 @@
 /**
  The subscription identifier returned by the service.
  */
-@property (copy, nonatomic, readonly) NSString *subscriptionID;
+@property (copy, nonatomic, readonly, nullable) NSString *subscriptionID;
 
 /**
  The date at which the subscription is expired by the service.
  */
-@property (strong, nonatomic, readonly) NSDate *expiryDate;
+@property (strong, nonatomic, readonly, nullable) NSDate *expiryDate;
 
 /**
  The URL where the service expects subscription calls to be made.
  */
-@property (strong, nonatomic, readonly) NSURL *eventSubscriptionURL;
+@property (strong, nonatomic, readonly, nonnull) NSURL *eventSubscriptionURL;
 
 /**
  A timer which fires 30 seconds before the subscription is due to expire, which
  triggers the subscription's manager to resubscribe.
  */
-@property (strong, nonatomic, readonly) NSTimer *renewTimer;
+@property (strong, nonatomic, readonly, nullable) NSTimer *renewTimer;
 
 /**
  A timer which fires at the subscriptions expiration date, which triggers the
  subscription's manager to attempt to subscribe again or scrap the subscription.
  */
-@property (strong, nonatomic, readonly) NSTimer *expirationTimer;
+@property (strong, nonatomic, readonly, nullable) NSTimer *expirationTimer;
 
 /**
  The manager responsible for making the subscription network calls.
  */
-@property (weak, nonatomic) UPPEventSubscriptionManager *manager;
+@property (weak, nonatomic, nullable) UPPEventSubscriptionManager *manager;
 
 /**
  The unique name of the service that the subscription applies to
  */
-@property (copy, nonatomic, readonly) NSString *uniqueServiceName;
+@property (copy, nonatomic, readonly, nonnull) NSString *uniqueServiceName;
 
 
 #pragma mark - Initialisation
@@ -89,7 +89,7 @@
 
  @return Returns a new subscription object.
  */
-+ (instancetype)subscriptionWithSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName;
++ (nonnull instancetype)subscriptionWithSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)uniqueServiceName;
 
 /**
  Convenience initialiser which returns a new subscription object when given a
@@ -104,7 +104,7 @@
 
  @return Returns a new subscription object.
  */
-+ (instancetype)subscriptionWithID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate eventSubscriptionURL:(NSURL *)eventSubscriptionURL serviceIdentifier:(NSString *)uniqueServiceName;
++ (nonnull instancetype)subscriptionWithID:(nullable NSString *)subscriptionID expiryDate:(nonnull NSDate *)expiryDate eventSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)uniqueServiceName;
 
 /**
  Update the object after renewing a subscription.
@@ -114,7 +114,7 @@
  @param expiryDate     The date which the subscription expires. Decided by the
  UPnP service currently being subscribed to.
  */
-- (void)updateSubscriptionID:(NSString *)subscriptionID expiryDate:(NSDate *)expiryDate;
+- (void)updateSubscriptionID:(nonnull NSString *)subscriptionID expiryDate:(nonnull NSDate *)expiryDate;
 
 
 #pragma mark - Events
@@ -128,7 +128,7 @@
 
  @param observer An observer class conforming to `UPPEventSubscriptionDelegate`
  */
-- (void)addEventObserver:(id <UPPEventSubscriptionDelegate>)observer;
+- (void)addEventObserver:(nonnull id <UPPEventSubscriptionDelegate>)observer;
 
 /**
  Remove a previously added observer, once you no longer wish to be notified of
@@ -136,19 +136,19 @@
 
  @param observer An observer class conforming to `UPPEventSubscriptionDelegate`
  */
-- (void)removeEventObserver:(id <UPPEventSubscriptionDelegate>)observer;
+- (void)removeEventObserver:(nonnull id <UPPEventSubscriptionDelegate>)observer;
 
 /**
  An array of event observers.
  */
-- (NSArray *)eventObservers;
+- (nonnull NSArray *)eventObservers;
 
 /**
  Inform all observers of a new event.
 
  @param event A dictionary containing parsed XML related to the event.
  */
-- (void)informObserversOfEvent:(NSDictionary *)event;
+- (void)informObserversOfEvent:(nonnull NSDictionary *)event;
 
 
 #pragma mark - Background Helpers

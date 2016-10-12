@@ -12,6 +12,7 @@ describe(@"SSDPServiceBrowser", ^{
     __block SSDPServiceBrowser *browser;
     __block id mockMulticastSocket;
     __block id mockDelegate;
+    __block NSData *address;
 
     beforeEach(^{
         browser = [[SSDPServiceBrowser alloc] init];
@@ -20,6 +21,8 @@ describe(@"SSDPServiceBrowser", ^{
 
         mockDelegate = OCMProtocolMock(@protocol(SSDPServiceBrowserDelegate));
         browser.delegate = mockDelegate;
+
+        address = [NSData data];
     });
 
     afterEach(^{
@@ -61,7 +64,7 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:nil didReceiveData:data fromAddress:nil withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
@@ -98,7 +101,7 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:nil didReceiveData:data fromAddress:nil withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
@@ -126,10 +129,10 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:nil didReceiveData:data fromAddress:nil withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
-        OCMVerifyAllWithDelay(mockDelegate, 0.5);
+        OCMVerifyAllWithDelay(mockDelegate, 5.0);
     });
 
     it(@"should inform delegate when socket closes", ^{
@@ -138,7 +141,7 @@ describe(@"SSDPServiceBrowser", ^{
             return [obj isEqual:browser];
         }] didNotStartBrowsingForServices:mockError]);
 
-        [browser udpSocketDidClose:nil withError:mockError];
+        [browser udpSocketDidClose:mockMulticastSocket withError:mockError];
 
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
     });

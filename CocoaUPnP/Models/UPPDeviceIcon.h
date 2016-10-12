@@ -11,26 +11,26 @@
 /**
  The mime type of the icon
  */
-@property (copy, nonatomic) NSString *mimetype;
+@property (copy, nonatomic, nonnull) NSString *mimetype;
 
 /**
  The width in pixels of the icon
  */
-@property (copy, nonatomic) NSNumber *width;
+@property (copy, nonatomic, nonnull) NSNumber *width;
 
 /**
  The height in pixels of the icon
  */
-@property (copy, nonatomic) NSNumber *height;
+@property (copy, nonatomic, nonnull) NSNumber *height;
 
 /**
  The colour depth of the icon
  */
-@property (copy, nonatomic) NSNumber *depth;
+@property (copy, nonatomic, nonnull) NSNumber *depth;
 
 /**
  The URL of the icon
  */
-@property (copy, nonatomic) NSString *url;
+@property (copy, nonatomic, nonnull) NSString *url;
 
 @end

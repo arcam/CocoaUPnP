@@ -12,26 +12,26 @@
  UPnP compliant service type. E.g.
  `urn:schemas-upnp-org:service:RenderingControl:1`
  */
-@property (copy, nonatomic) NSString *serviceType;
+@property (copy, nonatomic, nonnull) NSString *serviceType;
 
 /**
  Service identifier. E.g. `urn:upnp-org:serviceId:RenderingControl`
  */
-@property (copy, nonatomic) NSString *serviceId;
+@property (copy, nonatomic, nonnull) NSString *serviceId;
 
 /**
  Service description URL path
  */
-@property (copy, nonatomic) NSString *descriptionURL;
+@property (copy, nonatomic, nonnull) NSString *descriptionURL;
 
 /**
  Control URL path
  */
-@property (copy, nonatomic) NSString *controlURL;
+@property (copy, nonatomic, nonnull) NSString *controlURL;
 
 /**
  Event subscription URL path
  */
-@property (copy, nonatomic) NSString *eventSubURL;
+@property (copy, nonatomic, nonnull) NSString *eventSubURL;
 
 @end

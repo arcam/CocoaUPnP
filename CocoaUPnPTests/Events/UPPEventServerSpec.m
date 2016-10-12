@@ -44,7 +44,7 @@ describe(@"UPPEventServer", ^{
         });
 
         it(@"should start up the server on the correct port", ^{
-            OCMExpect([mockServer startWithPort:54123 bonjourName:nil]);
+            OCMExpect([mockServer startWithPort:UPPEventServerPort bonjourName:nil]);
 
             [sut startServer];
 

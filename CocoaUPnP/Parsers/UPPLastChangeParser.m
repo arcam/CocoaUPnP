@@ -10,6 +10,7 @@
 
 + (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
 {
+    NSParameterAssert(completion);
     if (!completion) { return; }
 
     if (!data) {
@@ -25,7 +26,7 @@
     }
 
     ONOXMLElement *element = [document firstChildWithXPath:@"/e:propertyset/e:property/LastChange"];
-    __block NSMutableDictionary *responseDictionary;
+    __block NSMutableDictionary *responseDictionary = [NSMutableDictionary dictionary];
 
     ONOXMLDocument *lastChange = [ONOXMLDocument XMLDocumentWithString:[element stringValue] encoding:NSUTF8StringEncoding error:nil];
 
@@ -33,9 +34,6 @@
     [lastChange definePrefix:@"a" forDefaultNamespace:namespace];
 
     [lastChange enumerateElementsWithXPath:@"//a:Event/a:InstanceID/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-        if (!responseDictionary) {
-            responseDictionary = [NSMutableDictionary dictionary];
-        }
         NSString *tag = element.tag;
         NSString *value = [element valueForAttribute:@"val"];
 

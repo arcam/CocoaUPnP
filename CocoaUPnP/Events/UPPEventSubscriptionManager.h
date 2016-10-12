@@ -15,13 +15,13 @@
 /**
  An event server instance for service event callbacks.
  */
-@property (strong, nonatomic) UPPEventServer *eventServer;
+@property (strong, nonatomic, nullable) UPPEventServer *eventServer;
 
 /**
  @return A shared event subscription manager instance, with the `NSURLSession`
  set to `[NSURLSession sharedSession]`.
  */
-+ (instancetype)sharedManager;
++ (nonnull instancetype)sharedManager;
 
 /**
  Instantiate a new instance of event subscription manager with an NSURLSession.
@@ -30,7 +30,7 @@
 
  @return A newly allocated and initialised subscription manager instance.
  */
-- (instancetype)initWithSession:(NSURLSession *)session;
+- (nonnull instancetype)initWithSession:(nonnull NSURLSession *)session;
 
 /**
  Subscribe an observer to UPnP service events.
@@ -41,7 +41,7 @@
  @param completion A block to run when the subscription call finishes. Returns a
  BOOL corresponding to wether the call succeeded or failed.
  */
-- (void)subscribeObserver:(id<UPPEventSubscriptionDelegate>)observer toService:(UPPBasicService *)service completion:(void(^)(UPPEventSubscription *subscription, NSError *error))completion;
+- (void)subscribeObserver:(nonnull id<UPPEventSubscriptionDelegate>)observer toService:(nonnull UPPBasicService *)service completion:(nullable void(^)(UPPEventSubscription * _Nullable subscription, NSError * _Nullable error))completion;
 
 /**
  Renew a current subscription.
@@ -51,7 +51,7 @@
  Returns the new subscription identifier, the new expiry date, or if renewing
  failed, an error object.
  */
-- (void)renewSubscription:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
+- (void)renewSubscription:(nonnull UPPEventSubscription *)subscription completion:(nonnull void(^)(NSString * _Nullable subscriptionID, NSDate * _Nullable expiryDate, NSError * _Nullable error))completion;
 
 /**
  Renew an expired subscription. This differs from renewing an existing
@@ -63,7 +63,7 @@
  Returns the new subscription identifier, the new expiry date, or if renewing
  failed, an error object.
  */
-- (void)subscriptionExpired:(UPPEventSubscription *)subscription completion:(void(^)(NSString *subscriptionID, NSDate *expiryDate, NSError *error))completion;
+- (void)subscriptionExpired:(nonnull UPPEventSubscription *)subscription completion:(nonnull void(^)(NSString * _Nullable subscriptionID, NSDate * _Nullable expiryDate, NSError * _Nullable error))completion;
 
 /**
  Unsubscribe an observer from a service. If there are no more observers, then
@@ -75,7 +75,7 @@
  @param completion A block to run when the subscription call finishes. Returns a
  BOOL corresponding to whether the call succeeded or failed.
  */
-- (void)removeObserver:(id<UPPEventSubscriptionDelegate>)observer fromService:(UPPBasicService *)service completion:(void(^)(BOOL success))completion;
+- (void)removeObserver:(nonnull id<UPPEventSubscriptionDelegate>)observer fromService:(nonnull UPPBasicService *)service completion:(nullable void(^)(BOOL success))completion;
 
 /**
  Unsubscribe a specific subscription. Used internally, but may be useful for
@@ -85,7 +85,7 @@
  @param completion A block to run when the subscription call finishes. Returns a
  BOOL corresponding to whether the call succeeded or failed.
  */
-- (void)unsubscribe:(UPPEventSubscription *)subscription completion:(void(^)(BOOL success))completion;
+- (void)unsubscribe:(nonnull UPPEventSubscription *)subscription completion:(nullable void(^)(BOOL success))completion;
 
 /**
  Remove all subscriptions for an array of services. This is run when discovery
@@ -94,6 +94,6 @@
  @param services An array of `UPPBasicService` objects.
  @param deviceId The parent unique device name.
  */
-- (void)removeSubscriptionsForServices:(NSArray *)services deviceId:(NSString *)deviceId;
+- (void)removeSubscriptionsForServices:(nonnull NSArray *)services deviceId:(nonnull NSString *)deviceId;
 
 @end

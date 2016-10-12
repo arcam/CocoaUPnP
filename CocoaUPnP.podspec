@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CocoaUPnP"
-  s.version      = "0.2.2"
+  s.version      = "1.0.0"
   s.summary      = "A modern and well tested UPnP library which feature asynchronous network calls."
 
   s.description  = <<-DESC
@@ -17,14 +17,14 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/arcam/CocoaUPnP"
   s.license      = "MIT"
   s.author       = { "Paul Williamson" => "PaulW@arcam.co.uk" }
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/arcam/CocoaUPnP.git", :tag => s.version.to_s }
   s.source_files = "CocoaUPnP", "CocoaUPnP/**/*.{h,m}"
   s.requires_arc = true
   s.xcconfig     = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
-  s.dependency 'CocoaAsyncSocket', '~> 7.4'
+  s.dependency 'CocoaAsyncSocket', '~> 7.5'
   s.dependency 'Ono', '~> 1.2'
   s.dependency 'AFNetworking', '~> 3'
-  s.dependency 'GCDWebServer', '~> 3.2'
+  s.dependency 'GCDWebServer', '~> 3'
 end

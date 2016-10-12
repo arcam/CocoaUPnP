@@ -12,7 +12,7 @@
 
  @param error  If parsing fails, an `NSError` object is returned
  */
-typedef void(^CompletionBlock)(NSArray *devices, NSError *error);
+typedef void(^CompletionBlock)(NSArray * _Nullable devices, NSError * _Nullable error);
 
 /**
  This class defines an object whose sole responsibility is to parse a device
@@ -27,6 +27,6 @@ typedef void(^CompletionBlock)(NSArray *devices, NSError *error);
  @param completion A completion block returning either a `UPPDevice` object
  or an `NSError` object
  */
-+ (void)parseURL:(NSURL *)url withCompletion:(CompletionBlock)completion;
++ (void)parseURL:(nonnull NSURL *)url withCompletion:(nonnull CompletionBlock)completion;
 
 @end

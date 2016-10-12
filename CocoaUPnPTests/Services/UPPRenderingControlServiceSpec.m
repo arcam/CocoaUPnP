@@ -13,6 +13,7 @@ describe(@"UPPRenderingControlService", ^{
     __block NSString *url;
     __block NSString *instanceId;
     __block UPPResponseBlock noCompletion;
+    __block UPPSuccessBlock noSuccess;
 
     beforeEach(^{
         service = [[UPPRenderingControlService alloc] init];
@@ -30,6 +31,9 @@ describe(@"UPPRenderingControlService", ^{
         // We exit early for all GET requests that do not provide a completion
         // block, so explicity create an "empty" completion block.
         noCompletion = ^(NSDictionary *d, NSError *e) {};
+
+        // Same as above
+        noSuccess = ^(BOOL s, NSError *e) {};
     });
 
     describe(@"mute status", ^{
@@ -81,7 +85,7 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:YES
                   withInstanceID:instanceId
                          channel:channel
-                         success:nil];
+                         success:noSuccess];
 
                 [sessionManager verify];
             });
@@ -92,7 +96,7 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:YES
                   withInstanceID:instanceId
                          channel:channel
-                         success:nil];
+                         success:noSuccess];
 
                 [sessionManager verify];
             });
@@ -110,7 +114,7 @@ describe(@"UPPRenderingControlService", ^{
                 [service setMute:NO
                   withInstanceID:instanceId
                          channel:nil
-                         success:nil];
+                         success:noSuccess];
 
                 [sessionManager verify];
             });
@@ -165,7 +169,7 @@ describe(@"UPPRenderingControlService", ^{
                 [service setVolume:@1
                     withInstanceID:instanceId
                            channel:channel
-                           success:nil];
+                           success:noSuccess];
 
                 [sessionManager verify];
             });
@@ -176,7 +180,7 @@ describe(@"UPPRenderingControlService", ^{
                 [service setVolume:@1
                     withInstanceID:instanceId
                            channel:nil
-                           success:nil];
+                           success:noSuccess];
 
                 [sessionManager verify];
             });

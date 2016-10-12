@@ -10,9 +10,8 @@
 
 - (void)parseWithResponse:(Response)responseBlock
 {
-    if (!responseBlock) {
-        return;
-    }
+    NSParameterAssert(responseBlock);
+    if (!responseBlock) { return; }
 
     NSError *error = nil;
 

@@ -33,27 +33,27 @@
 /**
  The location of the service's description XML file
  */
-@property (readonly, nonatomic) NSURL *xmlLocation;
+@property (readonly, nonatomic, nullable) NSURL *xmlLocation;
 
 /**
  The UPnP service type of the device
  */
-@property (readonly, nonatomic) NSString *serviceType;
+@property (readonly, nonatomic, nullable) NSString *serviceType;
 
 /**
  The services unique service name
  */
-@property (readonly, nonatomic) NSString *uniqueServiceName;
+@property (readonly, nonatomic, nullable) NSString *uniqueServiceName;
 
 /**
  The server description
  */
-@property (readonly, nonatomic) NSString *server;
+@property (readonly, nonatomic, nullable) NSString *server;
 
 /**
  The services cache control max age
  */
-@property (readonly, nonatomic) NSNumber *cacheControlTime;
+@property (readonly, nonatomic, nullable) NSNumber *cacheControlTime;
 
 /**
  Intialize a new instance
@@ -63,6 +63,6 @@
  @return Returns a new `SSDPService` instance, populated from the headers
  dictionary
  */
-- (id)initWithHeaders:(NSDictionary *)headers;
+- (nonnull id)initWithHeaders:(nonnull NSDictionary *)headers;
 
 @end

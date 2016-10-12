@@ -17,6 +17,7 @@
 
 + (instancetype)mediaRendererWithURN:(NSString *)urn baseURL:(NSURL *)baseURL
 {
+    if (!urn || !baseURL) { return nil; }
     UPPMediaRendererDevice *device = [[UPPMediaRendererDevice alloc] init];
     device.deviceType = urn;
     device.baseURL = baseURL;

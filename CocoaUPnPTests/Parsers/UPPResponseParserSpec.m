@@ -47,18 +47,6 @@ describe(@"UPPResponseParser", ^{
             }];
         });
     });
-
-    it(@"should return early with no data", ^{
-        parser = [[UPPResponseParser alloc] initWithXMLData:nil];
-        waitUntil(^(DoneCallback done) {
-            [parser parseWithResponse:^(NSDictionary *response, NSError *error) {
-                expect(response).to.beNil();
-                expect(error).toNot.beNil();
-                expect(error.code).to.equal(UPPErrorCodeEmptyData);
-                done();
-            }];
-        });
-    });
 });
 
 SpecEnd

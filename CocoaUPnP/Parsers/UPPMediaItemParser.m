@@ -6,6 +6,7 @@
 #import "UPPMediaItem.h"
 #import "UPPMediaItemResource.h"
 #import "UPPError.h"
+#import "ONOXMLDocument+StringValueOrNil.h"
 
 NSString * const UPnPXMLResultsKey = @"Result";
 
@@ -13,6 +14,8 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (void)parseResults:(NSDictionary *)results withCompletion:(void (^)(NSDictionary *results, NSError *error))completion
 {
+    NSParameterAssert(results);
+    NSParameterAssert(completion);
     if (!results || !completion) { return; }
 
     NSString *resultsString = results[UPnPXMLResultsKey];
@@ -33,7 +36,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
     }
 
     NSArray *items = [self parseItemsInDocument:document];
-    if (items) {
+    if (items.count > 0) {
         NSMutableDictionary *parsedResults = [results mutableCopy];
         [parsedResults setObject:items forKey:UPnPXMLResultsKey];
         completion([parsedResults copy], nil);
@@ -44,26 +47,56 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
-    __block NSMutableArray *items;
+    if (!document) { return @[]; }
+
+    __block NSMutableArray *items = [NSMutableArray array];
     [document enumerateElementsWithXPath:@"/*[local-name() = 'DIDL-Lite']/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 
         UPPMediaItem *item = [[UPPMediaItem alloc] init];
 
         if ([[element tag] isEqualToString:@"container"]) {
             item.isContainer = YES;
-            item.childCount = [element valueForAttribute:@"childCount"];
+            id childCount = [element valueForAttribute:@"childCount"];
+            if (childCount) {
+                item.childCount = [NSString stringWithFormat:@"%@",
+                                   [element valueForAttribute:@"childCount"]];
+            }
         }
 
-        item.albumTitle = [[element firstChildWithTag:@"album"] stringValue];
-        item.artist = [[element firstChildWithTag:@"artist"] stringValue];
-        item.date = [[element firstChildWithTag:@"date"] stringValue];
-        item.genre = [[element firstChildWithTag:@"genre"] stringValue];
-        item.objectClass = [[element firstChildWithTag:@"class"] stringValue];
-        item.trackNumber = [[element firstChildWithTag:@"originalTrackNumber"] stringValue];
-        item.albumArtURLString = [[element firstChildWithTag:@"albumArtURI"] stringValue];
-        item.itemTitle = [[element firstChildWithTag:@"title"] stringValue];
-        item.parentID = [element valueForAttribute:@"parentID"];
-        item.objectID = [element valueForAttribute:@"id"];
+
+        // Required parameters. If any of these are missing, then give up attempting to parse item.
+        ONOXMLElement *objectClass = [element firstChildWithTag:@"class"];
+        if (!objectClass) { return; }
+        item.objectClass = [objectClass stringValue];
+
+        ONOXMLElement *objectID = [element valueForAttribute:@"id"];
+        if (!objectID) { return; }
+        item.objectID = [NSString stringWithFormat:@"%@", objectID];
+
+        ONOXMLElement *parentId = [element valueForAttribute:@"parentID"];
+        if (!parentId) { return; }
+        item.parentID = [NSString stringWithFormat:@"%@", parentId];
+
+        ONOXMLElement *title = [element firstChildWithTag:@"title"];
+        if (!title) { return; }
+        item.itemTitle = [title stringValue];
+
+
+        // Optional parameters. Ignore any missing keys.
+        item.albumTitle = [[element firstChildWithTag:@"album"] stringValueOrNil];
+
+        NSString *albumArtist = [[element firstChildWithTag:@"albumArtist"] stringValueOrNil];
+
+        if (albumArtist) {
+            item.artist = albumArtist;
+        } else {
+            item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+        }
+
+        item.date = [[element firstChildWithTag:@"date"] stringValueOrNil];
+        item.genre = [[element firstChildWithTag:@"genre"] stringValueOrNil];
+        item.trackNumber = [[element firstChildWithTag:@"originalTrackNumber"] stringValueOrNil];
+        item.albumArtURLString = [[element firstChildWithTag:@"albumArtURI"] stringValueOrNil];
         item.resources = [self parseResources:[element childrenWithTag:@"res"]];
 
         NSArray *durations = [item.resources valueForKey:@"duration"];
@@ -73,10 +106,6 @@ NSString * const UPnPXMLResultsKey = @"Result";
                 *stop = YES;
             }
         }];
-
-        if (!items) {
-            items = [NSMutableArray array];
-        }
 
         [items addObject:item];
     }];
@@ -90,13 +119,22 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
     [res enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL *stop) {
         UPPMediaItemResource *r = [[UPPMediaItemResource alloc] init];
-        r.numberOfAudioChannels = [resource valueForAttribute:@"nrAudioChannels"];
-        r.bitrate = [resource valueForAttribute:@"bitrate"];
-        r.duration = [resource valueForAttribute:@"duration"];
-        r.sampleFrequency = [resource valueForAttribute:@"sampleFrequency"];
-        r.protocolInfo = [resource valueForAttribute:@"protocolInfo"];
-        r.itemSize = [resource valueForAttribute:@"size"];
-        r.resourceURLString = [resource stringValue];
+
+        // Required parameters
+        id protocolInfo = [resource valueForAttribute:@"protocolInfo"];
+        if (!protocolInfo) { return; }
+        r.protocolInfo = [NSString stringWithFormat:@"%@", protocolInfo];
+
+        NSString *urlString = [resource stringValue];
+        if ([urlString isEqualToString:@""]) { return; }
+        r.resourceURLString = urlString;
+
+        // Optional parameters
+        r.numberOfAudioChannels = [resource stringForAttributeOrNil:@"nrAudioChannels"];
+        r.bitrate = [resource stringForAttributeOrNil:@"bitrate"];
+        r.duration = [resource stringForAttributeOrNil:@"duration"];
+        r.sampleFrequency = [resource stringForAttributeOrNil:@"sampleFrequency"];
+        r.itemSize = [resource stringForAttributeOrNil:@"size"];
 
         if (!mutableResources) {
             mutableResources = [NSMutableArray array];

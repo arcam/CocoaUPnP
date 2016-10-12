@@ -11,6 +11,7 @@
 + (void)parseData:(NSData *)data completion:(void (^)(NSDictionary *event, NSError *error))completion;
 {
     NSParameterAssert(completion);
+    if (!completion) { return; }
 
     if (!data) {
         completion(nil, UPPErrorWithCode(UPPErrorCodeEmptyData));

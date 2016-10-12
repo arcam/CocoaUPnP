@@ -16,6 +16,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 {
     NSParameterAssert(results);
     NSParameterAssert(completion);
+    if (!results || !completion) { return; }
 
     NSString *resultsString = results[UPnPXMLResultsKey];
 
@@ -46,7 +47,7 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
 + (NSArray *)parseItemsInDocument:(ONOXMLDocument *)document
 {
-    NSParameterAssert(document);
+    if (!document) { return @[]; }
 
     __block NSMutableArray *items = [NSMutableArray array];
     [document enumerateElementsWithXPath:@"/*[local-name() = 'DIDL-Lite']/*" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
@@ -83,7 +84,15 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
         // Optional parameters. Ignore any missing keys.
         item.albumTitle = [[element firstChildWithTag:@"album"] stringValueOrNil];
-        item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+
+        NSString *albumArtist = [[element firstChildWithTag:@"albumArtist"] stringValueOrNil];
+
+        if (albumArtist) {
+            item.artist = albumArtist;
+        } else {
+            item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+        }
+
         item.date = [[element firstChildWithTag:@"date"] stringValueOrNil];
         item.genre = [[element firstChildWithTag:@"genre"] stringValueOrNil];
         item.trackNumber = [[element firstChildWithTag:@"originalTrackNumber"] stringValueOrNil];

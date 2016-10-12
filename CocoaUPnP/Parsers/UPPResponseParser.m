@@ -11,6 +11,7 @@
 - (void)parseWithResponse:(Response)responseBlock
 {
     NSParameterAssert(responseBlock);
+    if (!responseBlock) { return; }
 
     NSError *error = nil;
 

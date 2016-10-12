@@ -12,10 +12,10 @@ static NSString * XMLSafeString (NSString *s) {
     // against runtime crashes.
     if ([s isKindOfClass:[NSNumber class]]) { return [(NSNumber *)s stringValue]; }
     s = [s stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;amp;"];
-    s = [s stringByReplacingOccurrencesOfString:@"<" withString:@"&amp;lt;"];
-    s = [s stringByReplacingOccurrencesOfString:@">" withString:@"&amp;gt;"];
-    s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"&amp;apos;"];
-    s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"&amp;quot;"];
+    s = [s stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+    s = [s stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+    s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"&apos;"];
+    s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
 
     return s;
 }

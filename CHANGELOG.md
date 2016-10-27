@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+- Add forgetAllKnownDevices method to UPPDiscovery
+- Exit early if `setVolume:` called with `nil` volume
+- Add additional safe guards against object IDs returning numbers
+
 ## 1.0.0
 
 - Add tests for socket enableReusePort

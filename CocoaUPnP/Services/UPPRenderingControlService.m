@@ -48,6 +48,8 @@
 
 - (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
 {
+    if (volume == nil) { return; }
+
     NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredVolume" ];
     NSString *ch = channel ?: @"Master";
     NSArray *values = @[ instanceId, ch, volume ];

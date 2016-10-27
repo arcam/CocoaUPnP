@@ -32,6 +32,12 @@
     return [self.devices copy];
 }
 
+- (void)forgetAllKnownDevices
+{
+    self.devices = [NSMutableArray array];
+    self.unparsedUUIDs = [NSMutableArray array];
+}
+
 - (void)startBrowsingForServices:(NSString *)services
 {
     [self.browser startBrowsingForServiceTypes:services];

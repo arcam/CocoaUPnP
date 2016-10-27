@@ -11,9 +11,11 @@ NSString * UPPMetadataForItem (UPPMediaItem *item) {
 
     [metadata appendString:@"&lt;?xml version=\"1.0\"?&gt;&lt;DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"&gt;"];
 
+    NSString *objectID = [NSString stringWithFormat:@"%@", item.objectID];
+    NSString *parentID = [NSString stringWithFormat:@"%@", item.parentID];
     [metadata appendString:@"&lt;item "];
-    [metadata appendFormat:@"id=\"%@\" ", [item.objectID stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;amp;"] ?: @"1"];
-    [metadata appendFormat:@"parentID=\"%@\" ", [item.parentID stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;amp;"] ?: @"1"];
+    [metadata appendFormat:@"id=\"%@\" ", [objectID stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;amp;"] ?: @"1"];
+    [metadata appendFormat:@"parentID=\"%@\" ", [parentID stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;amp;"] ?: @"1"];
     [metadata appendString:@"restricted=\"1\"&gt;"];
     [metadata upp_appendValue:item.itemTitle forKey:@"dc:title"];
     [metadata upp_appendValue:item.objectClass forKey:@"upnp:class"];

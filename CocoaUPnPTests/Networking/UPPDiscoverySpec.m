@@ -187,6 +187,27 @@ describe(@"UPPDiscovery", ^{
         expect(browser).toNot.beNil();
         expect(browser.delegate).to.equal(discovery);
     });
+
+    describe(@"when forgetting devices", ^{
+        it(@"should clear devices", ^{
+            UPPBasicDevice *device = [UPPBasicDevice new];
+            [discovery.devices addObject:device];
+            expect(discovery.devices.count).to.equal(1);
+
+            [discovery forgetAllKnownDevices];
+
+            expect(discovery.devices.count).to.equal(0);
+        });
+
+        it(@"should clear unparsed UUID", ^{
+            [discovery.unparsedUUIDs addObject:@"0xDEAD"];
+            expect(discovery.unparsedUUIDs.count).to.equal(1);
+
+            [discovery forgetAllKnownDevices];
+
+            expect(discovery.unparsedUUIDs.count).to.equal(0);
+        });
+    });
 });
 
 SpecEnd

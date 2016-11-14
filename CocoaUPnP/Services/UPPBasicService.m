@@ -15,7 +15,7 @@
 
 + (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn
 {
-    if (!baseURL) {
+    if (!baseURL || !description || !udn) {
         return nil;
     }
 

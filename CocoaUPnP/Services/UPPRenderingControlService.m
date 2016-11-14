@@ -8,11 +8,10 @@
 
 - (void)muteWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion
 {
-    if (!completion) { return; }
+    if (!instanceId || !completion) { return; }
 
     NSArray *keys = @[ @"InstanceID", @"Channel" ];
-    NSString *ch = channel ?: @"Master";
-    NSArray *values = @[ instanceId, ch ];
+    NSArray *values = @[ instanceId, channel ?: @"Master" ];
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
     [self _sendPostRequestWithParameters:params
@@ -22,9 +21,10 @@
 
 - (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
 {
+    if (!instanceId) { return; }
+
     NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredMute" ];
-    NSString *ch = channel ?: @"Master";
-    NSArray *values = @[ instanceId, ch, @(mute) ];
+    NSArray *values = @[ instanceId, channel ?: @"Master", @(mute)];
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
     [self _sendPostRequestWithParameters:params
@@ -34,11 +34,11 @@
 
 - (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion
 {
-    if (!completion) { return; }
+    if (!instanceId || !completion) { return; }
 
     NSArray *keys = @[ @"InstanceID", @"Channel" ];
-    NSString *ch = channel ?: @"Master";
-    NSArray *values = @[ instanceId, ch ];
+    NSArray *values = @[ instanceId ?: @"0",
+                         channel ?: @"Master" ];
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
     [self _sendPostRequestWithParameters:params
@@ -48,11 +48,10 @@
 
 - (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
 {
-    if (volume == nil) { return; }
+    if (!volume || !instanceId) { return; }
 
     NSArray *keys = @[ @"InstanceID", @"Channel", @"DesiredVolume" ];
-    NSString *ch = channel ?: @"Master";
-    NSArray *values = @[ instanceId, ch, volume ];
+    NSArray *values = @[ instanceId, channel ?: @"Master", volume ];
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
     [self _sendPostRequestWithParameters:params

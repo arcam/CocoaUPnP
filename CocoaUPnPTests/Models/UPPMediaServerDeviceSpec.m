@@ -16,6 +16,7 @@ describe(@"UPPMediaServerDevice", ^{
         baseURL = [NSURL URLWithString:@"http://127.0.0.1:5000"];
 
         device = [UPPMediaServerDevice mediaServerWithURN:urn baseURL:baseURL];
+        device.udn = urn;
 
         UPPServiceDescription *contentDirectoryService = [[UPPServiceDescription alloc] init];
         contentDirectoryService.controlURL = @"ctrl/dir";

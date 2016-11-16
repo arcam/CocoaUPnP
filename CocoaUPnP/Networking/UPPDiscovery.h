@@ -67,6 +67,11 @@
 - (nonnull NSArray *)availableDevices;
 
 /**
+ Clear the cache of known devices
+ */
+- (void)forgetAllKnownDevices;
+
+/**
  Add an observer to be notified as devices are discovered or removed.
 
  @param observer An observer conforming to `UPPDiscoveryDelegate`.

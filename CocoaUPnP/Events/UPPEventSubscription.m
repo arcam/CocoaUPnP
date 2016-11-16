@@ -98,13 +98,13 @@
 
 - (void)subscriptionExpired
 {
-    [self.manager subscriptionExpired:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
-        self.subscriptionID = subscriptionID;
-        self.expiryDate = expiryDate;
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.manager subscriptionExpired:self completion:^(NSString *subscriptionID, NSDate *expiryDate, NSError *error) {
+            self.subscriptionID = subscriptionID;
+            self.expiryDate = expiryDate;
             [self updateTimersWithExpiryDate:expiryDate];
-        });
-    }];
+        }];
+    });
 }
 
 #pragma mark - Lazy Instantiation

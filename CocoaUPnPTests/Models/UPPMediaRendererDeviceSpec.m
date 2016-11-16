@@ -16,6 +16,7 @@ describe(@"UPPMediaRendererDevice", ^{
         baseURL = [NSURL URLWithString:@"http://127.0.0.1:5000"];
 
         device = [UPPMediaRendererDevice mediaRendererWithURN:urn baseURL:baseURL];
+        device.udn = urn;
 
         UPPServiceDescription *renderingControlService = [[UPPServiceDescription alloc] init];
         renderingControlService.controlURL = @"ctrl/render";

@@ -19,7 +19,7 @@
 
 - (void)prepareForConnectionWithProtocolInfo:(NSString *)protocolInfo peerConnectionManager:(NSString *)peerConnectionManager peerConnectionID:(NSString *)peerConnectionId direction:(NSString *)direction completion:(UPPResponseBlock)completion
 {
-    if (!completion) { return; }
+    if (!protocolInfo || !peerConnectionManager || !peerConnectionId || !completion) { return; }
 
     NSArray *k = @[ @"RemoteProtocolInfo",
                     @"PeerConnectionManager",
@@ -40,6 +40,8 @@
 
 - (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
 {
+    if (!connectionId || !successBlock) { return; }
+
     UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
                                                    value:connectionId];
 
@@ -59,7 +61,7 @@
 
 - (void)currentConnectionInfoWithConnectionID:(NSString *)connectionId completion:(UPPResponseBlock)completion
 {
-    if (!completion) { return; }
+    if (!connectionId || !completion) { return; }
 
     UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID" value:connectionId];
 

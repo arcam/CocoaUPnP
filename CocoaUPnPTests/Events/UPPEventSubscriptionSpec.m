@@ -124,7 +124,7 @@ describe(@"UPPEventSubscription", ^{
 
             [timer fire];
 
-            OCMVerifyAll(mockManager);
+            OCMVerifyAllWithDelay(mockManager, 5);
         });
     });
 
@@ -148,7 +148,7 @@ describe(@"UPPEventSubscription", ^{
 
             [timer fire];
 
-            OCMVerifyAll(mockManager);
+            OCMVerifyAllWithDelay(mockManager, 5);
         });
     });
 

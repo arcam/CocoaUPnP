@@ -86,7 +86,7 @@
 /**
  A collection of album artwork resources
  */
-@property (copy, nonnull, nonnull) NSArray <UPPMediaItemArtwork *> *artworkResources;
+@property (copy, nonatomic, nonnull) NSArray <UPPMediaItemArtwork *> *artworkResources;
 
 /**
  An integer describing the tracks total duration in seconds.

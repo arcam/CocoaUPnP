@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
+#import "UPPMediaItemArtwork.h"
 #import "UPPMediaItemProtocol.h"
 
 @class UPPMediaItemResource;
@@ -77,8 +78,15 @@
 
 /**
  A string representation of the album artwork URL
+ @warning This is a legacy property - it will be set to the first URL in the
+ `artworkResources` array.
  */
 @property (copy, nonatomic, nullable) NSString *albumArtURLString;
+
+/**
+ A collection of album artwork resources
+ */
+@property (copy, nonnull, nonnull) NSArray <UPPMediaItemArtwork *> *artworkResources;
 
 /**
  An integer describing the tracks total duration in seconds.

@@ -19,6 +19,7 @@
 #import "UPPDeviceIcon.h"
 #import "UPPError.h"
 #import "UPPMediaItem.h"
+#import "UPPMediaItemArtwork.h"
 #import "UPPMediaItemResource.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"

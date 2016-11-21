@@ -96,8 +96,9 @@ NSString * const UPnPXMLResultsKey = @"Result";
         item.date = [[element firstChildWithTag:@"date"] stringValueOrNil];
         item.genre = [[element firstChildWithTag:@"genre"] stringValueOrNil];
         item.trackNumber = [[element firstChildWithTag:@"originalTrackNumber"] stringValueOrNil];
-        item.albumArtURLString = [[element firstChildWithTag:@"albumArtURI"] stringValueOrNil];
         item.resources = [self parseResources:[element childrenWithTag:@"res"]];
+
+        item.artworkResources = [self artworkResources:[element childrenWithTag:@"albumArtURI"]];
 
         NSArray *durations = [item.resources valueForKey:@"duration"];
         [durations enumerateObjectsUsingBlock:^(NSString *duration, NSUInteger idx, BOOL *stop) {
@@ -147,6 +148,23 @@ NSString * const UPnPXMLResultsKey = @"Result";
 }
 
 #pragma mark - Private
+
++ (NSArray *)artworkResources:(NSArray *)resources
+{
+    __block NSMutableArray *mutableResources = [NSMutableArray array];
+
+    [resources enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL * stop) {
+        NSString *urlString = [resource stringValueOrNil];
+        if (!urlString) { return; }
+        NSString *profileID = [resource valueForAttribute:@"profileID"];
+        NSURL *url = [NSURL URLWithString:urlString];
+        UPPMediaItemArtwork *artwork = [[UPPMediaItemArtwork alloc] initWithURL:url
+                                                                      profileId:profileID];
+        [mutableResources addObject:artwork];
+    }];
+
+    return [mutableResources copy];
+}
 
 + (NSInteger)durationFromString:(NSString *)string
 {

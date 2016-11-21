@@ -40,6 +40,22 @@
     return resource;
 }
 
+- (void)setArtworkResources:(NSArray<UPPMediaItemArtwork *> *)artworkResources
+{
+    if ([_artworkResources isEqualToArray:artworkResources]) {
+        return;
+    }
+
+    _artworkResources = artworkResources;
+
+    if (artworkResources.count == 0) {
+        _albumArtURLString = nil;
+        return;
+    }
+
+    _albumArtURLString = [artworkResources firstObject].url.absoluteString;
+}
+
 #pragma mark - NSObject
 
 - (NSString *)description
@@ -65,8 +81,13 @@
         self.parentID = [decoder decodeObjectForKey:@"parentID"];
         self.resources = [decoder decodeObjectForKey:@"resources"];
         self.itemTitle = [decoder decodeObjectForKey:@"itemTitle"];
-        self.albumArtURLString = [decoder decodeObjectForKey:@"albumArtURLString"];
         self.durationInSeconds = [[decoder decodeObjectForKey:@"durationInSeconds"] integerValue];
+        NSArray *artwork = [decoder decodeObjectForKey:@"artworkResources"];
+        self.artworkResources = artwork ?: @[];
+        // If restoring a legacy object, artwork resources will be `NULL` but
+        // there will an `albumArtURLString`. Decode this last to prevent
+        // `setArtworkResources` from clearing the value of `albumArtURLString`.
+        self.albumArtURLString = [decoder decodeObjectForKey:@"albumArtURLString"];
     }
     return self;
 }
@@ -87,6 +108,7 @@
     [encoder encodeObject:self.itemTitle forKey:@"itemTitle"];
     [encoder encodeObject:self.albumArtURLString forKey:@"albumArtURLString"];
     [encoder encodeObject:@(self.durationInSeconds) forKey:@"durationInSeconds"];
+    [encoder encodeObject:self.artworkResources forKey:@"artworkResources"];
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -106,6 +128,7 @@
     newItem->_itemTitle = [_itemTitle copyWithZone:zone];
     newItem->_albumArtURLString = [_albumArtURLString copyWithZone:zone];
     newItem->_durationInSeconds = _durationInSeconds;
+    newItem->_artworkResources = [_artworkResources copyWithZone:zone];
 
     return newItem;
 }

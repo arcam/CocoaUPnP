@@ -52,7 +52,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   CocoaUPnP:
-    :path: ../CocoaUPnP.podspec
+    :path: "../CocoaUPnP.podspec"
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -67,4 +67,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8a391c9b7fffbc070de1991f51811553e05842ae
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1

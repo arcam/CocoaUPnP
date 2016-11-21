@@ -10,6 +10,7 @@ describe(@"UPPMediaItem", ^{
     __block UPPMediaItem *mediaItem;
     __block NSString *url;
     __block UPPMediaItemResource *res;
+    __block UPPMediaItemArtwork *artwork;
 
     beforeEach(^{
         url = @"http://localhost/example.png";
@@ -25,7 +26,6 @@ describe(@"UPPMediaItem", ^{
         mediaItem.trackNumber = @"10";
         mediaItem.parentID = @"sdfg";
         mediaItem.itemTitle = @"title";
-        mediaItem.albumArtURLString = url;
         mediaItem.durationInSeconds = 123;
 
         res = [[UPPMediaItemResource alloc] init];
@@ -37,6 +37,11 @@ describe(@"UPPMediaItem", ^{
         res.itemSize = @"size";
         res.resourceURLString = @"resource";
         mediaItem.resources = @[ res ];
+
+        artwork = [[UPPMediaItemArtwork alloc] init];
+        artwork.url = [NSURL URLWithString:url];
+        artwork.profileId = @"JPEG_LRG";
+        mediaItem.artworkResources = @[ artwork ];
     });
 
     it(@"should conform to UPPMediaItemProtocol", ^{
@@ -100,6 +105,20 @@ describe(@"UPPMediaItem", ^{
         });
     });
 
+    describe(@"artwork resources", ^{
+        it(@"should contain one item", ^{
+            expect([mediaItem artworkResources].count).to.equal(1);
+        });
+
+        it(@"should match artwork", ^{
+            expect([mediaItem artworkResources].firstObject).to.equal(artwork);
+        });
+
+        it(@"should set albumArtURLString to first item URL", ^{
+            expect([mediaItem albumArtURLString]).to.equal(artwork.url.absoluteString);
+        });
+    });
+
     describe(@"NSCoding", ^{
         it(@"should conform to NSCoding", ^{
             expect(mediaItem).to.conformTo(@protocol(NSCoding));
@@ -131,6 +150,45 @@ describe(@"UPPMediaItem", ^{
             expect(newRes.protocolInfo).to.equal(res.protocolInfo);
             expect(newRes.itemSize).to.equal(res.itemSize);
             expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+
+            expect(newItem.artworkResources.count).to.equal(1);
+            UPPMediaItemArtwork *artwork = [newItem.artworkResources firstObject];
+            expect(artwork.url).to.equal(artwork.url);
+            expect(artwork.profileId).to.equal(artwork.profileId);
+        });
+
+        it(@"handle unarchive when artwork resources missing", ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
+            mediaItem.artworkResources = nil;
+#pragma clang diagnostic pop
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem];
+            UPPMediaItem *newItem = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            expect(newItem.albumTitle).to.equal(mediaItem.albumTitle);
+            expect(newItem.artist).to.equal(mediaItem.artist);
+            expect(newItem.date).to.equal(mediaItem.date);
+            expect(newItem.genre).to.equal(mediaItem.genre);
+            expect(newItem.isContainer).to.equal(mediaItem.isContainer);
+            expect(newItem.childCount).to.equal(mediaItem.childCount);
+            expect(newItem.objectClass).to.equal(mediaItem.objectClass);
+            expect(newItem.objectID).to.equal(mediaItem.objectID);
+            expect(newItem.trackNumber).to.equal(mediaItem.trackNumber);
+            expect(newItem.parentID).to.equal(mediaItem.parentID);
+            expect(newItem.itemTitle).to.equal(mediaItem.itemTitle);
+            expect(newItem.albumArtURLString).to.equal(mediaItem.albumArtURLString);
+            expect(newItem.durationInSeconds).to.equal(mediaItem.durationInSeconds);
+
+            expect(newItem.resources.count).to.equal(1);
+            UPPMediaItemResource *newRes = [newItem.resources firstObject];
+            expect(newRes.numberOfAudioChannels).to.equal(res.numberOfAudioChannels);
+            expect(newRes.bitrate).to.equal(res.bitrate);
+            expect(newRes.duration).to.equal(res.duration);
+            expect(newRes.sampleFrequency).to.equal(res.sampleFrequency);
+            expect(newRes.protocolInfo).to.equal(res.protocolInfo);
+            expect(newRes.itemSize).to.equal(res.itemSize);
+            expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+
+            expect(newItem.artworkResources.count).to.equal(0);
         });
     });
 
@@ -165,6 +223,11 @@ describe(@"UPPMediaItem", ^{
             expect(newRes.protocolInfo).to.equal(res.protocolInfo);
             expect(newRes.itemSize).to.equal(res.itemSize);
             expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+
+            expect(newItem.artworkResources.count).to.equal(1);
+            UPPMediaItemArtwork *artwork = [newItem.artworkResources firstObject];
+            expect(artwork.url).to.equal(artwork.url);
+            expect(artwork.profileId).to.equal(artwork.profileId);
         });
     });
 });

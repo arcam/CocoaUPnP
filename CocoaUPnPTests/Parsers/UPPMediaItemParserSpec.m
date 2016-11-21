@@ -40,8 +40,6 @@ describe(@"UPPMediaItemParser", ^{
                 expect(item.trackNumber).to.equal(@"1");
                 expect(item.parentID).to.equal(@"29$34537$34555");
                 expect(item.itemTitle).to.equal(@"Now We Die");
-                expect(item.albumArtURLString).to.equal(@"http://127.0.0.1/art.jpg");
-
                 expect(item.resources.count).to.equal(1);
                 UPPMediaItemResource *resource = [item.resources firstObject];
                 expect(resource).toNot.beNil();
@@ -59,6 +57,13 @@ describe(@"UPPMediaItemParser", ^{
                 expect(results[@"NumberReturned"]).to.equal(2);
                 expect(results[@"TotalMatches"]).to.equal(12);
                 expect(results[@"UpdateID"]).to.equal(0);
+
+                NSString *artworkURL = @"http://127.0.0.1/art.jpg";
+                expect(item.albumArtURLString).to.equal(artworkURL);
+                expect(item.artworkResources.count).to.equal(1);
+                UPPMediaItemArtwork *artwork = [item.artworkResources firstObject];
+                expect(artwork.url.absoluteString).to.equal(artworkURL);
+                expect(artwork.profileId).to.equal(@"JPEG_TN");
 
                 done();
 

@@ -4,7 +4,7 @@ podfile: Example/Podfile
 before_script:
   - rvm get head || true # https://github.com/travis-ci/travis-ci/issues/6307
 script: 
-  - scan
+  - scan --device 'iPhone SE'
 after_success:
   - bundle exec slather
   - bash <(curl -s https://codecov.io/bash)

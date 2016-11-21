@@ -1,10 +1,15 @@
 osx_image: xcode8.2
 language: objective-c
 podfile: Example/Podfile
+before_install:
+  # https://github.com/travis-ci/travis-ci/issues/6675#issuecomment-257964767
+  - export IOS_SIMULATOR_UDID=`instruments -s devices | grep "iPhone SE (10" | awk -F '[ ]' '{print $4}' | awk -F '[\[]' '{print $2}' | sed 's/.$//'`
+  - echo $IOS_SIMULATOR_UDID
+  - open -a "simulator" --args -CurrentDeviceUDID $IOS_SIMULATOR_UDID
 before_script:
   - rvm get head || true # https://github.com/travis-ci/travis-ci/issues/6307
 script: 
-  - scan --device 'iPhone SE'
+  - travis_retry scan --device 'iPhone SE'
 after_success:
   - bundle exec slather
   - bash <(curl -s https://codecov.io/bash)

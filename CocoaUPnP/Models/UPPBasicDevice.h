@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
+#import "UPPDeviceIcon.h"
 
 @class UPPServiceDescription;
 
@@ -74,7 +75,7 @@
  An array of icon objects as presented by the device.
  @see UPPDeviceIcon
  */
-@property (copy, nonatomic, nullable) NSArray *iconList;
+@property (copy, nonatomic, nullable) NSArray <UPPDeviceIcon *> *iconList;
 
 /**
  An array of service objects supported by the device. @see UPPServiceDescription

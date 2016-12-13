@@ -89,6 +89,13 @@
 - (nonnull NSString *)usn;
 
 /**
+ The address of the device
+ *
+ @return Returns the address of the device
+ */
+- (NSString *)address;
+
+/**
  Find the first service which matches `serviceType`
 
  @param serviceType The service type to search for

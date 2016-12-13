@@ -11,6 +11,11 @@
     return [NSString stringWithFormat:@"%@::%@", self.udn, self.deviceType];
 }
 
+- (NSString *)address
+{
+    return [self.baseURL host];
+}
+
 - (UPPServiceDescription *)serviceForType:(NSString *)serviceType
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"serviceType contains %@", serviceType];

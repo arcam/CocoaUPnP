@@ -48,12 +48,12 @@
 
     [nc addObserver:self
            selector:@selector(invalidateAllTimers)
-               name:UIApplicationDidEnterBackgroundNotification
+               name:NSExtensionHostDidEnterBackgroundNotification
              object:nil];
 
     [nc addObserver:self
            selector:@selector(renewAllTimers)
-               name:UIApplicationDidBecomeActiveNotification
+               name:NSExtensionHostDidBecomeActiveNotification
              object:nil];
 }
 

@@ -2,7 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import "UPPResponseParser.h"
-#import "Ono.h"
+#import <Ono/Ono.h>
 #import "UPPError.h"
 #import "UPPMediaItemParser.h"
 

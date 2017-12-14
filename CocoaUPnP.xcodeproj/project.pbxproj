@@ -54,7 +54,7 @@
 		6EBD12FC1FE2A89B005DFD94 /* UPPParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B01FE2A89B005DFD94 /* UPPParameters.h */; };
 		6EBD12FD1FE2A89B005DFD94 /* UPPMediaServerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B11FE2A89B005DFD94 /* UPPMediaServerDevice.h */; };
 		6EBD12FE1FE2A89B005DFD94 /* UPPBasicDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B21FE2A89B005DFD94 /* UPPBasicDevice.h */; };
-		6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B31FE2A89B005DFD94 /* CocoaUPnP.h */; };
+		6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B31FE2A89B005DFD94 /* CocoaUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13001FE2A89B005DFD94 /* UPPEventServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12B51FE2A89B005DFD94 /* UPPEventServer.m */; };
 		6EBD13011FE2A89B005DFD94 /* UPPEventSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12B61FE2A89B005DFD94 /* UPPEventSubscriptionManager.m */; };
 		6EBD13021FE2A89B005DFD94 /* UPPEventSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B71FE2A89B005DFD94 /* UPPEventSubscription.h */; };
@@ -384,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBD12ED1FE2A89B005DFD94 /* UPPMediaItemResource.h in Headers */,
+				6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */,
 				6EBD12771FE2A7BD005DFD94 /* CocoaUPnPiOS.h in Headers */,
 				6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */,
 				6EBD12FB1FE2A89B005DFD94 /* UPPServiceDescription.h in Headers */,
@@ -411,7 +412,6 @@
 				6EBD12EF1FE2A89B005DFD94 /* UPPMediaItemArtwork.h in Headers */,
 				6EBD12DB1FE2A89B005DFD94 /* UPPResponseParser.h in Headers */,
 				6EBD12D91FE2A89B005DFD94 /* UPPLastChangeParser.h in Headers */,
-				6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */,
 				6EBD12DA1FE2A89B005DFD94 /* UPPBaseParser.h in Headers */,
 				6EBD12FD1FE2A89B005DFD94 /* UPPMediaServerDevice.h in Headers */,
 				6EBD13021FE2A89B005DFD94 /* UPPEventSubscription.h in Headers */,

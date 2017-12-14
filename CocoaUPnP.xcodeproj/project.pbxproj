@@ -62,10 +62,10 @@
 		6EBD13041FE2A89B005DFD94 /* UPPEventSubscriptionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B91FE2A89B005DFD94 /* UPPEventSubscriptionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13051FE2A89B005DFD94 /* UPPEventSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12BA1FE2A89B005DFD94 /* UPPEventSubscription.m */; };
 		6EBD13061FE2A89B005DFD94 /* UPPMediaItemProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BC1FE2A89B005DFD94 /* UPPMediaItemProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6EBD13071FE2A89B005DFD94 /* NSMutableString+xmlNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BE1FE2A89B005DFD94 /* NSMutableString+xmlNode.h */; };
+		6EBD13071FE2A89B005DFD94 /* NSMutableString+xmlNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BE1FE2A89B005DFD94 /* NSMutableString+xmlNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13081FE2A89B005DFD94 /* UPPMetadataHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BF1FE2A89B005DFD94 /* UPPMetadataHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13091FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C01FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.m */; };
-		6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C11FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h */; };
+		6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C11FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD130B1FE2A89B005DFD94 /* NSMutableString+xmlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C21FE2A89B005DFD94 /* NSMutableString+xmlNode.m */; };
 		6EBD130C1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C31FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m */; };
 		6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C41FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h */; };

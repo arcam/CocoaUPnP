@@ -64,6 +64,9 @@
         } else if ([deviceType rangeOfString:@":MediaServer:"].location != NSNotFound) {
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
+        } else if ([deviceType rangeOfString:@":Edge NQ:"].location != NSNotFound) {
+            device = [UPPMediaServerDevice mediaServerWithURN:deviceType
+                                                      baseURL:baseURL];
         }
 
         if (!device) {

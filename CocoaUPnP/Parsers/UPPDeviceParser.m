@@ -64,9 +64,6 @@
         } else if ([deviceType rangeOfString:@":MediaServer:"].location != NSNotFound) {
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
-        } else if ([deviceType rangeOfString:@"Edge NQ"].location != NSNotFound) {
-            device = [UPPMediaServerDevice mediaServerWithURN:deviceType
-                                                      baseURL:baseURL];
         }
 
         if (!device) {
@@ -81,6 +78,31 @@
             devices = [NSMutableArray array];
         }
 
+        [devices addObject:device];
+    }];
+    
+    [document.rootElement enumerateElementsWithXPath:@"//*[name()='manufacturer']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+        NSString *deviceType = [[element firstChildWithTag:@"manufacturer"] stringValue];
+        
+        UPPBasicDevice *device;
+        
+         if ([deviceType rangeOfString:@"Cambridge Audio"].location != NSNotFound) {
+            device = [UPPMediaServerDevice mediaServerWithURN:deviceType
+                                                      baseURL:baseURL];
+        }
+        
+        if (!device) {
+            return;
+        }
+        
+        [self parseElement:element intoDevice:device];
+        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
+        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
+        
+        if (!devices) {
+            devices = [NSMutableArray array];
+        }
+        
         [devices addObject:device];
     }];
 

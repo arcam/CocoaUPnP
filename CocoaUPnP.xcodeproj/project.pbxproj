@@ -68,7 +68,7 @@
 		6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C11FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD130B1FE2A89B005DFD94 /* NSMutableString+xmlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C21FE2A89B005DFD94 /* NSMutableString+xmlNode.m */; };
 		6EBD130C1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C31FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m */; };
-		6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C41FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h */; };
+		6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C41FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD130E1FE2A89B005DFD94 /* UPPMetadataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C51FE2A89B005DFD94 /* UPPMetadataHelper.m */; };
 		6EBD130F1FE2A89B005DFD94 /* UPPConnectionManagerService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C71FE2A89B005DFD94 /* UPPConnectionManagerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13101FE2A89B005DFD94 /* UPPContentDirectoryService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C81FE2A89B005DFD94 /* UPPContentDirectoryService.h */; settings = {ATTRIBUTES = (Public, ); }; };

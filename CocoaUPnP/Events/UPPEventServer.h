@@ -2,7 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <GCDWebServer/GCDWebServer.h>
+#import <GCDWebServers/GCDWebServers.h>
 
 /**
  A delegate protocol for recieving parsed UPnP events.

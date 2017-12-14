@@ -1,0 +1,4 @@
+github "appoulsen/CocoaSSDP" "master"
+github "ngocluu/Ono" "master"
+github "AFNetworking/AFNetworking" "master"
+github "swisspol/GCDWebServer" "master"

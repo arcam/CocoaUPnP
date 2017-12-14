@@ -24,7 +24,8 @@
 
 #import "SSDPServiceBrowser.h"
 
-#import "GCDAsyncUdpSocket.h"
+#import <UIKit/UIKit.h>
+#import <GCDWebServers/GCDWebServers.h>
 #import "SSDPService.h"
 
 #import <ifaddrs.h>

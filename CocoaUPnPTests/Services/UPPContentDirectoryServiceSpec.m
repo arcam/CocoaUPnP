@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <CocoaUPnP/CocoaUPnP.h>
+#import <Specta/Specta.h>
 #import "NetworkTestHelpers.h"
 
 SpecBegin(UPPContentDirectoryService)

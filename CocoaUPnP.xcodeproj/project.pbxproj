@@ -13,78 +13,79 @@
 		6EBD12D31FE2A89B005DFD94 /* UPPResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12841FE2A89B005DFD94 /* UPPResponseParser.m */; };
 		6EBD12D41FE2A89B005DFD94 /* UPPLastChangeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12851FE2A89B005DFD94 /* UPPLastChangeParser.m */; };
 		6EBD12D51FE2A89B005DFD94 /* UPPBaseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12861FE2A89B005DFD94 /* UPPBaseParser.m */; };
-		6EBD12D61FE2A89B005DFD94 /* UPPMediaItemParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12871FE2A89B005DFD94 /* UPPMediaItemParser.h */; };
-		6EBD12D71FE2A89B005DFD94 /* UPPDeviceParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12881FE2A89B005DFD94 /* UPPDeviceParser.h */; };
-		6EBD12D81FE2A89B005DFD94 /* UPPErrorParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12891FE2A89B005DFD94 /* UPPErrorParser.h */; };
-		6EBD12D91FE2A89B005DFD94 /* UPPLastChangeParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128A1FE2A89B005DFD94 /* UPPLastChangeParser.h */; };
-		6EBD12DA1FE2A89B005DFD94 /* UPPBaseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128B1FE2A89B005DFD94 /* UPPBaseParser.h */; };
-		6EBD12DB1FE2A89B005DFD94 /* UPPResponseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128C1FE2A89B005DFD94 /* UPPResponseParser.h */; };
+		6EBD12D61FE2A89B005DFD94 /* UPPMediaItemParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12871FE2A89B005DFD94 /* UPPMediaItemParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12D71FE2A89B005DFD94 /* UPPDeviceParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12881FE2A89B005DFD94 /* UPPDeviceParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12D81FE2A89B005DFD94 /* UPPErrorParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12891FE2A89B005DFD94 /* UPPErrorParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12D91FE2A89B005DFD94 /* UPPLastChangeParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128A1FE2A89B005DFD94 /* UPPLastChangeParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12DA1FE2A89B005DFD94 /* UPPBaseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128B1FE2A89B005DFD94 /* UPPBaseParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12DB1FE2A89B005DFD94 /* UPPResponseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128C1FE2A89B005DFD94 /* UPPResponseParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12DC1FE2A89B005DFD94 /* UPPMediaItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD128D1FE2A89B005DFD94 /* UPPMediaItemParser.m */; };
-		6EBD12DD1FE2A89B005DFD94 /* UPPResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128F1FE2A89B005DFD94 /* UPPResponseSerializer.h */; };
-		6EBD12DE1FE2A89B005DFD94 /* UPPDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12901FE2A89B005DFD94 /* UPPDiscovery.h */; };
+		6EBD12DD1FE2A89B005DFD94 /* UPPResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD128F1FE2A89B005DFD94 /* UPPResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12DE1FE2A89B005DFD94 /* UPPDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12901FE2A89B005DFD94 /* UPPDiscovery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12DF1FE2A89B005DFD94 /* UPPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12911FE2A89B005DFD94 /* UPPSessionManager.m */; };
-		6EBD12E01FE2A89B005DFD94 /* UPPRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12921FE2A89B005DFD94 /* UPPRequestSerializer.h */; };
+		6EBD12E01FE2A89B005DFD94 /* UPPRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12921FE2A89B005DFD94 /* UPPRequestSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12E11FE2A89B005DFD94 /* UPPResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12931FE2A89B005DFD94 /* UPPResponseSerializer.m */; };
 		6EBD12E21FE2A89B005DFD94 /* UPPDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12941FE2A89B005DFD94 /* UPPDiscovery.m */; };
-		6EBD12E31FE2A89B005DFD94 /* SSDPServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12961FE2A89B005DFD94 /* SSDPServiceBrowser.h */; };
-		6EBD12E41FE2A89B005DFD94 /* SSDPService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12971FE2A89B005DFD94 /* SSDPService.h */; };
+		6EBD12E31FE2A89B005DFD94 /* SSDPServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12961FE2A89B005DFD94 /* SSDPServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12E41FE2A89B005DFD94 /* SSDPService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12971FE2A89B005DFD94 /* SSDPService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12E51FE2A89B005DFD94 /* SSDPServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12981FE2A89B005DFD94 /* SSDPServiceBrowser.m */; };
 		6EBD12E61FE2A89B005DFD94 /* SSDPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12991FE2A89B005DFD94 /* SSDPService.m */; };
-		6EBD12E71FE2A89B005DFD94 /* UPPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD129A1FE2A89B005DFD94 /* UPPSessionManager.h */; };
+		6EBD12E71FE2A89B005DFD94 /* UPPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD129A1FE2A89B005DFD94 /* UPPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12E81FE2A89B005DFD94 /* UPPRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD129B1FE2A89B005DFD94 /* UPPRequestSerializer.m */; };
 		6EBD12E91FE2A89B005DFD94 /* UPPMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD129D1FE2A89B005DFD94 /* UPPMediaItem.m */; };
 		6EBD12EA1FE2A89B005DFD94 /* UPPDeviceIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD129E1FE2A89B005DFD94 /* UPPDeviceIcon.m */; };
 		6EBD12EB1FE2A89B005DFD94 /* UPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD129F1FE2A89B005DFD94 /* UPPError.m */; };
 		6EBD12EC1FE2A89B005DFD94 /* UPPMediaRendererDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A01FE2A89B005DFD94 /* UPPMediaRendererDevice.m */; };
-		6EBD12ED1FE2A89B005DFD94 /* UPPMediaItemResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A11FE2A89B005DFD94 /* UPPMediaItemResource.h */; };
+		6EBD12ED1FE2A89B005DFD94 /* UPPMediaItemResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A11FE2A89B005DFD94 /* UPPMediaItemResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12EE1FE2A89B005DFD94 /* UPPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A21FE2A89B005DFD94 /* UPPConstants.m */; };
-		6EBD12EF1FE2A89B005DFD94 /* UPPMediaItemArtwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A31FE2A89B005DFD94 /* UPPMediaItemArtwork.h */; };
+		6EBD12EF1FE2A89B005DFD94 /* UPPMediaItemArtwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A31FE2A89B005DFD94 /* UPPMediaItemArtwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12F01FE2A89B005DFD94 /* UPPServiceDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A41FE2A89B005DFD94 /* UPPServiceDescription.m */; };
 		6EBD12F11FE2A89B005DFD94 /* UPPBasicDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A51FE2A89B005DFD94 /* UPPBasicDevice.m */; };
 		6EBD12F21FE2A89B005DFD94 /* UPPParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A61FE2A89B005DFD94 /* UPPParameters.m */; };
 		6EBD12F31FE2A89B005DFD94 /* UPPMediaServerDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12A71FE2A89B005DFD94 /* UPPMediaServerDevice.m */; };
-		6EBD12F41FE2A89B005DFD94 /* UPPDeviceIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A81FE2A89B005DFD94 /* UPPDeviceIcon.h */; };
-		6EBD12F51FE2A89B005DFD94 /* UPPMediaItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A91FE2A89B005DFD94 /* UPPMediaItem.h */; };
+		6EBD12F41FE2A89B005DFD94 /* UPPDeviceIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A81FE2A89B005DFD94 /* UPPDeviceIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12F51FE2A89B005DFD94 /* UPPMediaItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12A91FE2A89B005DFD94 /* UPPMediaItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12F61FE2A89B005DFD94 /* UPPMediaItemArtwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12AA1FE2A89B005DFD94 /* UPPMediaItemArtwork.m */; };
-		6EBD12F71FE2A89B005DFD94 /* UPPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AB1FE2A89B005DFD94 /* UPPConstants.h */; };
+		6EBD12F71FE2A89B005DFD94 /* UPPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AB1FE2A89B005DFD94 /* UPPConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12F81FE2A89B005DFD94 /* UPPMediaItemResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12AC1FE2A89B005DFD94 /* UPPMediaItemResource.m */; };
-		6EBD12F91FE2A89B005DFD94 /* UPPMediaRendererDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AD1FE2A89B005DFD94 /* UPPMediaRendererDevice.h */; };
-		6EBD12FA1FE2A89B005DFD94 /* UPPError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AE1FE2A89B005DFD94 /* UPPError.h */; };
-		6EBD12FB1FE2A89B005DFD94 /* UPPServiceDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AF1FE2A89B005DFD94 /* UPPServiceDescription.h */; };
-		6EBD12FC1FE2A89B005DFD94 /* UPPParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B01FE2A89B005DFD94 /* UPPParameters.h */; };
-		6EBD12FD1FE2A89B005DFD94 /* UPPMediaServerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B11FE2A89B005DFD94 /* UPPMediaServerDevice.h */; };
-		6EBD12FE1FE2A89B005DFD94 /* UPPBasicDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B21FE2A89B005DFD94 /* UPPBasicDevice.h */; };
+		6EBD12F91FE2A89B005DFD94 /* UPPMediaRendererDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AD1FE2A89B005DFD94 /* UPPMediaRendererDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12FA1FE2A89B005DFD94 /* UPPError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AE1FE2A89B005DFD94 /* UPPError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12FB1FE2A89B005DFD94 /* UPPServiceDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12AF1FE2A89B005DFD94 /* UPPServiceDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12FC1FE2A89B005DFD94 /* UPPParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B01FE2A89B005DFD94 /* UPPParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12FD1FE2A89B005DFD94 /* UPPMediaServerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B11FE2A89B005DFD94 /* UPPMediaServerDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD12FE1FE2A89B005DFD94 /* UPPBasicDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B21FE2A89B005DFD94 /* UPPBasicDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B31FE2A89B005DFD94 /* CocoaUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13001FE2A89B005DFD94 /* UPPEventServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12B51FE2A89B005DFD94 /* UPPEventServer.m */; };
 		6EBD13011FE2A89B005DFD94 /* UPPEventSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12B61FE2A89B005DFD94 /* UPPEventSubscriptionManager.m */; };
-		6EBD13021FE2A89B005DFD94 /* UPPEventSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B71FE2A89B005DFD94 /* UPPEventSubscription.h */; };
-		6EBD13031FE2A89B005DFD94 /* UPPEventServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B81FE2A89B005DFD94 /* UPPEventServer.h */; };
-		6EBD13041FE2A89B005DFD94 /* UPPEventSubscriptionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B91FE2A89B005DFD94 /* UPPEventSubscriptionManager.h */; };
+		6EBD13021FE2A89B005DFD94 /* UPPEventSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B71FE2A89B005DFD94 /* UPPEventSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD13031FE2A89B005DFD94 /* UPPEventServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B81FE2A89B005DFD94 /* UPPEventServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD13041FE2A89B005DFD94 /* UPPEventSubscriptionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12B91FE2A89B005DFD94 /* UPPEventSubscriptionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13051FE2A89B005DFD94 /* UPPEventSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12BA1FE2A89B005DFD94 /* UPPEventSubscription.m */; };
-		6EBD13061FE2A89B005DFD94 /* UPPMediaItemProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BC1FE2A89B005DFD94 /* UPPMediaItemProtocol.h */; };
+		6EBD13061FE2A89B005DFD94 /* UPPMediaItemProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BC1FE2A89B005DFD94 /* UPPMediaItemProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13071FE2A89B005DFD94 /* NSMutableString+xmlNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BE1FE2A89B005DFD94 /* NSMutableString+xmlNode.h */; };
-		6EBD13081FE2A89B005DFD94 /* UPPMetadataHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BF1FE2A89B005DFD94 /* UPPMetadataHelper.h */; };
+		6EBD13081FE2A89B005DFD94 /* UPPMetadataHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12BF1FE2A89B005DFD94 /* UPPMetadataHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13091FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C01FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.m */; };
 		6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C11FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h */; };
 		6EBD130B1FE2A89B005DFD94 /* NSMutableString+xmlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C21FE2A89B005DFD94 /* NSMutableString+xmlNode.m */; };
 		6EBD130C1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C31FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.m */; };
 		6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C41FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h */; };
 		6EBD130E1FE2A89B005DFD94 /* UPPMetadataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12C51FE2A89B005DFD94 /* UPPMetadataHelper.m */; };
-		6EBD130F1FE2A89B005DFD94 /* UPPConnectionManagerService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C71FE2A89B005DFD94 /* UPPConnectionManagerService.h */; };
-		6EBD13101FE2A89B005DFD94 /* UPPContentDirectoryService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C81FE2A89B005DFD94 /* UPPContentDirectoryService.h */; };
-		6EBD13111FE2A89B005DFD94 /* UPPBasicService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C91FE2A89B005DFD94 /* UPPBasicService.h */; };
+		6EBD130F1FE2A89B005DFD94 /* UPPConnectionManagerService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C71FE2A89B005DFD94 /* UPPConnectionManagerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD13101FE2A89B005DFD94 /* UPPContentDirectoryService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C81FE2A89B005DFD94 /* UPPContentDirectoryService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EBD13111FE2A89B005DFD94 /* UPPBasicService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12C91FE2A89B005DFD94 /* UPPBasicService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13121FE2A89B005DFD94 /* UPPRenderingControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12CA1FE2A89B005DFD94 /* UPPRenderingControlService.m */; };
-		6EBD13131FE2A89B005DFD94 /* UPPAVTransportService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12CB1FE2A89B005DFD94 /* UPPAVTransportService.h */; };
+		6EBD13131FE2A89B005DFD94 /* UPPAVTransportService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12CB1FE2A89B005DFD94 /* UPPAVTransportService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13141FE2A89B005DFD94 /* UPPConnectionManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12CC1FE2A89B005DFD94 /* UPPConnectionManagerService.m */; };
 		6EBD13151FE2A89B005DFD94 /* UPPContentDirectoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12CD1FE2A89B005DFD94 /* UPPContentDirectoryService.m */; };
 		6EBD13161FE2A89B005DFD94 /* UPPAVTransportService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12CE1FE2A89B005DFD94 /* UPPAVTransportService.m */; };
-		6EBD13171FE2A89B005DFD94 /* UPPRenderingControlService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12CF1FE2A89B005DFD94 /* UPPRenderingControlService.h */; };
+		6EBD13171FE2A89B005DFD94 /* UPPRenderingControlService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD12CF1FE2A89B005DFD94 /* UPPRenderingControlService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EBD13181FE2A89B005DFD94 /* UPPBasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD12D01FE2A89B005DFD94 /* UPPBasicService.m */; };
 		6EBD13191FE2A8D6005DFD94 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B9252D1ED5D2A100BA1543 /* Ono.framework */; };
 		6EBD131A1FE2A8D6005DFD94 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B9252E1ED5D2A100BA1543 /* GCDWebServers.framework */; };
 		6EBD131B1FE2A8D6005DFD94 /* CocoaSSDP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B9252F1ED5D2A100BA1543 /* CocoaSSDP.framework */; };
 		6EBD131C1FE2A8D6005DFD94 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B925301ED5D2A100BA1543 /* CocoaAsyncSocket.framework */; };
 		6EBD131D1FE2A8D6005DFD94 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B925311ED5D2A100BA1543 /* AFNetworking.framework */; };
+		6EBD13511FE303EB005DFD94 /* CocoaUPnPMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EBD134F1FE303EB005DFD94 /* CocoaUPnPMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +164,9 @@
 		6EBD12CE1FE2A89B005DFD94 /* UPPAVTransportService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPAVTransportService.m; sourceTree = "<group>"; };
 		6EBD12CF1FE2A89B005DFD94 /* UPPRenderingControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPRenderingControlService.h; sourceTree = "<group>"; };
 		6EBD12D01FE2A89B005DFD94 /* UPPBasicService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPBasicService.m; sourceTree = "<group>"; };
+		6EBD134D1FE303EB005DFD94 /* CocoaUPnPMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaUPnPMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EBD134F1FE303EB005DFD94 /* CocoaUPnPMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CocoaUPnPMac.h; sourceTree = "<group>"; };
+		6EBD13501FE303EB005DFD94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0B9252D1ED5D2A100BA1543 /* Ono.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ono.framework; path = Carthage/Build/iOS/Ono.framework; sourceTree = "<group>"; };
 		B0B9252E1ED5D2A100BA1543 /* GCDWebServers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDWebServers.framework; path = Carthage/Build/iOS/GCDWebServers.framework; sourceTree = "<group>"; };
 		B0B9252F1ED5D2A100BA1543 /* CocoaSSDP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaSSDP.framework; path = Carthage/Build/iOS/CocoaSSDP.framework; sourceTree = "<group>"; };
@@ -180,6 +184,13 @@
 				6EBD131B1FE2A8D6005DFD94 /* CocoaSSDP.framework in Frameworks */,
 				6EBD131C1FE2A8D6005DFD94 /* CocoaAsyncSocket.framework in Frameworks */,
 				6EBD131D1FE2A8D6005DFD94 /* AFNetworking.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBD13491FE303EB005DFD94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,11 +357,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		6EBD134E1FE303EB005DFD94 /* CocoaUPnPMac */ = {
+			isa = PBXGroup;
+			children = (
+				6EBD134F1FE303EB005DFD94 /* CocoaUPnPMac.h */,
+				6EBD13501FE303EB005DFD94 /* Info.plist */,
+			);
+			path = CocoaUPnPMac;
+			sourceTree = "<group>";
+		};
 		B0B9234D1ED5C1A000BA1543 = {
 			isa = PBXGroup;
 			children = (
 				6EBD127D1FE2A811005DFD94 /* Common */,
 				6EBD12741FE2A7BD005DFD94 /* CocoaUPnPiOS */,
+				6EBD134E1FE303EB005DFD94 /* CocoaUPnPMac */,
 				B0B923581ED5C1A000BA1543 /* Products */,
 				B0B9252C1ED5D2A100BA1543 /* Frameworks */,
 			);
@@ -360,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				6EBD12731FE2A7BD005DFD94 /* CocoaUPnPiOS.framework */,
+				6EBD134D1FE303EB005DFD94 /* CocoaUPnPMac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,16 +405,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EBD12ED1FE2A89B005DFD94 /* UPPMediaItemResource.h in Headers */,
 				6EBD12FF1FE2A89B005DFD94 /* CocoaUPnP.h in Headers */,
+				6EBD12ED1FE2A89B005DFD94 /* UPPMediaItemResource.h in Headers */,
 				6EBD12771FE2A7BD005DFD94 /* CocoaUPnPiOS.h in Headers */,
-				6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */,
 				6EBD12FB1FE2A89B005DFD94 /* UPPServiceDescription.h in Headers */,
 				6EBD12F71FE2A89B005DFD94 /* UPPConstants.h in Headers */,
 				6EBD13081FE2A89B005DFD94 /* UPPMetadataHelper.h in Headers */,
 				6EBD12D71FE2A89B005DFD94 /* UPPDeviceParser.h in Headers */,
-				6EBD13111FE2A89B005DFD94 /* UPPBasicService.h in Headers */,
-				6EBD13071FE2A89B005DFD94 /* NSMutableString+xmlNode.h in Headers */,
 				6EBD12F41FE2A89B005DFD94 /* UPPDeviceIcon.h in Headers */,
 				6EBD13041FE2A89B005DFD94 /* UPPEventSubscriptionManager.h in Headers */,
 				6EBD12E31FE2A89B005DFD94 /* SSDPServiceBrowser.h in Headers */,
@@ -405,7 +424,7 @@
 				6EBD13131FE2A89B005DFD94 /* UPPAVTransportService.h in Headers */,
 				6EBD13171FE2A89B005DFD94 /* UPPRenderingControlService.h in Headers */,
 				6EBD12F91FE2A89B005DFD94 /* UPPMediaRendererDevice.h in Headers */,
-				6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */,
+				6EBD13111FE2A89B005DFD94 /* UPPBasicService.h in Headers */,
 				6EBD12E41FE2A89B005DFD94 /* SSDPService.h in Headers */,
 				6EBD12F51FE2A89B005DFD94 /* UPPMediaItem.h in Headers */,
 				6EBD12DE1FE2A89B005DFD94 /* UPPDiscovery.h in Headers */,
@@ -421,6 +440,17 @@
 				6EBD12D61FE2A89B005DFD94 /* UPPMediaItemParser.h in Headers */,
 				6EBD13031FE2A89B005DFD94 /* UPPEventServer.h in Headers */,
 				6EBD13061FE2A89B005DFD94 /* UPPMediaItemProtocol.h in Headers */,
+				6EBD130A1FE2A89B005DFD94 /* ONOXMLDocument+StringValueOrNil.h in Headers */,
+				6EBD13071FE2A89B005DFD94 /* NSMutableString+xmlNode.h in Headers */,
+				6EBD130D1FE2A89B005DFD94 /* NSArray+firstObjectMatchingPredicate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBD134A1FE303EB005DFD94 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EBD13511FE303EB005DFD94 /* CocoaUPnPMac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +475,24 @@
 			productReference = 6EBD12731FE2A7BD005DFD94 /* CocoaUPnPiOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6EBD134C1FE303EB005DFD94 /* CocoaUPnPMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EBD13521FE303EB005DFD94 /* Build configuration list for PBXNativeTarget "CocoaUPnPMac" */;
+			buildPhases = (
+				6EBD13481FE303EB005DFD94 /* Sources */,
+				6EBD13491FE303EB005DFD94 /* Frameworks */,
+				6EBD134A1FE303EB005DFD94 /* Headers */,
+				6EBD134B1FE303EB005DFD94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaUPnPMac;
+			productName = CocoaUPnPMac;
+			productReference = 6EBD134D1FE303EB005DFD94 /* CocoaUPnPMac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -455,6 +503,11 @@
 				ORGANIZATIONNAME = cambridgeaudio;
 				TargetAttributes = {
 					6EBD12721FE2A7BD005DFD94 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 8777MV3N2V;
+						ProvisioningStyle = Automatic;
+					};
+					6EBD134C1FE303EB005DFD94 = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = 8777MV3N2V;
 						ProvisioningStyle = Automatic;
@@ -475,12 +528,20 @@
 			projectRoot = "";
 			targets = (
 				6EBD12721FE2A7BD005DFD94 /* CocoaUPnPiOS */,
+				6EBD134C1FE303EB005DFD94 /* CocoaUPnPMac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6EBD12711FE2A7BD005DFD94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBD134B1FE303EB005DFD94 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -529,6 +590,13 @@
 				6EBD12E61FE2A89B005DFD94 /* SSDPService.m in Sources */,
 				6EBD12EC1FE2A89B005DFD94 /* UPPMediaRendererDevice.m in Sources */,
 				6EBD13051FE2A89B005DFD94 /* UPPEventSubscription.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBD13481FE303EB005DFD94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +656,58 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6EBD13531FE303EB005DFD94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8777MV3N2V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CocoaUPnPMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = CambridgeAudio.CocoaUPnPMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6EBD13541FE303EB005DFD94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8777MV3N2V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CocoaUPnPMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = CambridgeAudio.CocoaUPnPMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -711,6 +831,15 @@
 			buildConfigurations = (
 				6EBD12791FE2A7BD005DFD94 /* Debug */,
 				6EBD127A1FE2A7BD005DFD94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EBD13521FE303EB005DFD94 /* Build configuration list for PBXNativeTarget "CocoaUPnPMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EBD13531FE303EB005DFD94 /* Debug */,
+				6EBD13541FE303EB005DFD94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

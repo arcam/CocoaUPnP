@@ -55,6 +55,7 @@
 
     [document.rootElement enumerateElementsWithXPath:@"//*[name()='device']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         NSString *deviceType = [[element firstChildWithTag:@"deviceType"] stringValue];
+        NSString *manufacturer = [[element firstChildWithTag:@"manufacturer"] stringValue];
 
         UPPBasicDevice *device;
 
@@ -65,44 +66,23 @@
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
         }
-
-        if (!device) {
-            return;
-        }
-
-        [self parseElement:element intoDevice:device];
-        [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
-        [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
-
-        if (!devices) {
-            devices = [NSMutableArray array];
-        }
-
-        [devices addObject:device];
-    }];
-    
-    [document.rootElement enumerateElementsWithXPath:@"//*[name()='manufacturer']" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-        NSString *deviceType = [[element firstChildWithTag:@"manufacturer"] stringValue];
-        
-        UPPBasicDevice *device;
-        
-         if ([deviceType rangeOfString:@"Cambridge Audio"].location != NSNotFound) {
+        if ([manufacturer rangeOfString:@"Cambridge Audio"].location != NSNotFound) {
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
-                                                      baseURL:baseURL];
+                                                    baseURL:baseURL];
         }
-        
+
         if (!device) {
             return;
         }
-        
+
         [self parseElement:element intoDevice:device];
         [self parseIcons:[element firstChildWithTag:@"iconList"] intoDevice:device];
         [self parseServices:[element firstChildWithTag:@"serviceList"] intoDevice:device];
-        
+
         if (!devices) {
             devices = [NSMutableArray array];
         }
-        
+
         [devices addObject:device];
     }];
 

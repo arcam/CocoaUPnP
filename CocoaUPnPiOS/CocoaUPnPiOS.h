@@ -14,4 +14,4 @@ FOUNDATION_EXPORT double CocoaUPnPiOSVersionNumber;
 //! Project version string for CocoaUPnPiOS.
 FOUNDATION_EXPORT const unsigned char CocoaUPnPiOSVersionString[];
 
-#import "../CocoaUPnP/CocoaUPnPiOS.h"
+#import "../CocoaUPnP/CocoaUPnP.h"

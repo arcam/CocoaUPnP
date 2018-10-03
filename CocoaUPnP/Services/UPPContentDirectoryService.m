@@ -120,9 +120,17 @@ NSString * const UPPCDSSortCriteriaKey = @"SortCriteria";
 
     UPPParameters *params = [UPPParameters paramsWithKeys:keys values:values];
 
-    [self _sendPostRequestWithParameters:params
-                                  action:@"Search"
-                              completion:completion];
+    [self _sendPostRequestWithParameters:params action:@"Search" completion:^(NSDictionary *responseObject, NSError *error) {
+
+        if (responseObject) {
+            [UPPMediaItemParser parseResults:responseObject withCompletion:^(NSDictionary *results, NSError *error) {
+                completion(results, error);
+            }];
+
+        } else {
+            completion(nil, error);
+        }
+    }];
 }
 
 @end

@@ -76,7 +76,6 @@
         self.isContainer = [decoder decodeBoolForKey:@"isContainer"];
         self.childCount = [decoder decodeObjectForKey:@"childCount"];
         self.objectClass = [decoder decodeObjectForKey:@"objectClass"];
-        self.objectID = [decoder decodeObjectForKey:@"objectID"];
         self.trackNumber = [decoder decodeObjectForKey:@"trackNumber"];
         self.parentID = [decoder decodeObjectForKey:@"parentID"];
         self.resources = [decoder decodeObjectForKey:@"resources"];
@@ -88,6 +87,16 @@
         // there will an `albumArtURLString`. Decode this last to prevent
         // `setArtworkResources` from clearing the value of `albumArtURLString`.
         self.albumArtURLString = [decoder decodeObjectForKey:@"albumArtURLString"];
+
+        // If restoring an object with a faulty object ID, handle it
+        id objectID = [decoder decodeObjectForKey:@"objectID"];
+        if ([objectID isKindOfClass:[NSString class]]) {
+            self.objectID = objectID;
+        } else if ([objectID isKindOfClass:[NSNumber class]]) {
+            self.objectID = [objectID stringValue];
+        } else {
+            self.objectID = @"123";
+        }
     }
     return self;
 }

@@ -6,6 +6,21 @@
 
 @implementation UPPBasicDevice
 
++ (instancetype)deviceWithURN:(nonnull NSString *)urn baseURL:(nonnull NSURL *)baseURL
+{
+    return [[[self class] alloc] initWithURN:urn baseURL:baseURL];
+}
+
+- (instancetype)initWithURN:(nonnull NSString *)urn baseURL:(nonnull NSURL *)baseURL
+{
+    self = [super init];
+    if (!self) { return nil; }
+
+    self.deviceType = urn;
+    self.baseURL = baseURL;
+    return self;
+}
+
 - (NSString *)usn
 {
     return [NSString stringWithFormat:@"%@::%@", self.udn, self.deviceType];

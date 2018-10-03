@@ -90,6 +90,26 @@
 - (nonnull NSString *)usn;
 
 /**
+ Convenience initialiser
+
+ @param urn     The device's uniform resource name
+ @param baseURL The base URL to use with service calls
+
+ @return A new `UPPBasicDevice`
+ */
++ (nonnull instancetype)deviceWithURN:(nonnull NSString *)urn baseURL:(nonnull NSURL *)baseURL;
+
+/**
+ Object initialiser
+
+ @param urn     The device's uniform resource name
+ @param baseURL The base URL to use with service calls
+
+ @return A new `UPPBasicDevice`
+ */
+- (nonnull instancetype)initWithURN:(nonnull NSString *)urn baseURL:(nonnull NSURL *)baseURL;
+
+/**
  Find the first service which matches `serviceType`
 
  @param serviceType The service type to search for

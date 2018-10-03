@@ -71,6 +71,9 @@
         } else if ([deviceType rangeOfString:@":MediaServer:"].location != NSNotFound) {
             device = [UPPMediaServerDevice mediaServerWithURN:deviceType
                                                       baseURL:baseURL];
+        } else {
+            device = [UPPBasicDevice deviceWithURN:deviceType
+                                           baseURL:baseURL];
         }
 
         if (!device) {

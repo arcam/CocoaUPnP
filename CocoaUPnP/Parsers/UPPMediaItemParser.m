@@ -174,9 +174,9 @@ NSString * const UPnPXMLResultsKey = @"Result";
 
     [resources enumerateObjectsUsingBlock:^(ONOXMLElement *resource, NSUInteger idx, BOOL * stop) {
         NSString *urlString = [resource stringValueOrNil];
-        if (!urlString) { return; }
-        NSString *profileID = [resource valueForAttribute:@"profileID"];
         NSURL *url = [NSURL URLWithString:urlString];
+        if (!url) { return; }
+        NSString *profileID = [resource valueForAttribute:@"profileID"];
         UPPMediaItemArtwork *artwork = [[UPPMediaItemArtwork alloc] initWithURL:url
                                                                       profileId:profileID];
         [mutableResources addObject:artwork];

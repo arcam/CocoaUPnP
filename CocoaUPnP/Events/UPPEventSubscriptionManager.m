@@ -257,10 +257,6 @@
 
     if (subscripton) {
         [subscripton removeEventObserver:observer];
-
-        if ([subscripton eventObservers].count == 0) {
-            [self unsubscribe:subscripton completion:nil];
-        }
     }
 
     if (completion) {

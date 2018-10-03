@@ -8,6 +8,7 @@
 @interface UPPDiscovery ()
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSMutableArray *unparsedUUIDs;
+@property (strong, nonatomic) UPPDeviceParser *parser;
 @end
 
 SpecBegin(UPPDiscovery)
@@ -91,6 +92,7 @@ describe(@"UPPDiscovery", ^{
                 });
                 OCMStub([mockService uniqueServiceName]).andReturn(uniqueServiceName);
                 OCMStub([mockDevice valueForKey:@"udn"]).andReturn(uniqueDeviceName);
+                discovery.parser = mockParser;
             });
 
             it(@"should add parsed device to availableDevices", ^{

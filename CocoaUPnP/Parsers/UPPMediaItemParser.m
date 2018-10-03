@@ -85,12 +85,31 @@ NSString * const UPnPXMLResultsKey = @"Result";
         // Optional parameters. Ignore any missing keys.
         item.albumTitle = [[element firstChildWithTag:@"album"] stringValueOrNil];
 
-        NSString *albumArtist = [[element firstChildWithTag:@"albumArtist"] stringValueOrNil];
+        // Parse any <upnp:artist role> values
+        NSMutableDictionary *roles = [[NSMutableDictionary alloc] init];
+        for (ONOXMLElement *artist in [element childrenWithTag:@"artist"]) {
+            NSString *artistValue = [artist stringValueOrNil];
+            NSString *role = [artist attributes][@"role"];
+            if (role && artistValue) {
+                [roles setObject:artistValue forKey:role];
+            } else {
+                item.artist = artistValue;
+            }
+        }
 
-        if (albumArtist) {
-            item.artist = albumArtist;
-        } else {
-            item.artist = [[element firstChildWithTag:@"artist"] stringValueOrNil];
+        NSString *creator = [[element firstChildWithTag:@"creator"] stringValueOrNil];
+        if (creator) {
+            [roles setObject:creator forKey:@"creator"];
+        }
+
+        // Sometimes a server returns no top level <upnp:artist>, so pick the most likely
+        // candidate from the parsed roles dictionary
+        if (!item.artist) {
+            item.artist = [self mostLikelyArtist:roles];
+        }
+
+        if (roles.count > 0) {
+            item.artistRoles = [roles copy];
         }
 
         item.date = [[element firstChildWithTag:@"date"] stringValueOrNil];
@@ -186,6 +205,40 @@ NSString * const UPnPXMLResultsKey = @"Result";
     }
 
     return seconds;
+}
+
++ (NSString *)mostLikelyArtist:(NSDictionary *)artistRoles
+{
+    if (artistRoles.count == 0) {
+        return nil;
+    }
+
+    if (artistRoles.count == 1) {
+        return artistRoles.allValues.firstObject;
+    }
+
+    // Priority 1
+    if (artistRoles[@"AlbumArtist"]) {
+        return artistRoles[@"AlbumArtist"];
+    }
+
+    // Priority 2
+    if (artistRoles[@"Performer"]) {
+        return artistRoles[@"Performer"];
+    }
+
+    // Priority 3
+    if (artistRoles[@"Composer"]) {
+        return artistRoles[@"Composer"];
+    }
+
+    // Priority 4
+    if (artistRoles[@"Creator"]) {
+        return artistRoles[@"Creator"];
+    }
+
+    // Bail out
+    return artistRoles.allValues.firstObject;
 }
 
 @end

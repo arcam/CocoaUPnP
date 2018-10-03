@@ -152,7 +152,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         for (id<UPPEventSubscriptionDelegate> observer in self.observers) {
-            [observer eventRecieved:event];
+            [observer eventReceived:event];
         }
     });
 }

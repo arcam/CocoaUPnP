@@ -198,7 +198,7 @@ describe(@"UPPEventSubscription", ^{
         expect([sut eventObservers]).to.contain(mockObserver);
 
         NSDictionary *event = @{ @"transportState": @"stopped" };
-        OCMExpect([mockObserver eventRecieved:event]);
+        OCMExpect([mockObserver eventReceived:event]);
 
         [sut informObserversOfEvent:event];
 

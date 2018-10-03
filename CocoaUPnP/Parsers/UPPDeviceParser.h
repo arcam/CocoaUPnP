@@ -8,9 +8,8 @@
 /**
  Parser completion block
 
- @param device If parsing succeeds, a new `UPPBasicDevice` object is returned
-
- @param error  If parsing fails, an `NSError` object is returned
+ @param devices If parsing succeeds, a new `UPPBasicDevice` object is returned
+ @param error   If parsing fails, an `NSError` object is returned
  */
 typedef void(^CompletionBlock)(NSArray * _Nullable devices, NSError * _Nullable error);
 

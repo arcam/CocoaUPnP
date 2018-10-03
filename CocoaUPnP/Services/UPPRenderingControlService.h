@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    A block which returns the success state of the call, along
      with an error object if the call was unsuccessful.
  */
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)successBlock;
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)success;
 
 
 #pragma mark - Volume
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
       along with an error object if the call was unsuccessful.
  */
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)successBlock;
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(nullable NSString *)channel success:(nullable UPPSuccessBlock)success;
 
 NS_ASSUME_NONNULL_END
 

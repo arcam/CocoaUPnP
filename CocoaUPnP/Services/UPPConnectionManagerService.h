@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
      the content
  @param peerConnectionManager The connection manager
  @param peerConnectionId      The connection identifier
- @param peerConnectionId      The direction: either Input or Output
+ @param direction             The direction: either Input or Output
  @param completion            A completion block which returns the parsed
      information, or an error if unsuccessful
  */
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  call, along with an error object if the call was unsuccessful.
 
  */
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)success;
 
 /**
  Get current connection IDs. See 2.4.4 of the service template

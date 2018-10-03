@@ -73,7 +73,7 @@ typedef void (^UPPSuccessBlock)(BOOL success, NSError * _Nullable error);
 
  @return A new basic service instance
  */
-+ (nullable instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn;
++ (nullable instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)uniqueDeviceName;
 
 /**
  Returns a unique service name, comprised of the parent devices unique device name,

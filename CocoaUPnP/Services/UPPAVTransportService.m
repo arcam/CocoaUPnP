@@ -11,12 +11,12 @@
 
 #pragma mark - Transport URI Methods
 
-- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(NSString *)currentURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)success;
 {
     if (!currentURI) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd), @"CurrentURI");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return;
     }
@@ -29,15 +29,15 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetAVTransportURI"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(NSString *)nextURIMetaData instanceID:(NSString *)instanceId success:(UPPSuccessBlock)success;
 {
     if (!nextURI) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd), @"NextURI");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return;
     }
@@ -50,7 +50,7 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetNextAVTransportURI"
-                                 success:successBlock];
+                                 success:success];
 }
 
 
@@ -112,19 +112,19 @@
 
 #pragma mark - General Transport Controls
 
-- (void)stopWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)stopWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Stop"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)playWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock;
+- (void)playWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success;
 {
-    [self playWithInstanceID:instanceId speed:nil success:successBlock];
+    [self playWithInstanceID:instanceId speed:nil success:success];
 }
 
-- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(UPPSuccessBlock)successBlock;
+- (void)playWithInstanceID:(NSString *)instanceId speed:(NSString *)speed success:(UPPSuccessBlock)success;
 {
     NSArray *keys = @[ @"InstanceID", @"Speed" ];
     NSString *iid = instanceId ?: @"0";
@@ -134,37 +134,37 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"Play"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)pauseWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)pauseWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Pause"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)recordWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)recordWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Record"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(UPPSuccessBlock)successBlock
+- (void)setSeekWithInstanceID:(NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(UPPSuccessBlock)success
 {
     if (!unit) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd), @"Unit");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return;
     }
 
     if (!target) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd), @"Target");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return;
     }
@@ -176,32 +176,32 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"Seek"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)nextWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)nextWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Next"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)previousWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)previousWithInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     [self _sendPostRequestWithParameters:[self paramsWithInstanceID:instanceId]
                                   action:@"Previous"
-                                 success:successBlock];
+                                 success:success];
 }
 
 
 #pragma mark - Mode Setting
 
-- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     if (!newPlayMode) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd), @"NewPlayMode");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return;
     }
@@ -213,16 +213,16 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetPlayMode"
-                                 success:successBlock];
+                                 success:success];
 }
 
-- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)successBlock
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(NSString *)instanceId success:(UPPSuccessBlock)success
 {
     if (!newRecordMode) {
-        if (successBlock) {
+        if (success) {
             NSError *e = UPPErrorWithMethodAndParam(NSStringFromSelector(_cmd),
                                                         @"NewRecordMode");
-            successBlock(NO, e);
+            success(NO, e);
         }
         return; }
 
@@ -232,7 +232,7 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetRecordMode"
-                                 success:successBlock];
+                                 success:success];
 }
 
 #pragma mark - Private Methods

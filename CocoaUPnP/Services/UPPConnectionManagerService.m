@@ -38,16 +38,16 @@
                               completion:completion];
 }
 
-- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)successBlock;
+- (void)connectionCompleteWithConnectionID:(NSString *)connectionId success:(UPPSuccessBlock)success;
 {
-    if (!connectionId || !successBlock) { return; }
+    if (!connectionId || !success) { return; }
 
     UPPParameters *params = [UPPParameters paramsWithKey:@"ConnectionID"
                                                    value:connectionId];
 
     [self _sendPostRequestWithParameters:params
                                   action:@"ConnectionComplete"
-                                 success:successBlock];
+                                 success:success];
 }
 
 - (void)currentConnectionIDsWithCompletion:(UPPResponseBlock)completion

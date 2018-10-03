@@ -13,16 +13,16 @@
 
 @implementation UPPBasicService
 
-+ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)udn
++ (instancetype)serviceWithBaseURL:(NSURL *)baseURL description:(UPPServiceDescription *)description uniqueDeviceName:(NSString *)uniqueDeviceName
 {
-    if (!baseURL || !description || !udn) {
+    if (!baseURL || !description || !uniqueDeviceName) {
         return nil;
     }
 
     id service = [[[self class] alloc] init];
     [service setBaseURL:baseURL];
     [service populateFromServiceDescription:description];
-    [service createUniqueServiceNameWithDeviceName:udn];
+    [service createUniqueServiceNameWithDeviceName:uniqueDeviceName];
 
     return service;
 }

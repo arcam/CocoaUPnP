@@ -259,7 +259,7 @@ typedef enum : NSUInteger {
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool {
-            [_delegate ssdpBrowser:self didNotStartBrowsingForServices:error];
+            [self.delegate ssdpBrowser:self didNotStartBrowsingForServices:error];
         }
     });
 }
@@ -268,7 +268,7 @@ typedef enum : NSUInteger {
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool {
-            [_delegate ssdpBrowser:self didFindService:service];
+            [self.delegate ssdpBrowser:self didFindService:service];
         }
     });
 }
@@ -277,7 +277,7 @@ typedef enum : NSUInteger {
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool {
-            [_delegate ssdpBrowser:self didRemoveService:service];
+            [self.delegate ssdpBrowser:self didRemoveService:service];
         }
     });
 }

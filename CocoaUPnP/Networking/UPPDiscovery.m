@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSMutableArray *unparsedUUIDs;
 @property (strong, nonatomic) NSMutableSet *observers;
+@property (strong, nonatomic) UPPDeviceParser *parser;
 @end
 
 @implementation UPPDiscovery
@@ -155,7 +156,12 @@
     }
 
     [self.unparsedUUIDs addObject:udn];
-    [UPPDeviceParser parseURL:service.xmlLocation withCompletion:^(NSArray *devices, NSError *error) {
+
+    if (_parser == nil) {
+        _parser = [[UPPDeviceParser alloc] init];
+    }
+
+    [_parser parseURL:service.xmlLocation withCompletion:^(NSArray *devices, NSError *error) {
         [self.unparsedUUIDs removeObject:udn];
         if (devices) {
             for (UPPBasicDevice *device in devices) {

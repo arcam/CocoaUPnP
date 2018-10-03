@@ -437,10 +437,7 @@ describe(@"UPPEventSubscriptionManager", ^{
         it(@"should send UNSUBSCRIBE call if there are no more observers", ^{
             expect([exampleSubscription eventObservers].count).to.equal(1);
 
-            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
-                return [[request HTTPMethod] isEqualToString:@"UNSUBSCRIBE"] &&
-                       [[request URL] isEqual:[NSURL URLWithString:UPPTestFakeURL]];
-            }] completionHandler:[OCMArg any]]);
+            [[mockSession reject] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
 
             [sut removeObserver:mockObserver fromService:mockService completion:nil];
 
@@ -450,12 +447,7 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         it(@"should send required headers if there are no more observers", ^{
             expect([exampleSubscription eventObservers].count).to.equal(1);
-
-            OCMExpect([mockSession dataTaskWithRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *request) {
-                NSDictionary *headers = request.allHTTPHeaderFields;
-                return [headers[@"HOST"] isEqualToString:UPPTestFakeURL] &&
-                       [headers[@"SID"] isEqualToString:UPPTestSID];
-            }] completionHandler:[OCMArg any]]);
+            [[mockSession reject] dataTaskWithRequest:[OCMArg any] completionHandler:[OCMArg any]];
 
             [sut removeObserver:mockObserver fromService:mockService completion:nil];
 
@@ -478,7 +470,7 @@ describe(@"UPPEventSubscriptionManager", ^{
 
         it(@"should shut down event server if no more subscriptions exist", ^{
             expect(sut.activeSubscriptions.count).to.equal(1);
-            OCMExpect([mockEventServer stopServer]);
+            [[mockEventServer reject] stopServer];
 
             StubDataTaskAndReturnResponse(mockSession, SuccessfulResponse());
             [sut removeObserver:mockObserver fromService:mockService completion:nil];

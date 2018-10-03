@@ -2,6 +2,7 @@
 // Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
+#import "UPPMediaItemArtwork.h"
 #import "UPPMediaItemProtocol.h"
 
 @class UPPMediaItemResource;
@@ -24,6 +25,11 @@
  The artist of the item
  */
 @property (copy, nonatomic, nullable) NSString *artist;
+
+/**
+ Any additional artists supplied by the server
+ */
+@property (copy, nonatomic, nullable) NSDictionary<NSString *, NSString *> *artistRoles;
 
 /**
  The date of the media item. E.g. the album release year
@@ -77,8 +83,15 @@
 
 /**
  A string representation of the album artwork URL
+ @warning This is a legacy property - it will be set to the first URL in the
+ `artworkResources` array.
  */
 @property (copy, nonatomic, nullable) NSString *albumArtURLString;
+
+/**
+ A collection of album artwork resources
+ */
+@property (copy, nonatomic, nonnull) NSArray <UPPMediaItemArtwork *> *artworkResources;
 
 /**
  An integer describing the tracks total duration in seconds.

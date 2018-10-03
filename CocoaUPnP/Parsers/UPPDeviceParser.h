@@ -27,6 +27,6 @@ typedef void(^CompletionBlock)(NSArray * _Nullable devices, NSError * _Nullable 
  @param completion A completion block returning either a `UPPDevice` object
  or an `NSError` object
  */
-+ (void)parseURL:(nonnull NSURL *)url withCompletion:(nonnull CompletionBlock)completion;
+- (void)parseURL:(nonnull NSURL *)url withCompletion:(nonnull CompletionBlock)completion;
 
 @end

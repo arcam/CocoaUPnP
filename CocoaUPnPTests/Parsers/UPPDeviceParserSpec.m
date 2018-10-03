@@ -8,6 +8,12 @@ SpecBegin(UPPDeviceParser)
 
 describe(@"UPPDeviceParser", ^{
 
+    __block UPPDeviceParser *parser;
+
+    beforeEach(^{
+        parser = [[UPPDeviceParser alloc] init];
+    });
+
     afterEach(^{
         [OHHTTPStubs removeAllStubs];
     });
@@ -26,7 +32,7 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
+            [parser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
                 expect(devices.count).to.equal(1);
                 UPPMediaRendererDevice *renderer = [devices firstObject];
                 expect(renderer).toNot.beNil();
@@ -98,7 +104,7 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
+            [parser parseURL:url withCompletion:^(NSArray *devices, NSError *error) {
                 expect(devices.count).to.equal(1);
                 UPPMediaServerDevice *server = [devices firstObject];
                 expect(server).toNot.beNil();
@@ -159,7 +165,7 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(id device, NSError *error) {
+            [parser parseURL:url withCompletion:^(id device, NSError *error) {
                 expect(device).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeNoDeviceElementFound);
@@ -182,7 +188,7 @@ describe(@"UPPDeviceParser", ^{
         }];
 
         waitUntil(^(DoneCallback done) {
-            [UPPDeviceParser parseURL:url withCompletion:^(id device, NSError *error) {
+            [parser parseURL:url withCompletion:^(id device, NSError *error) {
                 expect(device).to.beNil();
                 expect(error).toNot.beNil();
                 expect(error.code).to.equal(UPPErrorCodeEmptyData);

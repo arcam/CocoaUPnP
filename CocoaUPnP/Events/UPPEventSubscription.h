@@ -17,7 +17,7 @@
  @param event A dictionary representation of the XML sent by the subscribed
  service.
  */
-- (void)eventRecieved:(nonnull NSDictionary *)event;
+- (void)eventReceived:(nonnull NSDictionary *)event;
 @end
 
 

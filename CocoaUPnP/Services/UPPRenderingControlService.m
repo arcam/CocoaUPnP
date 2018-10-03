@@ -19,7 +19,7 @@
                               completion:completion];
 }
 
-- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
+- (void)setMute:(BOOL)mute withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)success
 {
     if (!instanceId) { return; }
 
@@ -29,7 +29,7 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetMute"
-                                 success:successBlock];
+                                 success:success];
 }
 
 - (void)volumeWithInstanceID:(NSString *)instanceId channel:(NSString *)channel completion:(UPPResponseBlock)completion
@@ -46,7 +46,7 @@
                               completion:completion];
 }
 
-- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)successBlock
+- (void)setVolume:(NSNumber *)volume withInstanceID:(NSString *)instanceId channel:(NSString *)channel success:(UPPSuccessBlock)success
 {
     if (!volume || !instanceId) { return; }
 
@@ -56,7 +56,7 @@
 
     [self _sendPostRequestWithParameters:params
                                   action:@"SetVolume"
-                                 success:successBlock];
+                                 success:success];
 }
 
 @end

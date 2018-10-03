@@ -89,7 +89,7 @@
 
  @return Returns a new subscription object.
  */
-+ (nonnull instancetype)subscriptionWithSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)uniqueServiceName;
++ (nonnull instancetype)subscriptionWithSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)serviceIdentifier;
 
 /**
  Convenience initialiser which returns a new subscription object when given a
@@ -104,7 +104,7 @@
 
  @return Returns a new subscription object.
  */
-+ (nonnull instancetype)subscriptionWithID:(nullable NSString *)subscriptionID expiryDate:(nonnull NSDate *)expiryDate eventSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)uniqueServiceName;
++ (nonnull instancetype)subscriptionWithID:(nullable NSString *)subscriptionID expiryDate:(nonnull NSDate *)expiryDate eventSubscriptionURL:(nonnull NSURL *)eventSubscriptionURL serviceIdentifier:(nonnull NSString *)serviceIdentifier;
 
 /**
  Update the object after renewing a subscription.

@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  the call, along with an error object if the call was unsuccessful.
 
  */
-- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(nullable NSString *)currentURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)setAVTransportURI:(NSString *)currentURI currentURIMetaData:(nullable NSString *)currentURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Set the next transport URI
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success         An optional block which returns the success state of the
  call, along with an error object if the call was unsuccessful.
  */
-- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(nullable NSString *)nextURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)setNextAVTransportURI:(NSString *)nextURI nextURIMetaData:(nullable NSString *)nextURIMetaData instanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 
 #pragma mark - Getting Information
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
  along with an error object if the call was unsuccessful.
 
  */
-- (void)stopWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)stopWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Send play command, with speed set to `1`
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)playWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)playWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Send play command with a speed setting
@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)playWithInstanceID:(nullable NSString *)instanceId speed:(nullable NSString *)speed success:(nullable UPPSuccessBlock)successBlock;
+- (void)playWithInstanceID:(nullable NSString *)instanceId speed:(nullable NSString *)speed success:(nullable UPPSuccessBlock)success;
 
 /**
  Send pause command
@@ -144,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)pauseWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)pauseWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Send record command
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)recordWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)recordWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Seek to time
@@ -164,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)setSeekWithInstanceID:(nullable NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(nullable UPPSuccessBlock)successBlock;
+- (void)setSeekWithInstanceID:(nullable NSString *)instanceId unit:(NSString *)unit target:(NSString *)target success:(nullable UPPSuccessBlock)success;
 
 /**
  Send next command
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)nextWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)nextWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Send previous command
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success    An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)previousWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)previousWithInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 
 #pragma mark - Mode Setting
@@ -199,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success     An optional block which returns the success state of the call,
  along with an error object if the call was unsuccessful.
  */
-- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)setPlayMode:(NSString *)newPlayMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 /**
  Set record mode
@@ -209,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success       An optional block which returns the success state of the
  call, along with an error object if the call was unsuccessful.
  */
-- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)successBlock;
+- (void)setRecordMode:(NSString *)newRecordMode withInstanceID:(nullable NSString *)instanceId success:(nullable UPPSuccessBlock)success;
 
 @end
 

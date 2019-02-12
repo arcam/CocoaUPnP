@@ -74,7 +74,7 @@
 /**
  An array of media resources
  */
-@property (copy, nonatomic, nullable) NSArray *resources;
+@property (copy, nonatomic, nullable) NSArray <UPPMediaItemResource *> *resources;
 
 /**
  The media item title

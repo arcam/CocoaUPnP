@@ -28,7 +28,7 @@
     return _sharedInstance;
 }
 
-- (NSArray *)availableDevices
+- (NSArray <UPPBasicDevice *>*)availableDevices
 {
     return [self.devices copy];
 }

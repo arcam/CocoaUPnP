@@ -80,7 +80,7 @@
 /**
  An array of service objects supported by the device. @see UPPServiceDescription
  */
-@property (copy, nonatomic, nonnull) NSArray *services;
+@property (copy, nonatomic, nonnull) NSArray <UPPServiceDescription *> *services;
 
 /**
  Unique service name

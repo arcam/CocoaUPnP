@@ -6,10 +6,10 @@ target 'Example' do
 end
 
 target 'ExampleTests' do
-  pod 'Specta', '~> 1'
-  pod 'Expecta', '~> 1'
-  pod 'OCMock', '~> 3'
-  pod 'OHHTTPStubs', '~> 6'
+  pod 'Specta', '~> 1.0.7'
+  pod 'Expecta', '~> 1.0.6'
+  pod 'OCMock', '~> 3.4.3'
+  pod 'OHHTTPStubs', '~> 6.1.0'
 end
 
 # Xcode 10 generates a bunch of warnings when using CocoaPods

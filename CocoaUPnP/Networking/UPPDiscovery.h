@@ -64,7 +64,7 @@
 /**
  Return an array of all currently known devices.
  */
-- (nonnull NSArray *)availableDevices;
+- (nonnull NSArray <UPPBasicDevice *> *)availableDevices;
 
 /**
  Clear the cache of known devices

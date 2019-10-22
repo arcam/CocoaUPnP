@@ -305,14 +305,14 @@
 
 - (void)invalidateAllTimers
 {
-    for (UPPEventSubscription *subscription in self.activeSubscriptions) {
+    for (UPPEventSubscription *subscription in [self.activeSubscriptions copy]) {
         [subscription invalidateTimers];
     }
 }
 
 - (void)renewAllTimers
 {
-    for (UPPEventSubscription *subscription in self.activeSubscriptions) {
+    for (UPPEventSubscription *subscription in [self.activeSubscriptions copy]) {
         [subscription renewSubscription];
     }
 }

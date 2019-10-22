@@ -126,7 +126,7 @@
 
         [self.devices removeObject:device];
 
-        for (id <UPPDiscoveryDelegate>delegate in self.observers) {
+        for (id <UPPDiscoveryDelegate>delegate in [self.observers copy]) {
             if ([delegate respondsToSelector:@selector(discovery:didRemoveDevice:)]) {
                 [delegate discovery:self didRemoveDevice:device];
             }
@@ -179,7 +179,7 @@
 
     [self.devices addObject:device];
 
-    for (id <UPPDiscoveryDelegate>delegate in self.observers) {
+    for (id <UPPDiscoveryDelegate>delegate in [self.observers copy]) {
         if ([delegate respondsToSelector:@selector(discovery:didFindDevice:)]) {
             [delegate discovery:self didFindDevice:device];
         }

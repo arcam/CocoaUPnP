@@ -151,7 +151,7 @@
 - (void)informObserversOfEvent:(NSDictionary *)event
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        for (id<UPPEventSubscriptionDelegate> observer in self.observers) {
+        for (id<UPPEventSubscriptionDelegate> observer in [self.observers copy]) {
             [observer eventReceived:event];
         }
     });

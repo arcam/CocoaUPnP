@@ -14,23 +14,25 @@ void (^ExpectAndReturnErrorWithParams)(NSDictionary *, id, NSString *) = ^void (
     [[[manager expect]
       andDo:^(NSInvocation *invocation) {
           void (^failureBlock)(NSURLSessionTask *task, NSError *error);
-          [invocation getArgument:&failureBlock atIndex:6];
+          [invocation getArgument:&failureBlock atIndex:7];
           failureBlock(nil, UPPErrorWithCode(UPPErrorCodeGeneric));
       }]
      POST:url
      parameters:params
+     headers:nil
      progress:nil
      success:[OCMArg any]
      failure:[OCMArg any]];
 };
 
 void (^ExpectGetWithParams)(id, NSDictionary *, NSString *) = ^void(id manager, NSDictionary *params, NSString *url) {
-    OCMExpect([manager POST:url parameters:params progress:nil success:[OCMArg any] failure:[OCMArg any]]);
+    OCMExpect([manager POST:url parameters:params headers: nil progress:nil success:[OCMArg any] failure:[OCMArg any]]);
 };
 
 void (^RejectGetWithURL)(id, NSString *) = ^void(id manager, NSString *url) {
     [[manager reject] POST:url
                 parameters:[OCMArg any]
+                   headers:nil
                   progress:nil
                    success:[OCMArg any]
                    failure:[OCMArg any]];

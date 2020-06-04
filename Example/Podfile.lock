@@ -1,47 +1,47 @@
 PODS:
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - CocoaAsyncSocket (7.6.3)
-  - CocoaUPnP (2.0.2):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - CocoaAsyncSocket (~> 7.6.3)
-    - GCDWebServer (~> 3.5.2)
-    - Ono (~> 2.1.1)
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - CocoaAsyncSocket (7.6.4)
+  - CocoaUPnP (2.0.3):
+    - AFNetworking/NSURLSession (~> 4)
+    - AFNetworking/Reachability (~> 4)
+    - AFNetworking/Security (~> 4)
+    - AFNetworking/Serialization (~> 4)
+    - CocoaAsyncSocket (~> 7)
+    - GCDWebServer (~> 3)
+    - Ono (~> 2)
   - Expecta (1.0.6)
-  - GCDWebServer (3.5.2):
-    - GCDWebServer/Core (= 3.5.2)
-  - GCDWebServer/Core (3.5.2)
-  - OCMock (3.4.3)
-  - OHHTTPStubs (6.1.0):
-    - OHHTTPStubs/Default (= 6.1.0)
-  - OHHTTPStubs/Core (6.1.0)
-  - OHHTTPStubs/Default (6.1.0):
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
+  - OCMock (3.6)
+  - OHHTTPStubs (6.2.0):
+    - OHHTTPStubs/Default (= 6.2.0)
+  - OHHTTPStubs/Core (6.2.0)
+  - OHHTTPStubs/Default (6.2.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (6.1.0):
+  - OHHTTPStubs/JSON (6.2.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (6.1.0):
+  - OHHTTPStubs/NSURLSession (6.2.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (6.1.0)
-  - Ono (2.1.1)
+  - OHHTTPStubs/OHPathHelpers (6.2.0)
+  - Ono (2.1.2)
   - Specta (1.0.7)
 
 DEPENDENCIES:
   - CocoaUPnP (from `../CocoaUPnP.podspec`)
-  - Expecta (~> 1.0.6)
-  - OCMock (~> 3.4.3)
-  - OHHTTPStubs (~> 6.1.0)
-  - Specta (~> 1.0.7)
+  - Expecta (~> 1)
+  - OCMock (~> 3)
+  - OHHTTPStubs (~> 6)
+  - Specta (~> 1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -59,16 +59,16 @@ EXTERNAL SOURCES:
     :path: "../CocoaUPnP.podspec"
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
-  CocoaUPnP: 5739622b0d4e36cfad5b4ad32242e714271ad89d
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaUPnP: ca21d6a3c40a7745ecb786c72cb87ef5fc160820
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  GCDWebServer: ead88cd14596dd4eae4f5830b8877c87c8728990
-  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
-  Ono: 13c25831a4a66b30df93bd1fa57cf70f13c62699
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
+  OHHTTPStubs: 9cde8b5c0b8cc5c0f393b5e20c8efb6e05915c63
+  Ono: 26a7c1fc4df13ece7747560a1d80655807a8a000
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: a84edd7882244a628567d6397a85e96593bd894f
+PODFILE CHECKSUM: ef4ae6122f3ff8eceec4fb13a590c5e80c2444d4
 
 COCOAPODS: 1.8.4

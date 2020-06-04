@@ -29,7 +29,7 @@
         [_manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     }
 
-    [_manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSData *data) {
+    [_manager GET:url.absoluteString parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSData *data) {
         UPPDeviceParser *parser = [[UPPDeviceParser alloc] initWithXMLData:data];
         [parser parseWithBaseURL:url completion:^(NSArray *devices, NSError *error) {
             completion(devices, error);

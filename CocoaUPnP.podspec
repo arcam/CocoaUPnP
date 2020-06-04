@@ -24,11 +24,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.xcconfig     = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
-  s.dependency 'CocoaAsyncSocket', '~> 7.6.3'
-  s.dependency 'Ono', '~> 2.1.1'
-  s.dependency 'AFNetworking/NSURLSession', '3.2.1'
-  s.dependency 'AFNetworking/Reachability', '3.2.1'
-  s.dependency 'AFNetworking/Security', '3.2.1'
-  s.dependency 'AFNetworking/Serialization', '3.2.1'
-  s.dependency 'GCDWebServer', '~> 3.5.2'
+  s.dependency 'CocoaAsyncSocket', '~> 7'
+  s.dependency 'Ono', '~> 2'
+  s.dependency 'AFNetworking/NSURLSession', '~> 4'
+  s.dependency 'AFNetworking/Reachability', '~> 4'
+  s.dependency 'AFNetworking/Security', '~> 4'
+  s.dependency 'AFNetworking/Serialization', '~> 4'
+  s.dependency 'GCDWebServer', '~> 3'
 end

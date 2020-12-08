@@ -55,10 +55,6 @@ typedef enum : NSUInteger {
 
 - (void)startBrowsingForServiceTypes:(NSString *)serviceType {
 
-    if (self.multicastSocket.isClosed) {
-        [self setupMulticastSocket];
-    }
-
     if (self.unicastSocket.isClosed) {
         [self setupUnicastSocket];
     }
@@ -67,45 +63,11 @@ typedef enum : NSUInteger {
     searchHeader = [self _prepareSearchRequestWithServiceType:serviceType];
     NSData *d = [searchHeader dataUsingEncoding:NSUTF8StringEncoding];
 
-    [self.multicastSocket sendData:d
-                            toHost:SSDPMulticastGroupAddress
-                              port:SSDPMulticastUDPPort
-                       withTimeout:-1
-                               tag:11];
-}
-
-- (void)setupMulticastSocket
-{
-    [self.multicastSocket setIPv6Enabled:NO];
-
-    NSError *err = nil;
-
-    NSDictionary *interfaces = [SSDPServiceBrowser availableNetworkInterfaces];
-    NSData *sourceAddress = _networkInterface? [interfaces objectForKey:_networkInterface] : nil;
-
-    if (!sourceAddress) {
-        sourceAddress = [[interfaces allValues] firstObject];
-    }
-
-    if (![self.multicastSocket enableReusePort:YES error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket bindToAddress:sourceAddress error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket joinMulticastGroup:SSDPMulticastGroupAddress error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket beginReceiving:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
+    [self.unicastSocket sendData:d
+                          toHost:SSDPMulticastGroupAddress
+                            port:SSDPMulticastUDPPort
+                     withTimeout:-1
+                             tag:11];
 }
 
 - (void)setupUnicastSocket
@@ -135,16 +97,6 @@ typedef enum : NSUInteger {
     }
 }
 
-- (GCDAsyncUdpSocket *)multicastSocket
-{
-    if (!_multicastSocket) {
-        _multicastSocket = [[GCDAsyncUdpSocket alloc]
-                            initWithDelegate:self
-                            delegateQueue:dispatch_get_main_queue()];
-    }
-    return _multicastSocket;
-}
-
 - (GCDAsyncUdpSocket *)unicastSocket
 {
     if (!_unicastSocket) {
@@ -157,9 +109,6 @@ typedef enum : NSUInteger {
 
 - (void)stopBrowsingForServices
 {
-    [self closeSocket:self.multicastSocket];
-    self.multicastSocket = nil;
-
     [self closeSocket:self.unicastSocket];
     self.unicastSocket = nil;
 }

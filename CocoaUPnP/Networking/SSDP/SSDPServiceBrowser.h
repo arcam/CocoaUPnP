@@ -97,11 +97,6 @@ extern const UInt16 SSDPMulticastUDPPort;
 @interface SSDPServiceBrowser : NSObject <GCDAsyncUdpSocketDelegate>
 
 /**
- A `GCDAsyncUdpSocket` instance which is connected to the multicast address
- */
-@property (strong, nonatomic) GCDAsyncUdpSocket *multicastSocket;
-
-/**
  A `GCDAsyncUdpSocket` instance which is connected to the multicast address, and
  tied to a specific port
  */

@@ -43,8 +43,12 @@ describe(@"UPPBasicDevice", ^{
     });
 
     it(@"should support NSCoding", ^{
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:device];
-        UPPBasicDevice *loadedDevice = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:device requiringSecureCoding:NO error:nil];
+        NSError *error = nil;
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
+        unarchiver.requiresSecureCoding = NO;
+        UPPBasicDevice *loadedDevice = [unarchiver decodeTopLevelObjectOfClass:[UPPBasicDevice class] forKey:NSKeyedArchiveRootObjectKey error:&error];
+        expect(error).to.beNil();
         expect(loadedDevice.deviceType).to.equal(device.deviceType);
         expect(loadedDevice.deviceType).to.equal(device.deviceType);
         expect(loadedDevice.xmlLocation).to.equal(device.xmlLocation);

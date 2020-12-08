@@ -7,7 +7,7 @@ PODS:
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
   - CocoaAsyncSocket (7.6.4)
-  - CocoaUPnP (2.0.3):
+  - CocoaUPnP (4.0.0):
     - AFNetworking/NSURLSession (~> 4)
     - AFNetworking/Reachability (~> 4)
     - AFNetworking/Security (~> 4)
@@ -44,7 +44,7 @@ DEPENDENCIES:
   - Specta (~> 1)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
     - CocoaAsyncSocket
     - Expecta
@@ -61,7 +61,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
-  CocoaUPnP: ca21d6a3c40a7745ecb786c72cb87ef5fc160820
+  CocoaUPnP: 9865471eb4aca0e95eb812deb8fce4f9c8e467bc
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
@@ -69,6 +69,6 @@ SPEC CHECKSUMS:
   Ono: 26a7c1fc4df13ece7747560a1d80655807a8a000
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: ef4ae6122f3ff8eceec4fb13a590c5e80c2444d4
+PODFILE CHECKSUM: 7e5fd60a69574171c651d7dfa39c40a51263593f
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

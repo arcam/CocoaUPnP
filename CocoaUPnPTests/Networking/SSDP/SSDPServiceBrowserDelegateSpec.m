@@ -10,14 +10,14 @@ SpecBegin(SSDPServiceBrowserDelegate)
 describe(@"SSDPServiceBrowser", ^{
 
     __block SSDPServiceBrowser *browser;
-    __block id mockUnicastSocket;
+    __block id mockMulticastSocket;
     __block id mockDelegate;
     __block NSData *address;
 
     beforeEach(^{
         browser = [[SSDPServiceBrowser alloc] init];
-        mockUnicastSocket = OCMClassMock([GCDAsyncUdpSocket class]);
-        browser.unicastSocket = mockUnicastSocket;
+        mockMulticastSocket = OCMClassMock([GCDAsyncUdpSocket class]);
+        browser.multicastSocket = mockMulticastSocket;
 
         mockDelegate = OCMProtocolMock(@protocol(SSDPServiceBrowserDelegate));
         browser.delegate = mockDelegate;
@@ -26,7 +26,7 @@ describe(@"SSDPServiceBrowser", ^{
     });
 
     afterEach(^{
-        [mockUnicastSocket stopMocking];
+        [mockMulticastSocket stopMocking];
     });
 
     it(@"should conform to GCDAsyncUdpSocketDelegate", ^{
@@ -64,7 +64,7 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:mockUnicastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
@@ -101,7 +101,7 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:mockUnicastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
@@ -129,7 +129,7 @@ describe(@"SSDPServiceBrowser", ^{
         }]]);
 
         NSData *data = [header dataUsingEncoding:NSUTF8StringEncoding];
-        [browser udpSocket:mockUnicastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
+        [browser udpSocket:mockMulticastSocket didReceiveData:data fromAddress:address withFilterContext:nil];
 
         // Delegate calls are asynchronous, add a delay
         OCMVerifyAllWithDelay(mockDelegate, 5.0);
@@ -141,7 +141,7 @@ describe(@"SSDPServiceBrowser", ^{
             return [obj isEqual:browser];
         }] didNotStartBrowsingForServices:mockError]);
 
-        [browser udpSocketDidClose:mockUnicastSocket withError:mockError];
+        [browser udpSocketDidClose:mockMulticastSocket withError:mockError];
 
         OCMVerifyAllWithDelay(mockDelegate, 0.5);
     });

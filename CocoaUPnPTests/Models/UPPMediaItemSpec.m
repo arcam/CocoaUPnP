@@ -125,13 +125,8 @@ describe(@"UPPMediaItem", ^{
         });
 
         it(@"handle archive and unarchive", ^{
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem requiringSecureCoding:NO error:nil];
-            NSError *error = nil;
-            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
-            unarchiver.requiresSecureCoding = NO;
-            UPPMediaItem *newItem = [NSKeyedUnarchiver unarchivedObjectOfClass:[UPPMediaItem class] fromData:data error:nil];
-            expect(error).to.beNil();
-
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem];
+            UPPMediaItem *newItem = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             expect(newItem.albumTitle).to.equal(mediaItem.albumTitle);
             expect(newItem.artist).to.equal(mediaItem.artist);
             expect(newItem.date).to.equal(mediaItem.date);
@@ -167,13 +162,8 @@ describe(@"UPPMediaItem", ^{
 #pragma clang diagnostic ignored "-Wnonnull"
             mediaItem.artworkResources = nil;
 #pragma clang diagnostic pop
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem requiringSecureCoding:NO error:nil];
-            NSError *error = nil;
-            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
-            unarchiver.requiresSecureCoding = NO;
-            UPPMediaItem *newItem = [unarchiver decodeTopLevelObjectOfClass:[UPPMediaItem class] forKey:NSKeyedArchiveRootObjectKey error:&error];
-            expect(error).to.beNil();
-
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mediaItem];
+            UPPMediaItem *newItem = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             expect(newItem.albumTitle).to.equal(mediaItem.albumTitle);
             expect(newItem.artist).to.equal(mediaItem.artist);
             expect(newItem.date).to.equal(mediaItem.date);

@@ -35,6 +35,7 @@ NSString * UPPMetadataForItem (UPPMediaItem *item) {
         [metadata upp_appendValue:res.duration forAttribute:@"duration"];
         [metadata upp_appendValue:res.numberOfAudioChannels forAttribute:@"nrAudioChannels"];
         [metadata upp_appendValue:res.sampleFrequency forAttribute:@"sampleFrequency"];
+        [metadata upp_appendValue:res.bitsPerSample forAttribute:@"bitsPerSample"];
         [metadata appendFormat:@"&gt;%@&lt;/res&gt;", res.resourceURLString];
     }
 

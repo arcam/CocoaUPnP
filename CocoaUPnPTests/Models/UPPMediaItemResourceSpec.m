@@ -18,6 +18,7 @@ describe(@"UPPMediaItemResource", ^{
         res.protocolInfo = @"protocol";
         res.itemSize = @"123456789";
         res.resourceURLString = @"http://127.0.0.1";
+        res.bitsPerSample = @"16";
     });
 
     it(@"should allow setting number of channels", ^{
@@ -63,6 +64,7 @@ describe(@"UPPMediaItemResource", ^{
             expect(newRes.protocolInfo).to.equal(res.protocolInfo);
             expect(newRes.itemSize).to.equal(res.itemSize);
             expect(newRes.resourceURLString).to.equal(res.resourceURLString);
+            expect(newRes.bitsPerSample).to.equal(res.bitsPerSample);
         });
     });
 });

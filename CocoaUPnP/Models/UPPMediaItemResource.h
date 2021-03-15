@@ -14,6 +14,11 @@
 @property (copy, nonatomic, nullable) NSString *numberOfAudioChannels;
 
 /**
+ The number of bits per sample
+ */
+@property (copy, nonatomic, nullable) NSString *bitsPerSample;
+
+/**
  The bitrate of the resource
  */
 @property (copy, nonatomic, nullable) NSString *bitrate;

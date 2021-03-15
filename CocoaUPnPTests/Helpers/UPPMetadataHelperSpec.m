@@ -33,6 +33,7 @@ static UPPMediaItem * CreateMediaItem() {
     res2.duration = @"0:03:10.000";
     res2.numberOfAudioChannels = @"2";
     res2.sampleFrequency = @"44100";
+    res2.bitsPerSample = @"16";
     res2.resourceURLString = @"http://127.0.0.1/res.flac";
 
     item.resources = @[ res1, res2 ];
@@ -48,6 +49,8 @@ describe(@"UPPMetadataHelper", ^{
         NSData *xml = LoadDataFromXML(@"FullMetadata", [self class]);
         NSString *expected = [[NSString alloc] initWithData:xml
                                                    encoding:NSUTF8StringEncoding];
+        // Tests fail when you don't trim new lines space from the XML.
+        expected = [expected stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 
         NSString *metadata = UPPMetadataForItem(item);
 

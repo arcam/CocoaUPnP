@@ -11,6 +11,7 @@
 {
     if ((self = [super init])) {
         self.numberOfAudioChannels = [decoder decodeObjectForKey:@"numberOfAudioChannels"];
+        self.bitsPerSample = [decoder decodeObjectForKey:@"bitsPerSample"];
         self.bitrate = [decoder decodeObjectForKey:@"bitrate"];
         self.duration = [decoder decodeObjectForKey:@"duration"];
         self.sampleFrequency = [decoder decodeObjectForKey:@"sampleFrequency"];
@@ -24,6 +25,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.numberOfAudioChannels forKey:@"numberOfAudioChannels"];
+    [encoder encodeObject:self.bitsPerSample forKey:@"bitsPerSample"];
     [encoder encodeObject:self.bitrate forKey:@"bitrate"];
     [encoder encodeObject:self.duration forKey:@"duration"];
     [encoder encodeObject:self.sampleFrequency forKey:@"sampleFrequency"];
@@ -36,6 +38,7 @@
 {
     UPPMediaItemResource *newRes = [[[self class] alloc] init];
     newRes->_numberOfAudioChannels = [_numberOfAudioChannels copyWithZone:zone];
+    newRes->_bitsPerSample = [_bitsPerSample copyWithZone:zone];
     newRes->_bitrate = [_bitrate copyWithZone:zone];
     newRes->_duration = [_duration copyWithZone:zone];
     newRes->_sampleFrequency = [_sampleFrequency copyWithZone:zone];

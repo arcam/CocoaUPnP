@@ -1,13 +1,14 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
+#import <Ono/Ono.h>
+#import <AFNetworking/AFNetworking.h>
+
 #import "UPPDeviceParser.h"
 #import "UPPBasicDevice.h"
-#import "Ono.h"
 #import "UPPDeviceIcon.h"
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
-#import "AFHTTPSessionManager.h"
 #import "UPPRequestSerializer.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"

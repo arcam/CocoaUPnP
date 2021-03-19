@@ -1,0 +1,4 @@
+explicit module CocoaUPnP.Private {
+    umbrella "PrivateHeaders"
+    requires objc_arc
+}

@@ -1,5 +1,6 @@
 # CocoaUPnP
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Build Status](https://travis-ci.org/arcam/CocoaUPnP.svg)](https://travis-ci.org/arcam/CocoaUPnP)
 [![codecov](https://codecov.io/gh/arcam/CocoaUPnP/branch/develop/graph/badge.svg)](https://codecov.io/gh/arcam/CocoaUPnP)
 [![Pod Version](https://img.shields.io/cocoapods/v/CocoaUPnP.svg)](http://cocoadocs.org/docsets/CocoaUPnP/)

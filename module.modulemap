@@ -1,0 +1,4 @@
+module CocoaUPnP {
+    umbrella header "Headers/CocoaUPnP.h"
+    requires objc_arc
+}

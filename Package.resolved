@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AFNetworking",
+        "repositoryURL": "https://github.com/AFNetworking/AFNetworking.git",
+        "state": {
+          "branch": null,
+          "revision": "ffae2391ab0c29dc88eb0a58d2f5b2c2c27cadbf",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "CocoaAsyncSocket",
+        "repositoryURL": "https://github.com/robbiehanson/CocoaAsyncSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "dbdc00669c1ced63b27c3c5f052ee4d28f10150c",
+          "version": "7.6.5"
+        }
+      },
+      {
+        "package": "GCDWebServers",
+        "repositoryURL": "https://github.com/nostradani/GCDWebServer.git",
+        "state": {
+          "branch": "master",
+          "revision": "16bbfa795eef8c8c0715e49ab3ea75d816907661",
+          "version": null
+        }
+      },
+      {
+        "package": "Ono",
+        "repositoryURL": "https://github.com/jay18001/Ono.git",
+        "state": {
+          "branch": "master",
+          "revision": "d744f5387cc669960e1562cff84c6cea02608572",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

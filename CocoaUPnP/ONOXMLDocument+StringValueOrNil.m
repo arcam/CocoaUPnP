@@ -1,7 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2016 Arcam. See LICENSE file.
 
-#import "ONOXMLDocument+StringValueOrNil.h"
+@import Ono;
 
 @implementation ONOXMLElement (StringValueOrNil)
 - (NSString *)stringValueOrNil {

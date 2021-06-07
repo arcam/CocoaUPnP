@@ -3,9 +3,7 @@
 
 #import <OCMock/OCMock.h>
 #import <CocoaUPnP/CocoaUPnP.h>
-#import <GCDWebServer/GCDWebServerDataRequest.h>
-#import <GCDWebServer/GCDWebServerFunctions.h>
-#import <GCDWebServer/GCDWebServer.h>
+@import GCDWebServers;
 #import "TestHelpers.h"
 
 SpecBegin(UPPEventServer)

@@ -3,7 +3,7 @@
 
 #import "Specta.h"
 #import <CocoaUPnP/CocoaUPnP.h>
-#import <Ono/Ono.h>
+@import Ono;
 
 SpecBegin(UPPMediaItemParser)
 

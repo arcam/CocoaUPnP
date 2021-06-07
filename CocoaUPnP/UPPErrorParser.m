@@ -3,7 +3,7 @@
 
 #import "UPPErrorParser.h"
 #import "UPPError.h"
-#import "Ono.h"
+@import Ono;
 
 @implementation UPPErrorParser
 

@@ -1,6 +1,7 @@
 // CocoaUPnP by A&R Cambridge Ltd, http://www.arcam.co.uk
 // Copyright 2015 Arcam. See LICENSE file.
 
+#import <UIKit/UIKit.h>
 #import "UPPEventSubscriptionManager.h"
 #import "UPPBasicService.h"
 #import "UPPEventSubscription.h"

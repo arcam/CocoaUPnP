@@ -3,11 +3,11 @@
 
 #import "UPPDeviceParser.h"
 #import "UPPBasicDevice.h"
-#import "Ono.h"
+@import Ono;
 #import "UPPDeviceIcon.h"
 #import "UPPServiceDescription.h"
 #import "UPPError.h"
-#import "AFHTTPSessionManager.h"
+@import AFNetworking;
 #import "UPPRequestSerializer.h"
 #import "UPPMediaRendererDevice.h"
 #import "UPPMediaServerDevice.h"

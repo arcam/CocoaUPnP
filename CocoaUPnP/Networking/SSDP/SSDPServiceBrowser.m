@@ -24,13 +24,13 @@
 
 #import "SSDPServiceBrowser.h"
 
-#import "GCDAsyncUdpSocket.h"
 #import "SSDPService.h"
+#import <CocoaUPnP/CocoaUPnP-Swift.h>
 
-#import <ifaddrs.h>
-#import <sys/socket.h>
-#import <net/if.h>
-#import <arpa/inet.h>
+//#import <ifaddrs.h>
+//#import <sys/socket.h>
+//#import <net/if.h>
+//#import <arpa/inet.h>
 
 NSString * const SSDPMulticastGroupAddress = @"239.255.255.250";
 const UInt16 SSDPMulticastUDPPort = 1900;
@@ -38,6 +38,7 @@ const UInt16 SSDPMulticastUDPPort = 1900;
 NSString *const SSDPVersionString = @"CocoaSSDP/0.1.0";
 NSString *const SSDPResponseStatusKey = @"HTTP-Status";
 NSString *const SSDPRequestMethodKey = @"HTTP-Method";
+//@import CocoaUPnP;
 
 
 typedef enum : NSUInteger {
@@ -48,141 +49,39 @@ typedef enum : NSUInteger {
     SSDPNotifyMessage,
 } SSDPMessageType;
 
+@interface SSDPServiceBrowser()<SocketAdapterDelegate> {
+
+}
+@property(strong, nonatomic) SocketAdapter *socket;
+@end
 
 @implementation SSDPServiceBrowser
 
 #pragma mark - Public Methods
 
 - (void)startBrowsingForServiceTypes:(NSString *)serviceType {
-
-    if (self.multicastSocket.isClosed) {
-        [self setupMulticastSocket];
-    }
-
-    if (self.unicastSocket.isClosed) {
-        [self setupUnicastSocket];
-    }
+    _socket = [[SocketAdapter alloc] initWithHost:SSDPMulticastGroupAddress port:SSDPMulticastUDPPort];
+    _socket.delegate = self;
 
     NSString *searchHeader;
     searchHeader = [self _prepareSearchRequestWithServiceType:serviceType];
-    NSData *d = [searchHeader dataUsingEncoding:NSUTF8StringEncoding];
-
-    [self.multicastSocket sendData:d
-                            toHost:SSDPMulticastGroupAddress
-                              port:SSDPMulticastUDPPort
-                       withTimeout:-1
-                               tag:11];
-}
-
-- (void)setupMulticastSocket
-{
-    [self.multicastSocket setIPv6Enabled:NO];
-
-    NSError *err = nil;
-
-    NSDictionary *interfaces = [SSDPServiceBrowser availableNetworkInterfaces];
-    NSData *sourceAddress = _networkInterface? [interfaces objectForKey:_networkInterface] : nil;
-
-    if (!sourceAddress) {
-        sourceAddress = [[interfaces allValues] firstObject];
-    }
-
-    if (![self.multicastSocket enableReusePort:YES error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket bindToAddress:sourceAddress error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket joinMulticastGroup:SSDPMulticastGroupAddress error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.multicastSocket beginReceiving:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-}
-
-- (void)setupUnicastSocket
-{
-    [self.unicastSocket setIPv6Enabled:NO];
-
-    NSError *err = nil;
-
-    if (![self.unicastSocket enableReusePort:YES error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.unicastSocket bindToPort:1900 error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.unicastSocket joinMulticastGroup:SSDPMulticastGroupAddress error:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-
-    if (![self.unicastSocket beginReceiving:&err]) {
-        [self _notifyDelegateWithError:err];
-        return;
-    }
-}
-
-- (GCDAsyncUdpSocket *)multicastSocket
-{
-    if (!_multicastSocket) {
-        _multicastSocket = [[GCDAsyncUdpSocket alloc]
-                            initWithDelegate:self
-                            delegateQueue:dispatch_get_main_queue()];
-    }
-    return _multicastSocket;
-}
-
-- (GCDAsyncUdpSocket *)unicastSocket
-{
-    if (!_unicastSocket) {
-        _unicastSocket = [[GCDAsyncUdpSocket alloc]
-                            initWithDelegate:self
-                            delegateQueue:dispatch_get_main_queue()];
-    }
-    return _unicastSocket;
+    [_socket sendWithMessage:searchHeader];
 }
 
 - (void)stopBrowsingForServices
 {
-    [self closeSocket:self.multicastSocket];
-    self.multicastSocket = nil;
-
-    [self closeSocket:self.unicastSocket];
-    self.unicastSocket = nil;
+    [_socket close];
+    _socket = nil;
 }
 
-- (void)closeSocket:(GCDAsyncUdpSocket *)socket
-{
-    [socket leaveMulticastGroup:SSDPMulticastGroupAddress error:nil];
-    [socket close];
-}
-
-#pragma mark - GCDAsyncUdpSocketDelegate
-
-- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error {
+- (void)socket:(SocketAdapter *)socket didCloseWith:(NSError *)error {
     if (error) {
         [self _notifyDelegateWithError:error];
     }
 }
 
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address withFilterContext:(id)filterContext
-{
+- (void)socket:(SocketAdapter *)socket didReceive:(NSData *)data {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
     if (!msg) {
         return;
     }
@@ -317,27 +216,6 @@ typedef enum : NSUInteger {
 #endif
 
     return userAgent;
-}
-
-+ (NSDictionary *)availableNetworkInterfaces {
-    NSMutableDictionary *addresses = [NSMutableDictionary dictionary];
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *ifa = NULL;
-
-    // retrieve the current interfaces - returns 0 on success
-    if( getifaddrs(&interfaces) == 0 ) {
-        for( ifa = interfaces; ifa != NULL; ifa = ifa->ifa_next ) {
-            if( (ifa->ifa_addr->sa_family == AF_INET) && !(ifa->ifa_flags & IFF_LOOPBACK) && !strncmp(ifa->ifa_name, "en", 2)) {
-                NSData *data = [NSData dataWithBytes:ifa->ifa_addr length:sizeof(struct sockaddr_in)];
-                NSString *if_name = [NSString stringWithUTF8String:ifa->ifa_name];
-                [addresses setObject:data forKey:if_name];
-            }
-        }
-
-        freeifaddrs(interfaces);
-    }
-
-    return addresses;
 }
 
 @end

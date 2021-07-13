@@ -6,13 +6,13 @@ PODS:
   - AFNetworking/Reachability (4.0.1)
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
-  - CocoaAsyncSocket (7.6.4)
-  - CocoaUPnP (3.0.0):
+  - BlueSocket (1.0.52)
+  - CocoaUPnP (3.1.0):
     - AFNetworking/NSURLSession (~> 4)
     - AFNetworking/Reachability (~> 4)
     - AFNetworking/Security (~> 4)
     - AFNetworking/Serialization (~> 4)
-    - CocoaAsyncSocket (~> 7)
+    - BlueSocket (~> 1)
     - GCDWebServer (~> 3)
     - Ono (~> 2)
   - Expecta (1.0.6)
@@ -46,7 +46,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
-    - CocoaAsyncSocket
+    - BlueSocket
     - Expecta
     - GCDWebServer
     - OCMock
@@ -60,8 +60,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
-  CocoaUPnP: 65d07a4260f18d7999713fb189d9dc4530671818
+  BlueSocket: 1acd943acb07b55905291d608649fcfbf8cbd57d
+  CocoaUPnP: 2ec96d97a4be602140783559f75e1e3046df7499
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
@@ -69,6 +69,6 @@ SPEC CHECKSUMS:
   Ono: 26a7c1fc4df13ece7747560a1d80655807a8a000
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: 01e197ebb74083e112de84163ade6cdbd5ca8022
+PODFILE CHECKSUM: 315cb16d39c85699a1d2cb89fa8c8174ce051100
 
 COCOAPODS: 1.10.1

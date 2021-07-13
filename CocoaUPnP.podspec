@@ -17,14 +17,17 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/arcam/CocoaUPnP"
   s.license      = "MIT"
   s.author       = { "Paul Williamson" => "PaulW@arcam.co.uk" }
-  s.ios.deployment_target  = "9.0"
-  s.tvos.deployment_target  = "9.0"
+  s.ios.deployment_target  = "11.0"
+  s.tvos.deployment_target  = "11.0"
   s.source       = { :git => "https://github.com/arcam/CocoaUPnP.git", :tag => s.version.to_s }
-  s.source_files = "CocoaUPnP", "CocoaUPnP/**/*.{h,m}"
+  s.source_files = "CocoaUPnP", "CocoaUPnP/**/*.{h,m,swift}"
+  s.public_header_files = "CocoaUPnP/**/*.h"
   s.requires_arc = true
-  s.xcconfig     = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  s.xcconfig     = {
+    "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2"
+  }
 
-  s.dependency 'CocoaAsyncSocket', '~> 7'
+  s.dependency 'BlueSocket', '~> 1'
   s.dependency 'Ono', '~> 2'
   s.dependency 'AFNetworking/NSURLSession', '~> 4'
   s.dependency 'AFNetworking/Reachability', '~> 4'

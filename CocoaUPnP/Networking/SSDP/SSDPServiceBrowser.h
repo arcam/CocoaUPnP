@@ -23,7 +23,6 @@
 //  Copyright 2015 Arcam. See LICENSE file.
 
 #import <Foundation/Foundation.h>
-#import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
 
 @class SSDPServiceBrowser;
 @class SSDPService;
@@ -94,23 +93,7 @@ extern const UInt16 SSDPMulticastUDPPort;
 /**
  This class allows searching of UPnP devices over SSDP
  */
-@interface SSDPServiceBrowser : NSObject <GCDAsyncUdpSocketDelegate>
-
-/**
- A `GCDAsyncUdpSocket` instance which is connected to the multicast address
- */
-@property (strong, nonatomic) GCDAsyncUdpSocket *multicastSocket;
-
-/**
- A `GCDAsyncUdpSocket` instance which is connected to the multicast address, and
- tied to a specific port
- */
-@property (strong, nonatomic) GCDAsyncUdpSocket *unicastSocket;
-
-/**
- The current network interface
- */
-@property(readonly, nonatomic) NSString *networkInterface;
+@interface SSDPServiceBrowser : NSObject
 
 /**
  A delegate to inform of browse events.

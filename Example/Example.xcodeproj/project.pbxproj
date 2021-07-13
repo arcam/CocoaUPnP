@@ -11,6 +11,7 @@
 		0E32DB3C1B9DAF69003BC803 /* GetPositionInfoResponse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */; };
 		0E32DB401BA019AD003BC803 /* UPPParametersSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E32DB3F1BA019AD003BC803 /* UPPParametersSpec.m */; };
 		0E4935731C69FFB5006EB6A8 /* UPPBasicServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4935711C69FF89006EB6A8 /* UPPBasicServiceSpec.m */; };
+		0E50D59326862B3900666E79 /* BridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E50D59226862B3900666E79 /* BridgeHeader.swift */; };
 		0E592A291B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */; };
 		0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B3241B04D13F008FBF27 /* PlaybackManager.m */; };
 		0E9A782E1AC944C10013DB95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A782D1AC944C10013DB95 /* main.m */; };
@@ -83,6 +84,8 @@
 		0E32DB3B1B9DAF69003BC803 /* GetPositionInfoResponse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GetPositionInfoResponse.xml; sourceTree = "<group>"; };
 		0E32DB3F1BA019AD003BC803 /* UPPParametersSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPParametersSpec.m; sourceTree = "<group>"; };
 		0E4935711C69FF89006EB6A8 /* UPPBasicServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPPBasicServiceSpec.m; sourceTree = "<group>"; };
+		0E50D58F26862AEE00666E79 /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		0E50D59226862B3900666E79 /* BridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeHeader.swift; sourceTree = "<group>"; };
 		0E592A271B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+beWithinAMillisecondOf.h"; sourceTree = "<group>"; };
 		0E592A281B970602000D55B6 /* EXPMatchers+beWithinAMillisecondOf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+beWithinAMillisecondOf.m"; sourceTree = "<group>"; };
 		0E83B3231B04D13F008FBF27 /* PlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackManager.h; sourceTree = "<group>"; };
@@ -200,11 +203,13 @@
 		0E9A781F1AC944C10013DB95 = {
 			isa = PBXGroup;
 			children = (
+				0E50D59226862B3900666E79 /* BridgeHeader.swift */,
 				0E9A782A1AC944C10013DB95 /* Example */,
 				0E83D95B1AD5691B00694AA7 /* ExampleTests */,
 				0E9A78291AC944C10013DB95 /* Products */,
 				67E7167481446F5F17FA86C0 /* Pods */,
 				5C10AD3F4F09CEC25256EB62 /* Frameworks */,
+				0E50D58F26862AEE00666E79 /* Example-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -502,11 +507,12 @@
 		0E9A78201AC944C10013DB95 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = ARCAM;
 				TargetAttributes = {
 					0E9A78271AC944C10013DB95 = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1250;
 					};
 					0E9A78401AC944C20013DB95 = {
 						CreatedOnToolsVersion = 6.2;
@@ -637,6 +643,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E83B3251B04D13F008FBF27 /* PlaybackManager.m in Sources */,
+				0E50D59326862B3900666E79 /* BridgeHeader.swift in Sources */,
 				0E2DFDB51B021A700051717E /* FolderViewController.m in Sources */,
 				0EA80D8F1BD5013E00DF02F8 /* UPPTestAppDelegate.m in Sources */,
 				0E9A78341AC944C10013DB95 /* ViewController.m in Sources */,
@@ -741,6 +748,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -768,7 +776,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -798,6 +806,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -818,7 +827,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -830,11 +839,15 @@
 			baseConfigurationReference = BB970C60CA71D7DA24DE11AC /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arcam.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -843,11 +856,14 @@
 			baseConfigurationReference = E61A28D32CF37D279DFC43F4 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arcam.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -855,6 +871,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E227CA7A621B3C36C1295953 /* Pods-ExampleTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "ExampleTests-Prefix.pch";
@@ -874,6 +891,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F2D8A47464C1F06BDCC52C6 /* Pods-ExampleTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "ExampleTests-Prefix.pch";
